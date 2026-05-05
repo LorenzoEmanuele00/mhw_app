@@ -2,7 +2,7 @@
 
 Aggiornare questo file ad ogni sessione.
 
-## Fase corrente: 0 — Setup
+## Fase corrente: 2 — Equipment Browser
 
 ### Fase 0: Setup ✅ COMPLETATA
 - [x] Progetto Flutter creato (`flutter create mhw_app`)
@@ -19,12 +19,18 @@ Aggiornare questo file ad ogni sessione.
 - [x] Codegen drift completato (zero warning, zero errori)
 - [x] `flutter analyze` → No issues found
 
-### Fase 1: Data Layer ⬜ DA FARE
-- [ ] Script Python `parse_excel.py` per estrarre skill e weapon mods
-- [ ] Seed SQL generato da Excel
-- [ ] Repository layer (weapons, armor, skills, builds, talismans)
-- [ ] Supabase project creato e schema caricato
-- [ ] Sync base funzionante (con versioning)
+### Fase 1: Data Layer ✅ COMPLETATA (parziale — Supabase rimandato a Fase 5)
+- [x] Script Python `scripts/parse_excel.py` — estrae skill, weapon mods, motion values
+- [x] Seed SQL generato: `01_skills.sql` (168 skill), `02_skill_levels.sql` (427 livelli)
+- [x] `03_weapon_mods.json` — RMV/EMV/sharpness per 14 tipi arma
+- [x] `04_motion_values.sql` — 1216 motion value entries (per DPH futuro)
+- [x] `SeedService` — carica SQL seed al primo avvio se DB vuoto
+- [x] Repository layer: WeaponsRepository, ArmorRepository, JewelsRepository, TalismansRepository, BuildsRepository, SkillsRepository
+- [x] Provider Riverpod per tutti i repository + StreamProvider per le liste
+- [x] `main.dart` aggiornato — seedInitProvider attivo, splash durante init
+- [x] `flutter analyze` → No issues found
+- [ ] Supabase project creato e schema caricato (→ Fase 5)
+- [ ] Sync base funzionante (→ Fase 5)
 
 ### Fase 2: Equipment Browser ⬜ DA FARE
 - [ ] Weapon list screen con filtro per tipo
@@ -66,10 +72,18 @@ Aggiornare questo file ad ogni sessione.
 
 ## Note di sessione
 
-### 2026-05-05
+### 2026-05-05 — Sessione 1
 - Progetto creato da zero su piano condiviso con l'utente
 - Stack scelto: drift + supabase + riverpod + go_router
 - Fonte dati principale: `/Users/loke/Downloads/Alpha Calulator.xlsx`
 - Dati mancanti (armature, armi base, gioielli) da raccogliere esternamente
 - MVP: statistiche aggregate (no DPH per hitzone — riservato fase futura)
 - Talismani: CRUD utente, solo locale
+
+### 2026-05-05 — Sessione 2
+- Aggiornati pacchetti Flutter e dipendenze (drift 2.33.0, sqlite3 3.3.1, flutter_riverpod 3.1.0, go_router 17.x)
+- Rimossi pacchetti inutilizzati o incompatibili: `sqlite3_flutter_libs`, `riverpod_annotation`, `riverpod_generator`, `custom_lint`, `riverpod_lint`
+- Tutti i provider scritti manualmente (no @riverpod codegen)
+- `flutter pub outdated` — tutti i pacchetti diretti all'ultima versione disponibile
+- `flutter analyze` → No issues found
+- Aggiornata ARCHITECTURE.md (stack, pattern provider, comando codegen)

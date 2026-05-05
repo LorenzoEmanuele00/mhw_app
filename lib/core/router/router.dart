@@ -17,35 +17,35 @@ final router = GoRouter(
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/equipment',
-            redirect: (_, __) => '/equipment/weapons',
+            redirect: (_, _) => '/equipment/weapons',
           ),
           GoRoute(
             path: '/equipment/weapons',
-            builder: (_, __) => const WeaponsScreen(),
+            builder: (_, _) => const WeaponsScreen(),
           ),
           GoRoute(
             path: '/equipment/armor',
-            builder: (_, __) => const ArmorScreen(),
+            builder: (_, _) => const ArmorScreen(),
           ),
           GoRoute(
             path: '/equipment/jewels',
-            builder: (_, __) => const JewelsScreen(),
+            builder: (_, _) => const JewelsScreen(),
           ),
           GoRoute(
             path: '/equipment/talismans',
-            builder: (_, __) => const TalismansScreen(),
+            builder: (_, _) => const TalismansScreen(),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/builds',
-            builder: (_, __) => const BuildsScreen(),
+            builder: (_, _) => const BuildsScreen(),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/builder',
-            builder: (_, __) => const BuilderScreen(),
+            builder: (_, _) => const BuilderScreen(),
           ),
           GoRoute(
             path: '/builder/:id',

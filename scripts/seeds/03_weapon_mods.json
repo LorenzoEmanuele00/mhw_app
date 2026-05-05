@@ -1,0 +1,160 @@
+{
+  "weapon_type_mods": {
+    "gs": {
+      "display_name": "Greatsword",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "GS & HH",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "ls": {
+      "display_name": "Longsword",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "Other",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "sns": {
+      "display_name": "Sword and Shield",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "Other",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "db": {
+      "display_name": "Dual Blades",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "DB",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "hmr": {
+      "display_name": "Hammer",
+      "rmv": 1.15,
+      "emv": 1.0,
+      "damage_type": "Impact",
+      "burst_group": "Other",
+      "rmv_source": "excel",
+      "emv_source": "default"
+    },
+    "hh": {
+      "display_name": "Hunting Horn",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Impact",
+      "burst_group": "GS & HH",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "lan": {
+      "display_name": "Lance",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "Other",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "gl": {
+      "display_name": "Gunlance",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "GL",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "sa": {
+      "display_name": "Switch Axe",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "Other",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "cb": {
+      "display_name": "Charge Blade",
+      "rmv": 1.32,
+      "emv": 1.15,
+      "damage_type": "Cut",
+      "burst_group": "Other",
+      "rmv_source": "excel",
+      "emv_source": "excel"
+    },
+    "ig": {
+      "display_name": "Insect Glaive",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Cut",
+      "burst_group": "Other",
+      "rmv_source": "default",
+      "emv_source": "default"
+    },
+    "lbg": {
+      "display_name": "Light Bowgun",
+      "rmv": 0.065,
+      "emv": 0.1625,
+      "damage_type": "Ranged",
+      "burst_group": "Bowgun",
+      "rmv_source": "excel",
+      "emv_source": "excel"
+    },
+    "hbg": {
+      "display_name": "Heavy Bowgun",
+      "rmv": 0.1,
+      "emv": 0.1,
+      "damage_type": "Ranged",
+      "burst_group": "Bowgun",
+      "rmv_source": "excel",
+      "emv_source": "excel"
+    },
+    "bow": {
+      "display_name": "Bow",
+      "rmv": 1.0,
+      "emv": 1.0,
+      "damage_type": "Ranged",
+      "burst_group": "Bow",
+      "rmv_source": "default",
+      "emv_source": "excel"
+    }
+  },
+  "sharpness_mods": {
+    "red": {
+      "raw_mod": 0.5,
+      "elem_mod": 0.25
+    },
+    "orange": {
+      "raw_mod": 0.75,
+      "elem_mod": 0.5
+    },
+    "yellow": {
+      "raw_mod": 1.0,
+      "elem_mod": 0.75
+    },
+    "green": {
+      "raw_mod": 1.05,
+      "elem_mod": 1.0
+    },
+    "blue": {
+      "raw_mod": 1.2,
+      "elem_mod": 1.0625
+    },
+    "white": {
+      "raw_mod": 1.32,
+      "elem_mod": 1.15
+    },
+    "purple": {
+      "raw_mod": 1.39,
+      "elem_mod": 1.25
+    }
+  }
+}

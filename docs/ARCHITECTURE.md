@@ -5,72 +5,78 @@
 | Layer | Libreria | Versione target |
 |-------|----------|----------------|
 | UI | Flutter | 3.x |
-| DB locale | drift | ^2.x |
-| SQLite bindings | sqlite3_flutter_libs | ^0.x |
-| Remote sync | supabase_flutter | ^2.x |
-| State management | flutter_riverpod | ^2.x |
-| Codegen (riverpod) | riverpod_annotation | ^2.x |
-| Navigation | go_router | ^14.x |
-| Connectivity | connectivity_plus | ^6.x |
+| DB locale | drift | ^2.33.x |
+| Remote sync | supabase_flutter | ^2.9.x |
+| State management | flutter_riverpod | ^3.1.x |
+| Navigation | go_router | ^17.x |
+| Connectivity | connectivity_plus | ^7.x |
 | Path utilities | path_provider + path | ^2.x / ^1.x |
 
-## Struttura `lib/`
+Note: `sqlite3_flutter_libs` rimosso — drift 2.33+ usa `sqlite3 3.x` che include SQLite bundled nativamente. `riverpod_annotation`/`riverpod_generator` rimossi — tutti i provider sono scritti manualmente (incompatibili con drift_dev per vincoli su analyzer).
+
+## Struttura `lib/` (stato attuale)
 
 ```
 lib/
   core/
     database/
-      tables/           ← definizioni tabelle drift (1 file per tabella)
-      daos/             ← DAO drift (query per dominio)
-      database.dart     ← AppDatabase con tutti i DAO
+      tables/
+        game_tables.dart    ← Weapons, ArmorPieces, ArmorSets, ArmorSetSkills,
+                               Jewels, Skills, SkillLevels
+        user_tables.dart    ← Talismans, Builds, BuildJewels, SyncMetadata
+      daos/
+        weapons_dao.dart
+        armor_dao.dart
+        skills_dao.dart     ← include anche Jewels
+        builds_dao.dart
+        talismans_dao.dart
+      database.dart         ← AppDatabase drift (schema v1)
+      database.g.dart       ← GENERATO — non editare
+      seed_service.dart     ← carica assets/seeds/*.sql al primo avvio
     providers/
-      database_provider.dart    ← Provider<AppDatabase>
-      supabase_provider.dart    ← Provider<SupabaseClient>
-      connectivity_provider.dart
+      database_provider.dart   ← Provider<AppDatabase>
+      seed_provider.dart       ← seedInitProvider (FutureProvider<void>)
     router/
-      router.dart               ← go_router config, shell route
+      router.dart              ← StatefulShellRoute, 3 branch
   features/
     equipment/
       weapons/
-        widgets/
-        weapons_screen.dart
-        weapon_detail_screen.dart
+        repository/weapons_repository.dart
+        weapons_screen.dart      ← placeholder
       armor/
-        widgets/
-        armor_screen.dart
-        armor_detail_screen.dart
+        repository/armor_repository.dart
+        armor_screen.dart        ← placeholder
       jewels/
-        jewels_screen.dart
+        repository/jewels_repository.dart
+        jewels_screen.dart       ← placeholder
       talismans/
-        widgets/
-        talismans_screen.dart
-        talisman_form_screen.dart
+        repository/talismans_repository.dart
+        talismans_screen.dart    ← placeholder
     builds/
-      builds_screen.dart
-      build_detail_screen.dart
+      repository/builds_repository.dart
+      builds_screen.dart         ← placeholder
     builder/
-      widgets/
-        slot_selector.dart
-        jewel_slot_widget.dart
-        stats_panel.dart
-      builder_screen.dart
-      builder_controller.dart
+      builder_screen.dart        ← placeholder
   shared/
-    models/             ← classi pure dart (BuildStats, SkillEffect, ecc.)
-    widgets/            ← widget riutilizzabili (SearchBar, FilterChips, ecc.)
     calc/
-      calc_engine.dart  ← BuildStats computeStats(Build build, ...)
+      skills_repository.dart    ← SkillsRepository + allSkillsProvider
+      calc_engine.dart          ← (Fase 4 — da implementare)
+    models/                     ← (Fase 4 — classi pure dart)
+    widgets/                    ← (Fase 6 — widget riutilizzabili)
 ```
 
 ## Pattern architetturali
 
 ### Repository via Riverpod
-Ogni feature espone provider Riverpod che wrappano i DAO drift:
+Ogni feature espone provider Riverpod che wrappano i DAO drift (provider manuali, no codegen):
 ```dart
-@riverpod
-WeaponsRepository weaponsRepository(WeaponsRepositoryRef ref) {
+final weaponsRepositoryProvider = Provider<WeaponsRepository>((ref) {
   return WeaponsRepository(ref.watch(databaseProvider));
-}
+});
+
+final allWeaponsProvider = StreamProvider<List<Weapon>>((ref) {
+  return ref.watch(weaponsRepositoryProvider).watchAll();
+});
 ```
 
 ### Reattività DB
@@ -102,7 +108,8 @@ Tabelle escluse dalla sync: `talismans`, `builds`, `build_jewels`, `sync_metadat
 
 ## Codegen
 ```bash
-# Generare codice drift e riverpod
-flutter pub run build_runner build --delete-conflicting-outputs
+# Generare codice drift (da eseguire dopo ogni modifica alle tabelle)
+dart run build_runner build
 ```
 File generati con `.g.dart` — non editare manualmente.
+Nota: `--delete-conflicting-outputs` è stato rimosso da build_runner — non usarlo.
