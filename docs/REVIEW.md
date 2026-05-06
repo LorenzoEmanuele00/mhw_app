@@ -11,7 +11,8 @@
 ### Commenti generali
 
 1. Tutto ciò che è scritto nel progetto dovrebbe essere in inglese: file, commenti, nomi e documentazione.
-2. Ogni parte del codice dovrebbe essere testata. Ricordati di inserire dei test automatici per ogni implementazione che esegui. Ricrdati di lanciare tutti i test automatici al termine di ogni implementazine per controllare di non aver creato ripercussioni su altre feature. **_Questa regola deve essere ferrea e rispettata sempre._**
+2. L'applicazione invecedovrà avere almeno la doppia lingua tra italiano e inglese. Questo significa che dobbiamo strutturare un processo di traduzione flessibile, per avere modo in futuro di aggiungere altre lingue se necessario.
+3. Ogni parte del codice dovrebbe essere testata. Ricordati di inserire dei test automatici per ogni implementazione che esegui. Ricrdati di lanciare tutti i test automatici al termine di ogni implementazine per controllare di non aver creato ripercussioni su altre feature. **_Questa regola deve essere ferrea e rispettata sempre._**
 
 ### Domande
 
@@ -21,5 +22,3 @@
   3. A quel punto verranno quindi syncate e salvate sul db sqlite
 
   Evitiamo così la necessità di avere dei seeder interni. Possiamo comunque tenerli per adesso in modo da utilizzarli in ambiente di sviluppo, Ma per quando l'app andrà in prod vorrei slegarmi da questo metodo.
-
--
