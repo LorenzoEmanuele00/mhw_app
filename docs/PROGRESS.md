@@ -1,89 +1,109 @@
-# PROGRESS.md — Stato Avanzamento
+# PROGRESS.md — Development Progress
 
-Aggiornare questo file ad ogni sessione.
+Update this file at every session.
 
-## Fase corrente: 2 — Equipment Browser
+## Current phase: 2 — Equipment Browser
 
-### Fase 0: Setup ✅ COMPLETATA
-- [x] Progetto Flutter creato (`flutter create mhw_app`)
-- [x] Cartella `/docs` creata
-- [x] `CLAUDE.md` scritto
-- [x] `ARCHITECTURE.md` scritto
-- [x] `DATA_MODEL.md` scritto
-- [x] `CALC_ENGINE.md` scritto
-- [x] `pubspec.yaml` aggiornato con dipendenze (drift, supabase, riverpod, go_router, connectivity_plus)
-- [x] Struttura cartelle `lib/` creata (core/features/shared)
-- [x] Schema drift definito — tabelle game + user + DAO per ogni dominio
-- [x] go_router configurato con StatefulShellRoute (3 tab: Equipment/Builds/Builder)
-- [x] Entry point `main.dart` configurato con ProviderScope + MaterialApp.router
-- [x] Codegen drift completato (zero warning, zero errori)
+### Phase 0: Setup ✅ COMPLETE
+- [x] Flutter project created (`flutter create mhw_app`)
+- [x] `/docs` folder created
+- [x] `CLAUDE.md` written
+- [x] `ARCHITECTURE.md` written
+- [x] `DATA_MODEL.md` written
+- [x] `CALC_ENGINE.md` written
+- [x] `pubspec.yaml` updated with dependencies (drift, supabase, riverpod, go_router, connectivity_plus)
+- [x] `lib/` folder structure created (core/features/shared)
+- [x] Drift schema defined — game + user tables + DAO per domain
+- [x] go_router configured with StatefulShellRoute (3 tabs: Equipment/Builds/Builder)
+- [x] `main.dart` entry point configured with ProviderScope + MaterialApp.router
+- [x] Drift codegen complete (zero warnings, zero errors)
 - [x] `flutter analyze` → No issues found
 
-### Fase 1: Data Layer ✅ COMPLETATA (parziale — Supabase rimandato a Fase 5)
-- [x] Script Python `scripts/parse_excel.py` — estrae skill, weapon mods, motion values
-- [x] Seed SQL generato: `01_skills.sql` (168 skill), `02_skill_levels.sql` (427 livelli)
-- [x] `03_weapon_mods.json` — RMV/EMV/sharpness per 14 tipi arma
-- [x] `04_motion_values.sql` — 1216 motion value entries (per DPH futuro)
-- [x] `SeedService` — carica SQL seed al primo avvio se DB vuoto
+### Phase 1: Data Layer ✅ COMPLETE (partial — Supabase deferred to Phase 5)
+- [x] Python script `scripts/parse_excel.py` — extracts skills, weapon mods, motion values
+- [x] SQL seeds generated: `01_skills.sql` (168 skills), `02_skill_levels.sql` (427 levels)
+- [x] `03_weapon_mods.json` — RMV/EMV/sharpness for 14 weapon types
+- [x] `04_motion_values.sql` — 1216 motion value entries (for future DPH calc)
+- [x] `SeedService` — loads SQL seeds on first launch if DB is empty
 - [x] Repository layer: WeaponsRepository, ArmorRepository, JewelsRepository, TalismansRepository, BuildsRepository, SkillsRepository
-- [x] Provider Riverpod per tutti i repository + StreamProvider per le liste
-- [x] `main.dart` aggiornato — seedInitProvider attivo, splash durante init
+- [x] Riverpod providers for all repositories + StreamProvider for lists
+- [x] `main.dart` updated — seedInitProvider active, splash during init
 - [x] `flutter analyze` → No issues found
-- [ ] Supabase project creato e schema caricato (→ Fase 5)
-- [ ] Sync base funzionante (→ Fase 5)
+- [ ] Supabase project created and schema loaded (→ Phase 5)
+- [ ] Base sync working (→ Phase 5)
 
-### Fase 2: Equipment Browser ⬜ DA FARE
-- [ ] Weapon list screen con filtro per tipo
+### Phase 1.5: Code quality ✅ COMPLETE
+- [x] Enum types for all limited-value text columns (WeaponType, ElementType, DamageType,
+      SharpnessLevel, ArmorSlotType, SkillCategory, SkillSubcategory, SetSkillType, JewelSlotSource)
+- [x] TypeConverters — pure Dart-layer, no SQL schema change (stored values: lowercase snake_case)
+- [x] Seed `01_skills.sql` updated to lowercase type1/type2 values
+- [x] All code, comments, and documentation translated to English
+- [x] i18n infrastructure: flutter_localizations + intl, l10n.yaml, app_en.arb + app_it.arb
+- [x] Automated tests: 27 tests (converter unit tests + DAO integration tests with in-memory DB)
+- [x] `flutter analyze` → No issues found
+- [x] `flutter test` → All 27 tests passed
+
+### Phase 2: Equipment Browser ⬜ TODO
+- [ ] Weapon list screen with type filter
 - [ ] Weapon detail screen
-- [ ] Armor list screen con filtro per slot/serie
+- [ ] Armor list screen with slot/set filter
 - [ ] Armor detail screen
 - [ ] Jewel list screen
 - [ ] Talisman list screen
 - [ ] Talisman create/edit/delete
 
-### Fase 3: Build System ⬜ DA FARE
+### Phase 3: Build System ⬜ TODO
 - [ ] Build list screen
-- [ ] Builder screen — slot weapon
-- [ ] Builder screen — 5 slot armatura
-- [ ] Builder screen — slot talisman
-- [ ] Builder screen — slot gioielli dinamici
-- [ ] Salvataggio build
+- [ ] Builder screen — weapon slot
+- [ ] Builder screen — 5 armor slots
+- [ ] Builder screen — talisman slot
+- [ ] Builder screen — dynamic jewel slots
+- [ ] Save build
 
-### Fase 4: Stats Engine ⬜ DA FARE
-- [ ] Calc Engine: aggregazione skill dalla build
+### Phase 4: Stats Engine ⬜ TODO
+- [ ] Calc Engine: skill aggregation from build
 - [ ] Calc Engine: True Raw
 - [ ] Calc Engine: Effective Affinity
 - [ ] Calc Engine: True Element
 - [ ] Calc Engine: Defense + Elem Resistances
-- [ ] Stats Panel live nel builder
-- [ ] Stats view nel dettaglio build
+- [ ] Live stats panel in builder
+- [ ] Stats view in build detail
 
-### Fase 5: Supabase Sync ⬜ DA FARE
+### Phase 5: Supabase Sync ⬜ TODO
 - [ ] Connectivity detection
-- [ ] Versioning check
-- [ ] Delta sync tabelle dati di gioco
-- [ ] UI indicator sync status
+- [ ] Version check
+- [ ] Delta sync for game data tables
+- [ ] Sync status UI indicator
 
-### Fase 6: Polish ⬜ DA FARE
-- [ ] Filtri equipment (per tipo, rarity, skill)
-- [ ] Ricerca testuale
+### Phase 6: Polish ⬜ TODO
+- [ ] Equipment filters (by type, rarity, skill)
+- [ ] Text search
 - [ ] Sorting
 - [ ] UI/UX refinement
 
-## Note di sessione
+## Session notes
 
-### 2026-05-05 — Sessione 1
-- Progetto creato da zero su piano condiviso con l'utente
-- Stack scelto: drift + supabase + riverpod + go_router
-- Fonte dati principale: `/Users/loke/Downloads/Alpha Calulator.xlsx`
-- Dati mancanti (armature, armi base, gioielli) da raccogliere esternamente
-- MVP: statistiche aggregate (no DPH per hitzone — riservato fase futura)
-- Talismani: CRUD utente, solo locale
+### 2026-05-05 — Session 1
+- Project created from scratch on shared plan with user
+- Stack chosen: drift + supabase + riverpod + go_router
+- Primary data source: `/Users/loke/Downloads/Alpha Calulator.xlsx`
+- Missing data (armor, base weapons, jewels) to be gathered externally
+- MVP: aggregate stats (no DPH per hitzone — reserved for future phase)
+- Talismans: user CRUD, local-only
 
-### 2026-05-05 — Sessione 2
-- Aggiornati pacchetti Flutter e dipendenze (drift 2.33.0, sqlite3 3.3.1, flutter_riverpod 3.1.0, go_router 17.x)
-- Rimossi pacchetti inutilizzati o incompatibili: `sqlite3_flutter_libs`, `riverpod_annotation`, `riverpod_generator`, `custom_lint`, `riverpod_lint`
-- Tutti i provider scritti manualmente (no @riverpod codegen)
-- `flutter pub outdated` — tutti i pacchetti diretti all'ultima versione disponibile
+### 2026-05-05 — Session 2
+- Updated Flutter packages and dependencies (drift 2.33.0, sqlite3 3.3.1, flutter_riverpod 3.1.0, go_router 17.x)
+- Removed unused or incompatible packages: `sqlite3_flutter_libs`, `riverpod_annotation`, `riverpod_generator`, `custom_lint`, `riverpod_lint`
+- All providers written manually (no @riverpod codegen)
+- `flutter pub outdated` — all direct packages at latest available version
 - `flutter analyze` → No issues found
-- Aggiornata ARCHITECTURE.md (stack, pattern provider, comando codegen)
+- Updated ARCHITECTURE.md (stack, provider pattern, codegen command)
+
+### 2026-05-06 — Session 3
+- Added enum types for all limited-value text columns + TypeConverters (Dart-layer only, no DB schema change)
+- Updated seeds to use lowercase values for type1/type2 in skills table
+- Set up i18n: flutter_localizations, intl, l10n.yaml, app_en.arb, app_it.arb
+- Translated all Italian comments in code and documentation to English
+- Added automated tests: 20 converter unit tests + 7 DAO integration tests (in-memory DB)
+- `flutter analyze` → No issues found
+- `flutter test` → 27/27 passed

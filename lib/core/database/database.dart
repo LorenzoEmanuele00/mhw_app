@@ -4,6 +4,7 @@ import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
+import 'tables/enums.dart';
 import 'tables/game_tables.dart';
 import 'tables/user_tables.dart';
 import 'daos/weapons_dao.dart';
@@ -38,6 +39,8 @@ part 'database.g.dart';
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
+
+  AppDatabase.forTesting(super.e);
 
   @override
   int get schemaVersion => 1;

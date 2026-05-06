@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/providers/seed_provider.dart';
 import 'core/router/router.dart';
+import 'l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +20,13 @@ class MhwApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'MHW Builder',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF8B1A1A),
@@ -26,7 +35,7 @@ class MhwApp extends ConsumerWidget {
         useMaterial3: true,
       ),
       routerConfig: router,
-      // Mostra splash finché il seed non è pronto
+      // Show splash screen until DB seed is ready
       builder: seed.when(
         data: (_) => null,
         loading: () => (context, child) => const Scaffold(

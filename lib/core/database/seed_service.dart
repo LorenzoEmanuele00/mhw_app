@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 import 'database.dart';
 
-/// Carica i seed SQL negli asset al primo avvio (DB vuoto).
-/// Viene chiamato una sola volta durante l'init dell'app.
+/// Loads SQL seed assets on first launch (empty DB).
+/// Called once during app initialization.
 class SeedService {
   final AppDatabase _db;
 
@@ -31,7 +31,7 @@ class SeedService {
     });
   }
 
-  /// Divide il file SQL in statement singoli, saltando commenti e righe vuote.
+  /// Splits a SQL file into individual statements, skipping comments and blank lines.
   List<String> _splitStatements(String sql) {
     final results = <String>[];
     final buffer = StringBuffer();

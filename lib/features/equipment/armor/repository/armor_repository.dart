@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/database/database.dart';
+import '../../../../core/database/tables/enums.dart';
 import '../../../../core/providers/database_provider.dart';
 
 class ArmorRepository {
@@ -8,7 +9,7 @@ class ArmorRepository {
 
   Stream<List<ArmorPiece>> watchAll() => _db.armorDao.watchAll();
 
-  Stream<List<ArmorPiece>> watchBySlot(String slotType) =>
+  Stream<List<ArmorPiece>> watchBySlot(ArmorSlotType slotType) =>
       _db.armorDao.watchBySlot(slotType);
 
   Future<ArmorPiece?> getById(String id) => _db.armorDao.getById(id);
@@ -26,6 +27,6 @@ final allArmorProvider = StreamProvider<List<ArmorPiece>>((ref) {
 });
 
 final armorBySlotProvider =
-    StreamProvider.family<List<ArmorPiece>, String>((ref, slot) {
+    StreamProvider.family<List<ArmorPiece>, ArmorSlotType>((ref, slot) {
   return ref.watch(armorRepositoryProvider).watchBySlot(slot);
 });

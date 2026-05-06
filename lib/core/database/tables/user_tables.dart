@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'game_tables.dart';
+import 'enums.dart';
 
 class Talismans extends Table {
   IntColumn get id => integer().autoIncrement()();
@@ -10,7 +11,7 @@ class Talismans extends Table {
   @ReferenceName('talismanSkill2Refs')
   TextColumn get skill2Id => text().nullable().references(Skills, #id)();
   IntColumn get skill2Level => integer().nullable()();
-  TextColumn get slots => text().withDefault(const Constant('[]'))(); // JSON
+  TextColumn get slots => text().withDefault(const Constant('[]'))(); // JSON array
   IntColumn get createdAt => integer()();
 }
 
@@ -36,7 +37,8 @@ class Builds extends Table {
 class BuildJewels extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get buildId => integer().references(Builds, #id)();
-  TextColumn get slotSource => text()(); // weapon/head/chest/arms/waist/legs/talisman
+  TextColumn get slotSource =>
+      text().map(const JewelSlotSourceConverter())();
   IntColumn get slotIndex => integer()();
   TextColumn get jewelId => text().references(Jewels, #id)();
 }

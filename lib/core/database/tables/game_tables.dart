@@ -1,19 +1,23 @@
 import 'package:drift/drift.dart';
+import 'enums.dart';
 
 class Weapons extends Table {
   TextColumn get id => text()();
   TextColumn get name => text()();
-  TextColumn get weaponType => text()();
+  TextColumn get weaponType => text().map(const WeaponTypeConverter())();
   IntColumn get baseAttack => integer()();
   RealColumn get baseAffinity => real().withDefault(const Constant(0.0))();
-  TextColumn get elementType => text().nullable()();
+  TextColumn get elementType =>
+      text().nullable().map(const ElementTypeConverter())();
   IntColumn get elementValue => integer().nullable()();
-  TextColumn get sharpnessMax => text().withDefault(const Constant('white'))();
+  TextColumn get sharpnessMax =>
+      text().withDefault(const Constant('white')).map(const SharpnessLevelConverter())();
   IntColumn get rarity => integer().withDefault(const Constant(1))();
-  TextColumn get slots => text().withDefault(const Constant('[]'))(); // JSON
+  TextColumn get slots => text().withDefault(const Constant('[]'))(); // JSON array
   RealColumn get rmv => real().withDefault(const Constant(1.0))();
   RealColumn get emv => real().withDefault(const Constant(1.0))();
-  TextColumn get damageType => text().withDefault(const Constant('cut'))();
+  TextColumn get damageType =>
+      text().withDefault(const Constant('cut')).map(const DamageTypeConverter())();
   TextColumn get burstGroup => text().withDefault(const Constant('Other'))();
 
   @override
@@ -23,7 +27,7 @@ class Weapons extends Table {
 class ArmorPieces extends Table {
   TextColumn get id => text()();
   TextColumn get name => text()();
-  TextColumn get slotType => text()(); // head/chest/arms/waist/legs
+  TextColumn get slotType => text().map(const ArmorSlotTypeConverter())();
   IntColumn get baseDefense => integer().withDefault(const Constant(0))();
   IntColumn get fireRes => integer().withDefault(const Constant(0))();
   IntColumn get waterRes => integer().withDefault(const Constant(0))();
@@ -31,7 +35,7 @@ class ArmorPieces extends Table {
   IntColumn get iceRes => integer().withDefault(const Constant(0))();
   IntColumn get dragonRes => integer().withDefault(const Constant(0))();
   IntColumn get rarity => integer().withDefault(const Constant(1))();
-  TextColumn get slots => text().withDefault(const Constant('[]'))(); // JSON
+  TextColumn get slots => text().withDefault(const Constant('[]'))(); // JSON array
   TextColumn get setId => text().references(ArmorSets, #id)();
 
   @override
@@ -52,7 +56,8 @@ class ArmorSetSkills extends Table {
   IntColumn get requiredPieces => integer()();
   TextColumn get skillId => text().references(Skills, #id)();
   IntColumn get skillLevel => integer()();
-  TextColumn get skillCategory => text()(); // GROUP / SERIES
+  TextColumn get skillCategory =>
+      text().map(const SetSkillTypeConverter())();
 }
 
 class Jewels extends Table {
@@ -71,8 +76,10 @@ class Skills extends Table {
   TextColumn get id => text()();
   TextColumn get name => text()();
   IntColumn get maxLevel => integer()();
-  TextColumn get type1 => text().withDefault(const Constant('Armor'))();
-  TextColumn get type2 => text().withDefault(const Constant('Utility'))();
+  TextColumn get type1 =>
+      text().withDefault(const Constant('armor')).map(const SkillCategoryConverter())();
+  TextColumn get type2 =>
+      text().withDefault(const Constant('utility')).map(const SkillSubcategoryConverter())();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -92,8 +99,9 @@ class SkillLevels extends Table {
   RealColumn get cooldownS => real().nullable()();
 }
 
-// Tipi bonus validi (documentazione):
+// Valid bonus types for the calc engine (bonusXType fields above):
 // atk_multiplier, atk_additive, affinity_additive, crit_bonus_multiplier
 // elem_multiplier, elem_additive, def_multiplier, def_additive
 // fire_res_additive, water_res_additive, thunder_res_additive,
 // ice_res_additive, dragon_res_additive, sharpness_additive
+// Other values are descriptive text for non-calc skills.

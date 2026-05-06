@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import '../database.dart';
 import '../tables/game_tables.dart';
+import '../tables/enums.dart';
 
 part 'armor_dao.g.dart';
 
@@ -8,8 +9,10 @@ part 'armor_dao.g.dart';
 class ArmorDao extends DatabaseAccessor<AppDatabase> with _$ArmorDaoMixin {
   ArmorDao(super.db);
 
-  Stream<List<ArmorPiece>> watchBySlot(String slotType) =>
-      (select(armorPieces)..where((a) => a.slotType.equals(slotType))).watch();
+  Stream<List<ArmorPiece>> watchBySlot(ArmorSlotType slotType) =>
+      (select(armorPieces)
+            ..where((a) => a.slotType.equals(slotType.name)))
+          .watch();
 
   Stream<List<ArmorPiece>> watchAll() => select(armorPieces).watch();
 

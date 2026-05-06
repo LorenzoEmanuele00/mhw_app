@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/database/database.dart';
+import '../../../../core/database/tables/enums.dart';
 import '../../../../core/providers/database_provider.dart';
 
 class WeaponsRepository {
@@ -8,7 +9,7 @@ class WeaponsRepository {
 
   Stream<List<Weapon>> watchAll() => _db.weaponsDao.watchAll();
 
-  Stream<List<Weapon>> watchByType(String weaponType) =>
+  Stream<List<Weapon>> watchByType(WeaponType weaponType) =>
       _db.weaponsDao.watchByType(weaponType);
 
   Future<Weapon?> getById(String id) => _db.weaponsDao.getById(id);
@@ -26,6 +27,6 @@ final allWeaponsProvider = StreamProvider<List<Weapon>>((ref) {
 });
 
 final weaponsByTypeProvider =
-    StreamProvider.family<List<Weapon>, String>((ref, type) {
+    StreamProvider.family<List<Weapon>, WeaponType>((ref, type) {
   return ref.watch(weaponsRepositoryProvider).watchByType(type);
 });
