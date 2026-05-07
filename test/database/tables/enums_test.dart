@@ -113,7 +113,7 @@ void main() {
     test('fromSql maps all skill categories (lowercase, as stored in DB)', () {
       expect(converter.fromSql('armor'), SkillCategory.armor);
       expect(converter.fromSql('group'), SkillCategory.group);
-      expect(converter.fromSql('series'), SkillCategory.series);
+      expect(converter.fromSql('set'), SkillCategory.set);
       expect(converter.fromSql('weapon'), SkillCategory.weapon);
     });
 
@@ -146,9 +146,9 @@ void main() {
   group('SetSkillTypeConverter', () {
     const converter = SetSkillTypeConverter();
 
-    test('fromSql maps group and series', () {
+    test('fromSql maps group and set', () {
       expect(converter.fromSql('group'), SetSkillType.group);
-      expect(converter.fromSql('series'), SetSkillType.series);
+      expect(converter.fromSql('set'), SetSkillType.set);
     });
 
     test('toSql round-trips for all values', () {

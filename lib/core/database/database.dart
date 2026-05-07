@@ -43,7 +43,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -54,7 +54,6 @@ class AppDatabase extends _$AppDatabase {
         onUpgrade: (m, from, to) async {
           if (from < 2) {
             // Schema v2: integer PKs + slug unique on game tables; integer FKs on user tables.
-            // Drop in FK dependency order, then recreate everything.
             await m.drop(buildJewels);
             await m.drop(builds);
             await m.drop(talismans);
@@ -67,6 +66,12 @@ class AppDatabase extends _$AppDatabase {
             await m.drop(skills);
             await m.createAll();
             await _seedSyncMetadata();
+          }
+          if (from < 3) {
+            // Schema v3: add pieces_required to skill_levels (set/group activation threshold).
+            await customStatement(
+              'ALTER TABLE skill_levels ADD COLUMN pieces_required INTEGER',
+            );
           }
         },
       );

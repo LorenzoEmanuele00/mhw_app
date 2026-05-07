@@ -69,19 +69,24 @@
 ### skills
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | INTEGER PK autoincrement | |
+| id | INTEGER PK | Numeric ID from Skill.json (source of truth) |
 | slug | TEXT UNIQUE | es. "attack_boost" |
-| name | TEXT | Nome visualizzato es. "Attack Boost" |
+| name | TEXT | Nome visualizzato (English) |
 | max_level | INTEGER | |
-| type1 | TEXT | Armor / Weapon |
-| type2 | TEXT | Offensive / Defensive / Utility |
+| type1 | TEXT | armor / weapon / set / group |
+| type2 | TEXT | utility (default — from Excel subcategory data) |
+
+**type1 semantics:**
+- `armor` / `weapon`: skill equippable on armor/weapon jewels (constrains jewel assignment)
+- `set` / `group`: activated by equipping N armor pieces — no skill points needed
 
 ### skill_levels
 | Campo | Tipo | Note |
 |-------|------|------|
 | id | INTEGER PK autoincrement | |
 | skill_id | INTEGER FK → skills | |
-| level | INTEGER | |
+| level | INTEGER | Skill rank (1, 2, 3 ...) |
+| pieces_required | INTEGER? | For set/group only: armor pieces needed to activate this rank |
 | bonus1_value | REAL? | |
 | bonus1_type | TEXT? | Vedi tipi bonus sotto |
 | bonus2_value | REAL? | |

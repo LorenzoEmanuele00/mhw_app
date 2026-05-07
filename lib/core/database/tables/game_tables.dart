@@ -94,6 +94,8 @@ class SkillLevels extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get skillId => integer().references(Skills, #id)();
   IntColumn get level => integer()();
+  // Null for armor/weapon skills; for set/group skills: armor pieces required to activate this level.
+  IntColumn get piecesRequired => integer().nullable()();
   RealColumn get bonus1Value => real().nullable()();
   TextColumn get bonus1Type => text().nullable()();
   RealColumn get bonus2Value => real().nullable()();

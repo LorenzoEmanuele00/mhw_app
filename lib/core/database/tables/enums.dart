@@ -23,13 +23,14 @@ enum ArmorSlotType { head, chest, arms, waist, legs }
 // ---------------------------------------------------------------------------
 
 /// Primary skill category — stored in skills.type1
-enum SkillCategory { armor, group, series, weapon }
+/// Matches JSON `kind` field: set/group activate via armor pieces; armor/weapon constrain jewel assignment.
+enum SkillCategory { armor, group, set, weapon }
 
 /// Secondary skill category — stored in skills.type2
 enum SkillSubcategory { defensive, farming, offensive, regen, technical, utility }
 
 /// Armor set skill type — stored in armor_set_skills.skill_category
-enum SetSkillType { group, series }
+enum SetSkillType { group, set }
 
 // ---------------------------------------------------------------------------
 // Build / jewel enums

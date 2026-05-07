@@ -83,6 +83,17 @@ Update this file at every session.
 
 ## Session notes
 
+### 2026-05-07 — Session 4
+- Review from REVIEW.md applied: source of truth for skills changed to `assets/output/merged/Skill.json`
+- `SkillCategory.series` renamed to `SkillCategory.set` (matches JSON `kind` field)
+- `SetSkillType.series` renamed to `SetSkillType.set`
+- `SkillLevels` table: added `pieces_required` (nullable int) for set/group activation threshold
+- Schema bumped to v3 with migration (`ALTER TABLE skill_levels ADD COLUMN pieces_required INTEGER`)
+- New seed generator: `scripts/generate_seeds_from_json.py` — reads JSON (179 skills), cross-references with Excel calc data (158/179 matched), adds null rows for new skills
+- Seeds regenerated: 179 skills, 442 skill_levels with `pieces_required` for set/group ranks
+- `flutter analyze` → No issues found
+- `flutter test` → All 28 tests passed
+
 ### 2026-05-05 — Session 1
 - Project created from scratch on shared plan with user
 - Stack chosen: drift + supabase + riverpod + go_router
