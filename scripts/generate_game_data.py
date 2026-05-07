@@ -103,9 +103,13 @@ def max_sharpness(sharpness: dict) -> str:
 # Slug helper
 # ---------------------------------------------------------------------------
 
+_GREEK = [('α', 'alpha'), ('β', 'beta'), ('γ', 'gamma'), ('δ', 'delta')]
+
 def to_slug(name: str) -> str:
     s = name.strip().lower()
     s = re.sub(r"[''`']", '', s)
+    for greek, latin in _GREEK:
+        s = s.replace(greek, latin)
     s = re.sub(r'[^a-z0-9]+', '_', s)
     return s.strip('_')
 
@@ -136,6 +140,7 @@ def sql_real(v, default=None) -> str:
 def generate_weapons():
     weapon_mods = load_weapon_mods()
     rows_weapons = []
+    global_id = 0  # auto-increment across all weapon types
 
     for json_kind, db_slug in WEAPON_KIND_MAP.items():
         filename = json_kind.title().replace('-', '') + '.json'
@@ -164,22 +169,22 @@ def generate_weapons():
         emv = mods.get('emv', 1.0)
         damage_type, burst_group = WEAPON_TYPE_META[db_slug]
 
+        # First pass: collect all entries; assign global sequential IDs
+        weapon_entries = []
         for w in weapons:
-            wid   = w['id']
+            global_id += 1
+            wid   = global_id
             name  = w['names']['en']
             slug  = f"{db_slug}_{to_slug(name)}"
             rarity = w.get('rarity', 1)
             attack = w.get('attack_raw', 0)
-            # affinity in JSON is integer (e.g. 15 = 15%), DB stores as real (0.15)
             affinity = (w.get('affinity', 0) or 0) / 100.0
-            defense  = w.get('defense', 0) or 0
 
             sharp = w.get('sharpness')
             sharpness_max = max_sharpness(sharp) if sharp else 'red'
 
             slots = json.dumps(w.get('slots') or [])
 
-            # Element / status
             specials = w.get('specials') or []
             elem_type = None
             elem_value = None
@@ -188,11 +193,21 @@ def generate_weapons():
                 raw_type = sp.get('element') or sp.get('status')
                 elem_type = SPECIAL_TYPE_MAP.get(raw_type)
                 elem_value = sp.get('raw')
-                # Skip hidden elements (not active without Free Element skill)
                 if sp.get('hidden', False):
                     elem_type = None
                     elem_value = None
 
+            weapon_entries.append((wid, slug, name, rarity, attack, affinity,
+                                   elem_type, elem_value, sharpness_max, slots))
+
+        # Deduplicate slugs by appending _{id}
+        from collections import Counter
+        slug_counts = Counter(e[1] for e in weapon_entries)
+        slug_seen: dict = {}
+        for entry in weapon_entries:
+            wid, slug, name, rarity, attack, affinity, elem_type, elem_value, sharpness_max, slots = entry
+            if slug_counts[slug] > 1:
+                slug = f"{slug}_{wid}"
             rows_weapons.append(
                 f"  ({wid}, {sql_str(slug)}, {sql_str(name)}, {sql_str(db_slug)}, "
                 f"{attack}, {sql_real(affinity, 0.0)}, "
@@ -244,7 +259,7 @@ def generate_armor():
         rarity   = aset.get('rarity', 1)
 
         rows_sets.append(
-            f"  ({set_id}, {sql_str(set_slug)}, {sql_str(set_name)}, {rarity})"
+            f"  ({set_id}, {sql_str(set_slug)}, {sql_str(set_name)})"
         )
 
         # armor_set_skills: set_bonus + group_bonus
@@ -305,7 +320,7 @@ def generate_armor():
         f.write('DELETE FROM armor_pieces;\n')
         f.write('DELETE FROM armor_sets;\n\n')
 
-        f.write('INSERT INTO armor_sets (id, slug, name, rarity) VALUES\n')
+        f.write('INSERT INTO armor_sets (id, slug, name) VALUES\n')
         f.write(',\n'.join(rows_sets))
         f.write(';\n\n')
 
@@ -414,7 +429,7 @@ def generate_armor_fixed():
         rarity   = aset.get('rarity', 1)
 
         rows_sets.append(
-            f"  ({set_id}, {sql_str(set_slug)}, {sql_str(set_name)}, {rarity})"
+            f"  ({set_id}, {sql_str(set_slug)}, {sql_str(set_name)})"
         )
 
         for bonus_key in ('set_bonus', 'group_bonus'):
@@ -464,7 +479,7 @@ def generate_armor_fixed():
         f.write('DELETE FROM armor_pieces;\n')
         f.write('DELETE FROM armor_sets;\n\n')
 
-        f.write('INSERT INTO armor_sets (id, slug, name, rarity) VALUES\n')
+        f.write('INSERT INTO armor_sets (id, slug, name) VALUES\n')
         f.write(',\n'.join(rows_sets))
         f.write(';\n\n')
 
