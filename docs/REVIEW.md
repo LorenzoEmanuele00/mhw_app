@@ -4,21 +4,12 @@
 
 ### Review per parte di setup e creazione tabelle:
 
-1. Le tabelle hanno dei text come id —> è l’id primario (primaryKey)? Nel caso non salrebbe meglio lasciare un integer autoincrement unique che sia anche index (per velocizzare le query)? E aggiungere magari un campo slug anch’esso unique? —> Se questo ha senso allora andiamo a fare un check se questa modifica possa avere ripercussioni su altri file o metodi nel progetto e poi facciamo le dovute modifiche (probabile impatto su tabelle di build, dove la foreignKey non sarà più text e nei DAO relativi dove ci sono check su id).
-2. Le tabelle hanno molti campi di testo, dove però le opzioni sono limitate e decise in precedenza. Sarebbe utile e typesafe utilizzare degli enum in modo da permettere solo l’inserto di determinati text o Type
-3. Le chiavi primarie dovrebbero essere indici di default, se così non fosse, aggiungili
+1. Le tabelle hanno dei text come id —> è l’id primario (primaryKey)? Nel caso non salrebbe meglio lasciare un integer autoincrement unique che sia anche index (per velocizzare le query)? E aggiungere magari un campo slug anch’esso unique? —> Questo riflette in modo più accurato la situazione che troviamo nei dai reali —> Avere lo slug inoltre ci aiuta a differenziare nei casi futuri in cui due armi o armature con lo stesso nome indichino due pezzi diversi (penso ad un eventuale potenziamento).
+   Possiamo quindi andare a fare un check se questa modifica possa avere ripercussioni su altri file o metodi nel progetto e poi facciamo le dovute modifiche (probabile impatto su tabelle di build, dove la foreignKey non sarà più text e nei DAO relativi dove ci sono check su id).
+2. Adesso ho aggiunto una cartella true data in assets. Li sono contenuti tutti i json con armi, skill, armature ecc. Questa diventa la nostra fonte di verità su gli elementi, mentre excel rimane la verità su tutti i calcoli, i modificatori delle skill per livello (skill_level), i modificatori delle armi, motion value, hitzone value. --> Voglio quindi che venga fatta questa operazione: le tabelle verranno aggiornate sulla base di true data
+3. Dobbiamo puntualizzare alcune cose sulle skill. il type_1 delle skill identifica:
+   - series - group: quella skill è ottenuta se ci sono i necessari pezzi armatura indicati. Nel caso di _Fulgur Anjanath's Will_ ad esempio: Per ogni livello dell'abilità vediamo sotto quanti pezzi sono necessari affinchè quella skilla a quel livello compaia tra quelle attive.
+   - weapon e armor: indicano se quella skill può essere applicata ad un armatura o ad un arma. Dobbiamo quindi sapere che l'utente non potrà assegnare un jewel con una skill weapon a dei pezzi armatura e viceversa. salvo condizioni extra che esplicitermeo in seguito
 
-### Commenti generali
-
-1. Tutto ciò che è scritto nel progetto dovrebbe essere in inglese: file, commenti, nomi e documentazione.
-2. L'applicazione invecedovrà avere almeno la doppia lingua tra italiano e inglese. Questo significa che dobbiamo strutturare un processo di traduzione flessibile, per avere modo in futuro di aggiungere altre lingue se necessario.
-3. Ogni parte del codice dovrebbe essere testata. Ricordati di inserire dei test automatici per ogni implementazione che esegui. Ricrdati di lanciare tutti i test automatici al termine di ogni implementazine per controllare di non aver creato ripercussioni su altre feature. **_Questa regola deve essere ferrea e rispettata sempre._**
-
-### Domande
-
-- Non sarebbe forse eliminare la gestione dei seed al di fuori degli ambienti di sviluppo? Non se se questa cosa sia possibile, ma mi imaginavo un flusso di questo tipo:
-  1. Al primo avvio l'app necessita connessione alla rete.
-  2. Scaricherà le tabelle da supabase
-  3. A quel punto verranno quindi syncate e salvate sul db sqlite
-
-  Evitiamo così la necessità di avere dei seeder interni. Possiamo comunque tenerli per adesso in modo da utilizzarli in ambiente di sviluppo, Ma per quando l'app andrà in prod vorrei slegarmi da questo metodo.
+Alla luce di questo rinominerei il type_1 in "kind" per identificare appunto il tipo di skill. Di conseguenza type_2 --> type_1.
+Inoltre dobbiamo andare a fare dei cambiamoenti. Nei file presi dall'excel c'è una diversità sul livello, questo tipo di skill hanno come livello il numero di pezzi necessari. Questa cosa deve cambiare quando facciamo l'unificazione dei dati. Avremo una colonna che ci indica i pezzi necessari per l'attivazione di quel livello specifico.
