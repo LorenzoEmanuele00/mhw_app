@@ -1,6 +1,5 @@
 [
   {
-    "game_id": -2125233152,
     "names": {
       "ja": "龍耐性",
       "en": "Dragon Resistance",
@@ -99,10 +98,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 1
   },
   {
-    "game_id": -2123993856,
     "names": {
       "ja": "散弾・剛射強化",
       "en": "Spread/Power Shots",
@@ -161,10 +160,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 2
   },
   {
-    "game_id": -2096489472,
     "names": {
       "ja": "見切り",
       "en": "Critical Eye",
@@ -303,10 +302,10 @@
     ],
     "kind": "weapon",
     "icon": "affinity",
-    "icon_id": 2
+    "icon_id": 2,
+    "id": 3
   },
   {
-    "game_id": -2041451904,
     "names": {
       "ja": "護竜の守り",
       "en": "Guardian's Protection",
@@ -366,10 +365,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 4
   },
   {
-    "game_id": -2022542848,
     "names": {
       "ja": "爆破ビン追加",
       "en": "Blast Functionality",
@@ -428,10 +427,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 5
   },
   {
-    "game_id": -1961297152,
     "names": {
       "ja": "通常弾・通常矢強化",
       "en": "Normal Shots",
@@ -490,10 +489,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 6
   },
   {
-    "game_id": -1961116288,
     "names": {
       "ja": "高速変形",
       "en": "Rapid Morph",
@@ -592,10 +591,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 7
   },
   {
-    "game_id": -1946345856,
     "names": {
       "ja": "抜刀術【力】",
       "en": "Punishing Draw",
@@ -694,10 +693,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 8
   },
   {
-    "game_id": -1863702144,
     "names": {
       "ja": "麻痺属性強化",
       "en": "Paralysis Attack",
@@ -796,10 +795,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 9
   },
   {
-    "game_id": -1769550080,
     "names": {
       "ja": "ヌシの誇り",
       "en": "Lord's Favor",
@@ -859,10 +858,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 10
   },
   {
-    "game_id": -1768553344,
     "names": {
       "ja": "雷顎竜の闘志",
       "en": "Fulgur Anjanath's Will",
@@ -960,10 +959,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 11
   },
   {
-    "game_id": -1716324608,
     "names": {
       "ja": "毒属性強化",
       "en": "Poison Attack",
@@ -1062,10 +1061,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 12
   },
   {
-    "game_id": -1700743296,
     "names": {
       "ja": "災禍転福",
       "en": "Coalescence",
@@ -1164,10 +1163,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 13
   },
   {
-    "game_id": -1689391744,
     "names": {
       "ja": "体術",
       "en": "Constitution",
@@ -1306,10 +1305,10 @@
     ],
     "kind": "armor",
     "icon": "stamina",
-    "icon_id": 8
+    "icon_id": 8,
+    "id": 14
   },
   {
-    "game_id": -1684613760,
     "names": {
       "ja": "アイテム使用強化",
       "en": "Item Prolonger",
@@ -1408,10 +1407,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 15
   },
   {
-    "game_id": -1674114176,
     "names": {
       "ja": "ガード強化",
       "en": "Guard Up",
@@ -1510,10 +1509,10 @@
     ],
     "kind": "weapon",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 16
   },
   {
-    "game_id": -1664678272,
     "names": {
       "ja": "鱗重ねの工夫",
       "en": "Scale Layering",
@@ -1573,10 +1572,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 17
   },
   {
-    "game_id": -1662120192,
     "names": {
       "ja": "無我の境地",
       "en": "Antivirus",
@@ -1675,10 +1674,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 18
   },
   {
-    "game_id": -1648695680,
     "names": {
       "ja": "革細工の柔性",
       "en": "Flexible Leathercraft",
@@ -1738,10 +1737,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 19
   },
   {
-    "game_id": -1642078720,
     "names": {
       "ja": "先達の導き",
       "en": "Imparted Wisdom",
@@ -1801,10 +1800,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 20
   },
   {
-    "game_id": -1629629184,
     "names": {
       "ja": "毒ダメージ強化",
       "en": "Poison Duration Up",
@@ -1863,10 +1862,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 21
   },
   {
-    "game_id": -1607763456,
     "names": {
       "ja": "超会心",
       "en": "Critical Boost",
@@ -2005,10 +2004,10 @@
     ],
     "kind": "weapon",
     "icon": "affinity",
-    "icon_id": 2
+    "icon_id": 2,
+    "id": 22
   },
   {
-    "game_id": -1507579776,
     "names": {
       "ja": "速射強化",
       "en": "Rapid Fire Up",
@@ -2067,10 +2066,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 23
   },
   {
-    "game_id": -1475134080,
     "names": {
       "ja": "チャージマスター",
       "en": "Charge Master",
@@ -2169,10 +2168,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 24
   },
   {
-    "game_id": -1468066176,
     "names": {
       "ja": "暗器蛸の力",
       "en": "Xu Wu's Vigor",
@@ -2270,10 +2269,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 25
   },
   {
-    "game_id": -1432692352,
     "names": {
       "ja": "護鎖刃竜の命脈",
       "en": "Guardian Arkveld's Vitality",
@@ -2371,10 +2370,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 26
   },
   {
-    "game_id": -1305836672,
     "names": {
       "ja": "護竜の脈動",
       "en": "Guardian's Pulse",
@@ -2434,10 +2433,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 27
   },
   {
-    "game_id": -1304512512,
     "names": {
       "ja": "飛び込み",
       "en": "Leap of Faith",
@@ -2496,10 +2495,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 28
   },
   {
-    "game_id": -1237438336,
     "names": {
       "ja": "笛吹き名人",
       "en": "Horn Maestro",
@@ -2578,10 +2577,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 29
   },
   {
-    "game_id": -1235658624,
     "names": {
       "ja": "体力回復量ＵＰ",
       "en": "Recovery Up",
@@ -2680,10 +2679,10 @@
     ],
     "kind": "armor",
     "icon": "health",
-    "icon_id": 7
+    "icon_id": 7,
+    "id": 30
   },
   {
-    "game_id": -1121468544,
     "names": {
       "ja": "回復速度",
       "en": "Recovery Speed",
@@ -2782,10 +2781,10 @@
     ],
     "kind": "armor",
     "icon": "health",
-    "icon_id": 7
+    "icon_id": 7,
+    "id": 31
   },
   {
-    "game_id": -1073401280,
     "names": {
       "ja": "納刀術",
       "en": "Quick Sheathe",
@@ -2884,10 +2883,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 32
   },
   {
-    "game_id": -964369920,
     "names": {
       "ja": "鎖刃竜の飢餓",
       "en": "Arkveld's Hunger",
@@ -2985,10 +2984,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 33
   },
   {
-    "game_id": -911441792,
     "names": {
       "ja": "花舞の祈り",
       "en": "Blossomdance Prayer",
@@ -3086,10 +3085,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 34
   },
   {
-    "game_id": -895828480,
     "names": {
       "ja": "風圧耐性",
       "en": "Windproof",
@@ -3188,10 +3187,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 35
   },
   {
-    "game_id": -893407296,
     "names": {
       "ja": "ＫＯ術",
       "en": "Slugger",
@@ -3290,10 +3289,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 36
   },
   {
-    "game_id": -857543744,
     "names": {
       "ja": "ボマー",
       "en": "Bombardier",
@@ -3392,10 +3391,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 37
   },
   {
-    "game_id": -856322816,
     "names": {
       "ja": "鎖刃刺撃",
       "en": "Flayer",
@@ -3534,10 +3533,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 38
   },
   {
-    "game_id": -847539392,
     "names": {
       "ja": "濡れ刃紋",
       "en": "Slicked Blade",
@@ -3636,10 +3635,10 @@
     ],
     "kind": "weapon",
     "icon": "affinity",
-    "icon_id": 2
+    "icon_id": 2,
+    "id": 39
   },
   {
-    "game_id": -844978880,
     "names": {
       "ja": "爆破属性強化",
       "en": "Blast Attack",
@@ -3738,10 +3737,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 40
   },
   {
-    "game_id": -776946176,
     "names": {
       "ja": "龍属性攻撃強化",
       "en": "Dragon Attack",
@@ -3840,10 +3839,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 41
   },
   {
-    "game_id": -692636288,
     "names": {
       "ja": "クライマー",
       "en": "Cliffhanger",
@@ -3902,10 +3901,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 42
   },
   {
-    "game_id": -682586176,
     "names": {
       "ja": "ランナー",
       "en": "Marathon Runner",
@@ -4004,10 +4003,10 @@
     ],
     "kind": "armor",
     "icon": "stamina",
-    "icon_id": 8
+    "icon_id": 8,
+    "id": 43
   },
   {
-    "game_id": -676967744,
     "names": {
       "ja": "麻痺ビン追加",
       "en": "Para Functionality",
@@ -4066,10 +4065,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 44
   },
   {
-    "game_id": -632440576,
     "names": {
       "ja": "緩衝",
       "en": "Shock Absorber",
@@ -4128,10 +4127,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 45
   },
   {
-    "game_id": -609509888,
     "names": {
       "ja": "耐震",
       "en": "Tremor Resistance",
@@ -4230,10 +4229,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 46
   },
   {
-    "game_id": -596764096,
     "names": {
       "ja": "砲術",
       "en": "Artillery",
@@ -4332,10 +4331,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 47
   },
   {
-    "game_id": -593005376,
     "names": {
       "ja": "環境利用の知識",
       "en": "Survival Expert",
@@ -4434,10 +4433,10 @@
     ],
     "kind": "armor",
     "icon": "health",
-    "icon_id": 7
+    "icon_id": 7,
+    "id": 48
   },
   {
-    "game_id": -568838336,
     "names": {
       "ja": "属性やられ耐性",
       "en": "Blight Resistance",
@@ -4536,10 +4535,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 49
   },
   {
-    "game_id": -562534336,
     "names": {
       "ja": "火属性攻撃強化",
       "en": "Fire Attack",
@@ -4638,10 +4637,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 50
   },
   {
-    "game_id": -555494336,
     "names": {
       "ja": "白熾龍の脈動",
       "en": "Zoh Shia's Pulse",
@@ -4739,10 +4738,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 51
   },
   {
-    "game_id": -481419552,
     "names": {
       "ja": "キノコ大好き",
       "en": "Mushroomancer",
@@ -4841,10 +4840,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 52
   },
   {
-    "game_id": -420608864,
     "names": {
       "ja": "弾導強化",
       "en": "Ballistics",
@@ -4943,10 +4942,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 53
   },
   {
-    "game_id": -418246240,
     "names": {
       "ja": "鎧竜の守護",
       "en": "Gravios's Protection",
@@ -5044,10 +5043,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 54
   },
   {
-    "game_id": -411441344,
     "names": {
       "ja": "悪臭耐性",
       "en": "Stench Resistance",
@@ -5126,10 +5125,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 55
   },
   {
-    "game_id": -403054144,
     "names": {
       "ja": "泡狐竜の力",
       "en": "Mizutsune's Prowess",
@@ -5227,10 +5226,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 56
   },
   {
-    "game_id": -397570464,
     "names": {
       "ja": "弱点特効",
       "en": "Weakness Exploit",
@@ -5369,10 +5368,10 @@
     ],
     "kind": "armor",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 57
   },
   {
-    "game_id": -315492576,
     "names": {
       "ja": "スタミナ急速回復",
       "en": "Stamina Surge",
@@ -5471,10 +5470,10 @@
     ],
     "kind": "armor",
     "icon": "stamina",
-    "icon_id": 8
+    "icon_id": 8,
+    "id": 58
   },
   {
-    "game_id": -307644128,
     "names": {
       "ja": "ガード性能",
       "en": "Guard",
@@ -5573,10 +5572,10 @@
     ],
     "kind": "weapon",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 59
   },
   {
-    "game_id": -283334048,
     "names": {
       "ja": "集中",
       "en": "Focus",
@@ -5675,10 +5674,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 60
   },
   {
-    "game_id": -257693696,
     "names": {
       "ja": "閃光強化",
       "en": "Blindsider",
@@ -5737,10 +5736,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 61
   },
   {
-    "game_id": -215826112,
     "names": {
       "ja": "凍峰竜の反逆",
       "en": "Jin Dahaad's Revolt",
@@ -5838,10 +5837,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 62
   },
   {
-    "game_id": -201445760,
     "names": {
       "ja": "水場・油泥適応",
       "en": "Aquatic/Oilsilt Mobility",
@@ -5920,10 +5919,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 63
   },
   {
-    "game_id": -193031552,
     "names": {
       "ja": "睡眠耐性",
       "en": "Sleep Resistance",
@@ -6022,10 +6021,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 64
   },
   {
-    "game_id": -181774400,
     "names": {
       "ja": "減気ビン追加",
       "en": "Exhaust Functionality",
@@ -6084,10 +6083,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 65
   },
   {
-    "game_id": -181127504,
     "names": {
       "ja": "攻めの守勢",
       "en": "Offensive Guard",
@@ -6186,10 +6185,10 @@
     ],
     "kind": "weapon",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 66
   },
   {
-    "game_id": -171796848,
     "names": {
       "ja": "急襲",
       "en": "Ambush",
@@ -6288,10 +6287,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 67
   },
   {
-    "game_id": -168922880,
     "names": {
       "ja": "会心撃【特殊】",
       "en": "Critical Status",
@@ -6390,10 +6389,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 68
   },
   {
-    "game_id": -160562336,
     "names": {
       "ja": "特殊射撃強化",
       "en": "Special Ammo Boost",
@@ -6472,10 +6471,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 69
   },
   {
-    "game_id": -62248528,
     "names": {
       "ja": "闢獣の力",
       "en": "Doshaguma's Might",
@@ -6573,10 +6572,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 70
   },
   {
-    "game_id": -3666104,
     "names": {
       "ja": "火竜の力",
       "en": "Rathalos's Flare",
@@ -6674,10 +6673,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 71
   },
   {
-    "game_id": 1,
     "names": {
       "ja": "攻撃",
       "en": "Attack Boost",
@@ -6816,10 +6815,10 @@
     ],
     "kind": "weapon",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 72
   },
   {
-    "game_id": 1826,
     "names": {
       "ja": "焼き砲モロコシ",
       "en": "Crackling Cornpopper",
@@ -6878,10 +6877,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 73
   },
   {
-    "game_id": 2237,
     "names": {
       "ja": "栄光の誉れ",
       "en": "Glory's Favor",
@@ -6941,10 +6940,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 74
   },
   {
-    "game_id": 3504,
     "names": {
       "ja": "刃鱗増装",
       "en": "Bladescale Loading",
@@ -7003,10 +7002,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 75
   },
   {
-    "game_id": 3813,
     "names": {
       "ja": "暗黒",
       "en": "Darkside",
@@ -7065,10 +7064,10 @@
     ],
     "kind": "weapon",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 76
   },
   {
-    "game_id": 4554,
     "names": {
       "ja": "拳を極めし者",
       "en": "Master of the Fist",
@@ -7128,10 +7127,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 77
   },
   {
-    "game_id": 5590,
     "names": {
       "ja": "巨戟龍の黙示録",
       "en": "Gogmapocalypse",
@@ -7229,10 +7228,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 78
   },
   {
-    "game_id": 7506,
     "names": {
       "ja": "シールドオプション",
       "en": "Synthetic Shield",
@@ -7291,10 +7290,10 @@
     ],
     "kind": "weapon",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 79
   },
   {
-    "game_id": 8694,
     "names": {
       "ja": "踊火の祈り",
       "en": "Flamefete Prayer",
@@ -7392,10 +7391,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 80
   },
   {
-    "game_id": 10503,
     "names": {
       "ja": "にぎりめし",
       "en": "Rice Ball",
@@ -7454,10 +7453,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 81
   },
   {
-    "game_id": 11481,
     "names": {
       "ja": "耐性変換【水】",
       "en": "Convert Water Resistance",
@@ -7516,10 +7515,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 82
   },
   {
-    "game_id": 11709,
     "names": {
       "ja": "夢灯の祈り",
       "en": "Dreamspell Prayer",
@@ -7617,10 +7616,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 83
   },
   {
-    "game_id": 12877,
     "names": {
       "ja": "解キ放ツ鏡刃ノ破片",
       "en": "Shattering Reflection",
@@ -7679,10 +7678,10 @@
     ],
     "kind": "weapon",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 84
   },
   {
-    "game_id": 13941,
     "names": {
       "ja": "祝祭の巡り",
       "en": "Festival Spirit",
@@ -7742,10 +7741,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 85
   },
   {
-    "game_id": 16835,
     "names": {
       "ja": "海竜の渦雷",
       "en": "Leviathan's Fury",
@@ -7843,10 +7842,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 86
   },
   {
-    "game_id": 16931,
     "names": {
       "ja": "炎の料理人",
       "en": "Grillmaster",
@@ -7905,10 +7904,10 @@
     ],
     "kind": "weapon",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 87
   },
   {
-    "game_id": 24531,
     "names": {
       "ja": "暗黒騎士の証",
       "en": "Soul of the Dark Knight",
@@ -8006,10 +8005,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 88
   },
   {
-    "game_id": 25070,
     "names": {
       "ja": "刃鱗研装",
       "en": "Bladescale Honing",
@@ -8068,10 +8067,10 @@
     ],
     "kind": "weapon",
     "icon": "handicraft",
-    "icon_id": 4
+    "icon_id": 4,
+    "id": 89
   },
   {
-    "game_id": 28385,
     "names": {
       "ja": "パワーストーン",
       "en": "Power Stone",
@@ -8130,10 +8129,10 @@
     ],
     "kind": "weapon",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 90
   },
   {
-    "game_id": 30201,
     "names": {
       "ja": "耐性変換【雷】",
       "en": "Convert Thunder Resistance",
@@ -8192,10 +8191,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 91
   },
   {
-    "game_id": 30554,
     "names": {
       "ja": "にゃんにゃんぼう",
       "en": "Catburglar",
@@ -8254,10 +8253,10 @@
     ],
     "kind": "weapon",
     "icon": "gathering",
-    "icon_id": 12
+    "icon_id": 12,
+    "id": 92
   },
   {
-    "game_id": 30815,
     "names": {
       "ja": "祝謡の祈り",
       "en": "Lumenhymn Prayer",
@@ -8355,10 +8354,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 93
   },
   {
-    "game_id": 30828,
     "names": {
       "ja": "回避装填",
       "en": "Evading Reload",
@@ -8417,10 +8416,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 94
   },
   {
-    "game_id": 30992,
     "names": {
       "ja": "千刃竜の闘志",
       "en": "Seregios's Tenacity",
@@ -8518,10 +8517,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 95
   },
   {
-    "game_id": 31540,
     "names": {
       "ja": "オメガレゾナンス",
       "en": "Omega Resonance",
@@ -8619,10 +8618,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 96
   },
   {
-    "game_id": 31998,
     "names": {
       "ja": "連携プログラム",
       "en": "Synergy",
@@ -8681,10 +8680,10 @@
     ],
     "kind": "weapon",
     "icon": "affinity",
-    "icon_id": 2
+    "icon_id": 2,
+    "id": 97
   },
   {
-    "game_id": 27684744,
     "names": {
       "ja": "攻勢",
       "en": "Foray",
@@ -8823,10 +8822,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 98
   },
   {
-    "game_id": 78208296,
     "names": {
       "ja": "ジャンプ鉄人",
       "en": "Jump Master",
@@ -8885,10 +8884,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 99
   },
   {
-    "game_id": 144660544,
     "names": {
       "ja": "回避性能",
       "en": "Evade Window",
@@ -9027,10 +9026,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 100
   },
   {
-    "game_id": 166057120,
     "names": {
       "ja": "睡眠属性強化",
       "en": "Sleep Attack",
@@ -9129,10 +9128,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 101
   },
   {
-    "game_id": 169998480,
     "names": {
       "ja": "睡眠ビン追加",
       "en": "Sleep Functionality",
@@ -9191,10 +9190,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 102
   },
   {
-    "game_id": 192746944,
     "names": {
       "ja": "耳栓",
       "en": "Earplugs",
@@ -9293,10 +9292,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 103
   },
   {
-    "game_id": 280489184,
     "names": {
       "ja": "逆襲",
       "en": "Counterstrike",
@@ -9395,10 +9394,10 @@
     ],
     "kind": "armor",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 104
   },
   {
-    "game_id": 313598432,
     "names": {
       "ja": "会心撃【属性】",
       "en": "Critical Element",
@@ -9497,10 +9496,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 105
   },
   {
-    "game_id": 353114912,
     "names": {
       "ja": "溜打強化",
       "en": "Charge Up",
@@ -9559,10 +9558,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 106
   },
   {
-    "game_id": 383104832,
     "names": {
       "ja": "水耐性",
       "en": "Water Resistance",
@@ -9661,10 +9660,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 107
   },
   {
-    "game_id": 397306144,
     "names": {
       "ja": "鈍器使い",
       "en": "Bludgeoner",
@@ -9763,10 +9762,10 @@
     ],
     "kind": "weapon",
     "icon": "handicraft",
-    "icon_id": 4
+    "icon_id": 4,
+    "id": 108
   },
   {
-    "game_id": 402237312,
     "names": {
       "ja": "飛燕",
       "en": "Airborne",
@@ -9825,10 +9824,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 109
   },
   {
-    "game_id": 422666624,
     "names": {
       "ja": "火事場力",
       "en": "Heroics",
@@ -9967,10 +9966,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 110
   },
   {
-    "game_id": 424768352,
     "names": {
       "ja": "環境適応",
       "en": "Adaptability",
@@ -10049,10 +10048,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 111
   },
   {
-    "game_id": 451472896,
     "names": {
       "ja": "革細工の滑性",
       "en": "Buttery Leathercraft",
@@ -10112,10 +10111,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 112
   },
   {
-    "game_id": 469540352,
     "names": {
       "ja": "整備",
       "en": "Tool Specialist",
@@ -10254,10 +10253,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 113
   },
   {
-    "game_id": 508916704,
     "names": {
       "ja": "水属性攻撃強化",
       "en": "Water Attack",
@@ -10356,10 +10355,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 114
   },
   {
-    "game_id": 522288832,
     "names": {
       "ja": "麻痺耐性",
       "en": "Paralysis Resistance",
@@ -10458,10 +10457,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 115
   },
   {
-    "game_id": 539707072,
     "names": {
       "ja": "煌雷竜の力",
       "en": "Rey Dau's Voltage",
@@ -10559,10 +10558,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 116
   },
   {
-    "game_id": 552982656,
     "names": {
       "ja": "貫通弾・竜の矢強化",
       "en": "Piercing Shots",
@@ -10621,10 +10620,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 117
   },
   {
-    "game_id": 565867136,
     "names": {
       "ja": "連撃",
       "en": "Burst",
@@ -10763,10 +10762,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 118
   },
   {
-    "game_id": 576193792,
     "names": {
       "ja": "白熾の奔流",
       "en": "Whiteflame Torrent",
@@ -10825,10 +10824,10 @@
     ],
     "kind": "weapon",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 119
   },
   {
-    "game_id": 583598144,
     "names": {
       "ja": "毛皮の誘惑",
       "en": "Alluring Pelt",
@@ -10888,10 +10887,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 120
   },
   {
-    "game_id": 595870656,
     "names": {
       "ja": "地質学",
       "en": "Geologist",
@@ -10990,10 +10989,10 @@
     ],
     "kind": "armor",
     "icon": "gathering",
-    "icon_id": 12
+    "icon_id": 12,
+    "id": 121
   },
   {
-    "game_id": 632127488,
     "names": {
       "ja": "渾身",
       "en": "Maximum Might",
@@ -11092,10 +11091,10 @@
     ],
     "kind": "armor",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 122
   },
   {
-    "game_id": 634068352,
     "names": {
       "ja": "早食い",
       "en": "Speed Eating",
@@ -11194,10 +11193,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 123
   },
   {
-    "game_id": 652161472,
     "names": {
       "ja": "氷耐性",
       "en": "Ice Resistance",
@@ -11296,10 +11295,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 124
   },
   {
-    "game_id": 673822976,
     "names": {
       "ja": "回避距離ＵＰ",
       "en": "Evade Extender",
@@ -11398,10 +11397,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 125
   },
   {
-    "game_id": 686533440,
     "names": {
       "ja": "抜刀術【技】",
       "en": "Critical Draw",
@@ -11500,10 +11499,10 @@
     ],
     "kind": "weapon",
     "icon": "affinity",
-    "icon_id": 2
+    "icon_id": 2,
+    "id": 126
   },
   {
-    "game_id": 691199232,
     "names": {
       "ja": "強化持続",
       "en": "Power Prolonger",
@@ -11602,10 +11601,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 127
   },
   {
-    "game_id": 705317568,
     "names": {
       "ja": "気絶耐性",
       "en": "Stun Resistance",
@@ -11704,10 +11703,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 128
   },
   {
-    "game_id": 722735744,
     "names": {
       "ja": "黒蝕竜の力",
       "en": "Gore Magala's Tyranny",
@@ -11805,10 +11804,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 129
   },
   {
-    "game_id": 741102208,
     "names": {
       "ja": "雪獅子の闘志",
       "en": "Blangonga's Spirit",
@@ -11906,10 +11905,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 130
   },
   {
-    "game_id": 742695104,
     "names": {
       "ja": "ひるみ軽減",
       "en": "Flinch Free",
@@ -12008,10 +12007,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 131
   },
   {
-    "game_id": 802725120,
     "names": {
       "ja": "砲弾装填",
       "en": "Load Shells",
@@ -12090,10 +12089,10 @@
     ],
     "kind": "weapon",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 132
   },
   {
-    "game_id": 820385792,
     "names": {
       "ja": "爆破やられ耐性",
       "en": "Blast Resistance",
@@ -12192,10 +12191,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 133
   },
   {
-    "game_id": 850626240,
     "names": {
       "ja": "満足感",
       "en": "Free Meal",
@@ -12294,10 +12293,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 134
   },
   {
-    "game_id": 860517760,
     "names": {
       "ja": "植生学",
       "en": "Botanist",
@@ -12416,10 +12415,10 @@
     ],
     "kind": "armor",
     "icon": "gathering",
-    "icon_id": 12
+    "icon_id": 12,
+    "id": 135
   },
   {
-    "game_id": 894530496,
     "names": {
       "ja": "広域化",
       "en": "Wide-Range",
@@ -12558,10 +12557,10 @@
     ],
     "kind": "armor",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 136
   },
   {
-    "game_id": 898284480,
     "names": {
       "ja": "昆虫標本の達人",
       "en": "Entomologist",
@@ -12620,10 +12619,10 @@
     ],
     "kind": "armor",
     "icon": "gathering",
-    "icon_id": 12
+    "icon_id": 12,
+    "id": 137
   },
   {
-    "game_id": 918165056,
     "names": {
       "ja": "兇爪竜の力",
       "en": "Ebony Odogaron's Power",
@@ -12721,10 +12720,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 138
   },
   {
-    "game_id": 919683456,
     "names": {
       "ja": "毒ビン追加",
       "en": "Poison Functionality",
@@ -12783,10 +12782,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 139
   },
   {
-    "game_id": 1050520384,
     "names": {
       "ja": "業物",
       "en": "Razor Sharp",
@@ -12885,10 +12884,10 @@
     ],
     "kind": "weapon",
     "icon": "handicraft",
-    "icon_id": 4
+    "icon_id": 4,
+    "id": 140
   },
   {
-    "game_id": 1077686656,
     "names": {
       "ja": "防御",
       "en": "Defense Boost",
@@ -13067,10 +13066,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 141
   },
   {
-    "game_id": 1160639488,
     "names": {
       "ja": "匠",
       "en": "Handicraft",
@@ -13209,10 +13208,10 @@
     ],
     "kind": "weapon",
     "icon": "handicraft",
-    "icon_id": 4
+    "icon_id": 4,
+    "id": 142
   },
   {
-    "game_id": 1174975744,
     "names": {
       "ja": "巧撃",
       "en": "Adrenaline Rush",
@@ -13351,10 +13350,10 @@
     ],
     "kind": "armor",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 143
   },
   {
-    "game_id": 1268070400,
     "names": {
       "ja": "氷属性攻撃強化",
       "en": "Ice Attack",
@@ -13453,10 +13452,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 144
   },
   {
-    "game_id": 1346775424,
     "names": {
       "ja": "精霊の加護",
       "en": "Divine Blessing",
@@ -13555,10 +13554,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 145
   },
   {
-    "game_id": 1359821952,
     "names": {
       "ja": "逆恨み",
       "en": "Resentment",
@@ -13697,10 +13696,10 @@
     ],
     "kind": "armor",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 146
   },
   {
-    "game_id": 1389859584,
     "names": {
       "ja": "達人芸",
       "en": "Master's Touch",
@@ -13759,10 +13758,10 @@
     ],
     "kind": "weapon",
     "icon": "handicraft",
-    "icon_id": 4
+    "icon_id": 4,
+    "id": 147
   },
   {
-    "game_id": 1425756032,
     "names": {
       "ja": "火耐性",
       "en": "Fire Resistance",
@@ -13861,10 +13860,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 148
   },
   {
-    "game_id": 1444935552,
     "names": {
       "ja": "砥石使用高速化",
       "en": "Speed Sharpening",
@@ -13943,10 +13942,10 @@
     ],
     "kind": "weapon",
     "icon": "item",
-    "icon_id": 11
+    "icon_id": 11,
+    "id": 149
   },
   {
-    "game_id": 1452140672,
     "names": {
       "ja": "雷属性攻撃強化",
       "en": "Thunder Attack",
@@ -14045,10 +14044,10 @@
     ],
     "kind": "weapon",
     "icon": "element",
-    "icon_id": 3
+    "icon_id": 3,
+    "id": 150
   },
   {
-    "game_id": 1459579264,
     "names": {
       "ja": "毒耐性",
       "en": "Poison Resistance",
@@ -14147,10 +14146,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 151
   },
   {
-    "game_id": 1470960256,
     "names": {
       "ja": "破壊王",
       "en": "Partbreaker",
@@ -14249,10 +14248,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 152
   },
   {
-    "game_id": 1472632704,
     "names": {
       "ja": "威嚇",
       "en": "Intimidator",
@@ -14351,10 +14350,10 @@
     ],
     "kind": "armor",
     "icon": "utility",
-    "icon_id": 10
+    "icon_id": 10,
+    "id": 153
   },
   {
-    "game_id": 1484575872,
     "names": {
       "ja": "ヌシの魂",
       "en": "Lord's Soul",
@@ -14414,10 +14413,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 154
   },
   {
-    "game_id": 1487598336,
     "names": {
       "ja": "鱗張りの技法",
       "en": "Scaling Prowess",
@@ -14477,10 +14476,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 155
   },
   {
-    "game_id": 1489568384,
     "names": {
       "ja": "属性吸収",
       "en": "Elemental Absorption",
@@ -14579,10 +14578,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 156
   },
   {
-    "game_id": 1500129152,
     "names": {
       "ja": "剛刃研磨",
       "en": "Protective Polish",
@@ -14681,10 +14680,10 @@
     ],
     "kind": "weapon",
     "icon": "handicraft",
-    "icon_id": 4
+    "icon_id": 4,
+    "id": 157
   },
   {
-    "game_id": 1522518528,
     "names": {
       "ja": "防御力ＤＯＷＮ耐性",
       "en": "Iron Skin",
@@ -14783,10 +14782,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 158
   },
   {
-    "game_id": 1594792704,
     "names": {
       "ja": "心眼",
       "en": "Mind's Eye",
@@ -14885,10 +14884,10 @@
     ],
     "kind": "weapon",
     "icon": "handicraft",
-    "icon_id": 4
+    "icon_id": 4,
+    "id": 159
   },
   {
-    "game_id": 1613139840,
     "names": {
       "ja": "フォースショット",
       "en": "Tetrad Shot",
@@ -14987,10 +14986,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 160
   },
   {
-    "game_id": 1639440000,
     "names": {
       "ja": "研鑽",
       "en": "Self-Improvement",
@@ -15049,10 +15048,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 161
   },
   {
-    "game_id": 1685697920,
     "names": {
       "ja": "甲虫の擬態",
       "en": "Neopteron Camouflage",
@@ -15112,10 +15111,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 162
   },
   {
-    "game_id": 1711950720,
     "names": {
       "ja": "ファーストショット",
       "en": "Opening Shot",
@@ -15214,10 +15213,10 @@
     ],
     "kind": "weapon",
     "icon": "ranged",
-    "icon_id": 5
+    "icon_id": 5,
+    "id": 163
   },
   {
-    "game_id": 1758661504,
     "names": {
       "ja": "スタミナ奪取",
       "en": "Stamina Thief",
@@ -15316,10 +15315,10 @@
     ],
     "kind": "weapon",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 164
   },
   {
-    "game_id": 1763191040,
     "names": {
       "ja": "力の解放",
       "en": "Latent Power",
@@ -15458,10 +15457,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 165
   },
   {
-    "game_id": 1845834112,
     "names": {
       "ja": "ハンター生活",
       "en": "Outdoorsman",
@@ -15520,10 +15519,10 @@
     ],
     "kind": "armor",
     "icon": "gathering",
-    "icon_id": 12
+    "icon_id": 12,
+    "id": 166
   },
   {
-    "game_id": 1865909632,
     "names": {
       "ja": "挑戦者",
       "en": "Agitator",
@@ -15662,10 +15661,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 167
   },
   {
-    "game_id": 1934955136,
     "names": {
       "ja": "オトモへの采配",
       "en": "Palico Rally",
@@ -15804,10 +15803,10 @@
     ],
     "kind": "armor",
     "icon": "offense",
-    "icon_id": 9
+    "icon_id": 9,
+    "id": 168
   },
   {
-    "game_id": 1940820864,
     "names": {
       "ja": "裂傷耐性",
       "en": "Bleeding Resistance",
@@ -15906,10 +15905,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 169
   },
   {
-    "game_id": 1966172160,
     "names": {
       "ja": "拘束耐性",
       "en": "Bind Resistance",
@@ -16008,10 +16007,10 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 170
   },
   {
-    "game_id": 1968728576,
     "names": {
       "ja": "甲虫の知らせ",
       "en": "Neopteron Alert",
@@ -16071,10 +16070,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 171
   },
   {
-    "game_id": 1980404096,
     "names": {
       "ja": "獄焔蛸の反逆",
       "en": "Nu Udra's Mutiny",
@@ -16172,10 +16171,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 172
   },
   {
-    "game_id": 1998066176,
     "names": {
       "ja": "毛皮の昂揚",
       "en": "Fortifying Pelt",
@@ -16235,10 +16234,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 173
   },
   {
-    "game_id": 2045149568,
     "names": {
       "ja": "腹減り耐性",
       "en": "Hunger Resistance",
@@ -16337,10 +16336,10 @@
     ],
     "kind": "armor",
     "icon": "stamina",
-    "icon_id": 8
+    "icon_id": 8,
+    "id": 174
   },
   {
-    "game_id": 2083363072,
     "names": {
       "ja": "属性変換",
       "en": "Convert Element",
@@ -16439,10 +16438,10 @@
     ],
     "kind": "armor",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 175
   },
   {
-    "game_id": 2104075392,
     "names": {
       "ja": "波衣竜の守護",
       "en": "Uth Duna's Cover",
@@ -16540,10 +16539,10 @@
     ],
     "kind": "set",
     "icon": "set",
-    "icon_id": 14
+    "icon_id": 14,
+    "id": 176
   },
   {
-    "game_id": 2106877312,
     "names": {
       "ja": "フルチャージ",
       "en": "Peak Performance",
@@ -16682,10 +16681,10 @@
     ],
     "kind": "armor",
     "icon": "attack",
-    "icon_id": 1
+    "icon_id": 1,
+    "id": 177
   },
   {
-    "game_id": 2107855744,
     "names": {
       "ja": "ヌシの憤激",
       "en": "Lord's Fury",
@@ -16745,10 +16744,10 @@
     ],
     "kind": "group",
     "icon": "group",
-    "icon_id": 13
+    "icon_id": 13,
+    "id": 178
   },
   {
-    "game_id": 2143068800,
     "names": {
       "ja": "雷耐性",
       "en": "Thunder Resistance",
@@ -16847,6 +16846,7 @@
     ],
     "kind": "armor",
     "icon": "defense",
-    "icon_id": 6
+    "icon_id": 6,
+    "id": 179
   }
 ]

@@ -1,6 +1,5 @@
 [
   {
-    "game_id": -2144349312,
     "names": {
       "ja": "毒珠【１】",
       "en": "Venom Jewel [1]",
@@ -39,14 +38,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1716324608": 1
+      "12": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 1
   },
   {
-    "game_id": -2136274304,
     "names": {
       "ja": "匠珠Ⅱ【２】",
       "en": "Handicraft Jewel II [2]",
@@ -85,14 +84,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1160639488": 2
+      "142": 2
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 2
   },
   {
-    "game_id": -2135118208,
     "names": {
       "ja": "刺撃珠【３】",
       "en": "Flayer Jewel [3]",
@@ -131,14 +130,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-856322816": 1
+      "38": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 3
   },
   {
-    "game_id": -2098600064,
     "names": {
       "ja": "特会・匠珠【３】",
       "en": "Crit Stat/Handicraft Jwl [3]",
@@ -177,15 +176,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-168922880": 3,
-      "1160639488": 1
+      "68": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 4
   },
   {
-    "game_id": -2092760832,
     "names": {
       "ja": "睡眠珠【１】",
       "en": "Sleep Jewel [1]",
@@ -224,14 +223,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "166057120": 1
+      "101": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 5
   },
   {
-    "game_id": -2046315136,
     "names": {
       "ja": "射法珠Ⅱ【２】",
       "en": "Precise Jewel II [2]",
@@ -270,14 +269,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-420608864": 2
+      "53": 2
     },
     "allowed_on": "weapon",
     "icon_color": "pink",
-    "icon_color_id": 4
+    "icon_color_id": 4,
+    "id": 6
   },
   {
-    "game_id": -2040726144,
     "names": {
       "ja": "雷光・射法珠【３】",
       "en": "Bolt/Precise Jewel [3]",
@@ -316,15 +315,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "1452140672": 3
+      "53": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 7
   },
   {
-    "game_id": -1958732416,
     "names": {
       "ja": "耐水珠【１】",
       "en": "Water Res Jewel [1]",
@@ -363,14 +362,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "383104832": 1
+      "107": 1
     },
     "allowed_on": "armor",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 8
   },
   {
-    "game_id": -1957828352,
     "names": {
       "ja": "睡眠珠Ⅱ【２】",
       "en": "Sleep Jewel II [2]",
@@ -409,14 +408,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "166057120": 2
+      "101": 2
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 9
   },
   {
-    "game_id": -1918136064,
     "names": {
       "ja": "奪気珠Ⅲ【３】",
       "en": "Drain Jewel III [3]",
@@ -455,14 +454,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1758661504": 3
+      "164": 3
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 10
   },
   {
-    "game_id": -1911376000,
     "names": {
       "ja": "重撃珠【２】",
       "en": "Destroyer Jewel [2]",
@@ -501,14 +500,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1470960256": 1
+      "152": 1
     },
     "allowed_on": "armor",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 11
   },
   {
-    "game_id": -1907467776,
     "names": {
       "ja": "積弾珠Ⅲ【３】",
       "en": "Bandolier Jewel III [3]",
@@ -547,14 +546,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1613139840": 3
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 12
   },
   {
-    "game_id": -1898312320,
     "names": {
       "ja": "耐拘珠【１】",
       "en": "Escape Jewel [1]",
@@ -593,14 +592,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1966172160": 1
+      "170": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 13
   },
   {
-    "game_id": -1890995072,
     "names": {
       "ja": "溜幅珠【１】",
       "en": "Charge Jewel [1]",
@@ -639,14 +638,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1475134080": 1
+      "24": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 14
   },
   {
-    "game_id": -1843593600,
     "names": {
       "ja": "攻撃珠Ⅱ【２】",
       "en": "Attack Jewel II [2]",
@@ -685,14 +684,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1": 2
+      "72": 2
     },
     "allowed_on": "weapon",
     "icon_color": "pink",
-    "icon_color_id": 4
+    "icon_color_id": 4,
+    "id": 15
   },
   {
-    "game_id": -1838842752,
     "names": {
       "ja": "積弾・鉄壁珠【３】",
       "en": "Bandolier/Ironwall Jwl [3]",
@@ -731,15 +730,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "1613139840": 3
+      "59": 1,
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 16
   },
   {
-    "game_id": -1826260608,
     "names": {
       "ja": "火炎・射法珠【３】",
       "en": "Blaze/Precise Jewel [3]",
@@ -778,15 +777,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "-420608864": 1
+      "50": 3,
+      "53": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 17
   },
   {
-    "game_id": -1814261888,
     "names": {
       "ja": "雷光珠【１】",
       "en": "Bolt Jewel [1]",
@@ -825,14 +824,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1452140672": 1
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 18
   },
   {
-    "game_id": -1808385664,
     "names": {
       "ja": "耐裂珠【１】",
       "en": "Suture Jewel [1]",
@@ -871,14 +870,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1940820864": 1
+      "169": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 19
   },
   {
-    "game_id": -1801961088,
     "names": {
       "ja": "耐火珠【１】",
       "en": "Fire Res Jewel [1]",
@@ -917,14 +916,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1425756032": 1
+      "148": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 20
   },
   {
-    "game_id": -1780766976,
     "names": {
       "ja": "研磨・匠珠【３】",
       "en": "Grinder/Handicraft Jwl [3]",
@@ -963,15 +962,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1160639488": 1,
-      "1444935552": 2
+      "142": 1,
+      "149": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 21
   },
   {
-    "game_id": -1779241856,
     "names": {
       "ja": "強毒珠【２】",
       "en": "Poison Jewel [2]",
@@ -1010,14 +1009,14 @@
     "price": 250,
     "level": 2,
     "skills": {
-      "-1629629184": 1
+      "21": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 22
   },
   {
-    "game_id": -1775008128,
     "names": {
       "ja": "無食珠【１】",
       "en": "Hungerless Jewel [1]",
@@ -1056,14 +1055,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "2045149568": 1
+      "174": 1
     },
     "allowed_on": "armor",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 23
   },
   {
-    "game_id": -1770074240,
     "names": {
       "ja": "昂揚珠【１】",
       "en": "Enhancer Jewel [1]",
@@ -1102,14 +1101,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "691199232": 1
+      "127": 1
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 24
   },
   {
-    "game_id": -1769520768,
     "names": {
       "ja": "雷光・匠珠【３】",
       "en": "Bolt/Handicraft Jwl [3]",
@@ -1148,15 +1147,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1160639488": 1,
-      "1452140672": 3
+      "142": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 25
   },
   {
-    "game_id": -1749412352,
     "names": {
       "ja": "標本珠【１】",
       "en": "Specimen Jewel [1]",
@@ -1195,14 +1194,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "898284480": 1
+      "137": 1
     },
     "allowed_on": "armor",
     "icon_color": "moss-green",
-    "icon_color_id": 13
+    "icon_color_id": 13,
+    "id": 26
   },
   {
-    "game_id": -1730551168,
     "names": {
       "ja": "速射珠【３】",
       "en": "Salvo Jewel [3]",
@@ -1241,14 +1240,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1507579776": 1
+      "23": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 27
   },
   {
-    "game_id": -1726768640,
     "names": {
       "ja": "沼渡珠【１】",
       "en": "Mirewalker Jewel [1]",
@@ -1287,14 +1286,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-201445760": 1
+      "63": 1
     },
     "allowed_on": "armor",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 28
   },
   {
-    "game_id": -1723727616,
     "names": {
       "ja": "増弾珠Ⅱ【２】",
       "en": "Magazine Jewel II [2]",
@@ -1333,14 +1332,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "802725120": 2
+      "132": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 29
   },
   {
-    "game_id": -1720284416,
     "names": {
       "ja": "業物珠Ⅲ【３】",
       "en": "Rzr Sharp Jwl III [3]",
@@ -1379,14 +1378,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1050520384": 3
+      "140": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 30
   },
   {
-    "game_id": -1714653184,
     "names": {
       "ja": "睡眠珠Ⅲ【３】",
       "en": "Sleep Jewel III [3]",
@@ -1425,14 +1424,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "166057120": 3
+      "101": 3
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 31
   },
   {
-    "game_id": -1709840128,
     "names": {
       "ja": "破龍珠Ⅲ【３】",
       "en": "Dragon Jewel III [3]",
@@ -1471,14 +1470,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-776946176": 3
+      "41": 3
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 32
   },
   {
-    "game_id": -1708108928,
     "names": {
       "ja": "鼓笛・攻撃珠【３】",
       "en": "Sonorous/Attack Jwl [3]",
@@ -1517,15 +1516,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1237438336": 2,
-      "1": 1
+      "29": 2,
+      "72": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 33
   },
   {
-    "game_id": -1706210176,
     "names": {
       "ja": "特会珠Ⅲ【３】",
       "en": "Crit Stat Jwl III [3]",
@@ -1564,14 +1563,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-168922880": 3
+      "68": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 34
   },
   {
-    "game_id": -1693028992,
     "names": {
       "ja": "雷光珠Ⅱ【２】",
       "en": "Bolt Jewel II [2]",
@@ -1610,14 +1609,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1452140672": 2
+      "150": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 35
   },
   {
-    "game_id": -1672815872,
     "names": {
       "ja": "火炎・守勢珠【３】",
       "en": "Blaze/Guardian Jewel [3]",
@@ -1656,15 +1655,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "-181127504": 1
+      "50": 3,
+      "66": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 36
   },
   {
-    "game_id": -1669066368,
     "names": {
       "ja": "毒珠Ⅱ【２】",
       "en": "Venom Jewel II [2]",
@@ -1703,14 +1702,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1716324608": 2
+      "12": 2
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 37
   },
   {
-    "game_id": -1664513664,
     "names": {
       "ja": "奪気珠Ⅱ【２】",
       "en": "Drain Jewel II [2]",
@@ -1749,14 +1748,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1758661504": 2
+      "164": 2
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 38
   },
   {
-    "game_id": -1645940096,
     "names": {
       "ja": "攻勢珠【３】",
       "en": "Foray Jewel [3]",
@@ -1795,14 +1794,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "27684744": 1
+      "98": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 39
   },
   {
-    "game_id": -1631437696,
     "names": {
       "ja": "研磨・鉄壁珠【３】",
       "en": "Grinder/Ironwall Jewel [3]",
@@ -1841,15 +1840,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "1444935552": 2
+      "59": 1,
+      "149": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 40
   },
   {
-    "game_id": -1626218240,
     "names": {
       "ja": "耐防珠【１】",
       "en": "Def Lock Jewel [1]",
@@ -1888,14 +1887,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1522518528": 1
+      "158": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 41
   },
   {
-    "game_id": -1622630272,
     "names": {
       "ja": "破龍・ＫＯ珠【３】",
       "en": "Dragon/KO Jewel [3]",
@@ -1934,15 +1933,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "-776946176": 3
+      "36": 1,
+      "41": 3
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 42
   },
   {
-    "game_id": -1609962496,
     "names": {
       "ja": "研磨・抜刀珠【３】",
       "en": "Grinder/Draw Jewel [3]",
@@ -1981,15 +1980,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "686533440": 1,
-      "1444935552": 2
+      "126": 1,
+      "149": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 43
   },
   {
-    "game_id": -1604621952,
     "names": {
       "ja": "初弾珠Ⅱ【２】",
       "en": "Opener Jewel II [2]",
@@ -2028,14 +2027,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1711950720": 2
+      "163": 2
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 44
   },
   {
-    "game_id": -1581788032,
     "names": {
       "ja": "溜打・攻撃珠【３】",
       "en": "Charge Up/Attack Jwl [3]",
@@ -2074,15 +2073,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1": 1,
-      "353114912": 1
+      "72": 1,
+      "106": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 45
   },
   {
-    "game_id": -1569165952,
     "names": {
       "ja": "速変珠Ⅲ【３】",
       "en": "Quickswitch Jewel III [3]",
@@ -2121,14 +2120,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1961116288": 3
+      "7": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 46
   },
   {
-    "game_id": -1550869760,
     "names": {
       "ja": "渾身珠【２】",
       "en": "Mighty Jewel [2]",
@@ -2167,14 +2166,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "632127488": 1
+      "122": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 47
   },
   {
-    "game_id": -1549794304,
     "names": {
       "ja": "守勢珠【１】",
       "en": "Guardian Jewel [1]",
@@ -2213,14 +2212,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-181127504": 1
+      "66": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 48
   },
   {
-    "game_id": -1545069696,
     "names": {
       "ja": "剛刃珠Ⅱ【２】",
       "en": "Sharp Jewel II [2]",
@@ -2259,14 +2258,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1500129152": 2
+      "157": 2
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 49
   },
   {
-    "game_id": -1518352896,
     "names": {
       "ja": "雷光珠Ⅲ【３】",
       "en": "Bolt Jewel III [3]",
@@ -2305,14 +2304,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1452140672": 3
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 50
   },
   {
-    "game_id": -1489248128,
     "names": {
       "ja": "守勢・鉄壁珠【３】",
       "en": "Guardian/Ironwall Jwl [3]",
@@ -2351,15 +2350,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "-181127504": 3
+      "59": 1,
+      "66": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 51
   },
   {
-    "game_id": -1485261696,
     "names": {
       "ja": "跳躍珠【２】",
       "en": "Jumping Jewel [2]",
@@ -2398,14 +2397,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "673822976": 1
+      "125": 1
     },
     "allowed_on": "armor",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 52
   },
   {
-    "game_id": -1465477120,
     "names": {
       "ja": "雷光・ＫＯ珠【３】",
       "en": "Bolt/KO Jewel [3]",
@@ -2444,15 +2443,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "1452140672": 3
+      "36": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 53
   },
   {
-    "game_id": -1463543552,
     "names": {
       "ja": "心眼珠【１】",
       "en": "Mind's Eye Jewel [1]",
@@ -2491,14 +2490,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1594792704": 1
+      "159": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 54
   },
   {
-    "game_id": -1452017024,
     "names": {
       "ja": "業物・鉄壁珠【３】",
       "en": "Rzr Sharp/Ironwall Jwl [3]",
@@ -2537,15 +2536,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "1050520384": 3
+      "59": 1,
+      "140": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 55
   },
   {
-    "game_id": -1449268352,
     "names": {
       "ja": "早復珠【１】",
       "en": "Recovery Jewel [1]",
@@ -2584,14 +2583,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1121468544": 1
+      "31": 1
     },
     "allowed_on": "armor",
     "icon_color": "green",
-    "icon_color_id": 14
+    "icon_color_id": 14,
+    "id": 56
   },
   {
-    "game_id": -1434375936,
     "names": {
       "ja": "耐眠珠【１】",
       "en": "Pep Jewel [1]",
@@ -2630,14 +2629,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-193031552": 1
+      "64": 1
     },
     "allowed_on": "armor",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 57
   },
   {
-    "game_id": -1416808832,
     "names": {
       "ja": "耐龍珠【１】",
       "en": "Dragon Res Jewel [1]",
@@ -2676,14 +2675,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-2125233152": 1
+      "1": 1
     },
     "allowed_on": "armor",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 58
   },
   {
-    "game_id": -1401571456,
     "names": {
       "ja": "抗狂珠【１】",
       "en": "Sane Jewel [1]",
@@ -2722,14 +2721,14 @@
     "price": 250,
     "level": 1,
     "skills": {
-      "-1662120192": 1
+      "18": 1
     },
     "allowed_on": "armor",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 59
   },
   {
-    "game_id": -1397276160,
     "names": {
       "ja": "特射珠Ⅱ【２】",
       "en": "Trueshot Jewel II [2]",
@@ -2768,14 +2767,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-160562336": 2
+      "69": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 60
   },
   {
-    "game_id": -1394596736,
     "names": {
       "ja": "流水珠【１】",
       "en": "Stream Jewel [1]",
@@ -2814,14 +2813,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "508916704": 1
+      "114": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 61
   },
   {
-    "game_id": -1392648576,
     "names": {
       "ja": "防音珠【２】",
       "en": "Earplugs Jewel [2]",
@@ -2860,14 +2859,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "192746944": 1
+      "103": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 62
   },
   {
-    "game_id": -1381641984,
     "names": {
       "ja": "体術珠【１】",
       "en": "Physique Jewel [1]",
@@ -2906,14 +2905,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1689391744": 1
+      "14": 1
     },
     "allowed_on": "armor",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 63
   },
   {
-    "game_id": -1374390656,
     "names": {
       "ja": "初弾珠Ⅲ【３】",
       "en": "Opener Jewel III [3]",
@@ -2952,14 +2951,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1711950720": 3
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 64
   },
   {
-    "game_id": -1345708800,
     "names": {
       "ja": "火炎・鉄壁珠【３】",
       "en": "Blaze/Ironwall Jwl [3]",
@@ -2998,15 +2997,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "-307644128": 1
+      "50": 3,
+      "59": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 65
   },
   {
-    "game_id": -1340047744,
     "names": {
       "ja": "達芸珠【３】",
       "en": "Mastery Jewel [3]",
@@ -3045,14 +3044,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1389859584": 1
+      "147": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 66
   },
   {
-    "game_id": -1319399040,
     "names": {
       "ja": "抜打・ＫＯ珠【３】",
       "en": "Gambit/KO Jewel [3]",
@@ -3091,15 +3090,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1946345856": 3,
-      "-893407296": 1
+      "8": 3,
+      "36": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 67
   },
   {
-    "game_id": -1318893952,
     "names": {
       "ja": "環境珠【１】",
       "en": "Survival Jewel [1]",
@@ -3138,14 +3137,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-593005376": 1
+      "48": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 68
   },
   {
-    "game_id": -1267187456,
     "names": {
       "ja": "耐雷珠【１】",
       "en": "Thunder Res Jewel [1]",
@@ -3184,14 +3183,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "2143068800": 1
+      "179": 1
     },
     "allowed_on": "armor",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 69
   },
   {
-    "game_id": -1220470528,
     "names": {
       "ja": "抜刀珠Ⅲ【３】",
       "en": "Draw Jewel III [3]",
@@ -3230,14 +3229,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "686533440": 3
+      "126": 3
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 70
   },
   {
-    "game_id": -1218528128,
     "names": {
       "ja": "守勢珠Ⅲ【３】",
       "en": "Guardian Jewel III [3]",
@@ -3276,14 +3275,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-181127504": 3
+      "66": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 71
   },
   {
-    "game_id": -1205597696,
     "names": {
       "ja": "速変・匠珠【３】",
       "en": "Quickswitch/Handicraft Jwl [3]",
@@ -3322,15 +3321,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "1160639488": 1
+      "7": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 72
   },
   {
-    "game_id": -1188973056,
     "names": {
       "ja": "流水珠Ⅱ【２】",
       "en": "Stream Jewel II [2]",
@@ -3369,14 +3368,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "508916704": 2
+      "114": 2
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 73
   },
   {
-    "game_id": -1178454912,
     "names": {
       "ja": "飛燕珠【２】",
       "en": "Flight Jewel [2]",
@@ -3415,14 +3414,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "402237312": 1
+      "109": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 74
   },
   {
-    "game_id": -1166585472,
     "names": {
       "ja": "射法珠【１】",
       "en": "Precise Jewel [1]",
@@ -3461,14 +3460,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-420608864": 1
+      "53": 1
     },
     "allowed_on": "weapon",
     "icon_color": "pink",
-    "icon_color_id": 4
+    "icon_color_id": 4,
+    "id": 75
   },
   {
-    "game_id": -1163377152,
     "names": {
       "ja": "鈍器珠Ⅲ【３】",
       "en": "Blunt Jewel III [3]",
@@ -3507,14 +3506,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "397306144": 3
+      "108": 3
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 76
   },
   {
-    "game_id": -1161972480,
     "names": {
       "ja": "毒瓶珠【２】",
       "en": "Poisoncoat Jewel [2]",
@@ -3553,14 +3552,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "919683456": 1
+      "139": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 77
   },
   {
-    "game_id": -1159995904,
     "names": {
       "ja": "眠瓶珠【３】",
       "en": "Sleepcoat Jewel [3]",
@@ -3599,14 +3598,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "169998480": 1
+      "102": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 78
   },
   {
-    "game_id": -1152759424,
     "names": {
       "ja": "属会・匠珠【３】",
       "en": "Crit Elem/Handicraft Jwl [3]",
@@ -3645,15 +3644,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "313598432": 3,
-      "1160639488": 1
+      "105": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 79
   },
   {
-    "game_id": -1139186816,
     "names": {
       "ja": "強跳珠【１】",
       "en": "Leap Jewel [1]",
@@ -3692,14 +3691,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "78208296": 1
+      "99": 1
     },
     "allowed_on": "armor",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 80
   },
   {
-    "game_id": -1133012096,
     "names": {
       "ja": "毒珠Ⅲ【３】",
       "en": "Venom Jewel III [3]",
@@ -3738,14 +3737,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1716324608": 3
+      "12": 3
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 81
   },
   {
-    "game_id": -1113106688,
     "names": {
       "ja": "適応珠【１】",
       "en": "Adapt Jewel [1]",
@@ -3784,14 +3783,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "424768352": 1
+      "111": 1
     },
     "allowed_on": "armor",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 82
   },
   {
-    "game_id": -1108771200,
     "names": {
       "ja": "特会・鉄壁珠【３】",
       "en": "Crit Stat/Ironwall Jwl [3]",
@@ -3830,15 +3829,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "-168922880": 3
+      "59": 1,
+      "68": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 83
   },
   {
-    "game_id": -1082640896,
     "names": {
       "ja": "増弾・達人珠【３】",
       "en": "Magazine/Expert Jwl [3]",
@@ -3877,15 +3876,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-2096489472": 1,
-      "802725120": 2
+      "3": 1,
+      "132": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 84
   },
   {
-    "game_id": -1081371008,
     "names": {
       "ja": "達人珠Ⅲ【３】",
       "en": "Expert Jewel III [3]",
@@ -3924,14 +3923,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-2096489472": 3
+      "3": 3
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 85
   },
   {
-    "game_id": -1072040640,
     "names": {
       "ja": "耐氷珠【１】",
       "en": "Ice Res Jewel [1]",
@@ -3970,14 +3969,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "652161472": 1
+      "124": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 86
   },
   {
-    "game_id": -1055912640,
     "names": {
       "ja": "抜打・匠珠【３】",
       "en": "Gambit/Handicraft Jwl [3]",
@@ -4016,15 +4015,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1946345856": 3,
-      "1160639488": 1
+      "8": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 87
   },
   {
-    "game_id": -1050453888,
     "names": {
       "ja": "属会・ＫＯ珠【３】",
       "en": "Crit Elem/KO Jewel [3]",
@@ -4063,15 +4062,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "313598432": 3
+      "36": 1,
+      "105": 3
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 88
   },
   {
-    "game_id": -1034943744,
     "names": {
       "ja": "抜打珠【１】",
       "en": "Gambit Jewel [1]",
@@ -4110,14 +4109,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1946345856": 1
+      "8": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 89
   },
   {
-    "game_id": -1016655360,
     "names": {
       "ja": "耐麻珠【１】",
       "en": "Antipara Jewel [1]",
@@ -4156,14 +4155,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "522288832": 1
+      "115": 1
     },
     "allowed_on": "armor",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 90
   },
   {
-    "game_id": -1016332736,
     "names": {
       "ja": "爆破珠【１】",
       "en": "Blast Jewel [1]",
@@ -4202,14 +4201,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-844978880": 1
+      "40": 1
     },
     "allowed_on": "weapon",
     "icon_color": "vermilion",
-    "icon_color_id": 6
+    "icon_color_id": 6,
+    "id": 91
   },
   {
-    "game_id": -1003144960,
     "names": {
       "ja": "痺瓶珠【３】",
       "en": "Paracoat Jewel [3]",
@@ -4248,14 +4247,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-676967744": 1
+      "44": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 92
   },
   {
-    "game_id": -949824384,
     "names": {
       "ja": "ＫＯ珠【１】",
       "en": "KO Jewel [1]",
@@ -4294,14 +4293,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-893407296": 1
+      "36": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 93
   },
   {
-    "game_id": -937758144,
     "names": {
       "ja": "火炎・昂揚珠【３】",
       "en": "Blaze/Enhancer Jwl [3]",
@@ -4340,15 +4339,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "691199232": 1
+      "50": 3,
+      "127": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 94
   },
   {
-    "game_id": -933830080,
     "names": {
       "ja": "抜打・鉄壁珠【３】",
       "en": "Gambit/Ironwall Jwl [3]",
@@ -4387,15 +4386,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1946345856": 3,
-      "-307644128": 1
+      "8": 3,
+      "59": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 95
   },
   {
-    "game_id": -919326784,
     "names": {
       "ja": "飛燕・抜刀珠【３】",
       "en": "Flight/Draw Jewel [3]",
@@ -4434,15 +4433,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "402237312": 1,
-      "686533440": 1
+      "109": 1,
+      "126": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 96
   },
   {
-    "game_id": -857552768,
     "names": {
       "ja": "爆破珠Ⅱ【２】",
       "en": "Blast Jewel II [2]",
@@ -4481,14 +4480,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-844978880": 2
+      "40": 2
     },
     "allowed_on": "weapon",
     "icon_color": "vermilion",
-    "icon_color_id": 6
+    "icon_color_id": 6,
+    "id": 97
   },
   {
-    "game_id": -848728960,
     "names": {
       "ja": "超心珠Ⅱ【２】",
       "en": "Critical Jewel II [2]",
@@ -4527,14 +4526,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1607763456": 2
+      "22": 2
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 98
   },
   {
-    "game_id": -790612736,
     "names": {
       "ja": "雷光・鉄壁珠【３】",
       "en": "Bolt/Ironwall Jewel [3]",
@@ -4573,15 +4572,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "1452140672": 3
+      "59": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 99
   },
   {
-    "game_id": -777488128,
     "names": {
       "ja": "火炎・匠珠【３】",
       "en": "Blaze/Handicraft Jwl [3]",
@@ -4620,15 +4619,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "1160639488": 1
+      "50": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 100
   },
   {
-    "game_id": -773823488,
     "names": {
       "ja": "溜幅・ＫＯ珠【３】",
       "en": "Charge/KO Jewel [3]",
@@ -4667,15 +4666,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1475134080": 3,
-      "-893407296": 1
+      "24": 3,
+      "36": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 101
   },
   {
-    "game_id": -753381888,
     "names": {
       "ja": "守勢珠Ⅱ【２】",
       "en": "Guardian Jewel II [2]",
@@ -4714,14 +4713,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-181127504": 2
+      "66": 2
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 102
   },
   {
-    "game_id": -749488896,
     "names": {
       "ja": "属会珠【１】",
       "en": "Crit Element Jewel [1]",
@@ -4760,14 +4759,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "313598432": 1
+      "105": 1
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 103
   },
   {
-    "game_id": -725659840,
     "names": {
       "ja": "防風珠【１】",
       "en": "Wind Resist Jewel [1]",
@@ -4806,14 +4805,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-895828480": 1
+      "35": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 104
   },
   {
-    "game_id": -714680256,
     "names": {
       "ja": "麻痺珠【１】",
       "en": "Paralyzer Jewel [1]",
@@ -4852,14 +4851,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1863702144": 1
+      "9": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 105
   },
   {
-    "game_id": -712981504,
     "names": {
       "ja": "集中珠Ⅲ【３】",
       "en": "Focus Jewel III [3]",
@@ -4898,14 +4897,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-283334048": 3
+      "60": 3
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 106
   },
   {
-    "game_id": -706109632,
     "names": {
       "ja": "強毒・ＫＯ珠【３】",
       "en": "Poison/KO Jewel [3]",
@@ -4944,15 +4943,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1629629184": 1,
-      "-893407296": 1
+      "21": 1,
+      "36": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 107
   },
   {
-    "game_id": -699699904,
     "names": {
       "ja": "飛燕・攻撃珠【３】",
       "en": "Flight/Attack Jwl [3]",
@@ -4991,15 +4990,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1": 1,
-      "402237312": 1
+      "72": 1,
+      "109": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 108
   },
   {
-    "game_id": -693750528,
     "names": {
       "ja": "爆瓶珠【２】",
       "en": "Blastcoat Jewel [2]",
@@ -5038,14 +5037,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-2022542848": 1
+      "5": 1
     },
     "allowed_on": "weapon",
     "icon_color": "vermilion",
-    "icon_color_id": 6
+    "icon_color_id": 6,
+    "id": 109
   },
   {
-    "game_id": -682377152,
     "names": {
       "ja": "研磨・達人珠【３】",
       "en": "Grinder/Expert Jewel [3]",
@@ -5084,15 +5083,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-2096489472": 1,
-      "1444935552": 2
+      "3": 1,
+      "149": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 110
   },
   {
-    "game_id": -677836288,
     "names": {
       "ja": "増弾・抜刀珠【３】",
       "en": "Magazine/Draw Jwl [3]",
@@ -5131,15 +5130,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "686533440": 1,
-      "802725120": 2
+      "126": 1,
+      "132": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 111
   },
   {
-    "game_id": -673317952,
     "names": {
       "ja": "早気珠【２】",
       "en": "Refresh Jewel [2]",
@@ -5178,14 +5177,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-315492576": 1
+      "58": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 112
   },
   {
-    "game_id": -645579072,
     "names": {
       "ja": "火炎・集中珠【３】",
       "en": "Blaze/Focus Jewel [3]",
@@ -5224,15 +5223,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "-283334048": 1
+      "50": 3,
+      "60": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 113
   },
   {
-    "game_id": -645377408,
     "names": {
       "ja": "溜打・ＫＯ珠【３】",
       "en": "Charge Up/KO Jewel [3]",
@@ -5271,15 +5270,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "353114912": 1
+      "36": 1,
+      "106": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 114
   },
   {
-    "game_id": -621608832,
     "names": {
       "ja": "集中・匠珠【３】",
       "en": "Focus/Handicraft Jewel [3]",
@@ -5318,15 +5317,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-283334048": 3,
-      "1160639488": 1
+      "60": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 115
   },
   {
-    "game_id": -595931264,
     "names": {
       "ja": "鼓笛・ＫＯ珠【３】",
       "en": "Sonorous/KO Jewel [3]",
@@ -5365,15 +5364,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1237438336": 2,
-      "-893407296": 1
+      "29": 2,
+      "36": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 116
   },
   {
-    "game_id": -590616064,
     "names": {
       "ja": "研鑽珠【１】",
       "en": "Growth Jewel [1]",
@@ -5412,14 +5411,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1639440000": 1
+      "161": 1
     },
     "allowed_on": "armor",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 117
   },
   {
-    "game_id": -557270784,
     "names": {
       "ja": "積弾珠Ⅱ【２】",
       "en": "Bandolier Jewel II [2]",
@@ -5458,14 +5457,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1613139840": 2
+      "160": 2
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 118
   },
   {
-    "game_id": -546783040,
     "names": {
       "ja": "強壁・匠珠【３】",
       "en": "Shield/Handicraft Jwl [3]",
@@ -5504,15 +5503,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 3,
-      "1160639488": 1
+      "16": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 119
   },
   {
-    "game_id": -534202944,
     "names": {
       "ja": "加護珠【１】",
       "en": "Protection Jewel [1]",
@@ -5551,14 +5550,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1346775424": 1
+      "145": 1
     },
     "allowed_on": "armor",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 120
   },
   {
-    "game_id": -522458240,
     "names": {
       "ja": "麻痺珠Ⅲ【３】",
       "en": "Paralyzer Jwl III [3]",
@@ -5597,14 +5596,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1863702144": 3
+      "9": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 121
   },
   {
-    "game_id": -510575936,
     "names": {
       "ja": "流水・ＫＯ珠【３】",
       "en": "Stream/KO Jewel [3]",
@@ -5643,15 +5642,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "508916704": 3
+      "36": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 122
   },
   {
-    "game_id": -508830240,
     "names": {
       "ja": "鼓笛珠【２】",
       "en": "Sonorous Jewel [2]",
@@ -5690,14 +5689,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1237438336": 1
+      "29": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 123
   },
   {
-    "game_id": -493483136,
     "names": {
       "ja": "業物珠【１】",
       "en": "Razor Sharp Jewel [1]",
@@ -5736,14 +5735,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1050520384": 1
+      "140": 1
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 124
   },
   {
-    "game_id": -487601632,
     "names": {
       "ja": "速変・鉄壁珠【３】",
       "en": "Quickswitch/Ironwall Jwl [3]",
@@ -5782,15 +5781,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "-307644128": 1
+      "7": 3,
+      "59": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 125
   },
   {
-    "game_id": -477564992,
     "names": {
       "ja": "破龍・鉄壁珠【３】",
       "en": "Dragon/Ironwall Jwl [3]",
@@ -5829,15 +5828,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "-307644128": 1
+      "41": 3,
+      "59": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 126
   },
   {
-    "game_id": -463114720,
     "names": {
       "ja": "守勢・匠珠【３】",
       "en": "Guardian/Handicraft Jwl [3]",
@@ -5876,15 +5875,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-181127504": 3,
-      "1160639488": 1
+      "66": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 127
   },
   {
-    "game_id": -451614112,
     "names": {
       "ja": "達人珠【１】",
       "en": "Expert Jewel [1]",
@@ -5923,14 +5922,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-2096489472": 1
+      "3": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 128
   },
   {
-    "game_id": -447558304,
     "names": {
       "ja": "連撃珠【３】",
       "en": "Chain Jewel [3]",
@@ -5969,14 +5968,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "565867136": 1
+      "118": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 129
   },
   {
-    "game_id": -430198272,
     "names": {
       "ja": "増弾・匠珠【３】",
       "en": "Magazine/Handicraft Jwl [3]",
@@ -6015,15 +6014,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "802725120": 2,
-      "1160639488": 1
+      "132": 2,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 130
   },
   {
-    "game_id": -417484064,
     "names": {
       "ja": "耐衝珠【１】",
       "en": "Brace Jewel [1]",
@@ -6062,14 +6061,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "742695104": 1
+      "131": 1
     },
     "allowed_on": "armor",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 131
   },
   {
-    "game_id": -394478144,
     "names": {
       "ja": "飛込珠【１】",
       "en": "Dive Jewel [1]",
@@ -6108,14 +6107,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1304512512": 1
+      "28": 1
     },
     "allowed_on": "armor",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 132
   },
   {
-    "game_id": -389889248,
     "names": {
       "ja": "強毒・鉄壁珠【３】",
       "en": "Poison/Ironwall Jwl [3]",
@@ -6154,15 +6153,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1629629184": 1,
-      "-307644128": 1
+      "21": 1,
+      "59": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 133
   },
   {
-    "game_id": -384925600,
     "names": {
       "ja": "耐毒珠【１】",
       "en": "Antidote Jewel [1]",
@@ -6201,14 +6200,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1459579264": 1
+      "151": 1
     },
     "allowed_on": "armor",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 134
   },
   {
-    "game_id": -325572000,
     "names": {
       "ja": "爆師珠【１】",
       "en": "Bomber Jewel [1]",
@@ -6247,14 +6246,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-857543744": 1
+      "37": 1
     },
     "allowed_on": "armor",
     "icon_color": "vermilion",
-    "icon_color_id": 6
+    "icon_color_id": 6,
+    "id": 135
   },
   {
-    "game_id": -316552800,
     "names": {
       "ja": "地学珠【１】",
       "en": "Geology Jewel [1]",
@@ -6293,14 +6292,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "595870656": 1
+      "121": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 136
   },
   {
-    "game_id": -301443072,
     "names": {
       "ja": "昂揚珠Ⅱ【２】",
       "en": "Enhancer Jewel II [2]",
@@ -6339,14 +6338,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "691199232": 2
+      "127": 2
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 137
   },
   {
-    "game_id": -292390464,
     "names": {
       "ja": "火炎・ＫＯ珠【３】",
       "en": "Blaze/KO Jewel [3]",
@@ -6385,15 +6384,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "-562534336": 3
+      "36": 1,
+      "50": 3
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 138
   },
   {
-    "game_id": -245086656,
     "names": {
       "ja": "抜刀珠【１】",
       "en": "Draw Jewel [1]",
@@ -6432,14 +6431,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "686533440": 1
+      "126": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 139
   },
   {
-    "game_id": -243518144,
     "names": {
       "ja": "溜幅珠Ⅱ【２】",
       "en": "Charge Jewel II [2]",
@@ -6478,14 +6477,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1475134080": 2
+      "24": 2
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 140
   },
   {
-    "game_id": -198925264,
     "names": {
       "ja": "速納珠【１】",
       "en": "Sheath Jewel [1]",
@@ -6524,14 +6523,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1073401280": 1
+      "32": 1
     },
     "allowed_on": "armor",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 141
   },
   {
-    "game_id": -198819232,
     "names": {
       "ja": "強壁珠Ⅱ【２】",
       "en": "Shield Jewel II [2]",
@@ -6570,14 +6569,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1674114176": 2
+      "16": 2
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 142
   },
   {
-    "game_id": -177096704,
     "names": {
       "ja": "節食珠【１】",
       "en": "Satiated Jewel [1]",
@@ -6616,14 +6615,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "850626240": 1
+      "134": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 143
   },
   {
-    "game_id": -150840288,
     "names": {
       "ja": "破龍珠Ⅱ【２】",
       "en": "Dragon Jewel II [2]",
@@ -6662,14 +6661,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-776946176": 2
+      "41": 2
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 144
   },
   {
-    "game_id": -145991360,
     "names": {
       "ja": "業物珠Ⅱ【２】",
       "en": "Razor Sharp Jewel II [2]",
@@ -6708,14 +6707,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1050520384": 2
+      "140": 2
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 145
   },
   {
-    "game_id": -143560672,
     "names": {
       "ja": "鼓笛・達人珠【３】",
       "en": "Sonorous/Expert Jwl [3]",
@@ -6754,15 +6753,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-2096489472": 1,
-      "-1237438336": 2
+      "3": 1,
+      "29": 2
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 146
   },
   {
-    "game_id": -140702464,
     "names": {
       "ja": "強毒・抜刀珠【３】",
       "en": "Poison/Draw Jewel [3]",
@@ -6801,15 +6800,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1629629184": 1,
-      "686533440": 1
+      "21": 1,
+      "126": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 147
   },
   {
-    "game_id": -102120712,
     "names": {
       "ja": "研磨・ＫＯ珠【３】",
       "en": "Grinder/KO Jewel [3]",
@@ -6848,15 +6847,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "1444935552": 2
+      "36": 1,
+      "149": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 148
   },
   {
-    "game_id": -98207152,
     "names": {
       "ja": "鉄壁珠【１】",
       "en": "Ironwall Jewel [1]",
@@ -6895,14 +6894,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-307644128": 1
+      "59": 1
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 149
   },
   {
-    "game_id": -92885912,
     "names": {
       "ja": "火炎・強壁珠【３】",
       "en": "Blaze/Shield Jewel [3]",
@@ -6941,15 +6940,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 1,
-      "-562534336": 3
+      "16": 1,
+      "50": 3
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 150
   },
   {
-    "game_id": -87428912,
     "names": {
       "ja": "砲術珠Ⅱ【２】",
       "en": "Artillery Jewel II [2]",
@@ -6988,14 +6987,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-596764096": 2
+      "47": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 151
   },
   {
-    "game_id": -35111916,
     "names": {
       "ja": "茸好珠【２】",
       "en": "Fungiform Jewel [2]",
@@ -7034,14 +7033,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-481419552": 1
+      "52": 1
     },
     "allowed_on": "armor",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 152
   },
   {
-    "game_id": -19370102,
     "names": {
       "ja": "初弾・射法珠【３】",
       "en": "Opener/Precise Jewel [3]",
@@ -7080,15 +7079,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "1711950720": 3
+      "53": 1,
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 153
   },
   {
-    "game_id": -15284539,
     "names": {
       "ja": "火炎珠Ⅱ【２】",
       "en": "Blaze Jewel II [2]",
@@ -7127,14 +7126,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-562534336": 2
+      "50": 2
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 154
   },
   {
-    "game_id": -12878304,
     "names": {
       "ja": "火炎珠【１】",
       "en": "Blaze Jewel [1]",
@@ -7173,14 +7172,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-562534336": 1
+      "50": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 155
   },
   {
-    "game_id": 276,
     "names": {
       "ja": "強壁・流水珠【３】",
       "en": "Shield/Stream Jewel [3]",
@@ -7219,15 +7218,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 3,
-      "508916704": 1
+      "16": 3,
+      "114": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 156
   },
   {
-    "game_id": 783,
     "names": {
       "ja": "雷光・初弾珠【３】",
       "en": "Bolt/Opener Jewel [3]",
@@ -7266,15 +7265,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1452140672": 3,
-      "1711950720": 1
+      "150": 3,
+      "163": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 157
   },
   {
-    "game_id": 1508,
     "names": {
       "ja": "破龍・守勢珠【３】",
       "en": "Dragon/Guardian Jwl [3]",
@@ -7313,15 +7312,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "-181127504": 1
+      "41": 3,
+      "66": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 158
   },
   {
-    "game_id": 1570,
     "names": {
       "ja": "破龍・集中珠【３】",
       "en": "Dragon/Focus Jewel [3]",
@@ -7360,15 +7359,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "-283334048": 1
+      "41": 3,
+      "60": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 159
   },
   {
-    "game_id": 1591,
     "names": {
       "ja": "属会・火炎珠【３】",
       "en": "Crit Elem/Blaze Jwl [3]",
@@ -7407,15 +7406,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-562534336": 1,
-      "313598432": 3
+      "50": 1,
+      "105": 3
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 160
   },
   {
-    "game_id": 1625,
     "names": {
       "ja": "氷結・業物珠【３】",
       "en": "Frost/Rzr Sharp Jwl [3]",
@@ -7454,15 +7453,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1050520384": 1,
-      "1268070400": 3
+      "140": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 161
   },
   {
-    "game_id": 1919,
     "names": {
       "ja": "集中・氷結珠【３】",
       "en": "Focus/Frost Jewel [3]",
@@ -7501,15 +7500,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-283334048": 3,
-      "1268070400": 1
+      "60": 3,
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 162
   },
   {
-    "game_id": 2186,
     "names": {
       "ja": "業物・氷結珠【３】",
       "en": "Rzr Sharp/Frost Jwl [3]",
@@ -7548,15 +7547,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "1050520384": 3,
-      "1268070400": 1
+      "140": 3,
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 163
   },
   {
-    "game_id": 2420,
     "names": {
       "ja": "破龍・初弾珠【３】",
       "en": "Dragon/Opener Jewel [3]",
@@ -7595,15 +7594,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "1711950720": 1
+      "41": 3,
+      "163": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 164
   },
   {
-    "game_id": 3416,
     "names": {
       "ja": "集中・流水珠【３】",
       "en": "Focus/Stream Jewel [3]",
@@ -7642,15 +7641,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-283334048": 3,
-      "508916704": 1
+      "60": 3,
+      "114": 1
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 165
   },
   {
-    "game_id": 3690,
     "names": {
       "ja": "速変・破龍珠【３】",
       "en": "Quickswitch/Dragon Jwl [3]",
@@ -7689,15 +7688,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "-776946176": 1
+      "7": 3,
+      "41": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 166
   },
   {
-    "game_id": 4514,
     "names": {
       "ja": "積弾・火炎珠【３】",
       "en": "Bandolier/Blaze Jwl [3]",
@@ -7736,15 +7735,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-562534336": 1,
-      "1613139840": 3
+      "50": 1,
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 167
   },
   {
-    "game_id": 4715,
     "names": {
       "ja": "業物・流水珠【３】",
       "en": "Rzr Sharp/Stream Jwl [3]",
@@ -7783,15 +7782,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "508916704": 1,
-      "1050520384": 3
+      "114": 1,
+      "140": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 168
   },
   {
-    "game_id": 4781,
     "names": {
       "ja": "火炎・初弾珠【３】",
       "en": "Blaze/Opener Jewel [3]",
@@ -7830,15 +7829,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "1711950720": 1
+      "50": 3,
+      "163": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 169
   },
   {
-    "game_id": 5173,
     "names": {
       "ja": "雷光・集中珠【３】",
       "en": "Bolt/Focus Jewel [3]",
@@ -7877,15 +7876,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-283334048": 1,
-      "1452140672": 3
+      "60": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 170
   },
   {
-    "game_id": 5731,
     "names": {
       "ja": "昂揚・火炎珠【３】",
       "en": "Enhancer/Blaze Jewel [3]",
@@ -7924,15 +7923,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-562534336": 1,
-      "691199232": 3
+      "50": 1,
+      "127": 3
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 171
   },
   {
-    "game_id": 5876,
     "names": {
       "ja": "属会・流水珠【３】",
       "en": "Crit Elem/Stream Jwl [3]",
@@ -7971,15 +7970,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "313598432": 3,
-      "508916704": 1
+      "105": 3,
+      "114": 1
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 172
   },
   {
-    "game_id": 6393,
     "names": {
       "ja": "雷光・業物珠【３】",
       "en": "Bolt/Rzr Sharp Jwl [3]",
@@ -8018,15 +8017,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1050520384": 1,
-      "1452140672": 3
+      "140": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 173
   },
   {
-    "game_id": 6455,
     "names": {
       "ja": "昂揚・氷結珠【３】",
       "en": "Enhancer/Frost Jwl [3]",
@@ -8065,15 +8064,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "691199232": 3,
-      "1268070400": 1
+      "127": 3,
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 174
   },
   {
-    "game_id": 6866,
     "names": {
       "ja": "属会・雷光珠【３】",
       "en": "Crit Elem/Bolt Jwl [3]",
@@ -8112,15 +8111,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "313598432": 3,
-      "1452140672": 1
+      "105": 3,
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 175
   },
   {
-    "game_id": 7249,
     "names": {
       "ja": "破龍・属会珠【３】",
       "en": "Dragon/Crit Elem Jwl [3]",
@@ -8159,15 +8158,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "313598432": 1
+      "41": 3,
+      "105": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 176
   },
   {
-    "game_id": 7817,
     "names": {
       "ja": "氷結・積弾珠【３】",
       "en": "Frost/Bandolier Jwl [3]",
@@ -8206,15 +8205,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1268070400": 3,
-      "1613139840": 1
+      "144": 3,
+      "160": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 177
   },
   {
-    "game_id": 8302,
     "names": {
       "ja": "破龍・強壁珠【３】",
       "en": "Dragon/Shield Jewel [3]",
@@ -8253,15 +8252,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 1,
-      "-776946176": 3
+      "16": 1,
+      "41": 3
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 178
   },
   {
-    "game_id": 8988,
     "names": {
       "ja": "速変・火炎珠【３】",
       "en": "Quickswitch/Blaze Jwl [3]",
@@ -8300,15 +8299,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "-562534336": 1
+      "7": 3,
+      "50": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 179
   },
   {
-    "game_id": 9096,
     "names": {
       "ja": "強壁・氷結珠【３】",
       "en": "Shield/Frost Jewel [3]",
@@ -8347,15 +8346,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 3,
-      "1268070400": 1
+      "16": 3,
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 180
   },
   {
-    "game_id": 11183,
     "names": {
       "ja": "雷光・速変珠【３】",
       "en": "Bolt/Quickswitch Jwl [3]",
@@ -8394,15 +8393,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1961116288": 1,
-      "1452140672": 3
+      "7": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 181
   },
   {
-    "game_id": 12151,
     "names": {
       "ja": "属会・氷結珠【３】",
       "en": "Crit Elem/Frost Jwl [3]",
@@ -8441,15 +8440,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "313598432": 3,
-      "1268070400": 1
+      "105": 3,
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 182
   },
   {
-    "game_id": 12241,
     "names": {
       "ja": "強壁・雷光珠【３】",
       "en": "Shield/Bolt Jewel [3]",
@@ -8488,15 +8487,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 3,
-      "1452140672": 1
+      "16": 3,
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 183
   },
   {
-    "game_id": 12727,
     "names": {
       "ja": "流水・業物珠【３】",
       "en": "Stream/Rzr Sharp Jwl [3]",
@@ -8535,15 +8534,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "508916704": 3,
-      "1050520384": 1
+      "114": 3,
+      "140": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 184
   },
   {
-    "game_id": 13386,
     "names": {
       "ja": "流水・強壁珠【３】",
       "en": "Stream/Shield Jewel [3]",
@@ -8582,15 +8581,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 1,
-      "508916704": 3
+      "16": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 185
   },
   {
-    "game_id": 13550,
     "names": {
       "ja": "氷結・集中珠【３】",
       "en": "Frost/Focus Jewel [3]",
@@ -8629,15 +8628,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-283334048": 1,
-      "1268070400": 3
+      "60": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 186
   },
   {
-    "game_id": 14731,
     "names": {
       "ja": "流水・属会珠【３】",
       "en": "Stream/Crit Elem Jwl [3]",
@@ -8676,15 +8675,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "313598432": 1,
-      "508916704": 3
+      "105": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 187
   },
   {
-    "game_id": 14794,
     "names": {
       "ja": "初弾・雷光珠【３】",
       "en": "Opener/Bolt Jewel [3]",
@@ -8723,15 +8722,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "1452140672": 1,
-      "1711950720": 3
+      "150": 1,
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 188
   },
   {
-    "game_id": 14855,
     "names": {
       "ja": "破龍・昂揚珠【３】",
       "en": "Dragon/Enhancer Jwl [3]",
@@ -8770,15 +8769,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "691199232": 1
+      "41": 3,
+      "127": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 189
   },
   {
-    "game_id": 14956,
     "names": {
       "ja": "業物・火炎珠【３】",
       "en": "Rzr Sharp/Blaze Jwl [3]",
@@ -8817,15 +8816,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-562534336": 1,
-      "1050520384": 3
+      "50": 1,
+      "140": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 190
   },
   {
-    "game_id": 15379,
     "names": {
       "ja": "初弾・流水珠【３】",
       "en": "Opener/Stream Jwl [3]",
@@ -8864,15 +8863,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "508916704": 1,
-      "1711950720": 3
+      "114": 1,
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 191
   },
   {
-    "game_id": 16193,
     "names": {
       "ja": "守勢・火炎珠【３】",
       "en": "Guardian/Blaze Jwl [3]",
@@ -8911,15 +8910,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-562534336": 1,
-      "-181127504": 3
+      "50": 1,
+      "66": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 192
   },
   {
-    "game_id": 16930,
     "names": {
       "ja": "集中・雷光珠【３】",
       "en": "Focus/Bolt Jwl [3]",
@@ -8958,15 +8957,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-283334048": 3,
-      "1452140672": 1
+      "60": 3,
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 193
   },
   {
-    "game_id": 17415,
     "names": {
       "ja": "氷結・昂揚珠【３】",
       "en": "Frost/Enhancer Jwl [3]",
@@ -9005,15 +9004,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "691199232": 1,
-      "1268070400": 3
+      "127": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 194
   },
   {
-    "game_id": 17610,
     "names": {
       "ja": "集中・破龍珠【３】",
       "en": "Focus/Dragon Jewel [3]",
@@ -9052,15 +9051,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-776946176": 1,
-      "-283334048": 3
+      "41": 1,
+      "60": 3
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 195
   },
   {
-    "game_id": 17913,
     "names": {
       "ja": "雷光・強壁珠【３】",
       "en": "Bolt/Shield Jewel [3]",
@@ -9099,15 +9098,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 1,
-      "1452140672": 3
+      "16": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 196
   },
   {
-    "game_id": 17949,
     "names": {
       "ja": "積弾・流水珠【３】",
       "en": "Bandolier/Stream Jwl [3]",
@@ -9146,15 +9145,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "508916704": 1,
-      "1613139840": 3
+      "114": 1,
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 197
   },
   {
-    "game_id": 18359,
     "names": {
       "ja": "積弾・氷結珠【３】",
       "en": "Bandolier/Frost Jwl [3]",
@@ -9193,15 +9192,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "1268070400": 1,
-      "1613139840": 3
+      "144": 1,
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 198
   },
   {
-    "game_id": 18958,
     "names": {
       "ja": "速変・氷結珠【３】",
       "en": "Quickswitch/Frost Jwl [3]",
@@ -9240,15 +9239,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "1268070400": 1
+      "7": 3,
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 199
   },
   {
-    "game_id": 19383,
     "names": {
       "ja": "雷光・属会珠【３】",
       "en": "Bolt/Crit Elem Jwl [3]",
@@ -9287,15 +9286,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "313598432": 1,
-      "1452140672": 3
+      "105": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 200
   },
   {
-    "game_id": 20183,
     "names": {
       "ja": "破龍・速変珠【３】",
       "en": "Dragon/Quickswitch Jwl [3]",
@@ -9334,15 +9333,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1961116288": 1,
-      "-776946176": 3
+      "7": 1,
+      "41": 3
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 201
   },
   {
-    "game_id": 20287,
     "names": {
       "ja": "強壁・破龍珠【３】",
       "en": "Shield/Dragon Jwl [3]",
@@ -9381,15 +9380,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 3,
-      "-776946176": 1
+      "16": 3,
+      "41": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 202
   },
   {
-    "game_id": 20306,
     "names": {
       "ja": "氷結・守勢珠【３】",
       "en": "Frost/Guardian Jwl [3]",
@@ -9428,15 +9427,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-181127504": 1,
-      "1268070400": 3
+      "66": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 203
   },
   {
-    "game_id": 20412,
     "names": {
       "ja": "火炎・属会珠【３】",
       "en": "Blaze/Crit Elem Jwl [3]",
@@ -9475,15 +9474,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "313598432": 1
+      "50": 3,
+      "105": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 204
   },
   {
-    "game_id": 21045,
     "names": {
       "ja": "氷結・属会珠【３】",
       "en": "Frost/Crit Elem Jwl [3]",
@@ -9522,15 +9521,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "313598432": 1,
-      "1268070400": 3
+      "105": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 205
   },
   {
-    "game_id": 21328,
     "names": {
       "ja": "守勢・破龍珠【３】",
       "en": "Guardian/Dragon Jwl [3]",
@@ -9569,15 +9568,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-776946176": 1,
-      "-181127504": 3
+      "41": 1,
+      "66": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 206
   },
   {
-    "game_id": 21515,
     "names": {
       "ja": "破龍・積弾珠【３】",
       "en": "Dragon/Bandolier Jwl [3]",
@@ -9616,15 +9615,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "1613139840": 1
+      "41": 3,
+      "160": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 207
   },
   {
-    "game_id": 21891,
     "names": {
       "ja": "雷光・守勢珠【３】",
       "en": "Bolt/Guardian Jwl [3]",
@@ -9663,15 +9662,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-181127504": 1,
-      "1452140672": 3
+      "66": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 208
   },
   {
-    "game_id": 22048,
     "names": {
       "ja": "流水・昂揚珠【３】",
       "en": "Stream/Enhancer Jwl [3]",
@@ -9710,15 +9709,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "508916704": 3,
-      "691199232": 1
+      "114": 3,
+      "127": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 209
   },
   {
-    "game_id": 22310,
     "names": {
       "ja": "流水・守勢珠【３】",
       "en": "Stream/Guardian Jwl [3]",
@@ -9757,15 +9756,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-181127504": 1,
-      "508916704": 3
+      "66": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 210
   },
   {
-    "game_id": 22604,
     "names": {
       "ja": "積弾・雷光珠【３】",
       "en": "Bandolier/Bolt Jwl [3]",
@@ -9804,15 +9803,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "1452140672": 1,
-      "1613139840": 3
+      "150": 1,
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 211
   },
   {
-    "game_id": 22673,
     "names": {
       "ja": "守勢・流水珠【３】",
       "en": "Guardian/Stream Jwl [3]",
@@ -9851,15 +9850,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-181127504": 3,
-      "508916704": 1
+      "66": 3,
+      "114": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 212
   },
   {
-    "game_id": 22681,
     "names": {
       "ja": "昂揚・流水珠【３】",
       "en": "Enhancer/Stream Jwl [3]",
@@ -9898,15 +9897,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "508916704": 1,
-      "691199232": 3
+      "114": 1,
+      "127": 3
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 213
   },
   {
-    "game_id": 23236,
     "names": {
       "ja": "雷光・積弾珠【３】",
       "en": "Bolt/Bandolier Jwl [3]",
@@ -9945,15 +9944,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1452140672": 3,
-      "1613139840": 1
+      "150": 3,
+      "160": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 214
   },
   {
-    "game_id": 23494,
     "names": {
       "ja": "破龍・業物珠【３】",
       "en": "Dragon/Rzr Sharp Jwl [3]",
@@ -9992,15 +9991,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "1050520384": 1
+      "41": 3,
+      "140": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 215
   },
   {
-    "game_id": 23522,
     "names": {
       "ja": "集中・火炎珠【３】",
       "en": "Focus/Blaze Jewel [3]",
@@ -10039,15 +10038,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-562534336": 1,
-      "-283334048": 3
+      "50": 1,
+      "60": 3
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 216
   },
   {
-    "game_id": 23556,
     "names": {
       "ja": "守勢・雷光珠【３】",
       "en": "Guardian/Bolt Jwl [3]",
@@ -10086,15 +10085,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-181127504": 3,
-      "1452140672": 1
+      "66": 3,
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 217
   },
   {
-    "game_id": 23622,
     "names": {
       "ja": "速変・雷光珠【３】",
       "en": "Quickswitch/Bolt Jwl [3]",
@@ -10133,15 +10132,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "1452140672": 1
+      "7": 3,
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 218
   },
   {
-    "game_id": 23677,
     "names": {
       "ja": "氷結・速変珠【３】",
       "en": "Frost/Quickswitch Jwl [3]",
@@ -10180,15 +10179,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1961116288": 1,
-      "1268070400": 3
+      "7": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 219
   },
   {
-    "game_id": 24211,
     "names": {
       "ja": "守勢・氷結珠【３】",
       "en": "Guardian/Frost Jwl [3]",
@@ -10227,15 +10226,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-181127504": 3,
-      "1268070400": 1
+      "66": 3,
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 220
   },
   {
-    "game_id": 24561,
     "names": {
       "ja": "初弾・氷結珠【３】",
       "en": "Opener/Frost Jewel [3]",
@@ -10274,15 +10273,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "1268070400": 1,
-      "1711950720": 3
+      "144": 1,
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 221
   },
   {
-    "game_id": 24768,
     "names": {
       "ja": "流水・積弾珠【３】",
       "en": "Stream/Bandolier Jwl [3]",
@@ -10321,15 +10320,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "508916704": 3,
-      "1613139840": 1
+      "114": 3,
+      "160": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 222
   },
   {
-    "game_id": 24865,
     "names": {
       "ja": "業物・破龍珠【３】",
       "en": "Rzr Sharp/Dragon Jwl [3]",
@@ -10368,15 +10367,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-776946176": 1,
-      "1050520384": 3
+      "41": 1,
+      "140": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 223
   },
   {
-    "game_id": 24927,
     "names": {
       "ja": "初弾・火炎珠【３】",
       "en": "Opener/Blaze Jewel [3]",
@@ -10415,15 +10414,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-562534336": 1,
-      "1711950720": 3
+      "50": 1,
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 224
   },
   {
-    "game_id": 25926,
     "names": {
       "ja": "火炎・積弾珠【３】",
       "en": "Blaze/Bandolier Jwl [3]",
@@ -10462,15 +10461,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "1613139840": 1
+      "50": 3,
+      "160": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 225
   },
   {
-    "game_id": 25952,
     "names": {
       "ja": "昂揚・雷光珠【３】",
       "en": "Enhancer/Bolt Jewel [3]",
@@ -10509,15 +10508,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "691199232": 3,
-      "1452140672": 1
+      "127": 3,
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 226
   },
   {
-    "game_id": 26003,
     "names": {
       "ja": "強壁・火炎珠【３】",
       "en": "Shield/Blaze Jewel [3]",
@@ -10556,15 +10555,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 3,
-      "-562534336": 1
+      "16": 3,
+      "50": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 227
   },
   {
-    "game_id": 26077,
     "names": {
       "ja": "昂揚・破龍珠【３】",
       "en": "Enhancer/Dragon Jwl [3]",
@@ -10603,15 +10602,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-776946176": 1,
-      "691199232": 3
+      "41": 1,
+      "127": 3
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 228
   },
   {
-    "game_id": 27036,
     "names": {
       "ja": "速変・流水珠【３】",
       "en": "Quickswitch/Stream Jwl [3]",
@@ -10650,15 +10649,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "508916704": 1
+      "7": 3,
+      "114": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 229
   },
   {
-    "game_id": 27791,
     "names": {
       "ja": "積弾・破龍珠【３】",
       "en": "Bandolier/Dragon Jwl [3]",
@@ -10697,15 +10696,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-776946176": 1,
-      "1613139840": 3
+      "41": 1,
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 230
   },
   {
-    "game_id": 28076,
     "names": {
       "ja": "初弾・破龍珠【３】",
       "en": "Opener/Dragon Jewel [3]",
@@ -10744,15 +10743,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-776946176": 1,
-      "1711950720": 3
+      "41": 1,
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 231
   },
   {
-    "game_id": 30137,
     "names": {
       "ja": "属会・破龍珠【３】",
       "en": "Crit Elem/Dragon Jwl [3]",
@@ -10791,15 +10790,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-776946176": 1,
-      "313598432": 3
+      "41": 1,
+      "105": 3
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 232
   },
   {
-    "game_id": 30161,
     "names": {
       "ja": "氷結・初弾珠【３】",
       "en": "Frost/Opener Jewel [3]",
@@ -10838,15 +10837,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1268070400": 3,
-      "1711950720": 1
+      "144": 3,
+      "163": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 233
   },
   {
-    "game_id": 30405,
     "names": {
       "ja": "業物・雷光珠【３】",
       "en": "Rzr Sharp/Bolt Jwl [3]",
@@ -10885,15 +10884,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "1050520384": 3,
-      "1452140672": 1
+      "140": 3,
+      "150": 1
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 234
   },
   {
-    "game_id": 30490,
     "names": {
       "ja": "流水・速変珠【３】",
       "en": "Stream/Quickswitch Jwl [3]",
@@ -10932,15 +10931,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1961116288": 1,
-      "508916704": 3
+      "7": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 235
   },
   {
-    "game_id": 31893,
     "names": {
       "ja": "氷結・強壁珠【３】",
       "en": "Frost/Shield Jewel [3]",
@@ -10979,15 +10978,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 1,
-      "1268070400": 3
+      "16": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 236
   },
   {
-    "game_id": 32288,
     "names": {
       "ja": "雷光・昂揚珠【３】",
       "en": "Bolt/Enhancer Jwl [3]",
@@ -11026,15 +11025,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "691199232": 1,
-      "1452140672": 3
+      "127": 1,
+      "150": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 237
   },
   {
-    "game_id": 32433,
     "names": {
       "ja": "流水・集中珠【３】",
       "en": "Stream/Focus Jewel [3]",
@@ -11073,15 +11072,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-283334048": 1,
-      "508916704": 3
+      "60": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 238
   },
   {
-    "game_id": 32676,
     "names": {
       "ja": "流水・初弾珠【３】",
       "en": "Stream/Opener Jwl [3]",
@@ -11120,15 +11119,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "508916704": 3,
-      "1711950720": 1
+      "114": 3,
+      "163": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 239
   },
   {
-    "game_id": 5028590,
     "names": {
       "ja": "研磨珠Ⅱ【２】",
       "en": "Grinder Jewel II [2]",
@@ -11167,14 +11166,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1444935552": 2
+      "149": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 240
   },
   {
-    "game_id": 5672852,
     "names": {
       "ja": "防御珠【１】",
       "en": "Defense Jewel [1]",
@@ -11213,14 +11212,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1077686656": 1
+      "141": 1
     },
     "allowed_on": "armor",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 241
   },
   {
-    "game_id": 7844454,
     "names": {
       "ja": "研磨珠【１】",
       "en": "Grinder Jewel [1]",
@@ -11259,14 +11258,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1444935552": 1
+      "149": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 242
   },
   {
-    "game_id": 17525612,
     "names": {
       "ja": "強毒・射法珠【３】",
       "en": "Poison/Precise Jwl [3]",
@@ -11305,15 +11304,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1629629184": 1,
-      "-420608864": 1
+      "21": 1,
+      "53": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 243
   },
   {
-    "game_id": 19401228,
     "names": {
       "ja": "抜打珠Ⅲ【３】",
       "en": "Gambit Jewel III [3]",
@@ -11352,14 +11351,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1946345856": 3
+      "8": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 244
   },
   {
-    "game_id": 23951036,
     "names": {
       "ja": "業物・ＫＯ珠【３】",
       "en": "Razor Sharp/KO Jwl [3]",
@@ -11398,15 +11397,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "1050520384": 3
+      "36": 1,
+      "140": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 245
   },
   {
-    "game_id": 34988560,
     "names": {
       "ja": "散弾珠【３】",
       "en": "Spread Jewel [3]",
@@ -11445,14 +11444,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-2123993856": 1
+      "2": 1
     },
     "allowed_on": "weapon",
     "icon_color": "moss-green",
-    "icon_color_id": 13
+    "icon_color_id": 13,
+    "id": 246
   },
   {
-    "game_id": 44196940,
     "names": {
       "ja": "ＫＯ珠Ⅱ【２】",
       "en": "KO Jewel II [2]",
@@ -11491,14 +11490,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-893407296": 2
+      "36": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 247
   },
   {
-    "game_id": 64300272,
     "names": {
       "ja": "集中・ＫＯ珠【３】",
       "en": "Focus/KO Jewel [3]",
@@ -11537,15 +11536,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "-283334048": 3
+      "36": 1,
+      "60": 3
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 248
   },
   {
-    "game_id": 67372504,
     "names": {
       "ja": "剛刃珠【１】",
       "en": "Sharp Jewel [1]",
@@ -11584,14 +11583,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1500129152": 1
+      "157": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 249
   },
   {
-    "game_id": 72596768,
     "names": {
       "ja": "狩人珠【１】",
       "en": "Ranger Jewel [1]",
@@ -11630,14 +11629,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1845834112": 1
+      "166": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 250
   },
   {
-    "game_id": 97814240,
     "names": {
       "ja": "砲術珠【１】",
       "en": "Artillery Jewel [1]",
@@ -11676,14 +11675,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-596764096": 1
+      "47": 1
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 251
   },
   {
-    "game_id": 103198480,
     "names": {
       "ja": "積弾・射法珠【３】",
       "en": "Bandolier/Precise Jwl [3]",
@@ -11722,15 +11721,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "1613139840": 3
+      "53": 1,
+      "160": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 252
   },
   {
-    "game_id": 115284000,
     "names": {
       "ja": "溜幅・匠珠【３】",
       "en": "Charge/Handicraft Jwl [3]",
@@ -11769,15 +11768,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1475134080": 3,
-      "1160639488": 1
+      "24": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 253
   },
   {
-    "game_id": 124240896,
     "names": {
       "ja": "特会珠【１】",
       "en": "Crit Status Jewel [1]",
@@ -11816,14 +11815,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-168922880": 1
+      "68": 1
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 254
   },
   {
-    "game_id": 130724024,
     "names": {
       "ja": "攻撃珠【１】",
       "en": "Attack Jewel [1]",
@@ -11862,14 +11861,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1": 1
+      "72": 1
     },
     "allowed_on": "weapon",
     "icon_color": "pink",
-    "icon_color_id": 4
+    "icon_color_id": 4,
+    "id": 255
   },
   {
-    "game_id": 146040608,
     "names": {
       "ja": "匠珠Ⅲ【３】",
       "en": "Handicraft Jwl III [3]",
@@ -11908,14 +11907,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1160639488": 3
+      "142": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 256
   },
   {
-    "game_id": 163043584,
     "names": {
       "ja": "初弾・鉄壁珠【３】",
       "en": "Opener/Ironwall Jwl [3]",
@@ -11954,15 +11953,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "1711950720": 3
+      "59": 1,
+      "163": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 257
   },
   {
-    "game_id": 183160800,
     "names": {
       "ja": "速変珠Ⅱ【２】",
       "en": "Quickswitch Jewel II [2]",
@@ -12001,14 +12000,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1961116288": 2
+      "7": 2
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 258
   },
   {
-    "game_id": 186552368,
     "names": {
       "ja": "氷結珠【１】",
       "en": "Frost Jewel [1]",
@@ -12047,14 +12046,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1268070400": 1
+      "144": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 259
   },
   {
-    "game_id": 213184688,
     "names": {
       "ja": "無傷珠【２】",
       "en": "Flawless Jewel [2]",
@@ -12093,14 +12092,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "2106877312": 1
+      "177": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 260
   },
   {
-    "game_id": 219173888,
     "names": {
       "ja": "破龍・射法珠【３】",
       "en": "Dragon/Precise Jewel [3]",
@@ -12139,15 +12138,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "-420608864": 1
+      "41": 3,
+      "53": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 261
   },
   {
-    "game_id": 248848256,
     "names": {
       "ja": "達人珠Ⅱ【２】",
       "en": "Expert Jewel II [2]",
@@ -12186,14 +12185,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-2096489472": 2
+      "3": 2
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 262
   },
   {
-    "game_id": 280205024,
     "names": {
       "ja": "攻撃珠Ⅲ【３】",
       "en": "Attack Jewel III [3]",
@@ -12232,14 +12231,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1": 3
+      "72": 3
     },
     "allowed_on": "weapon",
     "icon_color": "pink",
-    "icon_color_id": 4
+    "icon_color_id": 4,
+    "id": 263
   },
   {
-    "game_id": 298345088,
     "names": {
       "ja": "増弾珠【１】",
       "en": "Magazine Jewel [1]",
@@ -12278,14 +12277,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "802725120": 1
+      "132": 1
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 264
   },
   {
-    "game_id": 336866720,
     "names": {
       "ja": "強毒・達人珠【３】",
       "en": "Poison/Expert Jwl [3]",
@@ -12324,15 +12323,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-2096489472": 1,
-      "-1629629184": 1
+      "3": 1,
+      "21": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 265
   },
   {
-    "game_id": 386498304,
     "names": {
       "ja": "氷結珠Ⅲ【３】",
       "en": "Frost Jewel III [3]",
@@ -12371,14 +12370,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1268070400": 3
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 266
   },
   {
-    "game_id": 391149760,
     "names": {
       "ja": "強毒・匠珠【３】",
       "en": "Poison/Handicraft Jwl [3]",
@@ -12417,15 +12416,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1629629184": 1,
-      "1160639488": 1
+      "21": 1,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 267
   },
   {
-    "game_id": 435353600,
     "names": {
       "ja": "匠珠【１】",
       "en": "Handicraft Jewel [1]",
@@ -12464,14 +12463,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1160639488": 1
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 268
   },
   {
-    "game_id": 446613472,
     "names": {
       "ja": "昂揚珠Ⅲ【３】",
       "en": "Enhancer Jewel III [3]",
@@ -12510,14 +12509,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "691199232": 3
+      "127": 3
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 269
   },
   {
-    "game_id": 454747104,
     "names": {
       "ja": "治癒珠【１】",
       "en": "Medicine Jewel [1]",
@@ -12556,14 +12555,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1235658624": 1
+      "30": 1
     },
     "allowed_on": "armor",
     "icon_color": "green",
-    "icon_color_id": 14
+    "icon_color_id": 14,
+    "id": 270
   },
   {
-    "game_id": 457280288,
     "names": {
       "ja": "溜幅珠Ⅲ【３】",
       "en": "Charge Jewel III [3]",
@@ -12602,14 +12601,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1475134080": 3
+      "24": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 271
   },
   {
-    "game_id": 460437856,
     "names": {
       "ja": "飛燕・達人珠【３】",
       "en": "Flight/Expert Jewel [3]",
@@ -12648,15 +12647,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-2096489472": 1,
-      "402237312": 1
+      "3": 1,
+      "109": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 272
   },
   {
-    "game_id": 499818016,
     "names": {
       "ja": "鼓笛・抜刀珠【３】",
       "en": "Sonorous/Draw Jwl [3]",
@@ -12695,15 +12694,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1237438336": 2,
-      "686533440": 1
+      "29": 2,
+      "126": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 273
   },
   {
-    "game_id": 519959680,
     "names": {
       "ja": "逆上珠【２】",
       "en": "Furor Jewel [2]",
@@ -12742,14 +12741,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1359821952": 1
+      "146": 1
     },
     "allowed_on": "armor",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 274
   },
   {
-    "game_id": 520733824,
     "names": {
       "ja": "特会・射法珠【３】",
       "en": "Crit Stat/Precise Jwl [3]",
@@ -12788,15 +12787,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "-168922880": 3
+      "53": 1,
+      "68": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 275
   },
   {
-    "game_id": 583988672,
     "names": {
       "ja": "心眼珠Ⅲ【３】",
       "en": "Mind's Eye Jwl III [3]",
@@ -12835,14 +12834,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1594792704": 3
+      "159": 3
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 276
   },
   {
-    "game_id": 594204352,
     "names": {
       "ja": "ＫＯ珠Ⅲ【３】",
       "en": "KO Jewel III [3]",
@@ -12881,14 +12880,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-893407296": 3
+      "36": 3
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 277
   },
   {
-    "game_id": 618579264,
     "names": {
       "ja": "増弾・鉄壁珠【３】",
       "en": "Magazine/Ironwall Jwl [3]",
@@ -12927,15 +12926,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "802725120": 2
+      "59": 1,
+      "132": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 278
   },
   {
-    "game_id": 639622592,
     "names": {
       "ja": "麻痺珠Ⅱ【２】",
       "en": "Paralyzer Jewel II [2]",
@@ -12974,14 +12973,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1863702144": 2
+      "9": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 279
   },
   {
-    "game_id": 645053056,
     "names": {
       "ja": "早食珠【１】",
       "en": "Gobbler Jewel [1]",
@@ -13020,14 +13019,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "634068352": 1
+      "123": 1
     },
     "allowed_on": "armor",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 280
   },
   {
-    "game_id": 654954304,
     "names": {
       "ja": "流水・鉄壁珠【３】",
       "en": "Stream/Ironwall Jwl [3]",
@@ -13066,15 +13065,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "508916704": 3
+      "59": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 281
   },
   {
-    "game_id": 656487488,
     "names": {
       "ja": "急襲珠【２】",
       "en": "Ambush Jewel [2]",
@@ -13113,14 +13112,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-171796848": 1
+      "67": 1
     },
     "allowed_on": "armor",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 282
   },
   {
-    "game_id": 668852032,
     "names": {
       "ja": "転福珠【２】",
       "en": "Phoenix Jewel [2]",
@@ -13159,14 +13158,14 @@
     "price": 350,
     "level": 2,
     "skills": {
-      "-1700743296": 1
+      "13": 1
     },
     "allowed_on": "armor",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 283
   },
   {
-    "game_id": 694060672,
     "names": {
       "ja": "耐絶珠【１】",
       "en": "Steadfast Jewel [1]",
@@ -13205,14 +13204,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "705317568": 1
+      "128": 1
     },
     "allowed_on": "armor",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 284
   },
   {
-    "game_id": 701807872,
     "names": {
       "ja": "耐爆珠【１】",
       "en": "Antiblast Jewel [1]",
@@ -13251,14 +13250,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "820385792": 1
+      "133": 1
     },
     "allowed_on": "armor",
     "icon_color": "vermilion",
-    "icon_color_id": 6
+    "icon_color_id": 6,
+    "id": 285
   },
   {
-    "game_id": 714935168,
     "names": {
       "ja": "奪気珠【１】",
       "en": "Drain Jewel [1]",
@@ -13297,14 +13296,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1758661504": 1
+      "164": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 286
   },
   {
-    "game_id": 759889920,
     "names": {
       "ja": "心眼珠Ⅱ【２】",
       "en": "Mind's Eye Jewel II [2]",
@@ -13343,14 +13342,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1594792704": 2
+      "159": 2
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 287
   },
   {
-    "game_id": 767051200,
     "names": {
       "ja": "痛撃珠【３】",
       "en": "Tenderizer Jewel [3]",
@@ -13389,14 +13388,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-397570464": 1
+      "57": 1
     },
     "allowed_on": "armor",
     "icon_color": "dark-purple",
-    "icon_color_id": 21
+    "icon_color_id": 21,
+    "id": 288
   },
   {
-    "game_id": 771935488,
     "names": {
       "ja": "砲術珠Ⅲ【３】",
       "en": "Artillery Jewel III [3]",
@@ -13435,14 +13434,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-596764096": 3
+      "47": 3
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 289
   },
   {
-    "game_id": 795180288,
     "names": {
       "ja": "溜打珠【２】",
       "en": "Charge Up Jewel [2]",
@@ -13481,14 +13480,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "353114912": 1
+      "106": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 290
   },
   {
-    "game_id": 797303936,
     "names": {
       "ja": "集中珠Ⅱ【２】",
       "en": "Focus Jewel II [2]",
@@ -13527,14 +13526,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-283334048": 2
+      "60": 2
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 291
   },
   {
-    "game_id": 839957184,
     "names": {
       "ja": "溜打・匠珠【３】",
       "en": "Charge Up/Handicraft Jwl [3]",
@@ -13573,15 +13572,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "353114912": 1,
-      "1160639488": 1
+      "106": 1,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 292
   },
   {
-    "game_id": 865685248,
     "names": {
       "ja": "緩衝珠【１】",
       "en": "Shockproof Jewel [1]",
@@ -13620,14 +13619,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-632440576": 1
+      "45": 1
     },
     "allowed_on": "armor",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 293
   },
   {
-    "game_id": 886913856,
     "names": {
       "ja": "火炎珠Ⅲ【３】",
       "en": "Blaze Jewel III [3]",
@@ -13666,14 +13665,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-562534336": 3
+      "50": 3
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 294
   },
   {
-    "game_id": 895028672,
     "names": {
       "ja": "氷結珠Ⅱ【２】",
       "en": "Frost Jewel II [2]",
@@ -13712,14 +13711,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "1268070400": 2
+      "144": 2
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 295
   },
   {
-    "game_id": 897466048,
     "names": {
       "ja": "破龍・匠珠【３】",
       "en": "Dragon/Handicraft Jwl [3]",
@@ -13758,15 +13757,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-776946176": 3,
-      "1160639488": 1
+      "41": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 296
   },
   {
-    "game_id": 910101056,
     "names": {
       "ja": "属会・鉄壁珠【３】",
       "en": "Crit Elem/Ironwall Jwl [3]",
@@ -13805,15 +13804,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "313598432": 3
+      "59": 1,
+      "105": 3
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 297
   },
   {
-    "game_id": 912898176,
     "names": {
       "ja": "火炎・速変珠【３】",
       "en": "Blaze/Quickswitch Jwl [3]",
@@ -13852,15 +13851,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1961116288": 1,
-      "-562534336": 3
+      "7": 1,
+      "50": 3
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 298
   },
   {
-    "game_id": 914233472,
     "names": {
       "ja": "流水・匠珠【３】",
       "en": "Stream/Handicraft Jwl [3]",
@@ -13899,15 +13898,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "508916704": 3,
-      "1160639488": 1
+      "114": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 299
   },
   {
-    "game_id": 934416192,
     "names": {
       "ja": "溜打・達人珠【３】",
       "en": "Charge Up/Expert Jwl [3]",
@@ -13946,15 +13945,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-2096489472": 1,
-      "353114912": 1
+      "3": 1,
+      "106": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 300
   },
   {
-    "game_id": 944809600,
     "names": {
       "ja": "属会・射法珠【３】",
       "en": "Crit Element/Precise Jwl [3]",
@@ -13993,15 +13992,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "313598432": 3
+      "53": 1,
+      "105": 3
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 301
   },
   {
-    "game_id": 948977536,
     "names": {
       "ja": "全開珠【３】",
       "en": "Throttle Jewel [3]",
@@ -14040,14 +14039,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1763191040": 1
+      "165": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 302
   },
   {
-    "game_id": 949857152,
     "names": {
       "ja": "耐臭珠【１】",
       "en": "Perfume Jewel [1]",
@@ -14086,14 +14085,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-411441344": 1
+      "55": 1
     },
     "allowed_on": "armor",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 303
   },
   {
-    "game_id": 954350400,
     "names": {
       "ja": "整備珠【２】",
       "en": "Maintenance Jewel [2]",
@@ -14132,14 +14131,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "469540352": 1
+      "113": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 304
   },
   {
-    "game_id": 986212736,
     "names": {
       "ja": "超心珠Ⅲ【３】",
       "en": "Critical Jewel III [3]",
@@ -14178,14 +14177,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1607763456": 3
+      "22": 3
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 305
   },
   {
-    "game_id": 1024615424,
     "names": {
       "ja": "氷結・射法珠【３】",
       "en": "Frost/Precise Jewel [3]",
@@ -14224,15 +14223,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "1268070400": 3
+      "53": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 306
   },
   {
-    "game_id": 1031937152,
     "names": {
       "ja": "火炎・業物珠【３】",
       "en": "Blaze/Rzr Sharp Jwl [3]",
@@ -14271,15 +14270,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-562534336": 3,
-      "1050520384": 1
+      "50": 3,
+      "140": 1
     },
     "allowed_on": "weapon",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 307
   },
   {
-    "game_id": 1067880832,
     "names": {
       "ja": "疲瓶珠【２】",
       "en": "Draincoat Jewel [2]",
@@ -14318,14 +14317,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-181774400": 1
+      "65": 1
     },
     "allowed_on": "weapon",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 308
   },
   {
-    "game_id": 1088947584,
     "names": {
       "ja": "強壁珠Ⅲ【３】",
       "en": "Shield Jewel III [3]",
@@ -14364,14 +14363,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1674114176": 3
+      "16": 3
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 309
   },
   {
-    "game_id": 1096472320,
     "names": {
       "ja": "研磨・攻撃珠【３】",
       "en": "Grinder/Attack Jewel [3]",
@@ -14410,15 +14409,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1": 1,
-      "1444935552": 2
+      "72": 1,
+      "149": 2
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 310
   },
   {
-    "game_id": 1115345024,
     "names": {
       "ja": "鈍器珠Ⅱ【２】",
       "en": "Blunt Jewel II [2]",
@@ -14457,14 +14456,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "397306144": 2
+      "108": 2
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 311
   },
   {
-    "game_id": 1150766464,
     "names": {
       "ja": "超心珠【１】",
       "en": "Critical Jewel [1]",
@@ -14503,14 +14502,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1607763456": 1
+      "22": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 312
   },
   {
-    "game_id": 1162934272,
     "names": {
       "ja": "剛刃珠Ⅲ【３】",
       "en": "Sharp Jewel III [3]",
@@ -14549,14 +14548,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1500129152": 3
+      "157": 3
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 313
   },
   {
-    "game_id": 1174071168,
     "names": {
       "ja": "集中・射法珠【３】",
       "en": "Focus/Precise Jewel [3]",
@@ -14595,15 +14594,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "-283334048": 3
+      "53": 1,
+      "60": 3
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 314
   },
   {
-    "game_id": 1179637760,
     "names": {
       "ja": "抜打珠Ⅱ【２】",
       "en": "Gambit Jewel II [2]",
@@ -14642,14 +14641,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-1946345856": 2
+      "8": 2
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 315
   },
   {
-    "game_id": 1190642816,
     "names": {
       "ja": "積弾珠【１】",
       "en": "Bandolier Jewel [1]",
@@ -14688,14 +14687,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1613139840": 1
+      "160": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 316
   },
   {
-    "game_id": 1194220032,
     "names": {
       "ja": "鈍器珠【１】",
       "en": "Blunt Jewel [1]",
@@ -14734,14 +14733,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "397306144": 1
+      "108": 1
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 317
   },
   {
-    "game_id": 1202986624,
     "names": {
       "ja": "強弾珠【３】",
       "en": "Forceshot Jewel [3]",
@@ -14780,14 +14779,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1961297152": 1
+      "6": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 318
   },
   {
-    "game_id": 1213481984,
     "names": {
       "ja": "速変珠【１】",
       "en": "Quickswitch Jewel [1]",
@@ -14826,14 +14825,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1961116288": 1
+      "7": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 319
   },
   {
-    "game_id": 1216872320,
     "names": {
       "ja": "属会珠Ⅱ【２】",
       "en": "Crit Element Jewel II [2]",
@@ -14872,14 +14871,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "313598432": 2
+      "105": 2
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 320
   },
   {
-    "game_id": 1230875008,
     "names": {
       "ja": "閃光珠【１】",
       "en": "Flash Jewel [1]",
@@ -14918,14 +14917,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-257693696": 1
+      "61": 1
     },
     "allowed_on": "armor",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 321
   },
   {
-    "game_id": 1287680640,
     "names": {
       "ja": "飛燕・匠珠【３】",
       "en": "Flight/Handicraft Jwl [3]",
@@ -14964,15 +14963,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "402237312": 1,
-      "1160639488": 1
+      "109": 1,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 322
   },
   {
-    "game_id": 1305797760,
     "names": {
       "ja": "逆襲珠【２】",
       "en": "Counter Jewel [2]",
@@ -15011,14 +15010,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "280489184": 1
+      "104": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 323
   },
   {
-    "game_id": 1343145856,
     "names": {
       "ja": "射法珠Ⅲ【３】",
       "en": "Precise Jewel III [3]",
@@ -15057,14 +15056,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-420608864": 3
+      "53": 3
     },
     "allowed_on": "weapon",
     "icon_color": "pink",
-    "icon_color_id": 4
+    "icon_color_id": 4,
+    "id": 324
   },
   {
-    "game_id": 1377760768,
     "names": {
       "ja": "特射珠【１】",
       "en": "Trueshot Jewel [1]",
@@ -15103,14 +15102,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-160562336": 1
+      "69": 1
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 325
   },
   {
-    "game_id": 1389113984,
     "names": {
       "ja": "氷結・ＫＯ珠【３】",
       "en": "Frost/KO Jewel [3]",
@@ -15149,15 +15148,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "1268070400": 3
+      "36": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 326
   },
   {
-    "game_id": 1397927296,
     "names": {
       "ja": "特会・ＫＯ珠【３】",
       "en": "Crit Status/KO Jwl [3]",
@@ -15196,15 +15195,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-893407296": 1,
-      "-168922880": 3
+      "36": 1,
+      "68": 3
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 327
   },
   {
-    "game_id": 1414248576,
     "names": {
       "ja": "底力珠【２】",
       "en": "Potential Jewel [2]",
@@ -15243,14 +15242,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "422666624": 1
+      "110": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 328
   },
   {
-    "game_id": 1427190272,
     "names": {
       "ja": "特会珠Ⅱ【２】",
       "en": "Crit Status Jewel II [2]",
@@ -15289,14 +15288,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-168922880": 2
+      "68": 2
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 329
   },
   {
-    "game_id": 1443679488,
     "names": {
       "ja": "強壁・鉄壁珠【３】",
       "en": "Shield/Ironwall Jwl [3]",
@@ -15335,15 +15334,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1674114176": 3,
-      "-307644128": 1
+      "16": 3,
+      "59": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 330
   },
   {
-    "game_id": 1444555776,
     "names": {
       "ja": "強壁珠【１】",
       "en": "Shield Jewel [1]",
@@ -15382,14 +15381,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1674114176": 1
+      "16": 1
     },
     "allowed_on": "weapon",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 331
   },
   {
-    "game_id": 1478235520,
     "names": {
       "ja": "回避珠【２】",
       "en": "Evasion Jewel [2]",
@@ -15428,14 +15427,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "144660544": 1
+      "100": 1
     },
     "allowed_on": "armor",
     "icon_color": "sky",
-    "icon_color_id": 16
+    "icon_color_id": 16,
+    "id": 332
   },
   {
-    "game_id": 1494637824,
     "names": {
       "ja": "氷結・匠珠【３】",
       "en": "Frost/Handicraft Jwl [3]",
@@ -15474,15 +15473,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "1160639488": 1,
-      "1268070400": 3
+      "142": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 333
   },
   {
-    "game_id": 1536980096,
     "names": {
       "ja": "流水珠Ⅲ【３】",
       "en": "Stream Jewel III [3]",
@@ -15521,14 +15520,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "508916704": 3
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 334
   },
   {
-    "game_id": 1596720768,
     "names": {
       "ja": "氷結・鉄壁珠【３】",
       "en": "Frost/Ironwall Jwl [3]",
@@ -15567,15 +15566,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-307644128": 1,
-      "1268070400": 3
+      "59": 1,
+      "144": 3
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 335
   },
   {
-    "game_id": 1597431680,
     "names": {
       "ja": "抜刀珠Ⅱ【２】",
       "en": "Draw Jewel II [2]",
@@ -15614,14 +15613,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "686533440": 2
+      "126": 2
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 336
   },
   {
-    "game_id": 1598502400,
     "names": {
       "ja": "反攻珠【３】",
       "en": "Counterattack Jewel [3]",
@@ -15660,14 +15659,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1174975744": 1
+      "143": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 337
   },
   {
-    "game_id": 1619248640,
     "names": {
       "ja": "速変・ＫＯ珠【３】",
       "en": "Quickswitch/KO Jwl [3]",
@@ -15706,15 +15705,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "-1961116288": 3,
-      "-893407296": 1
+      "7": 3,
+      "36": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 338
   },
   {
-    "game_id": 1636575872,
     "names": {
       "ja": "業物・匠珠【３】",
       "en": "Rzr Sharp/Handicraft Jwl [3]",
@@ -15753,15 +15752,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "1050520384": 3,
-      "1160639488": 1
+      "140": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "emerald",
-    "icon_color_id": 15
+    "icon_color_id": 15,
+    "id": 339
   },
   {
-    "game_id": 1701043584,
     "names": {
       "ja": "貫通珠【３】",
       "en": "Pierce Jewel [3]",
@@ -15800,14 +15799,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "552982656": 1
+      "117": 1
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 340
   },
   {
-    "game_id": 1731714432,
     "names": {
       "ja": "友愛珠【１】",
       "en": "Friendship Jewel [1]",
@@ -15846,14 +15845,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "894530496": 1
+      "136": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 341
   },
   {
-    "game_id": 1738329216,
     "names": {
       "ja": "強走珠【１】",
       "en": "Sprinter Jewel [1]",
@@ -15892,14 +15891,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-682586176": 1
+      "43": 1
     },
     "allowed_on": "armor",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 342
   },
   {
-    "game_id": 1789092864,
     "names": {
       "ja": "属会珠Ⅲ【３】",
       "en": "Crit Elem Jwl III [3]",
@@ -15938,14 +15937,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "313598432": 3
+      "105": 3
     },
     "allowed_on": "weapon",
     "icon_color": "ultramarine",
-    "icon_color_id": 18
+    "icon_color_id": 18,
+    "id": 343
   },
   {
-    "game_id": 1832912384,
     "names": {
       "ja": "爆破珠Ⅲ【３】",
       "en": "Blast Jewel III [3]",
@@ -15984,14 +15983,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-844978880": 3
+      "40": 3
     },
     "allowed_on": "weapon",
     "icon_color": "vermilion",
-    "icon_color_id": 6
+    "icon_color_id": 6,
+    "id": 344
   },
   {
-    "game_id": 1833462144,
     "names": {
       "ja": "流水・射法珠【３】",
       "en": "Stream/Precise Jewel [3]",
@@ -16030,15 +16029,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-420608864": 1,
-      "508916704": 3
+      "53": 1,
+      "114": 3
     },
     "allowed_on": "weapon",
     "icon_color": "blue",
-    "icon_color_id": 17
+    "icon_color_id": 17,
+    "id": 345
   },
   {
-    "game_id": 1887590400,
     "names": {
       "ja": "昂揚・匠珠【３】",
       "en": "Enhancer/Handicraft Jwl [3]",
@@ -16077,15 +16076,15 @@
     "price": 350,
     "level": 3,
     "skills": {
-      "691199232": 3,
-      "1160639488": 1
+      "127": 3,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "lemon",
-    "icon_color_id": 11
+    "icon_color_id": 11,
+    "id": 346
   },
   {
-    "game_id": 1906356096,
     "names": {
       "ja": "集中珠【１】",
       "en": "Focus Jewel [1]",
@@ -16124,14 +16123,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-283334048": 1
+      "60": 1
     },
     "allowed_on": "weapon",
     "icon_color": "brown",
-    "icon_color_id": 8
+    "icon_color_id": 8,
+    "id": 347
   },
   {
-    "game_id": 1910118400,
     "names": {
       "ja": "溜打・抜刀珠【３】",
       "en": "Charge Up/Draw Jwl [3]",
@@ -16170,15 +16169,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "353114912": 1,
-      "686533440": 1
+      "106": 1,
+      "126": 1
     },
     "allowed_on": "weapon",
     "icon_color": "yellow",
-    "icon_color_id": 10
+    "icon_color_id": 10,
+    "id": 348
   },
   {
-    "game_id": 1933586560,
     "names": {
       "ja": "登壁珠【１】",
       "en": "Climber Jewel [1]",
@@ -16217,14 +16216,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-692636288": 1
+      "42": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 349
   },
   {
-    "game_id": 1967618304,
     "names": {
       "ja": "鉄壁珠Ⅱ【２】",
       "en": "Ironwall Jewel II [2]",
@@ -16263,14 +16262,14 @@
     "price": 200,
     "level": 2,
     "skills": {
-      "-307644128": 2
+      "59": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 350
   },
   {
-    "game_id": 1979979520,
     "names": {
       "ja": "植学珠【１】",
       "en": "Botany Jewel [1]",
@@ -16309,14 +16308,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "860517760": 1
+      "135": 1
     },
     "allowed_on": "armor",
     "icon_color": "sage-green",
-    "icon_color_id": 12
+    "icon_color_id": 12,
+    "id": 351
   },
   {
-    "game_id": 2003488640,
     "names": {
       "ja": "挑戦珠【３】",
       "en": "Challenger Jewel [3]",
@@ -16355,14 +16354,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1865909632": 1
+      "167": 1
     },
     "allowed_on": "armor",
     "icon_color": "red",
-    "icon_color_id": 5
+    "icon_color_id": 5,
+    "id": 352
   },
   {
-    "game_id": 2004238976,
     "names": {
       "ja": "増弾・攻撃珠【３】",
       "en": "Magazine/Attack Jwl [3]",
@@ -16401,15 +16400,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "1": 1,
-      "802725120": 2
+      "72": 1,
+      "132": 2
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 353
   },
   {
-    "game_id": 2005516288,
     "names": {
       "ja": "鉄壁珠Ⅲ【３】",
       "en": "Ironwall Jewel III [3]",
@@ -16448,14 +16447,14 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-307644128": 3
+      "59": 3
     },
     "allowed_on": "weapon",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 354
   },
   {
-    "game_id": 2071836160,
     "names": {
       "ja": "鼓笛・匠珠【３】",
       "en": "Sonorous/Handicraft Jwl [3]",
@@ -16494,15 +16493,15 @@
     "price": 250,
     "level": 3,
     "skills": {
-      "-1237438336": 2,
-      "1160639488": 1
+      "29": 2,
+      "142": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 355
   },
   {
-    "game_id": 2074953216,
     "names": {
       "ja": "持続珠【１】",
       "en": "Enduring Jewel [1]",
@@ -16541,14 +16540,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-1684613760": 1
+      "15": 1
     },
     "allowed_on": "armor",
     "icon_color": "ivory",
-    "icon_color_id": 9
+    "icon_color_id": 9,
+    "id": 356
   },
   {
-    "game_id": 2088515968,
     "names": {
       "ja": "破龍珠【１】",
       "en": "Dragon Jewel [1]",
@@ -16587,14 +16586,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-776946176": 1
+      "41": 1
     },
     "allowed_on": "weapon",
     "icon_color": "rose",
-    "icon_color_id": 3
+    "icon_color_id": 3,
+    "id": 357
   },
   {
-    "game_id": 2092268800,
     "names": {
       "ja": "初弾珠【１】",
       "en": "Opener Jewel [1]",
@@ -16633,14 +16632,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1711950720": 1
+      "163": 1
     },
     "allowed_on": "weapon",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 358
   },
   {
-    "game_id": 2099419520,
     "names": {
       "ja": "耐震珠【１】",
       "en": "Footing Jewel [1]",
@@ -16679,14 +16678,14 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "-609509888": 1
+      "46": 1
     },
     "allowed_on": "armor",
     "icon_color": "gray",
-    "icon_color_id": 2
+    "icon_color_id": 2,
+    "id": 359
   },
   {
-    "game_id": 2117714048,
     "names": {
       "ja": "強毒・攻撃珠【３】",
       "en": "Poison/Attack Jewel [3]",
@@ -16725,15 +16724,15 @@
     "price": 300,
     "level": 3,
     "skills": {
-      "-1629629184": 1,
-      "1": 1
+      "21": 1,
+      "72": 1
     },
     "allowed_on": "weapon",
     "icon_color": "purple",
-    "icon_color_id": 20
+    "icon_color_id": 20,
+    "id": 360
   },
   {
-    "game_id": 2145184512,
     "names": {
       "ja": "威嚇珠【１】",
       "en": "Intimidator Jewel [1]",
@@ -16772,10 +16771,11 @@
     "price": 150,
     "level": 1,
     "skills": {
-      "1472632704": 1
+      "153": 1
     },
     "allowed_on": "armor",
     "icon_color": "white",
-    "icon_color_id": 1
+    "icon_color_id": 1,
+    "id": 361
   }
 ]

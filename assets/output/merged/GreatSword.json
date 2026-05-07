@@ -1,6 +1,5 @@
 [
   {
-    "game_id": 1,
     "kind": "great-sword",
     "sharpness": {
       "red": 60,
@@ -68,10 +67,10 @@
       "row": 0
     },
     "skills": {},
-    "series_id": 1
+    "series_id": 21,
+    "id": 1
   },
   {
-    "game_id": 2,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -128,7 +127,7 @@
     "crafting": {
       "zenny_cost": 500,
       "inputs": {
-        "53": 2
+        "51": 2
       },
       "previous_id": 1,
       "branches": [
@@ -140,12 +139,12 @@
       "row": 0
     },
     "skills": {
-      "1444935552": 1
+      "149": 1
     },
-    "series_id": 1
+    "series_id": 21,
+    "id": 2
   },
   {
-    "game_id": 3,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -202,8 +201,8 @@
     "crafting": {
       "zenny_cost": 1500,
       "inputs": {
-        "54": 2,
-        "55": 3
+        "52": 2,
+        "53": 3
       },
       "previous_id": 2,
       "branches": [
@@ -215,13 +214,13 @@
       "row": 0
     },
     "skills": {
-      "-2096489472": 1,
-      "1444935552": 1
+      "3": 1,
+      "149": 1
     },
-    "series_id": 1
+    "series_id": 21,
+    "id": 3
   },
   {
-    "game_id": 4,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -281,7 +280,7 @@
     "crafting": {
       "zenny_cost": 4000,
       "inputs": {
-        "56": 4
+        "54": 4
       },
       "previous_id": 3,
       "branches": [
@@ -292,13 +291,13 @@
       "row": 0
     },
     "skills": {
-      "-2096489472": 1,
-      "1444935552": 2
+      "3": 1,
+      "149": 2
     },
-    "series_id": 1
+    "series_id": 21,
+    "id": 4
   },
   {
-    "game_id": 5,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -358,25 +357,25 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "582": 5,
-        "656": 4
+        "540": 5,
+        "612": 4
       },
       "previous_id": 4,
       "branches": [
-        76
+        74
       ],
       "is_shortcut": false,
       "column": 7,
       "row": 0
     },
     "skills": {
-      "-2096489472": 1,
-      "1444935552": 2
+      "3": 1,
+      "149": 2
     },
-    "series_id": 1
+    "series_id": 21,
+    "id": 5
   },
   {
-    "game_id": 6,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -443,10 +442,10 @@
     "crafting": {
       "zenny_cost": 5000,
       "inputs": {
-        "102": 5,
-        "104": 3,
-        "105": 2,
-        "536": 1
+        "93": 5,
+        "95": 3,
+        "96": 2,
+        "494": 1
       },
       "previous_id": null,
       "branches": [
@@ -458,13 +457,13 @@
       "row": 17
     },
     "skills": {
-      "-1629629184": 1,
-      "-168922880": 2
+      "21": 1,
+      "68": 2
     },
-    "series_id": -2118986496
+    "series_id": 1,
+    "id": 6
   },
   {
-    "game_id": 7,
     "kind": "great-sword",
     "sharpness": {
       "red": 40,
@@ -531,10 +530,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "92": 1,
-        "103": 6,
-        "352": 2,
-        "411": 1
+        "84": 1,
+        "94": 6,
+        "319": 2,
+        "376": 1
       },
       "previous_id": 6,
       "branches": [
@@ -545,13 +544,13 @@
       "row": 17
     },
     "skills": {
-      "-1629629184": 1,
-      "-168922880": 3
+      "21": 1,
+      "68": 3
     },
-    "series_id": -2118986496
+    "series_id": 1,
+    "id": 7
   },
   {
-    "game_id": 8,
     "kind": "great-sword",
     "sharpness": {
       "red": 40,
@@ -619,9 +618,9 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "102": 5,
-        "106": 1,
-        "659": 5
+        "93": 5,
+        "97": 1,
+        "615": 5
       },
       "previous_id": 7,
       "branches": [],
@@ -630,13 +629,13 @@
       "row": 17
     },
     "skills": {
-      "-1629629184": 1,
-      "-168922880": 3
+      "21": 1,
+      "68": 3
     },
-    "series_id": -2118986496
+    "series_id": 1,
+    "id": 8
   },
   {
-    "game_id": 9,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -704,10 +703,10 @@
     "crafting": {
       "zenny_cost": 4000,
       "inputs": {
-        "522": 5,
-        "524": 2,
-        "526": 3,
-        "527": 1
+        "480": 5,
+        "482": 2,
+        "484": 3,
+        "485": 1
       },
       "previous_id": null,
       "branches": [
@@ -719,13 +718,13 @@
       "row": 14
     },
     "skills": {
-      "-1475134080": 1,
-      "-283334048": 1
+      "24": 1,
+      "60": 1
     },
-    "series_id": 1239485824
+    "series_id": 46,
+    "id": 9
   },
   {
-    "game_id": 10,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -793,10 +792,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "389": 2,
-        "525": 4,
-        "534": 1,
-        "594": 4
+        "356": 2,
+        "483": 4,
+        "492": 1,
+        "552": 4
       },
       "previous_id": 9,
       "branches": [
@@ -807,13 +806,13 @@
       "row": 14
     },
     "skills": {
-      "-1475134080": 2,
-      "-283334048": 2
+      "24": 2,
+      "60": 2
     },
-    "series_id": 1239485824
+    "series_id": 46,
+    "id": 10
   },
   {
-    "game_id": 11,
     "kind": "great-sword",
     "sharpness": {
       "red": 110,
@@ -882,9 +881,9 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "388": 1,
-        "523": 6,
-        "659": 5
+        "355": 1,
+        "481": 6,
+        "615": 5
       },
       "previous_id": 10,
       "branches": [],
@@ -893,13 +892,13 @@
       "row": 14
     },
     "skills": {
-      "-1475134080": 2,
-      "-283334048": 2
+      "24": 2,
+      "60": 2
     },
-    "series_id": 1239485824
+    "series_id": 46,
+    "id": 11
   },
   {
-    "game_id": 12,
     "kind": "great-sword",
     "sharpness": {
       "red": 20,
@@ -965,9 +964,9 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "440": 3,
-        "443": 2,
-        "444": 1
+        "404": 3,
+        "407": 2,
+        "408": 1
       },
       "previous_id": 33,
       "branches": [
@@ -978,12 +977,12 @@
       "row": 9
     },
     "skills": {
-      "686533440": 2
+      "126": 2
     },
-    "series_id": -1680519296
+    "series_id": 3,
+    "id": 12
   },
   {
-    "game_id": 13,
     "kind": "great-sword",
     "sharpness": {
       "red": 20,
@@ -1051,10 +1050,10 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "298": 2,
-        "445": 1,
-        "450": 6,
-        "451": 4
+        "265": 2,
+        "409": 1,
+        "414": 6,
+        "415": 4
       },
       "previous_id": 12,
       "branches": [
@@ -1065,12 +1064,12 @@
       "row": 9
     },
     "skills": {
-      "686533440": 2
+      "126": 2
     },
-    "series_id": -1680519296
+    "series_id": 3,
+    "id": 13
   },
   {
-    "game_id": 14,
     "kind": "great-sword",
     "sharpness": {
       "red": 20,
@@ -1138,10 +1137,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "448": 6,
-        "449": 4,
-        "452": 1,
-        "660": 5
+        "412": 6,
+        "413": 4,
+        "416": 1,
+        "616": 5
       },
       "previous_id": 13,
       "branches": [],
@@ -1150,12 +1149,12 @@
       "row": 9
     },
     "skills": {
-      "686533440": 3
+      "126": 3
     },
-    "series_id": -1680519296
+    "series_id": 3,
+    "id": 14
   },
   {
-    "game_id": 15,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -1219,9 +1218,9 @@
     "crafting": {
       "zenny_cost": 500,
       "inputs": {
-        "88": 3,
-        "90": 1,
-        "299": 2
+        "80": 3,
+        "82": 1,
+        "266": 2
       },
       "previous_id": 1,
       "branches": [
@@ -1232,12 +1231,12 @@
       "row": 4
     },
     "skills": {
-      "-1946345856": 1
+      "8": 1
     },
-    "series_id": -1281946368
+    "series_id": 7,
+    "id": 15
   },
   {
-    "game_id": 16,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -1301,9 +1300,9 @@
     "crafting": {
       "zenny_cost": 1500,
       "inputs": {
-        "55": 1,
-        "91": 1,
-        "580": 1
+        "53": 1,
+        "83": 1,
+        "538": 1
       },
       "previous_id": 15,
       "branches": [
@@ -1314,12 +1313,12 @@
       "row": 4
     },
     "skills": {
-      "-1946345856": 2
+      "8": 2
     },
-    "series_id": -1281946368
+    "series_id": 7,
+    "id": 16
   },
   {
-    "game_id": 17,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -1386,9 +1385,9 @@
     "crafting": {
       "zenny_cost": 4000,
       "inputs": {
-        "303": 5,
-        "304": 3,
-        "305": 2
+        "270": 5,
+        "271": 3,
+        "272": 2
       },
       "previous_id": 16,
       "branches": [
@@ -1399,12 +1398,12 @@
       "row": 4
     },
     "skills": {
-      "-1946345856": 2
+      "8": 2
     },
-    "series_id": -1281946368
+    "series_id": 7,
+    "id": 17
   },
   {
-    "game_id": 18,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -1471,10 +1470,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "92": 1,
-        "302": 6,
-        "389": 3,
-        "594": 5
+        "84": 1,
+        "269": 6,
+        "356": 3,
+        "552": 5
       },
       "previous_id": 17,
       "branches": [
@@ -1485,12 +1484,12 @@
       "row": 4
     },
     "skills": {
-      "-1946345856": 3
+      "8": 3
     },
-    "series_id": -1281946368
+    "series_id": 7,
+    "id": 18
   },
   {
-    "game_id": 19,
     "kind": "great-sword",
     "sharpness": {
       "red": 60,
@@ -1558,9 +1557,9 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "301": 6,
-        "388": 1,
-        "659": 5
+        "268": 6,
+        "355": 1,
+        "615": 5
       },
       "previous_id": 18,
       "branches": [],
@@ -1569,12 +1568,12 @@
       "row": 4
     },
     "skills": {
-      "-1946345856": 3
+      "8": 3
     },
-    "series_id": -1281946368
+    "series_id": 7,
+    "id": 19
   },
   {
-    "game_id": 20,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -1635,10 +1634,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "550": 4,
-        "551": 1,
-        "553": 3,
-        "555": 2
+        "508": 4,
+        "509": 1,
+        "511": 3,
+        "513": 2
       },
       "previous_id": null,
       "branches": [
@@ -1649,12 +1648,12 @@
       "row": 24
     },
     "skills": {
-      "25070": 1
+      "89": 1
     },
-    "series_id": 1228067456
+    "series_id": 45,
+    "id": 20
   },
   {
-    "game_id": 21,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -1715,10 +1714,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "549": 5,
-        "552": 3,
-        "554": 1,
-        "661": 5
+        "507": 5,
+        "510": 3,
+        "512": 1,
+        "617": 5
       },
       "previous_id": 20,
       "branches": [],
@@ -1727,12 +1726,12 @@
       "row": 24
     },
     "skills": {
-      "25070": 1
+      "89": 1
     },
-    "series_id": 1228067456
+    "series_id": 45,
+    "id": 21
   },
   {
-    "game_id": 22,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -1789,8 +1788,8 @@
     "crafting": {
       "zenny_cost": 800,
       "inputs": {
-        "54": 1,
-        "57": 2
+        "52": 1,
+        "55": 2
       },
       "previous_id": 2,
       "branches": [
@@ -1801,12 +1800,12 @@
       "row": 2
     },
     "skills": {
-      "686533440": 1
+      "126": 1
     },
-    "series_id": 2
+    "series_id": 22,
+    "id": 22
   },
   {
-    "game_id": 23,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -1865,8 +1864,8 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "578": 1,
-        "583": 2
+        "536": 1,
+        "541": 2
       },
       "previous_id": 22,
       "branches": [
@@ -1877,12 +1876,12 @@
       "row": 2
     },
     "skills": {
-      "686533440": 2
+      "126": 2
     },
-    "series_id": 2
+    "series_id": 22,
+    "id": 23
   },
   {
-    "game_id": 24,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -1942,9 +1941,9 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "582": 4,
-        "655": 3,
-        "698": 3
+        "540": 4,
+        "611": 3,
+        "646": 3
       },
       "previous_id": 23,
       "branches": [
@@ -1956,12 +1955,12 @@
       "row": 2
     },
     "skills": {
-      "686533440": 3
+      "126": 3
     },
-    "series_id": 2
+    "series_id": 22,
+    "id": 24
   },
   {
-    "game_id": 25,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -2022,9 +2021,9 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "92": 1,
-        "579": 1,
-        "659": 5
+        "84": 1,
+        "537": 1,
+        "615": 5
       },
       "previous_id": 24,
       "branches": [],
@@ -2033,12 +2032,12 @@
       "row": 2
     },
     "skills": {
-      "686533440": 3
+      "126": 3
     },
-    "series_id": 2
+    "series_id": 22,
+    "id": 25
   },
   {
-    "game_id": 26,
     "kind": "great-sword",
     "sharpness": {
       "red": 40,
@@ -2105,10 +2104,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "421": 4,
-        "422": 5,
-        "425": 1,
-        "707": 1
+        "385": 4,
+        "386": 5,
+        "389": 1,
+        "655": 1
       },
       "previous_id": 24,
       "branches": [
@@ -2119,12 +2118,12 @@
       "row": 3
     },
     "skills": {
-      "-283334048": 2
+      "60": 2
     },
-    "series_id": -1346940416
+    "series_id": 6,
+    "id": 26
   },
   {
-    "game_id": 27,
     "kind": "great-sword",
     "sharpness": {
       "red": 40,
@@ -2192,10 +2191,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "420": 4,
-        "423": 4,
-        "424": 1,
-        "661": 5
+        "384": 4,
+        "387": 4,
+        "388": 1,
+        "617": 5
       },
       "previous_id": 26,
       "branches": [],
@@ -2204,12 +2203,12 @@
       "row": 3
     },
     "skills": {
-      "-283334048": 3
+      "60": 3
     },
-    "series_id": -1346940416
+    "series_id": 6,
+    "id": 27
   },
   {
-    "game_id": 28,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -2275,9 +2274,9 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "400": 3,
-        "402": 2,
-        "593": 1
+        "367": 3,
+        "369": 2,
+        "551": 1
       },
       "previous_id": 3,
       "branches": [
@@ -2288,13 +2287,13 @@
       "row": 1
     },
     "skills": {
-      "313598432": 1,
-      "1389859584": 1
+      "105": 1,
+      "147": 1
     },
-    "series_id": 520158048
+    "series_id": 30,
+    "id": 28
   },
   {
-    "game_id": 29,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -2362,10 +2361,10 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "408": 5,
-        "410": 2,
-        "608": 1,
-        "706": 1
+        "374": 5,
+        "375": 2,
+        "565": 1,
+        "654": 1
       },
       "previous_id": 28,
       "branches": [
@@ -2376,13 +2375,13 @@
       "row": 1
     },
     "skills": {
-      "313598432": 1,
-      "1389859584": 1
+      "105": 1,
+      "147": 1
     },
-    "series_id": 520158048
+    "series_id": 30,
+    "id": 29
   },
   {
-    "game_id": 30,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -2450,10 +2449,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "407": 6,
-        "455": 6,
-        "660": 5,
-        "705": 1
+        "373": 6,
+        "418": 6,
+        "616": 5,
+        "653": 1
       },
       "previous_id": 29,
       "branches": [],
@@ -2462,13 +2461,13 @@
       "row": 1
     },
     "skills": {
-      "313598432": 1,
-      "1389859584": 1
+      "105": 1,
+      "147": 1
     },
-    "series_id": 520158048
+    "series_id": 30,
+    "id": 30
   },
   {
-    "game_id": 31,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -2535,10 +2534,10 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "411": 1,
-        "557": 5,
-        "558": 4,
-        "561": 2
+        "376": 1,
+        "515": 5,
+        "516": 4,
+        "519": 2
       },
       "previous_id": 6,
       "branches": [
@@ -2550,12 +2549,12 @@
       "row": 18
     },
     "skills": {
-      "-1607763456": 3
+      "22": 3
     },
-    "series_id": -622134208
+    "series_id": 15,
+    "id": 31
   },
   {
-    "game_id": 32,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -2623,10 +2622,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "556": 6,
-        "559": 1,
-        "560": 1,
-        "660": 5
+        "514": 6,
+        "517": 1,
+        "518": 1,
+        "616": 5
       },
       "previous_id": 31,
       "branches": [],
@@ -2635,12 +2634,12 @@
       "row": 18
     },
     "skills": {
-      "-1607763456": 3
+      "22": 3
     },
-    "series_id": -622134208
+    "series_id": 15,
+    "id": 32
   },
   {
-    "game_id": 33,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -2704,9 +2703,9 @@
     "crafting": {
       "zenny_cost": 1500,
       "inputs": {
-        "513": 3,
-        "515": 2,
-        "605": 1
+        "471": 3,
+        "473": 2,
+        "562": 1
       },
       "previous_id": 40,
       "branches": [
@@ -2718,13 +2717,13 @@
       "row": 8
     },
     "skills": {
-      "-307644128": 1,
-      "-181127504": 1
+      "59": 1,
+      "66": 1
     },
-    "series_id": 128739328
+    "series_id": 23,
+    "id": 33
   },
   {
-    "game_id": 34,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -2791,9 +2790,9 @@
     "crafting": {
       "zenny_cost": 5000,
       "inputs": {
-        "519": 3,
-        "521": 1,
-        "606": 3
+        "477": 3,
+        "479": 1,
+        "563": 3
       },
       "previous_id": 33,
       "branches": [
@@ -2804,13 +2803,13 @@
       "row": 8
     },
     "skills": {
-      "-307644128": 1,
-      "-181127504": 1
+      "59": 1,
+      "66": 1
     },
-    "series_id": 128739328
+    "series_id": 23,
+    "id": 34
   },
   {
-    "game_id": 35,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -2877,10 +2876,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "425": 3,
-        "480": 2,
-        "490": 3,
-        "520": 5
+        "389": 3,
+        "441": 2,
+        "451": 3,
+        "478": 5
       },
       "previous_id": 34,
       "branches": [
@@ -2891,13 +2890,13 @@
       "row": 8
     },
     "skills": {
-      "-307644128": 1,
-      "-181127504": 2
+      "59": 1,
+      "66": 2
     },
-    "series_id": 128739328
+    "series_id": 23,
+    "id": 35
   },
   {
-    "game_id": 36,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -2965,9 +2964,9 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "518": 6,
-        "534": 1,
-        "659": 5
+        "476": 6,
+        "492": 1,
+        "615": 5
       },
       "previous_id": 35,
       "branches": [],
@@ -2976,13 +2975,13 @@
       "row": 8
     },
     "skills": {
-      "-307644128": 1,
-      "-181127504": 2
+      "59": 1,
+      "66": 2
     },
-    "series_id": 128739328
+    "series_id": 23,
+    "id": 36
   },
   {
-    "game_id": 37,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -3050,10 +3049,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "418": 5,
-        "565": 4,
-        "566": 1,
-        "569": 3
+        "382": 5,
+        "523": 4,
+        "524": 1,
+        "527": 3
       },
       "previous_id": 31,
       "branches": [
@@ -3064,12 +3063,12 @@
       "row": 19
     },
     "skills": {
-      "313598432": 2
+      "105": 2
     },
-    "series_id": 861502784
+    "series_id": 38,
+    "id": 37
   },
   {
-    "game_id": 38,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -3137,10 +3136,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "567": 2,
-        "568": 1,
-        "570": 5,
-        "661": 5
+        "525": 2,
+        "526": 1,
+        "528": 5,
+        "617": 5
       },
       "previous_id": 37,
       "branches": [],
@@ -3149,12 +3148,12 @@
       "row": 19
     },
     "skills": {
-      "313598432": 3
+      "105": 3
     },
-    "series_id": 861502784
+    "series_id": 38,
+    "id": 38
   },
   {
-    "game_id": 39,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -3212,7 +3211,7 @@
     "crafting": {
       "zenny_cost": 500,
       "inputs": {
-        "58": 2
+        "56": 2
       },
       "previous_id": null,
       "branches": [
@@ -3224,12 +3223,12 @@
       "row": 6
     },
     "skills": {
-      "-283334048": 1
+      "60": 1
     },
-    "series_id": -1365154048
+    "series_id": 5,
+    "id": 39
   },
   {
-    "game_id": 40,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -3287,8 +3286,8 @@
     "crafting": {
       "zenny_cost": 800,
       "inputs": {
-        "59": 2,
-        "489": 1
+        "57": 2,
+        "450": 1
       },
       "previous_id": 39,
       "branches": [
@@ -3301,13 +3300,13 @@
       "row": 6
     },
     "skills": {
-      "-283334048": 1,
-      "1": 1
+      "60": 1,
+      "72": 1
     },
-    "series_id": -1365154048
+    "series_id": 5,
+    "id": 40
   },
   {
-    "game_id": 41,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -3366,7 +3365,7 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "588": 2
+        "546": 2
       },
       "previous_id": 40,
       "branches": [
@@ -3377,13 +3376,13 @@
       "row": 6
     },
     "skills": {
-      "-283334048": 2,
-      "1": 1
+      "60": 2,
+      "72": 1
     },
-    "series_id": -1365154048
+    "series_id": 5,
+    "id": 41
   },
   {
-    "game_id": 42,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -3443,8 +3442,8 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "61": 2,
-        "658": 4
+        "59": 2,
+        "614": 4
       },
       "previous_id": 41,
       "branches": [
@@ -3455,13 +3454,13 @@
       "row": 6
     },
     "skills": {
-      "-283334048": 3,
-      "1": 1
+      "60": 3,
+      "72": 1
     },
-    "series_id": -1365154048
+    "series_id": 5,
+    "id": 42
   },
   {
-    "game_id": 43,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -3522,10 +3521,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "37": 1,
-        "62": 1,
-        "656": 5,
-        "659": 5
+        "35": 1,
+        "60": 1,
+        "612": 5,
+        "615": 5
       },
       "previous_id": 42,
       "branches": [],
@@ -3534,13 +3533,13 @@
       "row": 6
     },
     "skills": {
-      "-283334048": 3,
-      "1": 1
+      "60": 3,
+      "72": 1
     },
-    "series_id": -1365154048
+    "series_id": 5,
+    "id": 43
   },
   {
-    "game_id": 44,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -3606,9 +3605,9 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "376": 3,
-        "377": 2,
-        "380": 1
+        "343": 3,
+        "344": 2,
+        "347": 1
       },
       "previous_id": 40,
       "branches": [
@@ -3619,13 +3618,13 @@
       "row": 7
     },
     "skills": {
-      "1444935552": 1,
-      "1500129152": 2
+      "149": 1,
+      "157": 2
     },
-    "series_id": 401764448
+    "series_id": 28,
+    "id": 44
   },
   {
-    "game_id": 45,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -3692,10 +3691,10 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "381": 1,
-        "384": 5,
-        "387": 4,
-        "389": 3
+        "348": 1,
+        "351": 5,
+        "354": 4,
+        "356": 3
       },
       "previous_id": 44,
       "branches": [
@@ -3706,13 +3705,13 @@
       "row": 7
     },
     "skills": {
-      "1444935552": 2,
-      "1500129152": 2
+      "149": 2,
+      "157": 2
     },
-    "series_id": 401764448
+    "series_id": 28,
+    "id": 45
   },
   {
-    "game_id": 46,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -3780,10 +3779,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "385": 4,
-        "386": 6,
-        "388": 1,
-        "661": 5
+        "352": 4,
+        "353": 6,
+        "355": 1,
+        "617": 5
       },
       "previous_id": 45,
       "branches": [],
@@ -3792,13 +3791,13 @@
       "row": 7
     },
     "skills": {
-      "1444935552": 2,
-      "1500129152": 3
+      "149": 2,
+      "157": 3
     },
-    "series_id": 401764448
+    "series_id": 28,
+    "id": 46
   },
   {
-    "game_id": 47,
     "kind": "great-sword",
     "sharpness": {
       "red": 90,
@@ -3865,10 +3864,10 @@
     "crafting": {
       "zenny_cost": 4000,
       "inputs": {
-        "529": 5,
-        "530": 3,
-        "531": 2,
-        "533": 1
+        "487": 5,
+        "488": 3,
+        "489": 2,
+        "491": 1
       },
       "previous_id": null,
       "branches": [
@@ -3879,13 +3878,13 @@
       "row": 16
     },
     "skills": {
-      "-1946345856": 1,
-      "686533440": 1
+      "8": 1,
+      "126": 1
     },
-    "series_id": 1049075776
+    "series_id": 42,
+    "id": 47
   },
   {
-    "game_id": 48,
     "kind": "great-sword",
     "sharpness": {
       "red": 90,
@@ -3952,9 +3951,9 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "532": 4,
-        "547": 2,
-        "602": 4
+        "490": 4,
+        "505": 2,
+        "559": 4
       },
       "previous_id": 47,
       "branches": [
@@ -3965,13 +3964,13 @@
       "row": 16
     },
     "skills": {
-      "-1946345856": 1,
-      "686533440": 2
+      "8": 1,
+      "126": 2
     },
-    "series_id": 1049075776
+    "series_id": 42,
+    "id": 48
   },
   {
-    "game_id": 49,
     "kind": "great-sword",
     "sharpness": {
       "red": 90,
@@ -4039,10 +4038,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "529": 6,
-        "534": 1,
-        "579": 1,
-        "659": 5
+        "487": 6,
+        "492": 1,
+        "537": 1,
+        "615": 5
       },
       "previous_id": 48,
       "branches": [],
@@ -4051,13 +4050,13 @@
       "row": 16
     },
     "skills": {
-      "-1946345856": 2,
-      "686533440": 2
+      "8": 2,
+      "126": 2
     },
-    "series_id": 1049075776
+    "series_id": 42,
+    "id": 49
   },
   {
-    "game_id": 50,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -4115,9 +4114,9 @@
     "crafting": {
       "zenny_cost": 800,
       "inputs": {
-        "34": 3,
-        "35": 2,
-        "36": 1
+        "32": 3,
+        "33": 2,
+        "34": 1
       },
       "previous_id": 39,
       "branches": [
@@ -4130,12 +4129,12 @@
       "row": 10
     },
     "skills": {
-      "-1946345856": 1
+      "8": 1
     },
-    "series_id": -492617504
+    "series_id": 18,
+    "id": 50
   },
   {
-    "game_id": 51,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -4194,9 +4193,9 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "33": 3,
-        "392": 1,
-        "588": 1
+        "31": 3,
+        "359": 1,
+        "546": 1
       },
       "previous_id": 50,
       "branches": [
@@ -4207,12 +4206,12 @@
       "row": 10
     },
     "skills": {
-      "-1946345856": 2
+      "8": 2
     },
-    "series_id": -492617504
+    "series_id": 18,
+    "id": 51
   },
   {
-    "game_id": 52,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -4272,25 +4271,25 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "319": 6,
-        "320": 4,
-        "321": 2
+        "286": 6,
+        "287": 4,
+        "288": 2
       },
       "previous_id": 51,
       "branches": [
-        80
+        78
       ],
       "is_shortcut": false,
       "column": 6,
       "row": 10
     },
     "skills": {
-      "-1946345856": 3
+      "8": 3
     },
-    "series_id": -492617504
+    "series_id": 18,
+    "id": 52
   },
   {
-    "game_id": 53,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -4350,9 +4349,9 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "390": 3,
-        "392": 2,
-        "393": 1
+        "357": 3,
+        "359": 2,
+        "360": 1
       },
       "previous_id": 50,
       "branches": [
@@ -4363,12 +4362,12 @@
       "row": 13
     },
     "skills": {
-      "-283334048": 1
+      "60": 1
     },
-    "series_id": 555478144
+    "series_id": 31,
+    "id": 53
   },
   {
-    "game_id": 54,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -4429,10 +4428,10 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "397": 6,
-        "398": 4,
-        "399": 2,
-        "608": 1
+        "364": 6,
+        "365": 4,
+        "366": 2,
+        "565": 1
       },
       "previous_id": 53,
       "branches": [
@@ -4443,12 +4442,12 @@
       "row": 13
     },
     "skills": {
-      "-283334048": 2
+      "60": 2
     },
-    "series_id": 555478144
+    "series_id": 31,
+    "id": 54
   },
   {
-    "game_id": 55,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -4510,10 +4509,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "37": 1,
-        "395": 6,
-        "660": 5,
-        "665": 6
+        "35": 1,
+        "362": 6,
+        "616": 5,
+        "621": 6
       },
       "previous_id": 54,
       "branches": [],
@@ -4522,12 +4521,12 @@
       "row": 13
     },
     "skills": {
-      "-283334048": 2
+      "60": 2
     },
-    "series_id": 555478144
+    "series_id": 31,
+    "id": 55
   },
   {
-    "game_id": 56,
     "kind": "great-sword",
     "sharpness": {
       "red": 40,
@@ -4595,10 +4594,10 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "483": 5,
-        "485": 1,
-        "584": 2,
-        "598": 4
+        "444": 5,
+        "446": 1,
+        "542": 2,
+        "555": 4
       },
       "previous_id": 9,
       "branches": [
@@ -4609,12 +4608,12 @@
       "row": 15
     },
     "skills": {
-      "313598432": 2
+      "105": 2
     },
-    "series_id": 1002649728
+    "series_id": 40,
+    "id": 56
   },
   {
-    "game_id": 57,
     "kind": "great-sword",
     "sharpness": {
       "red": 40,
@@ -4683,10 +4682,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "482": 6,
-        "484": 4,
-        "486": 1,
-        "660": 5
+        "443": 6,
+        "445": 4,
+        "447": 1,
+        "616": 5
       },
       "previous_id": 56,
       "branches": [],
@@ -4695,12 +4694,12 @@
       "row": 15
     },
     "skills": {
-      "313598432": 3
+      "105": 3
     },
-    "series_id": 1002649728
+    "series_id": 40,
+    "id": 57
   },
   {
-    "game_id": 58,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -4767,10 +4766,10 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "454": 3,
-        "588": 2,
-        "607": 1,
-        "664": 3
+        "417": 3,
+        "546": 2,
+        "564": 1,
+        "620": 3
       },
       "previous_id": 50,
       "branches": [
@@ -4781,12 +4780,12 @@
       "row": 11
     },
     "skills": {
-      "-283334048": 2
+      "60": 2
     },
-    "series_id": 559385600
+    "series_id": 32,
+    "id": 58
   },
   {
-    "game_id": 59,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -4854,10 +4853,10 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "62": 1,
-        "455": 6,
-        "608": 3,
-        "665": 6
+        "60": 1,
+        "418": 6,
+        "565": 3,
+        "621": 6
       },
       "previous_id": 58,
       "branches": [
@@ -4869,12 +4868,12 @@
       "row": 11
     },
     "skills": {
-      "-283334048": 2
+      "60": 2
     },
-    "series_id": 559385600
+    "series_id": 32,
+    "id": 59
   },
   {
-    "game_id": 60,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -4943,10 +4942,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "456": 2,
-        "463": 4,
-        "465": 1,
-        "661": 5
+        "419": 2,
+        "425": 4,
+        "427": 1,
+        "617": 5
       },
       "previous_id": 59,
       "branches": [],
@@ -4955,12 +4954,12 @@
       "row": 11
     },
     "skills": {
-      "-283334048": 2
+      "60": 2
     },
-    "series_id": 559385600
+    "series_id": 32,
+    "id": 60
   },
   {
-    "game_id": 61,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -5027,26 +5026,26 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "92": 1,
-        "459": 4,
-        "462": 2,
-        "466": 3
+        "84": 1,
+        "422": 4,
+        "424": 2,
+        "428": 3
       },
       "previous_id": 59,
       "branches": [
-        81
+        79
       ],
       "is_shortcut": false,
       "column": 8,
       "row": 12
     },
     "skills": {
-      "-283334048": 3
+      "60": 3
     },
-    "series_id": 769195136
+    "series_id": 35,
+    "id": 61
   },
   {
-    "game_id": 62,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -5110,9 +5109,9 @@
     "crafting": {
       "zenny_cost": 2600,
       "inputs": {
-        "587": 5,
-        "599": 5,
-        "615": 1
+        "545": 5,
+        "556": 5,
+        "572": 1
       },
       "previous_id": null,
       "branches": [
@@ -5123,12 +5122,12 @@
       "row": 20
     },
     "skills": {
-      "-1946345856": 3
+      "8": 3
     },
-    "series_id": -1272948352
+    "series_id": 8,
+    "id": 62
   },
   {
-    "game_id": 63,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -5194,10 +5193,10 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "600": 4,
-        "615": 2,
-        "658": 5,
-        "698": 5
+        "557": 4,
+        "572": 2,
+        "614": 5,
+        "646": 5
       },
       "previous_id": 62,
       "branches": [
@@ -5208,13 +5207,13 @@
       "row": 20
     },
     "skills": {
-      "-1946345856": 3,
-      "-893407296": 1
+      "8": 3,
+      "36": 1
     },
-    "series_id": -1272948352
+    "series_id": 8,
+    "id": 63
   },
   {
-    "game_id": 64,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -5281,10 +5280,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "62": 1,
-        "424": 1,
-        "615": 3,
-        "659": 5
+        "60": 1,
+        "388": 1,
+        "572": 3,
+        "615": 5
       },
       "previous_id": 63,
       "branches": [],
@@ -5293,13 +5292,13 @@
       "row": 20
     },
     "skills": {
-      "-1946345856": 3,
-      "-893407296": 2
+      "8": 3,
+      "36": 2
     },
-    "series_id": -1272948352
+    "series_id": 8,
+    "id": 64
   },
   {
-    "game_id": 65,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -5363,9 +5362,9 @@
     "crafting": {
       "zenny_cost": 500,
       "inputs": {
-        "273": 3,
-        "274": 1,
-        "603": 2
+        "245": 3,
+        "246": 1,
+        "560": 2
       },
       "previous_id": 1,
       "branches": [
@@ -5376,12 +5375,12 @@
       "row": 5
     },
     "skills": {
-      "1444935552": 1
+      "149": 1
     },
-    "series_id": -1616428288
+    "series_id": 4,
+    "id": 65
   },
   {
-    "game_id": 66,
     "kind": "great-sword",
     "sharpness": {
       "red": 60,
@@ -5445,9 +5444,9 @@
     "crafting": {
       "zenny_cost": 1500,
       "inputs": {
-        "275": 1,
-        "277": 3,
-        "515": 1
+        "247": 1,
+        "249": 3,
+        "473": 1
       },
       "previous_id": 65,
       "branches": [
@@ -5458,12 +5457,12 @@
       "row": 5
     },
     "skills": {
-      "1444935552": 2
+      "149": 2
     },
-    "series_id": -1616428288
+    "series_id": 4,
+    "id": 66
   },
   {
-    "game_id": 67,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -5531,9 +5530,9 @@
     "crafting": {
       "zenny_cost": 4000,
       "inputs": {
-        "308": 3,
-        "310": 2,
-        "604": 5
+        "275": 3,
+        "277": 2,
+        "561": 5
       },
       "previous_id": 66,
       "branches": [
@@ -5544,12 +5543,12 @@
       "row": 5
     },
     "skills": {
-      "1444935552": 2
+      "149": 2
     },
-    "series_id": -1616428288
+    "series_id": 4,
+    "id": 67
   },
   {
-    "game_id": 68,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -5618,9 +5617,9 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "306": 6,
-        "309": 4,
-        "656": 3
+        "273": 6,
+        "276": 4,
+        "612": 3
       },
       "previous_id": 67,
       "branches": [
@@ -5631,12 +5630,12 @@
       "row": 5
     },
     "skills": {
-      "1444935552": 2
+      "149": 2
     },
-    "series_id": -1616428288
+    "series_id": 4,
+    "id": 68
   },
   {
-    "game_id": 69,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -5705,10 +5704,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "307": 6,
-        "490": 4,
-        "534": 1,
-        "659": 5
+        "274": 6,
+        "451": 4,
+        "492": 1,
+        "615": 5
       },
       "previous_id": 68,
       "branches": [],
@@ -5717,12 +5716,12 @@
       "row": 5
     },
     "skills": {
-      "1444935552": 2
+      "149": 2
     },
-    "series_id": -1616428288
+    "series_id": 4,
+    "id": 69
   },
   {
-    "game_id": 70,
     "kind": "great-sword",
     "sharpness": {
       "red": 80,
@@ -5791,10 +5790,10 @@
       "row": 0
     },
     "skills": {},
-    "series_id": null
+    "series_id": null,
+    "id": 70
   },
   {
-    "game_id": 71,
     "kind": "great-sword",
     "sharpness": {
       "red": 80,
@@ -5862,10 +5861,10 @@
       "row": 0
     },
     "skills": {},
-    "series_id": null
+    "series_id": null,
+    "id": 71
   },
   {
-    "game_id": 72,
     "kind": "great-sword",
     "sharpness": {
       "red": 80,
@@ -5933,10 +5932,10 @@
       "row": 0
     },
     "skills": {},
-    "series_id": null
+    "series_id": null,
+    "id": 72
   },
   {
-    "game_id": 73,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -6003,26 +6002,26 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "710": 1,
-        "712": 5,
-        "713": 4,
-        "715": 1
+        "657": 1,
+        "659": 5,
+        "660": 4,
+        "662": 1
       },
       "previous_id": null,
       "branches": [
-        92
+        90
       ],
       "is_shortcut": false,
       "column": 8,
       "row": 22
     },
     "skills": {
-      "576193792": 1
+      "119": 1
     },
-    "series_id": 146353744
+    "series_id": 25,
+    "id": 73
   },
   {
-    "game_id": 76,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -6083,8 +6082,8 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "534": 1,
-        "659": 5
+        "492": 1,
+        "615": 5
       },
       "previous_id": 5,
       "branches": [],
@@ -6093,13 +6092,13 @@
       "row": 0
     },
     "skills": {
-      "-2096489472": 2,
-      "1444935552": 2
+      "3": 2,
+      "149": 2
     },
-    "series_id": 1
+    "series_id": 21,
+    "id": 74
   },
   {
-    "game_id": 77,
     "kind": "great-sword",
     "sharpness": {
       "red": 80,
@@ -6166,27 +6165,27 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "720": 2,
-        "722": 5,
-        "723": 3,
-        "726": 1
+        "665": 2,
+        "667": 5,
+        "668": 3,
+        "670": 1
       },
       "previous_id": null,
       "branches": [
-        78
+        76
       ],
       "is_shortcut": false,
       "column": 6,
       "row": 23
     },
     "skills": {
-      "-847539392": 2,
-      "313598432": 1
+      "39": 2,
+      "105": 1
     },
-    "series_id": -1175600512
+    "series_id": 10,
+    "id": 75
   },
   {
-    "game_id": 78,
     "kind": "great-sword",
     "sharpness": {
       "red": 80,
@@ -6254,25 +6253,25 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "661": 5,
-        "724": 4,
-        "727": 4,
-        "728": 1
+        "617": 5,
+        "669": 4,
+        "671": 4,
+        "672": 1
       },
-      "previous_id": 77,
+      "previous_id": 75,
       "branches": [],
       "is_shortcut": false,
       "column": 8,
       "row": 23
     },
     "skills": {
-      "-847539392": 3,
-      "313598432": 1
+      "39": 3,
+      "105": 1
     },
-    "series_id": -1175600512
+    "series_id": 10,
+    "id": 76
   },
   {
-    "game_id": 79,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -6339,26 +6338,26 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "737": 1,
-        "738": 7,
-        "740": 5,
-        "741": 4
+        "681": 1,
+        "682": 7,
+        "684": 5,
+        "685": 4
       },
       "previous_id": null,
       "branches": [
-        84
+        82
       ],
       "is_shortcut": false,
       "column": 8,
       "row": 26
     },
     "skills": {
-      "3813": 1
+      "76": 1
     },
-    "series_id": 569042624
+    "series_id": 33,
+    "id": 77
   },
   {
-    "game_id": 80,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -6420,9 +6419,9 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "37": 1,
-        "318": 6,
-        "660": 5
+        "35": 1,
+        "285": 6,
+        "616": 5
       },
       "previous_id": 52,
       "branches": [],
@@ -6431,12 +6430,12 @@
       "row": 10
     },
     "skills": {
-      "-1946345856": 3
+      "8": 3
     },
-    "series_id": -492617504
+    "series_id": 18,
+    "id": 78
   },
   {
-    "game_id": 81,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -6504,10 +6503,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "460": 5,
-        "464": 3,
-        "465": 1,
-        "661": 5
+        "423": 5,
+        "426": 3,
+        "427": 1,
+        "617": 5
       },
       "previous_id": 61,
       "branches": [],
@@ -6516,12 +6515,12 @@
       "row": 12
     },
     "skills": {
-      "-283334048": 3
+      "60": 3
     },
-    "series_id": 769195136
+    "series_id": 35,
+    "id": 79
   },
   {
-    "game_id": 82,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -6588,27 +6587,27 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "729": 2,
-        "731": 5,
-        "734": 1,
-        "735": 3
+        "673": 2,
+        "675": 5,
+        "678": 1,
+        "679": 3
       },
       "previous_id": null,
       "branches": [
-        83
+        81
       ],
       "is_shortcut": false,
       "column": 7,
       "row": 25
     },
     "skills": {
-      "-283334048": 2,
-      "30201": 1
+      "60": 2,
+      "91": 1
     },
-    "series_id": -1122003456
+    "series_id": 11,
+    "id": 80
   },
   {
-    "game_id": 83,
     "kind": "great-sword",
     "sharpness": {
       "red": 60,
@@ -6676,25 +6675,25 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "661": 5,
-        "732": 4,
-        "733": 3,
-        "736": 1
+        "617": 5,
+        "676": 4,
+        "677": 3,
+        "680": 1
       },
-      "previous_id": 82,
+      "previous_id": 80,
       "branches": [],
       "is_shortcut": false,
       "column": 8,
       "row": 25
     },
     "skills": {
-      "-283334048": 2,
-      "30201": 1
+      "60": 2,
+      "91": 1
     },
-    "series_id": -1122003456
+    "series_id": 11,
+    "id": 81
   },
   {
-    "game_id": 84,
     "kind": "great-sword",
     "sharpness": {
       "red": 70,
@@ -6762,24 +6761,24 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "737": 1,
-        "739": 6,
-        "743": 4,
-        "744": 1
+        "681": 1,
+        "683": 6,
+        "686": 4,
+        "687": 1
       },
-      "previous_id": 79,
+      "previous_id": 77,
       "branches": [],
       "is_shortcut": false,
       "column": 9,
       "row": 26
     },
     "skills": {
-      "3813": 1
+      "76": 1
     },
-    "series_id": 569042624
+    "series_id": 33,
+    "id": 82
   },
   {
-    "game_id": 85,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -6840,27 +6839,27 @@
     "crafting": {
       "zenny_cost": 10000,
       "inputs": {
-        "589": 5,
-        "616": 1,
-        "655": 5,
-        "657": 5
+        "547": 5,
+        "573": 1,
+        "611": 5,
+        "613": 5
       },
       "previous_id": null,
       "branches": [
-        86
+        84
       ],
       "is_shortcut": false,
       "column": 6,
       "row": 21
     },
     "skills": {
-      "-283334048": 2,
-      "1500129152": 2
+      "60": 2,
+      "157": 2
     },
-    "series_id": -547584512
+    "series_id": 17,
+    "id": 83
   },
   {
-    "game_id": 86,
     "kind": "great-sword",
     "sharpness": {
       "red": 50,
@@ -6922,25 +6921,25 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "62": 1,
-        "616": 2,
-        "656": 5,
-        "660": 5
+        "60": 1,
+        "573": 2,
+        "612": 5,
+        "616": 5
       },
-      "previous_id": 85,
+      "previous_id": 83,
       "branches": [],
       "is_shortcut": false,
       "column": 8,
       "row": 21
     },
     "skills": {
-      "-283334048": 2,
-      "1500129152": 2
+      "60": 2,
+      "157": 2
     },
-    "series_id": -547584512
+    "series_id": 17,
+    "id": 84
   },
   {
-    "game_id": 87,
     "kind": "great-sword",
     "sharpness": {
       "red": 140,
@@ -7008,10 +7007,10 @@
       "row": 0
     },
     "skills": {},
-    "series_id": null
+    "series_id": null,
+    "id": 85
   },
   {
-    "game_id": 88,
     "kind": "great-sword",
     "sharpness": {
       "red": 140,
@@ -7079,10 +7078,10 @@
       "row": 0
     },
     "skills": {},
-    "series_id": null
+    "series_id": null,
+    "id": 86
   },
   {
-    "game_id": 89,
     "kind": "great-sword",
     "sharpness": {
       "red": 140,
@@ -7150,10 +7149,10 @@
       "row": 0
     },
     "skills": {},
-    "series_id": null
+    "series_id": null,
+    "id": 87
   },
   {
-    "game_id": 90,
     "kind": "great-sword",
     "sharpness": {
       "red": 20,
@@ -7214,27 +7213,27 @@
     "crafting": {
       "zenny_cost": 14000,
       "inputs": {
-        "92": 2,
-        "301": 12,
-        "727": 4,
-        "836": 2
+        "84": 2,
+        "268": 12,
+        "671": 4,
+        "771": 2
       },
       "previous_id": null,
       "branches": [
-        91
+        89
       ],
       "is_shortcut": false,
       "column": 8,
       "row": 27
     },
     "skills": {
-      "-283334048": 3,
-      "12877": 1
+      "60": 3,
+      "84": 1
     },
-    "series_id": 787080512
+    "series_id": 36,
+    "id": 88
   },
   {
-    "game_id": 91,
     "kind": "great-sword",
     "sharpness": {
       "red": 10,
@@ -7293,25 +7292,25 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "303": 8,
-        "661": 5,
-        "728": 1,
-        "836": 1
+        "270": 8,
+        "617": 5,
+        "672": 1,
+        "771": 1
       },
-      "previous_id": 90,
+      "previous_id": 88,
       "branches": [],
       "is_shortcut": false,
       "column": 9,
       "row": 27
     },
     "skills": {
-      "-283334048": 3,
-      "12877": 1
+      "60": 3,
+      "84": 1
     },
-    "series_id": 787080512
+    "series_id": 36,
+    "id": 89
   },
   {
-    "game_id": 92,
     "kind": "great-sword",
     "sharpness": {
       "red": 100,
@@ -7379,10 +7378,10 @@
     "crafting": {
       "zenny_cost": 20000,
       "inputs": {
-        "661": 5,
-        "714": 3,
-        "717": 1,
-        "719": 4
+        "617": 5,
+        "661": 3,
+        "663": 1,
+        "664": 4
       },
       "previous_id": 73,
       "branches": [],
@@ -7391,8 +7390,9 @@
       "row": 22
     },
     "skills": {
-      "576193792": 1
+      "119": 1
     },
-    "series_id": 146353744
+    "series_id": 25,
+    "id": 90
   }
 ]

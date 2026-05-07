@@ -1,6 +1,5 @@
 [
   {
-    "game_id": -2003468672,
     "species": "construct",
     "names": {
       "ja": "ゾ・シア",
@@ -82,7 +81,7 @@
     },
     "base_health": 9000,
     "locations": [
-      327401792
+      4
     ],
     "weaknesses": [
       {
@@ -839,10 +838,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 1
   },
   {
-    "game_id": -1916429696,
     "species": "construct",
     "names": {
       "ja": "護竜ドシャグマ",
@@ -945,7 +944,7 @@
     },
     "base_health": 5800,
     "locations": [
-      327401792
+      4
     ],
     "weaknesses": [
       {
@@ -1542,10 +1541,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 2
   },
   {
-    "game_id": -1547364608,
     "species": "flying-wyvern",
     "names": {
       "ja": "レ・ダウ",
@@ -1668,7 +1667,7 @@
     },
     "base_health": 5000,
     "locations": [
-      -1226157568
+      2
     ],
     "weaknesses": [
       {
@@ -2354,10 +2353,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 3
   },
   {
-    "game_id": -1528962176,
     "species": "temnoceran",
     "names": {
       "ja": "ラバラ・バリナ",
@@ -2460,8 +2459,8 @@
     },
     "base_health": 4000,
     "locations": [
-      -859829056,
-      327401792
+      3,
+      4
     ],
     "weaknesses": [
       {
@@ -3088,10 +3087,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 4
   },
   {
-    "game_id": -1440201088,
     "species": "fanged-beast",
     "names": {
       "ja": "ババコンガ",
@@ -3194,8 +3193,8 @@
     },
     "base_health": 5000,
     "locations": [
-      -859829056,
-      327401792
+      3,
+      4
     ],
     "weaknesses": [
       {
@@ -3712,10 +3711,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 5
   },
   {
-    "game_id": -1363370496,
     "species": "temnoceran",
     "names": {
       "ja": "ネルスキュラ",
@@ -3858,9 +3857,9 @@
     },
     "base_health": 4400,
     "locations": [
-      -1251081216,
-      327401792,
-      1182228864
+      1,
+      4,
+      5
     ],
     "weaknesses": [
       {
@@ -4522,10 +4521,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 6
   },
   {
-    "game_id": -1083842944,
     "species": "leviathan",
     "names": {
       "ja": "ラギアクルス",
@@ -4628,7 +4627,7 @@
     },
     "base_health": 5600,
     "locations": [
-      -859829056
+      3
     ],
     "weaknesses": [
       {
@@ -5243,10 +5242,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 7
   },
   {
-    "game_id": -758250816,
     "species": "demi-elder",
     "names": {
       "ja": "ゴア・マガラ",
@@ -5349,8 +5348,8 @@
     },
     "base_health": 5100,
     "locations": [
-      327401792,
-      1182228864
+      4,
+      5
     ],
     "weaknesses": [
       {
@@ -5924,10 +5923,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 8
   },
   {
-    "game_id": -535078400,
     "species": "flying-wyvern",
     "names": {
       "ja": "グラビモス",
@@ -6030,8 +6029,8 @@
     },
     "base_health": 5500,
     "locations": [
-      -1251081216,
-      327401792
+      1,
+      4
     ],
     "weaknesses": [
       {
@@ -6613,10 +6612,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 9
   },
   {
-    "game_id": -283654400,
     "species": "construct",
     "names": {
       "ja": "護竜アルシュベルド",
@@ -6698,7 +6697,7 @@
     },
     "base_health": 5200,
     "locations": [
-      327401792
+      4
     ],
     "weaknesses": [
       {
@@ -7046,10 +7045,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 10
   },
   {
-    "game_id": -34937520,
     "species": "brute-wyvern",
     "names": {
       "ja": "ケマトリス",
@@ -7152,8 +7151,8 @@
     },
     "base_health": 4000,
     "locations": [
-      -1226157568,
-      327401792
+      2,
+      4
     ],
     "weaknesses": [
       {
@@ -7738,10 +7737,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 11
   },
   {
-    "game_id": 15,
     "species": "fanged-beast",
     "names": {
       "ja": "ドシャグマ",
@@ -7864,9 +7863,9 @@
     },
     "base_health": 4800,
     "locations": [
-      -1226157568,
-      -859829056,
-      327401792
+      2,
+      3,
+      4
     ],
     "weaknesses": [
       {
@@ -8381,10 +8380,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 12
   },
   {
-    "game_id": 16,
     "species": "leviathan",
     "names": {
       "ja": "バーラハーラ",
@@ -8487,7 +8486,7 @@
     },
     "base_health": 4400,
     "locations": [
-      -1226157568
+      2
     ],
     "weaknesses": [
       {
@@ -9143,10 +9142,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 13
   },
   {
-    "game_id": 25,
     "species": "flying-wyvern",
     "names": {
       "ja": "セルレギオス",
@@ -9249,8 +9248,8 @@
     },
     "base_health": 5500,
     "locations": [
-      -1226157568,
-      327401792
+      2,
+      4
     ],
     "weaknesses": [
       {
@@ -9765,10 +9764,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 14
   },
   {
-    "game_id": 26,
     "species": "flying-wyvern",
     "names": {
       "ja": "リオレイア",
@@ -9871,9 +9870,9 @@
     },
     "base_health": 4500,
     "locations": [
-      -1251081216,
-      -1226157568,
-      -859829056
+      1,
+      2,
+      3
     ],
     "weaknesses": [
       {
@@ -10346,10 +10345,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 15
   },
   {
-    "game_id": 33,
     "species": "amphibian",
     "names": {
       "ja": "チャタカブラ",
@@ -10452,7 +10451,7 @@
     },
     "base_health": 4000,
     "locations": [
-      -1226157568
+      2
     ],
     "weaknesses": [
       {
@@ -10943,10 +10942,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 16
   },
   {
-    "game_id": 13052,
     "species": "elder-dragon",
     "names": {
       "ja": "ゴグマジオス",
@@ -11049,7 +11048,7 @@
     },
     "base_health": 10000,
     "locations": [
-      -1251081216
+      1
     ],
     "weaknesses": [
       {
@@ -11704,10 +11703,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 17
   },
   {
-    "game_id": 21849,
     "species": "machine",
     "names": {
       "ja": "オメガ・プラネテス",
@@ -11810,7 +11809,7 @@
     },
     "base_health": 7000,
     "locations": [
-      1182228864
+      5
     ],
     "weaknesses": [
       {
@@ -12169,10 +12168,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 18
   },
   {
-    "game_id": 32634,
     "species": "leviathan",
     "names": {
       "ja": "タマミツネ",
@@ -12275,8 +12274,8 @@
     },
     "base_health": 5500,
     "locations": [
-      -859829056,
-      327401792
+      3,
+      4
     ],
     "weaknesses": [
       {
@@ -12821,10 +12820,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 19
   },
   {
-    "game_id": 107194928,
     "species": "construct",
     "names": {
       "ja": "護竜アンジャナフ亜種",
@@ -12927,7 +12926,7 @@
     },
     "base_health": 5000,
     "locations": [
-      327401792
+      4
     ],
     "weaknesses": [
       {
@@ -13483,10 +13482,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 20
   },
   {
-    "game_id": 222933952,
     "species": "leviathan",
     "names": {
       "ja": "ヒラバミ",
@@ -13609,8 +13608,8 @@
     },
     "base_health": 4500,
     "locations": [
-      327401792,
-      1182228864
+      4,
+      5
     ],
     "weaknesses": [
       {
@@ -14180,10 +14179,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 21
   },
   {
-    "game_id": 402056736,
     "species": "bird-wyvern",
     "names": {
       "ja": "イャンクック",
@@ -14306,8 +14305,8 @@
     },
     "base_health": 3800,
     "locations": [
-      -859829056,
-      1182228864
+      3,
+      5
     ],
     "weaknesses": [
       {
@@ -14907,10 +14906,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 22
   },
   {
-    "game_id": 567628288,
     "species": "brute-wyvern",
     "names": {
       "ja": "ププロポル",
@@ -15013,7 +15012,7 @@
     },
     "base_health": 4500,
     "locations": [
-      -1251081216
+      1
     ],
     "weaknesses": [
       {
@@ -15636,10 +15635,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 23
   },
   {
-    "game_id": 746996864,
     "species": "flying-wyvern",
     "names": {
       "ja": "アルシュベルド",
@@ -15762,11 +15761,11 @@
     },
     "base_health": 5200,
     "locations": [
-      -1251081216,
-      -1226157568,
-      -859829056,
-      327401792,
-      1182228864
+      1,
+      2,
+      3,
+      4,
+      5
     ],
     "weaknesses": [
       {
@@ -16284,10 +16283,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 24
   },
   {
-    "game_id": 777460864,
     "species": "fanged-beast",
     "names": {
       "ja": "アジャラカン",
@@ -16390,8 +16389,8 @@
     },
     "base_health": 5200,
     "locations": [
-      -1251081216,
-      327401792
+      1,
+      4
     ],
     "weaknesses": [
       {
@@ -17089,10 +17088,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 25
   },
   {
-    "game_id": 1049705664,
     "species": "bird-wyvern",
     "names": {
       "ja": "ゲリョス",
@@ -17215,10 +17214,10 @@
     },
     "base_health": 4200,
     "locations": [
-      -1251081216,
-      -1226157568,
-      327401792,
-      1182228864
+      1,
+      2,
+      4,
+      5
     ],
     "weaknesses": [
       {
@@ -17791,10 +17790,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 26
   },
   {
-    "game_id": 1401863296,
     "species": "cephalopod",
     "names": {
       "ja": "シーウー",
@@ -17897,7 +17896,7 @@
     },
     "base_health": 4500,
     "locations": [
-      327401792
+      4
     ],
     "weaknesses": [
       {
@@ -18629,10 +18628,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 27
   },
   {
-    "game_id": 1411933184,
     "species": "construct",
     "names": {
       "ja": "護竜リオレウス",
@@ -18735,7 +18734,7 @@
     },
     "base_health": 5000,
     "locations": [
-      327401792
+      4
     ],
     "weaknesses": [
       {
@@ -19427,10 +19426,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 28
   },
   {
-    "game_id": 1467998976,
     "species": "leviathan",
     "names": {
       "ja": "ウズ・トゥナ",
@@ -19553,7 +19552,7 @@
     },
     "base_health": 5500,
     "locations": [
-      -859829056
+      3
     ],
     "weaknesses": [
       {
@@ -20360,10 +20359,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 29
   },
   {
-    "game_id": 1553456768,
     "species": "leviathan",
     "names": {
       "ja": "ジン・ダハド",
@@ -20486,7 +20485,7 @@
     },
     "base_health": 7400,
     "locations": [
-      1182228864
+      5
     ],
     "weaknesses": [
       {
@@ -21227,10 +21226,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 30
   },
   {
-    "game_id": 1657778432,
     "species": "cephalopod",
     "names": {
       "ja": "ヌ・エグドラ",
@@ -21353,7 +21352,7 @@
     },
     "base_health": 5250,
     "locations": [
-      -1251081216
+      1
     ],
     "weaknesses": [
       {
@@ -22079,10 +22078,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 31
   },
   {
-    "game_id": 1663995904,
     "species": "construct",
     "names": {
       "ja": "護竜オドガロン亜種",
@@ -22185,7 +22184,7 @@
     },
     "base_health": 5000,
     "locations": [
-      327401792
+      4
     ],
     "weaknesses": [
       {
@@ -22972,10 +22971,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 32
   },
   {
-    "game_id": 1965232896,
     "species": "flying-wyvern",
     "names": {
       "ja": "リオレウス",
@@ -23078,9 +23077,9 @@
     },
     "base_health": 4500,
     "locations": [
-      -1251081216,
-      -859829056,
-      327401792
+      1,
+      3,
+      4
     ],
     "weaknesses": [
       {
@@ -23585,10 +23584,10 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 33
   },
   {
-    "game_id": 2129596800,
     "species": "fanged-beast",
     "names": {
       "ja": "ドドブランゴ",
@@ -23711,7 +23710,7 @@
     },
     "base_health": 4500,
     "locations": [
-      1182228864
+      5
     ],
     "weaknesses": [
       {
@@ -24105,6 +24104,7 @@
           "stun": 0.0
         }
       }
-    ]
+    ],
+    "id": 34
   }
 ]

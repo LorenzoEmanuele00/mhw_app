@@ -1,6 +1,5 @@
 [
   {
-    "game_id": -2118986496,
     "names": {
       "ja": "雌火竜派生",
       "en": "Rathian Tree",
@@ -17,10 +16,10 @@
       "ar": "شجرة راثيان",
       "th": "สายราเธียน",
       "es-419": "Árbol de Rathian"
-    }
+    },
+    "id": 1
   },
   {
-    "game_id": -1830241664,
     "names": {
       "ja": "沙海竜派生",
       "en": "Balahara Tree",
@@ -37,10 +36,10 @@
       "ar": "شجرة بالاهارا",
       "th": "สายบาลาฮารา",
       "es-419": "Árbol de Balahara"
-    }
+    },
+    "id": 2
   },
   {
-    "game_id": -1680519296,
     "names": {
       "ja": "暗器蛸派生",
       "en": "Xu Wu Tree",
@@ -57,10 +56,10 @@
       "ar": "شجرة شو وو",
       "th": "สายซือวู",
       "es-419": "Árbol de Xu Wu"
-    }
+    },
+    "id": 3
   },
   {
-    "game_id": -1616428288,
     "names": {
       "ja": "麻痺属性派生",
       "en": "Paralysis Tree",
@@ -77,10 +76,10 @@
       "ar": "شجرة الشلل",
       "th": "สายอัมพาต",
       "es-419": "Árbol de parálisis"
-    }
+    },
+    "id": 4
   },
   {
-    "game_id": -1365154048,
     "names": {
       "ja": "骨素材派生",
       "en": "Bone Tree",
@@ -97,10 +96,10 @@
       "ar": "شجرة العظام",
       "th": "สายกระดูก",
       "es-419": "Árbol de hueso"
-    }
+    },
+    "id": 5
   },
   {
-    "game_id": -1346940416,
     "names": {
       "ja": "凍峰竜派生",
       "en": "Jin Dahaad Tree",
@@ -117,10 +116,10 @@
       "ar": "شجرة جين دهاد",
       "th": "สายจิน ดาฮาด",
       "es-419": "Árbol de Jin Dahaad"
-    }
+    },
+    "id": 6
   },
   {
-    "game_id": -1281946368,
     "names": {
       "ja": "炎尾竜派生",
       "en": "Quematrice Tree",
@@ -137,10 +136,10 @@
       "ar": "شجرة كيماتريس",
       "th": "สายเคมาทริซ",
       "es-419": "Árbol de Quematrice"
-    }
+    },
+    "id": 7
   },
   {
-    "game_id": -1272948352,
     "names": {
       "ja": "ダイオウカジキ派生",
       "en": "Speartuna Tree",
@@ -157,10 +156,10 @@
       "ar": "شجرة تونة رمحية",
       "th": "สายปลาทูน่าหัวหอก",
       "es-419": "Árbol de pez arpón"
-    }
+    },
+    "id": 8
   },
   {
-    "game_id": -1246963200,
     "names": {
       "ja": "刺花蜘蛛派生",
       "en": "Lala Barina Tree",
@@ -177,10 +176,10 @@
       "ar": "شجرة لالا بارينا",
       "th": "สายลาลา บารินา",
       "es-419": "Árbol de Lala Barina"
-    }
+    },
+    "id": 9
   },
   {
-    "game_id": -1175600512,
     "names": {
       "ja": "泡狐竜派生",
       "en": "Mizutsune Tree",
@@ -197,10 +196,10 @@
       "ar": "شجرة ميزوتسوني",
       "th": "สายมิซึสึเนะ",
       "es-419": "Árbol de Mizutsune"
-    }
+    },
+    "id": 10
   },
   {
-    "game_id": -1122003456,
     "names": {
       "ja": "海竜派生",
       "en": "Lagiacrus Tree",
@@ -217,10 +216,10 @@
       "ar": "شجرة لاغياكروس",
       "th": "สายลาเกียครุส",
       "es-419": "Árbol de Lagiacrus"
-    }
+    },
+    "id": 11
   },
   {
-    "game_id": -1032609600,
     "names": {
       "ja": "水属性派生",
       "en": "Water Element Tree",
@@ -237,10 +236,10 @@
       "ar": "شجرة عنصر المياه",
       "th": "สายธาตุน้ำ",
       "es-419": "Árbol de agua"
-    }
+    },
+    "id": 12
   },
   {
-    "game_id": -772890752,
     "names": {
       "ja": "桃毛獣派生",
       "en": "Congalala Tree",
@@ -257,10 +256,10 @@
       "ar": "شجرة كونغالالا",
       "th": "สายคองกาลาลา",
       "es-419": "Árbol de Congalala"
-    }
+    },
+    "id": 13
   },
   {
-    "game_id": -765803328,
     "names": {
       "ja": "オメガ派生",
       "en": "Omega Tree",
@@ -277,10 +276,10 @@
       "ar": "شجرة أوميغا",
       "th": "สายโอเมกา",
       "es-419": "Árbol Omega"
-    }
+    },
+    "id": 14
   },
   {
-    "game_id": -622134208,
     "names": {
       "ja": "火竜派生",
       "en": "Rathalos Tree",
@@ -297,10 +296,10 @@
       "ar": "شجرة راثالوس",
       "th": "สายราธาลอส",
       "es-419": "Árbol de Rathalos"
-    }
+    },
+    "id": 15
   },
   {
-    "game_id": -621613632,
     "names": {
       "ja": "煌雷竜派生",
       "en": "Rey Dau Tree",
@@ -317,10 +316,10 @@
       "ar": "شجرة راي داو",
       "th": "สายเรย์ ดาว",
       "es-419": "Árbol de Rey Dau"
-    }
+    },
+    "id": 16
   },
   {
-    "game_id": -547584512,
     "names": {
       "ja": "工房武器派生",
       "en": "Workshop Tree",
@@ -337,10 +336,10 @@
       "ar": "شجرة الورشة",
       "th": "สายห้องช่าง",
       "es-419": "Árbol de forja"
-    }
+    },
+    "id": 17
   },
   {
-    "game_id": -492617504,
     "names": {
       "ja": "闢獣派生",
       "en": "Doshaguma Tree",
@@ -357,10 +356,10 @@
       "ar": "شجرة دوشاغوما",
       "th": "สายโดชากุมา",
       "es-419": "Árbol de Doshaguma"
-    }
+    },
+    "id": 18
   },
   {
-    "game_id": -89415872,
     "names": {
       "ja": "沼噴竜派生",
       "en": "Rompopolo Tree",
@@ -377,10 +376,10 @@
       "ar": "شجرة رومبوبولو",
       "th": "สายรอมโปโปโล",
       "es-419": "Árbol de Rompopolo"
-    }
+    },
+    "id": 19
   },
   {
-    "game_id": -6931531,
     "names": {
       "ja": "風鋏竜派生",
       "en": "Hirabami Tree",
@@ -397,10 +396,10 @@
       "ar": "شجرة هيرابامي",
       "th": "สายฮิราบามิ",
       "es-419": "Árbol de Hirabami"
-    }
+    },
+    "id": 20
   },
   {
-    "game_id": 1,
     "names": {
       "ja": "調査隊派生",
       "en": "Expedition Tree",
@@ -417,10 +416,10 @@
       "ar": "شجرة البعثات",
       "th": "สายทีมสำรวจ",
       "es-419": "Árbol de expedición"
-    }
+    },
+    "id": 21
   },
   {
-    "game_id": 2,
     "names": {
       "ja": "鉱石素材派生",
       "en": "Ore Tree",
@@ -437,10 +436,10 @@
       "ar": "شجرة المعدن الخام",
       "th": "สายแร่",
       "es-419": "Árbol de mineral"
-    }
+    },
+    "id": 22
   },
   {
-    "game_id": 128739328,
     "names": {
       "ja": "影蜘蛛派生",
       "en": "Nerscylla Tree",
@@ -457,10 +456,10 @@
       "ar": "شجرة نيرسكيلا",
       "th": "สายเนอร์ซิลลา",
       "es-419": "Árbol de Nerscylla"
-    }
+    },
+    "id": 23
   },
   {
-    "game_id": 145862672,
     "names": {
       "ja": "クナファ派生",
       "en": "Kunafa Tree",
@@ -477,10 +476,10 @@
       "ar": "شجرة كُنافة",
       "th": "สายคูนาฟา",
       "es-419": "Árbol de Kunafa"
-    }
+    },
+    "id": 24
   },
   {
-    "game_id": 146353744,
     "names": {
       "ja": "白熾龍派生",
       "en": "Zoh Shia Tree",
@@ -497,10 +496,10 @@
       "ar": "شجرة زو شيا",
       "th": "สายโซห์ ชิอา",
       "es-419": "Árbol de Zoh Shia"
-    }
+    },
+    "id": 25
   },
   {
-    "game_id": 232774032,
     "names": {
       "ja": "蒼星派生",
       "en": "Azure Star Tree",
@@ -517,10 +516,10 @@
       "ar": "شجرة النجم اللازوردي",
       "th": "สายดาวสีคราม",
       "es-419": "Árbol estrella celeste"
-    }
+    },
+    "id": 26
   },
   {
-    "game_id": 288608864,
     "names": {
       "ja": "蒼世派生",
       "en": "Azure Era Tree",
@@ -537,10 +536,10 @@
       "ar": "شجرة عصر اللازورد",
       "th": "สายโลกสีคราม",
       "es-419": "Árbol de Era Celeste"
-    }
+    },
+    "id": 27
   },
   {
-    "game_id": 401764448,
     "names": {
       "ja": "獄焔蛸派生",
       "en": "Nu Udra Tree",
@@ -557,10 +556,10 @@
       "ar": "شجرة نو أودرا",
       "th": "สายนู อูดรา",
       "es-419": "Árbol de Nu Udra"
-    }
+    },
+    "id": 28
   },
   {
-    "game_id": 501778656,
     "names": {
       "ja": "波衣竜派生",
       "en": "Uth Duna Tree",
@@ -577,10 +576,10 @@
       "ar": "شجرة أوث دونا",
       "th": "สายอุธ ดูนา",
       "es-419": "Árbol de Uth Duna"
-    }
+    },
+    "id": 29
   },
   {
-    "game_id": 520158048,
     "names": {
       "ja": "護火竜派生",
       "en": "G. Rathalos Tree",
@@ -597,10 +596,10 @@
       "ar": "شجرة راثالوس حارس",
       "th": "สาย ก. ราธาลอส",
       "es-419": "Árbol de Rathalos G."
-    }
+    },
+    "id": 30
   },
   {
-    "game_id": 555478144,
     "names": {
       "ja": "護闢獣派生",
       "en": "G. Doshaguma Tree",
@@ -617,10 +616,10 @@
       "ar": "شجرة دوشاغوما حارس",
       "th": "สาย ก. โดชากุมา",
       "es-419": "Árbol de Doshaguma G."
-    }
+    },
+    "id": 31
   },
   {
-    "game_id": 559385600,
     "names": {
       "ja": "護鎖刃竜派生",
       "en": "G. Arkveld Tree",
@@ -637,10 +636,10 @@
       "ar": "شجرة آركفيلد حارس",
       "th": "สาย ก. อาร์คเวลด์",
       "es-419": "Árbol de Arkveld G."
-    }
+    },
+    "id": 32
   },
   {
-    "game_id": 569042624,
     "names": {
       "ja": "暗黒騎士派生",
       "en": "Dark Knight Tree",
@@ -657,10 +656,10 @@
       "ar": "شجرة فارس الظلام",
       "th": "สายอัศวินดำ",
       "es-419": "Árbol del caballero oscuro"
-    }
+    },
+    "id": 33
   },
   {
-    "game_id": 756004224,
     "names": {
       "ja": "護兇爪竜派生",
       "en": "G. Ebony Tree",
@@ -677,10 +676,10 @@
       "ar": "شجرة وحش أسمر حارس",
       "th": "สาย ก. เอโบนี",
       "es-419": "Árbol de Ébano G."
-    }
+    },
+    "id": 34
   },
   {
-    "game_id": 769195136,
     "names": {
       "ja": "鎖刃竜派生",
       "en": "Arkveld Tree",
@@ -697,10 +696,10 @@
       "ar": "شجرة آركفيلد",
       "th": "สายอาร์คเวลด์",
       "es-419": "Árbol de Arkveld"
-    }
+    },
+    "id": 35
   },
   {
-    "game_id": 787080512,
     "names": {
       "ja": "封鏡派生",
       "en": "Shatterseal Tree",
@@ -717,10 +716,10 @@
       "ar": "ختم التحطم",
       "th": "สายดาบผนึกร้าว",
       "es-419": "Árbol de destrozarreflejos"
-    }
+    },
+    "id": 36
   },
   {
-    "game_id": 859479296,
     "names": {
       "ja": "アイルー派生",
       "en": "Felyne Tree",
@@ -737,10 +736,10 @@
       "ar": "شجرة فيلاين",
       "th": "สายเฟลีน",
       "es-419": "Árbol Felyne"
-    }
+    },
+    "id": 37
   },
   {
-    "game_id": 861502784,
     "names": {
       "ja": "黒蝕竜派生",
       "en": "Gore Magala Tree",
@@ -757,10 +756,10 @@
       "ar": "شجرة جور ماجالا",
       "th": "สายกอร์ มากาลา",
       "es-419": "Árbol de Gore Magala"
-    }
+    },
+    "id": 38
   },
   {
-    "game_id": 948173312,
     "names": {
       "ja": "赫猿獣派生",
       "en": "Ajarakan Tree",
@@ -777,10 +776,10 @@
       "ar": "شجرة أجاراكان",
       "th": "สายอาจาราคาน",
       "es-419": "Árbol de Ajarakan"
-    }
+    },
+    "id": 39
   },
   {
-    "game_id": 1002649728,
     "names": {
       "ja": "護雷顎竜派生",
       "en": "G. Fulgur Tree",
@@ -797,10 +796,10 @@
       "ar": "شجرة رعدي حارس",
       "th": "สาย ก. ฟูลเกอร์",
       "es-419": "Árbol Fulgúreo G."
-    }
+    },
+    "id": 40
   },
   {
-    "game_id": 1028911680,
     "names": {
       "ja": "纏蛙派生",
       "en": "Chatacabra Tree",
@@ -817,10 +816,10 @@
       "ar": "شجرة تشاتاكابرا",
       "th": "สายชาตาคาบรา",
       "es-419": "Árbol de Chatacabra"
-    }
+    },
+    "id": 41
   },
   {
-    "game_id": 1049075776,
     "names": {
       "ja": "毒怪鳥派生",
       "en": "Gypceros Tree",
@@ -837,10 +836,10 @@
       "ar": "شجرة جيبسيروس",
       "th": "สายจิปเซรอส",
       "es-419": "Árbol de Gypceros"
-    }
+    },
+    "id": 42
   },
   {
-    "game_id": 1094733056,
     "names": {
       "ja": "鎧竜派生",
       "en": "Gravios Tree",
@@ -857,10 +856,10 @@
       "ar": "شجرة غرافيوس",
       "th": "สายกราวิออส",
       "es-419": "Árbol de Gravios"
-    }
+    },
+    "id": 43
   },
   {
-    "game_id": 1226118784,
     "names": {
       "ja": "雪獅子派生",
       "en": "Blangonga Tree",
@@ -877,10 +876,10 @@
       "ar": "شجرة بلانجونجا",
       "th": "สายบลังกองกา",
       "es-419": "Árbol de Blangonga"
-    }
+    },
+    "id": 44
   },
   {
-    "game_id": 1228067456,
     "names": {
       "ja": "千刃竜派生",
       "en": "Seregios Tree",
@@ -897,10 +896,10 @@
       "ar": "شجرة سيرجيوس",
       "th": "สายเซเรกิออส",
       "es-419": "Árbol de Seregios"
-    }
+    },
+    "id": 45
   },
   {
-    "game_id": 1239485824,
     "names": {
       "ja": "怪鳥派生",
       "en": "Yian Kut-Ku Tree",
@@ -917,10 +916,10 @@
       "ar": "شجرة يان كوت-كو",
       "th": "สายยีอานคุท-คู",
       "es-419": "Árbol de Yian Kut-Ku"
-    }
+    },
+    "id": 46
   },
   {
-    "game_id": 1496386176,
     "names": {
       "ja": "ランゴスタ派生",
       "en": "Vespoid Tree",
@@ -937,6 +936,7 @@
       "ar": "شجرة فيسبويد",
       "th": "สายเวสปอยด์",
       "es-419": "Árbol de Vespoide"
-    }
+    },
+    "id": 47
   }
 ]
