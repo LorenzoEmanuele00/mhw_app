@@ -16,8 +16,11 @@ class WeaponsDao extends DatabaseAccessor<AppDatabase> with _$WeaponsDaoMixin {
             ..where((w) => w.weaponType.equals(weaponType.name)))
           .watch();
 
-  Future<Weapon?> getById(String id) =>
+  Future<Weapon?> getById(int id) =>
       (select(weapons)..where((w) => w.id.equals(id))).getSingleOrNull();
+
+  Future<Weapon?> getBySlug(String slug) =>
+      (select(weapons)..where((w) => w.slug.equals(slug))).getSingleOrNull();
 
   Future<void> replaceAll(List<WeaponsCompanion> rows) => transaction(() async {
         await delete(weapons).go();

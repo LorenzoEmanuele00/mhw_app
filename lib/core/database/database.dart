@@ -43,13 +43,31 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (m) async {
           await m.createAll();
           await _seedSyncMetadata();
+        },
+        onUpgrade: (m, from, to) async {
+          if (from < 2) {
+            // Schema v2: integer PKs + slug unique on game tables; integer FKs on user tables.
+            // Drop in FK dependency order, then recreate everything.
+            await m.drop(buildJewels);
+            await m.drop(builds);
+            await m.drop(talismans);
+            await m.drop(armorSetSkills);
+            await m.drop(skillLevels);
+            await m.drop(jewels);
+            await m.drop(armorPieces);
+            await m.drop(armorSets);
+            await m.drop(weapons);
+            await m.drop(skills);
+            await m.createAll();
+            await _seedSyncMetadata();
+          }
         },
       );
 

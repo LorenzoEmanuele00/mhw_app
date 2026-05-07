@@ -4,7 +4,7 @@
 DELETE FROM skill_levels;
 DELETE FROM skills;
 
-INSERT INTO skills (id, name, max_level, type1, type2) VALUES
+INSERT INTO skills (slug, name, max_level, type1, type2) VALUES
   ('adaptability', 'Adaptability', 2, 'armor', 'defensive'),
   ('aquatic_oilsilt_mobility', 'Aquatic/Oilsilt Mobility', 2, 'armor', 'defensive'),
   ('bind_resistence', 'Bind Resistence', 3, 'armor', 'defensive'),

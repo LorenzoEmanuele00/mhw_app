@@ -12,7 +12,9 @@ class WeaponsRepository {
   Stream<List<Weapon>> watchByType(WeaponType weaponType) =>
       _db.weaponsDao.watchByType(weaponType);
 
-  Future<Weapon?> getById(String id) => _db.weaponsDao.getById(id);
+  Future<Weapon?> getById(int id) => _db.weaponsDao.getById(id);
+
+  Future<Weapon?> getBySlug(String slug) => _db.weaponsDao.getBySlug(slug);
 
   Future<void> replaceAll(List<WeaponsCompanion> rows) =>
       _db.weaponsDao.replaceAll(rows);
