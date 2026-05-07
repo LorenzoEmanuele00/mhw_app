@@ -44,6 +44,10 @@ void main() {
       expect(converter.fromSql('thunder'), ElementType.thunder);
       expect(converter.fromSql('ice'), ElementType.ice);
       expect(converter.fromSql('dragon'), ElementType.dragon);
+      expect(converter.fromSql('poison'), ElementType.poison);
+      expect(converter.fromSql('sleep'), ElementType.sleep);
+      expect(converter.fromSql('paralysis'), ElementType.paralysis);
+      expect(converter.fromSql('blast'), ElementType.blast);
     });
 
     test('toSql round-trips for all values', () {

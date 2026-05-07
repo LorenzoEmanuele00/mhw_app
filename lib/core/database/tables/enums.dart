@@ -6,7 +6,7 @@ import 'package:drift/drift.dart';
 
 enum WeaponType { gs, ls, sns, db, hmr, hh, lan, gl, sa, cb, ig, lbg, hbg, bow }
 
-enum ElementType { fire, water, thunder, ice, dragon }
+enum ElementType { fire, water, thunder, ice, dragon, poison, sleep, paralysis, blast }
 
 enum DamageType { cut, impact, ranged }
 

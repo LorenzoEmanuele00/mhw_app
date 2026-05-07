@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Optional
 
 PROJECT_ROOT   = Path(__file__).parent.parent
-SKILL_JSON     = PROJECT_ROOT / 'assets' / 'output' / 'merged' / 'Skill.json'
+SKILL_JSON     = PROJECT_ROOT / 'scripts' / 'output' / 'merged' / 'Skill.json'
 # Excel calc data (written by parse_excel.py, never overwritten by this script)
 EXCEL_LEVELS_SQL = PROJECT_ROOT / 'scripts' / 'excel_calc_levels.sql'
 OUT_DIR          = PROJECT_ROOT / 'assets' / 'seeds'

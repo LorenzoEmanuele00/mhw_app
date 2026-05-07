@@ -11,6 +11,9 @@ class SeedService {
   static const _seeds = [
     'assets/seeds/01_skills.sql',
     'assets/seeds/02_skill_levels.sql',
+    'assets/seeds/03_armor.sql',
+    'assets/seeds/04_weapons.sql',
+    'assets/seeds/05_jewels.sql',
   ];
 
   Future<void> seedIfEmpty() async {

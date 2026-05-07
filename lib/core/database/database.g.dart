@@ -2641,6 +2641,319 @@ class ArmorSetSkillsCompanion extends UpdateCompanion<ArmorSetSkill> {
   }
 }
 
+class $ArmorPieceSkillsTable extends ArmorPieceSkills
+    with TableInfo<$ArmorPieceSkillsTable, ArmorPieceSkill> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ArmorPieceSkillsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _armorPieceIdMeta = const VerificationMeta(
+    'armorPieceId',
+  );
+  @override
+  late final GeneratedColumn<int> armorPieceId = GeneratedColumn<int>(
+    'armor_piece_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES armor_pieces (id)',
+    ),
+  );
+  static const VerificationMeta _skillIdMeta = const VerificationMeta(
+    'skillId',
+  );
+  @override
+  late final GeneratedColumn<int> skillId = GeneratedColumn<int>(
+    'skill_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES skills (id)',
+    ),
+  );
+  static const VerificationMeta _skillLevelMeta = const VerificationMeta(
+    'skillLevel',
+  );
+  @override
+  late final GeneratedColumn<int> skillLevel = GeneratedColumn<int>(
+    'skill_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, armorPieceId, skillId, skillLevel];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'armor_piece_skills';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ArmorPieceSkill> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('armor_piece_id')) {
+      context.handle(
+        _armorPieceIdMeta,
+        armorPieceId.isAcceptableOrUnknown(
+          data['armor_piece_id']!,
+          _armorPieceIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_armorPieceIdMeta);
+    }
+    if (data.containsKey('skill_id')) {
+      context.handle(
+        _skillIdMeta,
+        skillId.isAcceptableOrUnknown(data['skill_id']!, _skillIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_skillIdMeta);
+    }
+    if (data.containsKey('skill_level')) {
+      context.handle(
+        _skillLevelMeta,
+        skillLevel.isAcceptableOrUnknown(data['skill_level']!, _skillLevelMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_skillLevelMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ArmorPieceSkill map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ArmorPieceSkill(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      armorPieceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}armor_piece_id'],
+      )!,
+      skillId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skill_id'],
+      )!,
+      skillLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skill_level'],
+      )!,
+    );
+  }
+
+  @override
+  $ArmorPieceSkillsTable createAlias(String alias) {
+    return $ArmorPieceSkillsTable(attachedDatabase, alias);
+  }
+}
+
+class ArmorPieceSkill extends DataClass implements Insertable<ArmorPieceSkill> {
+  final int id;
+  final int armorPieceId;
+  final int skillId;
+  final int skillLevel;
+  const ArmorPieceSkill({
+    required this.id,
+    required this.armorPieceId,
+    required this.skillId,
+    required this.skillLevel,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['armor_piece_id'] = Variable<int>(armorPieceId);
+    map['skill_id'] = Variable<int>(skillId);
+    map['skill_level'] = Variable<int>(skillLevel);
+    return map;
+  }
+
+  ArmorPieceSkillsCompanion toCompanion(bool nullToAbsent) {
+    return ArmorPieceSkillsCompanion(
+      id: Value(id),
+      armorPieceId: Value(armorPieceId),
+      skillId: Value(skillId),
+      skillLevel: Value(skillLevel),
+    );
+  }
+
+  factory ArmorPieceSkill.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ArmorPieceSkill(
+      id: serializer.fromJson<int>(json['id']),
+      armorPieceId: serializer.fromJson<int>(json['armorPieceId']),
+      skillId: serializer.fromJson<int>(json['skillId']),
+      skillLevel: serializer.fromJson<int>(json['skillLevel']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'armorPieceId': serializer.toJson<int>(armorPieceId),
+      'skillId': serializer.toJson<int>(skillId),
+      'skillLevel': serializer.toJson<int>(skillLevel),
+    };
+  }
+
+  ArmorPieceSkill copyWith({
+    int? id,
+    int? armorPieceId,
+    int? skillId,
+    int? skillLevel,
+  }) => ArmorPieceSkill(
+    id: id ?? this.id,
+    armorPieceId: armorPieceId ?? this.armorPieceId,
+    skillId: skillId ?? this.skillId,
+    skillLevel: skillLevel ?? this.skillLevel,
+  );
+  ArmorPieceSkill copyWithCompanion(ArmorPieceSkillsCompanion data) {
+    return ArmorPieceSkill(
+      id: data.id.present ? data.id.value : this.id,
+      armorPieceId: data.armorPieceId.present
+          ? data.armorPieceId.value
+          : this.armorPieceId,
+      skillId: data.skillId.present ? data.skillId.value : this.skillId,
+      skillLevel: data.skillLevel.present
+          ? data.skillLevel.value
+          : this.skillLevel,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ArmorPieceSkill(')
+          ..write('id: $id, ')
+          ..write('armorPieceId: $armorPieceId, ')
+          ..write('skillId: $skillId, ')
+          ..write('skillLevel: $skillLevel')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, armorPieceId, skillId, skillLevel);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ArmorPieceSkill &&
+          other.id == this.id &&
+          other.armorPieceId == this.armorPieceId &&
+          other.skillId == this.skillId &&
+          other.skillLevel == this.skillLevel);
+}
+
+class ArmorPieceSkillsCompanion extends UpdateCompanion<ArmorPieceSkill> {
+  final Value<int> id;
+  final Value<int> armorPieceId;
+  final Value<int> skillId;
+  final Value<int> skillLevel;
+  const ArmorPieceSkillsCompanion({
+    this.id = const Value.absent(),
+    this.armorPieceId = const Value.absent(),
+    this.skillId = const Value.absent(),
+    this.skillLevel = const Value.absent(),
+  });
+  ArmorPieceSkillsCompanion.insert({
+    this.id = const Value.absent(),
+    required int armorPieceId,
+    required int skillId,
+    required int skillLevel,
+  }) : armorPieceId = Value(armorPieceId),
+       skillId = Value(skillId),
+       skillLevel = Value(skillLevel);
+  static Insertable<ArmorPieceSkill> custom({
+    Expression<int>? id,
+    Expression<int>? armorPieceId,
+    Expression<int>? skillId,
+    Expression<int>? skillLevel,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (armorPieceId != null) 'armor_piece_id': armorPieceId,
+      if (skillId != null) 'skill_id': skillId,
+      if (skillLevel != null) 'skill_level': skillLevel,
+    });
+  }
+
+  ArmorPieceSkillsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? armorPieceId,
+    Value<int>? skillId,
+    Value<int>? skillLevel,
+  }) {
+    return ArmorPieceSkillsCompanion(
+      id: id ?? this.id,
+      armorPieceId: armorPieceId ?? this.armorPieceId,
+      skillId: skillId ?? this.skillId,
+      skillLevel: skillLevel ?? this.skillLevel,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (armorPieceId.present) {
+      map['armor_piece_id'] = Variable<int>(armorPieceId.value);
+    }
+    if (skillId.present) {
+      map['skill_id'] = Variable<int>(skillId.value);
+    }
+    if (skillLevel.present) {
+      map['skill_level'] = Variable<int>(skillLevel.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ArmorPieceSkillsCompanion(')
+          ..write('id: $id, ')
+          ..write('armorPieceId: $armorPieceId, ')
+          ..write('skillId: $skillId, ')
+          ..write('skillLevel: $skillLevel')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -2698,30 +3011,17 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _skillIdMeta = const VerificationMeta(
-    'skillId',
+  static const VerificationMeta _allowedOnMeta = const VerificationMeta(
+    'allowedOn',
   );
   @override
-  late final GeneratedColumn<int> skillId = GeneratedColumn<int>(
-    'skill_id',
+  late final GeneratedColumn<String> allowedOn = GeneratedColumn<String>(
+    'allowed_on',
     aliasedName,
     false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES skills (id)',
-    ),
-  );
-  static const VerificationMeta _skillLevelMeta = const VerificationMeta(
-    'skillLevel',
-  );
-  @override
-  late final GeneratedColumn<int> skillLevel = GeneratedColumn<int>(
-    'skill_level',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('armor'),
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -2730,8 +3030,7 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
     name,
     rarity,
     slotSize,
-    skillId,
-    skillLevel,
+    allowedOn,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -2778,21 +3077,11 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
     } else if (isInserting) {
       context.missing(_slotSizeMeta);
     }
-    if (data.containsKey('skill_id')) {
+    if (data.containsKey('allowed_on')) {
       context.handle(
-        _skillIdMeta,
-        skillId.isAcceptableOrUnknown(data['skill_id']!, _skillIdMeta),
+        _allowedOnMeta,
+        allowedOn.isAcceptableOrUnknown(data['allowed_on']!, _allowedOnMeta),
       );
-    } else if (isInserting) {
-      context.missing(_skillIdMeta);
-    }
-    if (data.containsKey('skill_level')) {
-      context.handle(
-        _skillLevelMeta,
-        skillLevel.isAcceptableOrUnknown(data['skill_level']!, _skillLevelMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_skillLevelMeta);
     }
     return context;
   }
@@ -2827,13 +3116,9 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
         DriftSqlType.int,
         data['${effectivePrefix}slot_size'],
       )!,
-      skillId: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}skill_id'],
-      )!,
-      skillLevel: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}skill_level'],
+      allowedOn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}allowed_on'],
       )!,
     );
   }
@@ -2850,16 +3135,14 @@ class Jewel extends DataClass implements Insertable<Jewel> {
   final String name;
   final int rarity;
   final int slotSize;
-  final int skillId;
-  final int skillLevel;
+  final String allowedOn;
   const Jewel({
     required this.id,
     required this.slug,
     required this.name,
     required this.rarity,
     required this.slotSize,
-    required this.skillId,
-    required this.skillLevel,
+    required this.allowedOn,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2869,8 +3152,7 @@ class Jewel extends DataClass implements Insertable<Jewel> {
     map['name'] = Variable<String>(name);
     map['rarity'] = Variable<int>(rarity);
     map['slot_size'] = Variable<int>(slotSize);
-    map['skill_id'] = Variable<int>(skillId);
-    map['skill_level'] = Variable<int>(skillLevel);
+    map['allowed_on'] = Variable<String>(allowedOn);
     return map;
   }
 
@@ -2881,8 +3163,7 @@ class Jewel extends DataClass implements Insertable<Jewel> {
       name: Value(name),
       rarity: Value(rarity),
       slotSize: Value(slotSize),
-      skillId: Value(skillId),
-      skillLevel: Value(skillLevel),
+      allowedOn: Value(allowedOn),
     );
   }
 
@@ -2897,8 +3178,7 @@ class Jewel extends DataClass implements Insertable<Jewel> {
       name: serializer.fromJson<String>(json['name']),
       rarity: serializer.fromJson<int>(json['rarity']),
       slotSize: serializer.fromJson<int>(json['slotSize']),
-      skillId: serializer.fromJson<int>(json['skillId']),
-      skillLevel: serializer.fromJson<int>(json['skillLevel']),
+      allowedOn: serializer.fromJson<String>(json['allowedOn']),
     );
   }
   @override
@@ -2910,8 +3190,7 @@ class Jewel extends DataClass implements Insertable<Jewel> {
       'name': serializer.toJson<String>(name),
       'rarity': serializer.toJson<int>(rarity),
       'slotSize': serializer.toJson<int>(slotSize),
-      'skillId': serializer.toJson<int>(skillId),
-      'skillLevel': serializer.toJson<int>(skillLevel),
+      'allowedOn': serializer.toJson<String>(allowedOn),
     };
   }
 
@@ -2921,16 +3200,14 @@ class Jewel extends DataClass implements Insertable<Jewel> {
     String? name,
     int? rarity,
     int? slotSize,
-    int? skillId,
-    int? skillLevel,
+    String? allowedOn,
   }) => Jewel(
     id: id ?? this.id,
     slug: slug ?? this.slug,
     name: name ?? this.name,
     rarity: rarity ?? this.rarity,
     slotSize: slotSize ?? this.slotSize,
-    skillId: skillId ?? this.skillId,
-    skillLevel: skillLevel ?? this.skillLevel,
+    allowedOn: allowedOn ?? this.allowedOn,
   );
   Jewel copyWithCompanion(JewelsCompanion data) {
     return Jewel(
@@ -2939,10 +3216,7 @@ class Jewel extends DataClass implements Insertable<Jewel> {
       name: data.name.present ? data.name.value : this.name,
       rarity: data.rarity.present ? data.rarity.value : this.rarity,
       slotSize: data.slotSize.present ? data.slotSize.value : this.slotSize,
-      skillId: data.skillId.present ? data.skillId.value : this.skillId,
-      skillLevel: data.skillLevel.present
-          ? data.skillLevel.value
-          : this.skillLevel,
+      allowedOn: data.allowedOn.present ? data.allowedOn.value : this.allowedOn,
     );
   }
 
@@ -2954,15 +3228,13 @@ class Jewel extends DataClass implements Insertable<Jewel> {
           ..write('name: $name, ')
           ..write('rarity: $rarity, ')
           ..write('slotSize: $slotSize, ')
-          ..write('skillId: $skillId, ')
-          ..write('skillLevel: $skillLevel')
+          ..write('allowedOn: $allowedOn')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, slug, name, rarity, slotSize, skillId, skillLevel);
+  int get hashCode => Object.hash(id, slug, name, rarity, slotSize, allowedOn);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2972,8 +3244,7 @@ class Jewel extends DataClass implements Insertable<Jewel> {
           other.name == this.name &&
           other.rarity == this.rarity &&
           other.slotSize == this.slotSize &&
-          other.skillId == this.skillId &&
-          other.skillLevel == this.skillLevel);
+          other.allowedOn == this.allowedOn);
 }
 
 class JewelsCompanion extends UpdateCompanion<Jewel> {
@@ -2982,16 +3253,14 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
   final Value<String> name;
   final Value<int> rarity;
   final Value<int> slotSize;
-  final Value<int> skillId;
-  final Value<int> skillLevel;
+  final Value<String> allowedOn;
   const JewelsCompanion({
     this.id = const Value.absent(),
     this.slug = const Value.absent(),
     this.name = const Value.absent(),
     this.rarity = const Value.absent(),
     this.slotSize = const Value.absent(),
-    this.skillId = const Value.absent(),
-    this.skillLevel = const Value.absent(),
+    this.allowedOn = const Value.absent(),
   });
   JewelsCompanion.insert({
     this.id = const Value.absent(),
@@ -2999,21 +3268,17 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
     required String name,
     this.rarity = const Value.absent(),
     required int slotSize,
-    required int skillId,
-    required int skillLevel,
+    this.allowedOn = const Value.absent(),
   }) : slug = Value(slug),
        name = Value(name),
-       slotSize = Value(slotSize),
-       skillId = Value(skillId),
-       skillLevel = Value(skillLevel);
+       slotSize = Value(slotSize);
   static Insertable<Jewel> custom({
     Expression<int>? id,
     Expression<String>? slug,
     Expression<String>? name,
     Expression<int>? rarity,
     Expression<int>? slotSize,
-    Expression<int>? skillId,
-    Expression<int>? skillLevel,
+    Expression<String>? allowedOn,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -3021,8 +3286,7 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
       if (name != null) 'name': name,
       if (rarity != null) 'rarity': rarity,
       if (slotSize != null) 'slot_size': slotSize,
-      if (skillId != null) 'skill_id': skillId,
-      if (skillLevel != null) 'skill_level': skillLevel,
+      if (allowedOn != null) 'allowed_on': allowedOn,
     });
   }
 
@@ -3032,8 +3296,7 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
     Value<String>? name,
     Value<int>? rarity,
     Value<int>? slotSize,
-    Value<int>? skillId,
-    Value<int>? skillLevel,
+    Value<String>? allowedOn,
   }) {
     return JewelsCompanion(
       id: id ?? this.id,
@@ -3041,8 +3304,7 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
       name: name ?? this.name,
       rarity: rarity ?? this.rarity,
       slotSize: slotSize ?? this.slotSize,
-      skillId: skillId ?? this.skillId,
-      skillLevel: skillLevel ?? this.skillLevel,
+      allowedOn: allowedOn ?? this.allowedOn,
     );
   }
 
@@ -3064,11 +3326,8 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
     if (slotSize.present) {
       map['slot_size'] = Variable<int>(slotSize.value);
     }
-    if (skillId.present) {
-      map['skill_id'] = Variable<int>(skillId.value);
-    }
-    if (skillLevel.present) {
-      map['skill_level'] = Variable<int>(skillLevel.value);
+    if (allowedOn.present) {
+      map['allowed_on'] = Variable<String>(allowedOn.value);
     }
     return map;
   }
@@ -3081,6 +3340,309 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
           ..write('name: $name, ')
           ..write('rarity: $rarity, ')
           ..write('slotSize: $slotSize, ')
+          ..write('allowedOn: $allowedOn')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $JewelSkillsTable extends JewelSkills
+    with TableInfo<$JewelSkillsTable, JewelSkill> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $JewelSkillsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _jewelIdMeta = const VerificationMeta(
+    'jewelId',
+  );
+  @override
+  late final GeneratedColumn<int> jewelId = GeneratedColumn<int>(
+    'jewel_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES jewels (id)',
+    ),
+  );
+  static const VerificationMeta _skillIdMeta = const VerificationMeta(
+    'skillId',
+  );
+  @override
+  late final GeneratedColumn<int> skillId = GeneratedColumn<int>(
+    'skill_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES skills (id)',
+    ),
+  );
+  static const VerificationMeta _skillLevelMeta = const VerificationMeta(
+    'skillLevel',
+  );
+  @override
+  late final GeneratedColumn<int> skillLevel = GeneratedColumn<int>(
+    'skill_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, jewelId, skillId, skillLevel];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'jewel_skills';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<JewelSkill> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('jewel_id')) {
+      context.handle(
+        _jewelIdMeta,
+        jewelId.isAcceptableOrUnknown(data['jewel_id']!, _jewelIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_jewelIdMeta);
+    }
+    if (data.containsKey('skill_id')) {
+      context.handle(
+        _skillIdMeta,
+        skillId.isAcceptableOrUnknown(data['skill_id']!, _skillIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_skillIdMeta);
+    }
+    if (data.containsKey('skill_level')) {
+      context.handle(
+        _skillLevelMeta,
+        skillLevel.isAcceptableOrUnknown(data['skill_level']!, _skillLevelMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_skillLevelMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  JewelSkill map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return JewelSkill(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      jewelId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}jewel_id'],
+      )!,
+      skillId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skill_id'],
+      )!,
+      skillLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skill_level'],
+      )!,
+    );
+  }
+
+  @override
+  $JewelSkillsTable createAlias(String alias) {
+    return $JewelSkillsTable(attachedDatabase, alias);
+  }
+}
+
+class JewelSkill extends DataClass implements Insertable<JewelSkill> {
+  final int id;
+  final int jewelId;
+  final int skillId;
+  final int skillLevel;
+  const JewelSkill({
+    required this.id,
+    required this.jewelId,
+    required this.skillId,
+    required this.skillLevel,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['jewel_id'] = Variable<int>(jewelId);
+    map['skill_id'] = Variable<int>(skillId);
+    map['skill_level'] = Variable<int>(skillLevel);
+    return map;
+  }
+
+  JewelSkillsCompanion toCompanion(bool nullToAbsent) {
+    return JewelSkillsCompanion(
+      id: Value(id),
+      jewelId: Value(jewelId),
+      skillId: Value(skillId),
+      skillLevel: Value(skillLevel),
+    );
+  }
+
+  factory JewelSkill.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return JewelSkill(
+      id: serializer.fromJson<int>(json['id']),
+      jewelId: serializer.fromJson<int>(json['jewelId']),
+      skillId: serializer.fromJson<int>(json['skillId']),
+      skillLevel: serializer.fromJson<int>(json['skillLevel']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'jewelId': serializer.toJson<int>(jewelId),
+      'skillId': serializer.toJson<int>(skillId),
+      'skillLevel': serializer.toJson<int>(skillLevel),
+    };
+  }
+
+  JewelSkill copyWith({int? id, int? jewelId, int? skillId, int? skillLevel}) =>
+      JewelSkill(
+        id: id ?? this.id,
+        jewelId: jewelId ?? this.jewelId,
+        skillId: skillId ?? this.skillId,
+        skillLevel: skillLevel ?? this.skillLevel,
+      );
+  JewelSkill copyWithCompanion(JewelSkillsCompanion data) {
+    return JewelSkill(
+      id: data.id.present ? data.id.value : this.id,
+      jewelId: data.jewelId.present ? data.jewelId.value : this.jewelId,
+      skillId: data.skillId.present ? data.skillId.value : this.skillId,
+      skillLevel: data.skillLevel.present
+          ? data.skillLevel.value
+          : this.skillLevel,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JewelSkill(')
+          ..write('id: $id, ')
+          ..write('jewelId: $jewelId, ')
+          ..write('skillId: $skillId, ')
+          ..write('skillLevel: $skillLevel')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, jewelId, skillId, skillLevel);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is JewelSkill &&
+          other.id == this.id &&
+          other.jewelId == this.jewelId &&
+          other.skillId == this.skillId &&
+          other.skillLevel == this.skillLevel);
+}
+
+class JewelSkillsCompanion extends UpdateCompanion<JewelSkill> {
+  final Value<int> id;
+  final Value<int> jewelId;
+  final Value<int> skillId;
+  final Value<int> skillLevel;
+  const JewelSkillsCompanion({
+    this.id = const Value.absent(),
+    this.jewelId = const Value.absent(),
+    this.skillId = const Value.absent(),
+    this.skillLevel = const Value.absent(),
+  });
+  JewelSkillsCompanion.insert({
+    this.id = const Value.absent(),
+    required int jewelId,
+    required int skillId,
+    required int skillLevel,
+  }) : jewelId = Value(jewelId),
+       skillId = Value(skillId),
+       skillLevel = Value(skillLevel);
+  static Insertable<JewelSkill> custom({
+    Expression<int>? id,
+    Expression<int>? jewelId,
+    Expression<int>? skillId,
+    Expression<int>? skillLevel,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (jewelId != null) 'jewel_id': jewelId,
+      if (skillId != null) 'skill_id': skillId,
+      if (skillLevel != null) 'skill_level': skillLevel,
+    });
+  }
+
+  JewelSkillsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? jewelId,
+    Value<int>? skillId,
+    Value<int>? skillLevel,
+  }) {
+    return JewelSkillsCompanion(
+      id: id ?? this.id,
+      jewelId: jewelId ?? this.jewelId,
+      skillId: skillId ?? this.skillId,
+      skillLevel: skillLevel ?? this.skillLevel,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (jewelId.present) {
+      map['jewel_id'] = Variable<int>(jewelId.value);
+    }
+    if (skillId.present) {
+      map['skill_id'] = Variable<int>(skillId.value);
+    }
+    if (skillLevel.present) {
+      map['skill_level'] = Variable<int>(skillLevel.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JewelSkillsCompanion(')
+          ..write('id: $id, ')
+          ..write('jewelId: $jewelId, ')
           ..write('skillId: $skillId, ')
           ..write('skillLevel: $skillLevel')
           ..write(')'))
@@ -5660,7 +6222,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ArmorPiecesTable armorPieces = $ArmorPiecesTable(this);
   late final $SkillsTable skills = $SkillsTable(this);
   late final $ArmorSetSkillsTable armorSetSkills = $ArmorSetSkillsTable(this);
+  late final $ArmorPieceSkillsTable armorPieceSkills = $ArmorPieceSkillsTable(
+    this,
+  );
   late final $JewelsTable jewels = $JewelsTable(this);
+  late final $JewelSkillsTable jewelSkills = $JewelSkillsTable(this);
   late final $SkillLevelsTable skillLevels = $SkillLevelsTable(this);
   late final $TalismansTable talismans = $TalismansTable(this);
   late final $BuildsTable builds = $BuildsTable(this);
@@ -5681,7 +6247,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     armorPieces,
     skills,
     armorSetSkills,
+    armorPieceSkills,
     jewels,
+    jewelSkills,
     skillLevels,
     talismans,
     builds,
@@ -6593,6 +7161,29 @@ final class $$ArmorPiecesTableReferences
     );
   }
 
+  static MultiTypedResultKey<$ArmorPieceSkillsTable, List<ArmorPieceSkill>>
+  _armorPieceSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.armorPieceSkills,
+    aliasName: $_aliasNameGenerator(
+      db.armorPieces.id,
+      db.armorPieceSkills.armorPieceId,
+    ),
+  );
+
+  $$ArmorPieceSkillsTableProcessedTableManager get armorPieceSkillsRefs {
+    final manager = $$ArmorPieceSkillsTableTableManager(
+      $_db,
+      $_db.armorPieceSkills,
+    ).filter((f) => f.armorPieceId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _armorPieceSkillsRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
   static MultiTypedResultKey<$BuildsTable, List<Build>> _buildHeadRefsTable(
     _$AppDatabase db,
   ) => MultiTypedResultKey.fromTable(
@@ -6780,6 +7371,31 @@ class $$ArmorPiecesTableFilterComposer
           ),
     );
     return composer;
+  }
+
+  Expression<bool> armorPieceSkillsRefs(
+    Expression<bool> Function($$ArmorPieceSkillsTableFilterComposer f) f,
+  ) {
+    final $$ArmorPieceSkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.armorPieceSkills,
+      getReferencedColumn: (t) => t.armorPieceId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPieceSkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
   }
 
   Expression<bool> buildHeadRefs(
@@ -7073,6 +7689,31 @@ class $$ArmorPiecesTableAnnotationComposer
     return composer;
   }
 
+  Expression<T> armorPieceSkillsRefs<T extends Object>(
+    Expression<T> Function($$ArmorPieceSkillsTableAnnotationComposer a) f,
+  ) {
+    final $$ArmorPieceSkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.armorPieceSkills,
+      getReferencedColumn: (t) => t.armorPieceId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPieceSkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
   Expression<T> buildHeadRefs<T extends Object>(
     Expression<T> Function($$BuildsTableAnnotationComposer a) f,
   ) {
@@ -7214,6 +7855,7 @@ class $$ArmorPiecesTableTableManager
           ArmorPiece,
           PrefetchHooks Function({
             bool setId,
+            bool armorPieceSkillsRefs,
             bool buildHeadRefs,
             bool buildChestRefs,
             bool buildArmsRefs,
@@ -7303,6 +7945,7 @@ class $$ArmorPiecesTableTableManager
           prefetchHooksCallback:
               ({
                 setId = false,
+                armorPieceSkillsRefs = false,
                 buildHeadRefs = false,
                 buildChestRefs = false,
                 buildArmsRefs = false,
@@ -7312,6 +7955,7 @@ class $$ArmorPiecesTableTableManager
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
+                    if (armorPieceSkillsRefs) db.armorPieceSkills,
                     if (buildHeadRefs) db.builds,
                     if (buildChestRefs) db.builds,
                     if (buildArmsRefs) db.builds,
@@ -7354,6 +7998,27 @@ class $$ArmorPiecesTableTableManager
                       },
                   getPrefetchedDataCallback: (items) async {
                     return [
+                      if (armorPieceSkillsRefs)
+                        await $_getPrefetchedData<
+                          ArmorPiece,
+                          $ArmorPiecesTable,
+                          ArmorPieceSkill
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ArmorPiecesTableReferences
+                              ._armorPieceSkillsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ArmorPiecesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).armorPieceSkillsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.armorPieceId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                       if (buildHeadRefs)
                         await $_getPrefetchedData<
                           ArmorPiece,
@@ -7481,6 +8146,7 @@ typedef $$ArmorPiecesTableProcessedTableManager =
       ArmorPiece,
       PrefetchHooks Function({
         bool setId,
+        bool armorPieceSkillsRefs,
         bool buildHeadRefs,
         bool buildChestRefs,
         bool buildArmsRefs,
@@ -7529,20 +8195,39 @@ final class $$SkillsTableReferences
     );
   }
 
-  static MultiTypedResultKey<$JewelsTable, List<Jewel>> _jewelsRefsTable(
-    _$AppDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.jewels,
-    aliasName: $_aliasNameGenerator(db.skills.id, db.jewels.skillId),
+  static MultiTypedResultKey<$ArmorPieceSkillsTable, List<ArmorPieceSkill>>
+  _armorPieceSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.armorPieceSkills,
+    aliasName: $_aliasNameGenerator(db.skills.id, db.armorPieceSkills.skillId),
   );
 
-  $$JewelsTableProcessedTableManager get jewelsRefs {
-    final manager = $$JewelsTableTableManager(
+  $$ArmorPieceSkillsTableProcessedTableManager get armorPieceSkillsRefs {
+    final manager = $$ArmorPieceSkillsTableTableManager(
       $_db,
-      $_db.jewels,
+      $_db.armorPieceSkills,
     ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache = $_typedResult.readTableOrNull(_jewelsRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _armorPieceSkillsRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$JewelSkillsTable, List<JewelSkill>>
+  _jewelSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.jewelSkills,
+    aliasName: $_aliasNameGenerator(db.skills.id, db.jewelSkills.skillId),
+  );
+
+  $$JewelSkillsTableProcessedTableManager get jewelSkillsRefs {
+    final manager = $$JewelSkillsTableTableManager(
+      $_db,
+      $_db.jewelSkills,
+    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_jewelSkillsRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -7669,22 +8354,47 @@ class $$SkillsTableFilterComposer
     return f(composer);
   }
 
-  Expression<bool> jewelsRefs(
-    Expression<bool> Function($$JewelsTableFilterComposer f) f,
+  Expression<bool> armorPieceSkillsRefs(
+    Expression<bool> Function($$ArmorPieceSkillsTableFilterComposer f) f,
   ) {
-    final $$JewelsTableFilterComposer composer = $composerBuilder(
+    final $$ArmorPieceSkillsTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.jewels,
+      referencedTable: $db.armorPieceSkills,
       getReferencedColumn: (t) => t.skillId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$JewelsTableFilterComposer(
+          }) => $$ArmorPieceSkillsTableFilterComposer(
             $db: $db,
-            $table: $db.jewels,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> jewelSkillsRefs(
+    Expression<bool> Function($$JewelSkillsTableFilterComposer f) f,
+  ) {
+    final $$JewelSkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.skillId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelSkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.jewelSkills,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -7862,22 +8572,47 @@ class $$SkillsTableAnnotationComposer
     return f(composer);
   }
 
-  Expression<T> jewelsRefs<T extends Object>(
-    Expression<T> Function($$JewelsTableAnnotationComposer a) f,
+  Expression<T> armorPieceSkillsRefs<T extends Object>(
+    Expression<T> Function($$ArmorPieceSkillsTableAnnotationComposer a) f,
   ) {
-    final $$JewelsTableAnnotationComposer composer = $composerBuilder(
+    final $$ArmorPieceSkillsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.jewels,
+      referencedTable: $db.armorPieceSkills,
       getReferencedColumn: (t) => t.skillId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$JewelsTableAnnotationComposer(
+          }) => $$ArmorPieceSkillsTableAnnotationComposer(
             $db: $db,
-            $table: $db.jewels,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> jewelSkillsRefs<T extends Object>(
+    Expression<T> Function($$JewelSkillsTableAnnotationComposer a) f,
+  ) {
+    final $$JewelSkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.skillId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelSkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.jewelSkills,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -7978,7 +8713,8 @@ class $$SkillsTableTableManager
           Skill,
           PrefetchHooks Function({
             bool armorSetSkillsRefs,
-            bool jewelsRefs,
+            bool armorPieceSkillsRefs,
+            bool jewelSkillsRefs,
             bool skillLevelsRefs,
             bool talismanSkill1Refs,
             bool talismanSkill2Refs,
@@ -8036,7 +8772,8 @@ class $$SkillsTableTableManager
           prefetchHooksCallback:
               ({
                 armorSetSkillsRefs = false,
-                jewelsRefs = false,
+                armorPieceSkillsRefs = false,
+                jewelSkillsRefs = false,
                 skillLevelsRefs = false,
                 talismanSkill1Refs = false,
                 talismanSkill2Refs = false,
@@ -8045,7 +8782,8 @@ class $$SkillsTableTableManager
                   db: db,
                   explicitlyWatchedTables: [
                     if (armorSetSkillsRefs) db.armorSetSkills,
-                    if (jewelsRefs) db.jewels,
+                    if (armorPieceSkillsRefs) db.armorPieceSkills,
+                    if (jewelSkillsRefs) db.jewelSkills,
                     if (skillLevelsRefs) db.skillLevels,
                     if (talismanSkill1Refs) db.talismans,
                     if (talismanSkill2Refs) db.talismans,
@@ -8074,13 +8812,42 @@ class $$SkillsTableTableManager
                               ),
                           typedResults: items,
                         ),
-                      if (jewelsRefs)
-                        await $_getPrefetchedData<Skill, $SkillsTable, Jewel>(
+                      if (armorPieceSkillsRefs)
+                        await $_getPrefetchedData<
+                          Skill,
+                          $SkillsTable,
+                          ArmorPieceSkill
+                        >(
                           currentTable: table,
                           referencedTable: $$SkillsTableReferences
-                              ._jewelsRefsTable(db),
+                              ._armorPieceSkillsRefsTable(db),
                           managerFromTypedResult: (p0) =>
-                              $$SkillsTableReferences(db, table, p0).jewelsRefs,
+                              $$SkillsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).armorPieceSkillsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.skillId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (jewelSkillsRefs)
+                        await $_getPrefetchedData<
+                          Skill,
+                          $SkillsTable,
+                          JewelSkill
+                        >(
+                          currentTable: table,
+                          referencedTable: $$SkillsTableReferences
+                              ._jewelSkillsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$SkillsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).jewelSkillsRefs,
                           referencedItemsForCurrentItem:
                               (item, referencedItems) => referencedItems.where(
                                 (e) => e.skillId == item.id,
@@ -8172,7 +8939,8 @@ typedef $$SkillsTableProcessedTableManager =
       Skill,
       PrefetchHooks Function({
         bool armorSetSkillsRefs,
-        bool jewelsRefs,
+        bool armorPieceSkillsRefs,
+        bool jewelSkillsRefs,
         bool skillLevelsRefs,
         bool talismanSkill1Refs,
         bool talismanSkill2Refs,
@@ -8613,33 +9381,54 @@ typedef $$ArmorSetSkillsTableProcessedTableManager =
       ArmorSetSkill,
       PrefetchHooks Function({bool setId, bool skillId})
     >;
-typedef $$JewelsTableCreateCompanionBuilder =
-    JewelsCompanion Function({
+typedef $$ArmorPieceSkillsTableCreateCompanionBuilder =
+    ArmorPieceSkillsCompanion Function({
       Value<int> id,
-      required String slug,
-      required String name,
-      Value<int> rarity,
-      required int slotSize,
+      required int armorPieceId,
       required int skillId,
       required int skillLevel,
     });
-typedef $$JewelsTableUpdateCompanionBuilder =
-    JewelsCompanion Function({
+typedef $$ArmorPieceSkillsTableUpdateCompanionBuilder =
+    ArmorPieceSkillsCompanion Function({
       Value<int> id,
-      Value<String> slug,
-      Value<String> name,
-      Value<int> rarity,
-      Value<int> slotSize,
+      Value<int> armorPieceId,
       Value<int> skillId,
       Value<int> skillLevel,
     });
 
-final class $$JewelsTableReferences
-    extends BaseReferences<_$AppDatabase, $JewelsTable, Jewel> {
-  $$JewelsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+final class $$ArmorPieceSkillsTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $ArmorPieceSkillsTable, ArmorPieceSkill> {
+  $$ArmorPieceSkillsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $ArmorPiecesTable _armorPieceIdTable(_$AppDatabase db) =>
+      db.armorPieces.createAlias(
+        $_aliasNameGenerator(
+          db.armorPieceSkills.armorPieceId,
+          db.armorPieces.id,
+        ),
+      );
+
+  $$ArmorPiecesTableProcessedTableManager get armorPieceId {
+    final $_column = $_itemColumn<int>('armor_piece_id')!;
+
+    final manager = $$ArmorPiecesTableTableManager(
+      $_db,
+      $_db.armorPieces,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_armorPieceIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
 
   static $SkillsTable _skillIdTable(_$AppDatabase db) => db.skills.createAlias(
-    $_aliasNameGenerator(db.jewels.skillId, db.skills.id),
+    $_aliasNameGenerator(db.armorPieceSkills.skillId, db.skills.id),
   );
 
   $$SkillsTableProcessedTableManager get skillId {
@@ -8653,6 +9442,380 @@ final class $$JewelsTableReferences
     if (item == null) return manager;
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$ArmorPieceSkillsTableFilterComposer
+    extends Composer<_$AppDatabase, $ArmorPieceSkillsTable> {
+  $$ArmorPieceSkillsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ArmorPiecesTableFilterComposer get armorPieceId {
+    final $$ArmorPiecesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.armorPieceId,
+      referencedTable: $db.armorPieces,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPiecesTableFilterComposer(
+            $db: $db,
+            $table: $db.armorPieces,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableFilterComposer get skillId {
+    final $$SkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ArmorPieceSkillsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ArmorPieceSkillsTable> {
+  $$ArmorPieceSkillsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ArmorPiecesTableOrderingComposer get armorPieceId {
+    final $$ArmorPiecesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.armorPieceId,
+      referencedTable: $db.armorPieces,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPiecesTableOrderingComposer(
+            $db: $db,
+            $table: $db.armorPieces,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableOrderingComposer get skillId {
+    final $$SkillsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableOrderingComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ArmorPieceSkillsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ArmorPieceSkillsTable> {
+  $$ArmorPieceSkillsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => column,
+  );
+
+  $$ArmorPiecesTableAnnotationComposer get armorPieceId {
+    final $$ArmorPiecesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.armorPieceId,
+      referencedTable: $db.armorPieces,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPiecesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.armorPieces,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableAnnotationComposer get skillId {
+    final $$SkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ArmorPieceSkillsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ArmorPieceSkillsTable,
+          ArmorPieceSkill,
+          $$ArmorPieceSkillsTableFilterComposer,
+          $$ArmorPieceSkillsTableOrderingComposer,
+          $$ArmorPieceSkillsTableAnnotationComposer,
+          $$ArmorPieceSkillsTableCreateCompanionBuilder,
+          $$ArmorPieceSkillsTableUpdateCompanionBuilder,
+          (ArmorPieceSkill, $$ArmorPieceSkillsTableReferences),
+          ArmorPieceSkill,
+          PrefetchHooks Function({bool armorPieceId, bool skillId})
+        > {
+  $$ArmorPieceSkillsTableTableManager(
+    _$AppDatabase db,
+    $ArmorPieceSkillsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ArmorPieceSkillsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ArmorPieceSkillsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ArmorPieceSkillsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> armorPieceId = const Value.absent(),
+                Value<int> skillId = const Value.absent(),
+                Value<int> skillLevel = const Value.absent(),
+              }) => ArmorPieceSkillsCompanion(
+                id: id,
+                armorPieceId: armorPieceId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int armorPieceId,
+                required int skillId,
+                required int skillLevel,
+              }) => ArmorPieceSkillsCompanion.insert(
+                id: id,
+                armorPieceId: armorPieceId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$ArmorPieceSkillsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({armorPieceId = false, skillId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (armorPieceId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.armorPieceId,
+                                referencedTable:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._armorPieceIdTable(db),
+                                referencedColumn:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._armorPieceIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (skillId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.skillId,
+                                referencedTable:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._skillIdTable(db),
+                                referencedColumn:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._skillIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$ArmorPieceSkillsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ArmorPieceSkillsTable,
+      ArmorPieceSkill,
+      $$ArmorPieceSkillsTableFilterComposer,
+      $$ArmorPieceSkillsTableOrderingComposer,
+      $$ArmorPieceSkillsTableAnnotationComposer,
+      $$ArmorPieceSkillsTableCreateCompanionBuilder,
+      $$ArmorPieceSkillsTableUpdateCompanionBuilder,
+      (ArmorPieceSkill, $$ArmorPieceSkillsTableReferences),
+      ArmorPieceSkill,
+      PrefetchHooks Function({bool armorPieceId, bool skillId})
+    >;
+typedef $$JewelsTableCreateCompanionBuilder =
+    JewelsCompanion Function({
+      Value<int> id,
+      required String slug,
+      required String name,
+      Value<int> rarity,
+      required int slotSize,
+      Value<String> allowedOn,
+    });
+typedef $$JewelsTableUpdateCompanionBuilder =
+    JewelsCompanion Function({
+      Value<int> id,
+      Value<String> slug,
+      Value<String> name,
+      Value<int> rarity,
+      Value<int> slotSize,
+      Value<String> allowedOn,
+    });
+
+final class $$JewelsTableReferences
+    extends BaseReferences<_$AppDatabase, $JewelsTable, Jewel> {
+  $$JewelsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$JewelSkillsTable, List<JewelSkill>>
+  _jewelSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.jewelSkills,
+    aliasName: $_aliasNameGenerator(db.jewels.id, db.jewelSkills.jewelId),
+  );
+
+  $$JewelSkillsTableProcessedTableManager get jewelSkillsRefs {
+    final manager = $$JewelSkillsTableTableManager(
+      $_db,
+      $_db.jewelSkills,
+    ).filter((f) => f.jewelId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_jewelSkillsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
     );
   }
 
@@ -8709,32 +9872,34 @@ class $$JewelsTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<int> get skillLevel => $composableBuilder(
-    column: $table.skillLevel,
+  ColumnFilters<String> get allowedOn => $composableBuilder(
+    column: $table.allowedOn,
     builder: (column) => ColumnFilters(column),
   );
 
-  $$SkillsTableFilterComposer get skillId {
-    final $$SkillsTableFilterComposer composer = $composerBuilder(
+  Expression<bool> jewelSkillsRefs(
+    Expression<bool> Function($$JewelSkillsTableFilterComposer f) f,
+  ) {
+    final $$JewelSkillsTableFilterComposer composer = $composerBuilder(
       composer: this,
-      getCurrentColumn: (t) => t.skillId,
-      referencedTable: $db.skills,
-      getReferencedColumn: (t) => t.id,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.jewelId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$SkillsTableFilterComposer(
+          }) => $$JewelSkillsTableFilterComposer(
             $db: $db,
-            $table: $db.skills,
+            $table: $db.jewelSkills,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
                 $removeJoinBuilderFromRootComposer,
           ),
     );
-    return composer;
+    return f(composer);
   }
 
   Expression<bool> buildJewelsRefs(
@@ -8797,33 +9962,10 @@ class $$JewelsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<int> get skillLevel => $composableBuilder(
-    column: $table.skillLevel,
+  ColumnOrderings<String> get allowedOn => $composableBuilder(
+    column: $table.allowedOn,
     builder: (column) => ColumnOrderings(column),
   );
-
-  $$SkillsTableOrderingComposer get skillId {
-    final $$SkillsTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.skillId,
-      referencedTable: $db.skills,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$SkillsTableOrderingComposer(
-            $db: $db,
-            $table: $db.skills,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
 }
 
 class $$JewelsTableAnnotationComposer
@@ -8850,32 +9992,32 @@ class $$JewelsTableAnnotationComposer
   GeneratedColumn<int> get slotSize =>
       $composableBuilder(column: $table.slotSize, builder: (column) => column);
 
-  GeneratedColumn<int> get skillLevel => $composableBuilder(
-    column: $table.skillLevel,
-    builder: (column) => column,
-  );
+  GeneratedColumn<String> get allowedOn =>
+      $composableBuilder(column: $table.allowedOn, builder: (column) => column);
 
-  $$SkillsTableAnnotationComposer get skillId {
-    final $$SkillsTableAnnotationComposer composer = $composerBuilder(
+  Expression<T> jewelSkillsRefs<T extends Object>(
+    Expression<T> Function($$JewelSkillsTableAnnotationComposer a) f,
+  ) {
+    final $$JewelSkillsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
-      getCurrentColumn: (t) => t.skillId,
-      referencedTable: $db.skills,
-      getReferencedColumn: (t) => t.id,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.jewelId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$SkillsTableAnnotationComposer(
+          }) => $$JewelSkillsTableAnnotationComposer(
             $db: $db,
-            $table: $db.skills,
+            $table: $db.jewelSkills,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
                 $removeJoinBuilderFromRootComposer,
           ),
     );
-    return composer;
+    return f(composer);
   }
 
   Expression<T> buildJewelsRefs<T extends Object>(
@@ -8917,7 +10059,7 @@ class $$JewelsTableTableManager
           $$JewelsTableUpdateCompanionBuilder,
           (Jewel, $$JewelsTableReferences),
           Jewel,
-          PrefetchHooks Function({bool skillId, bool buildJewelsRefs})
+          PrefetchHooks Function({bool jewelSkillsRefs, bool buildJewelsRefs})
         > {
   $$JewelsTableTableManager(_$AppDatabase db, $JewelsTable table)
     : super(
@@ -8937,16 +10079,14 @@ class $$JewelsTableTableManager
                 Value<String> name = const Value.absent(),
                 Value<int> rarity = const Value.absent(),
                 Value<int> slotSize = const Value.absent(),
-                Value<int> skillId = const Value.absent(),
-                Value<int> skillLevel = const Value.absent(),
+                Value<String> allowedOn = const Value.absent(),
               }) => JewelsCompanion(
                 id: id,
                 slug: slug,
                 name: name,
                 rarity: rarity,
                 slotSize: slotSize,
-                skillId: skillId,
-                skillLevel: skillLevel,
+                allowedOn: allowedOn,
               ),
           createCompanionCallback:
               ({
@@ -8955,16 +10095,14 @@ class $$JewelsTableTableManager
                 required String name,
                 Value<int> rarity = const Value.absent(),
                 required int slotSize,
-                required int skillId,
-                required int skillLevel,
+                Value<String> allowedOn = const Value.absent(),
               }) => JewelsCompanion.insert(
                 id: id,
                 slug: slug,
                 name: name,
                 rarity: rarity,
                 slotSize: slotSize,
-                skillId: skillId,
-                skillLevel: skillLevel,
+                allowedOn: allowedOn,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -8972,62 +10110,63 @@ class $$JewelsTableTableManager
                     (e.readTable(table), $$JewelsTableReferences(db, table, e)),
               )
               .toList(),
-          prefetchHooksCallback: ({skillId = false, buildJewelsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [if (buildJewelsRefs) db.buildJewels],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (skillId) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.skillId,
-                                referencedTable: $$JewelsTableReferences
-                                    ._skillIdTable(db),
-                                referencedColumn: $$JewelsTableReferences
-                                    ._skillIdTable(db)
-                                    .id,
-                              )
-                              as T;
-                    }
-
-                    return state;
+          prefetchHooksCallback:
+              ({jewelSkillsRefs = false, buildJewelsRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (jewelSkillsRefs) db.jewelSkills,
+                    if (buildJewelsRefs) db.buildJewels,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (jewelSkillsRefs)
+                        await $_getPrefetchedData<
+                          Jewel,
+                          $JewelsTable,
+                          JewelSkill
+                        >(
+                          currentTable: table,
+                          referencedTable: $$JewelsTableReferences
+                              ._jewelSkillsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$JewelsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).jewelSkillsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.jewelId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (buildJewelsRefs)
+                        await $_getPrefetchedData<
+                          Jewel,
+                          $JewelsTable,
+                          BuildJewel
+                        >(
+                          currentTable: table,
+                          referencedTable: $$JewelsTableReferences
+                              ._buildJewelsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$JewelsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).buildJewelsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.jewelId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
                   },
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (buildJewelsRefs)
-                    await $_getPrefetchedData<Jewel, $JewelsTable, BuildJewel>(
-                      currentTable: table,
-                      referencedTable: $$JewelsTableReferences
-                          ._buildJewelsRefsTable(db),
-                      managerFromTypedResult: (p0) => $$JewelsTableReferences(
-                        db,
-                        table,
-                        p0,
-                      ).buildJewelsRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.jewelId == item.id),
-                      typedResults: items,
-                    ),
-                ];
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -9044,7 +10183,389 @@ typedef $$JewelsTableProcessedTableManager =
       $$JewelsTableUpdateCompanionBuilder,
       (Jewel, $$JewelsTableReferences),
       Jewel,
-      PrefetchHooks Function({bool skillId, bool buildJewelsRefs})
+      PrefetchHooks Function({bool jewelSkillsRefs, bool buildJewelsRefs})
+    >;
+typedef $$JewelSkillsTableCreateCompanionBuilder =
+    JewelSkillsCompanion Function({
+      Value<int> id,
+      required int jewelId,
+      required int skillId,
+      required int skillLevel,
+    });
+typedef $$JewelSkillsTableUpdateCompanionBuilder =
+    JewelSkillsCompanion Function({
+      Value<int> id,
+      Value<int> jewelId,
+      Value<int> skillId,
+      Value<int> skillLevel,
+    });
+
+final class $$JewelSkillsTableReferences
+    extends BaseReferences<_$AppDatabase, $JewelSkillsTable, JewelSkill> {
+  $$JewelSkillsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $JewelsTable _jewelIdTable(_$AppDatabase db) => db.jewels.createAlias(
+    $_aliasNameGenerator(db.jewelSkills.jewelId, db.jewels.id),
+  );
+
+  $$JewelsTableProcessedTableManager get jewelId {
+    final $_column = $_itemColumn<int>('jewel_id')!;
+
+    final manager = $$JewelsTableTableManager(
+      $_db,
+      $_db.jewels,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_jewelIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $SkillsTable _skillIdTable(_$AppDatabase db) => db.skills.createAlias(
+    $_aliasNameGenerator(db.jewelSkills.skillId, db.skills.id),
+  );
+
+  $$SkillsTableProcessedTableManager get skillId {
+    final $_column = $_itemColumn<int>('skill_id')!;
+
+    final manager = $$SkillsTableTableManager(
+      $_db,
+      $_db.skills,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_skillIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$JewelSkillsTableFilterComposer
+    extends Composer<_$AppDatabase, $JewelSkillsTable> {
+  $$JewelSkillsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$JewelsTableFilterComposer get jewelId {
+    final $$JewelsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.jewelId,
+      referencedTable: $db.jewels,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelsTableFilterComposer(
+            $db: $db,
+            $table: $db.jewels,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableFilterComposer get skillId {
+    final $$SkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$JewelSkillsTableOrderingComposer
+    extends Composer<_$AppDatabase, $JewelSkillsTable> {
+  $$JewelSkillsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$JewelsTableOrderingComposer get jewelId {
+    final $$JewelsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.jewelId,
+      referencedTable: $db.jewels,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelsTableOrderingComposer(
+            $db: $db,
+            $table: $db.jewels,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableOrderingComposer get skillId {
+    final $$SkillsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableOrderingComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$JewelSkillsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JewelSkillsTable> {
+  $$JewelSkillsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => column,
+  );
+
+  $$JewelsTableAnnotationComposer get jewelId {
+    final $$JewelsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.jewelId,
+      referencedTable: $db.jewels,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.jewels,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableAnnotationComposer get skillId {
+    final $$SkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$JewelSkillsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $JewelSkillsTable,
+          JewelSkill,
+          $$JewelSkillsTableFilterComposer,
+          $$JewelSkillsTableOrderingComposer,
+          $$JewelSkillsTableAnnotationComposer,
+          $$JewelSkillsTableCreateCompanionBuilder,
+          $$JewelSkillsTableUpdateCompanionBuilder,
+          (JewelSkill, $$JewelSkillsTableReferences),
+          JewelSkill,
+          PrefetchHooks Function({bool jewelId, bool skillId})
+        > {
+  $$JewelSkillsTableTableManager(_$AppDatabase db, $JewelSkillsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$JewelSkillsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$JewelSkillsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$JewelSkillsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> jewelId = const Value.absent(),
+                Value<int> skillId = const Value.absent(),
+                Value<int> skillLevel = const Value.absent(),
+              }) => JewelSkillsCompanion(
+                id: id,
+                jewelId: jewelId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int jewelId,
+                required int skillId,
+                required int skillLevel,
+              }) => JewelSkillsCompanion.insert(
+                id: id,
+                jewelId: jewelId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$JewelSkillsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({jewelId = false, skillId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (jewelId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.jewelId,
+                                referencedTable: $$JewelSkillsTableReferences
+                                    ._jewelIdTable(db),
+                                referencedColumn: $$JewelSkillsTableReferences
+                                    ._jewelIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+                    if (skillId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.skillId,
+                                referencedTable: $$JewelSkillsTableReferences
+                                    ._skillIdTable(db),
+                                referencedColumn: $$JewelSkillsTableReferences
+                                    ._skillIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$JewelSkillsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $JewelSkillsTable,
+      JewelSkill,
+      $$JewelSkillsTableFilterComposer,
+      $$JewelSkillsTableOrderingComposer,
+      $$JewelSkillsTableAnnotationComposer,
+      $$JewelSkillsTableCreateCompanionBuilder,
+      $$JewelSkillsTableUpdateCompanionBuilder,
+      (JewelSkill, $$JewelSkillsTableReferences),
+      JewelSkill,
+      PrefetchHooks Function({bool jewelId, bool skillId})
     >;
 typedef $$SkillLevelsTableCreateCompanionBuilder =
     SkillLevelsCompanion Function({
@@ -11705,8 +13226,12 @@ class $AppDatabaseManager {
       $$SkillsTableTableManager(_db, _db.skills);
   $$ArmorSetSkillsTableTableManager get armorSetSkills =>
       $$ArmorSetSkillsTableTableManager(_db, _db.armorSetSkills);
+  $$ArmorPieceSkillsTableTableManager get armorPieceSkills =>
+      $$ArmorPieceSkillsTableTableManager(_db, _db.armorPieceSkills);
   $$JewelsTableTableManager get jewels =>
       $$JewelsTableTableManager(_db, _db.jewels);
+  $$JewelSkillsTableTableManager get jewelSkills =>
+      $$JewelSkillsTableTableManager(_db, _db.jewelSkills);
   $$SkillLevelsTableTableManager get skillLevels =>
       $$SkillLevelsTableTableManager(_db, _db.skillLevels);
   $$TalismansTableTableManager get talismans =>

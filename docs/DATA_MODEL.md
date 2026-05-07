@@ -53,7 +53,15 @@
 | required_pieces | INTEGER | Quanti pezzi per attivare |
 | skill_id | INTEGER FK → skills | |
 | skill_level | INTEGER | |
-| skill_category | TEXT | GROUP / SERIES |
+| skill_category | TEXT | group / set |
+
+### armor_piece_skills
+| Campo | Tipo | Note |
+|-------|------|------|
+| id | INTEGER PK autoincrement | |
+| armor_piece_id | INTEGER FK → armor_pieces | |
+| skill_id | INTEGER FK → skills | |
+| skill_level | INTEGER | Livelli forniti da questo pezzo |
 
 ### jewels
 | Campo | Tipo | Note |
@@ -61,10 +69,16 @@
 | id | INTEGER PK autoincrement | |
 | slug | TEXT UNIQUE | |
 | name | TEXT | |
-| rarity | INTEGER | |
 | slot_size | INTEGER | 1/2/3/4 |
+| allowed_on | TEXT | "armor" / "weapon" — default "armor" |
+
+### jewel_skills
+| Campo | Tipo | Note |
+|-------|------|------|
+| id | INTEGER PK autoincrement | |
+| jewel_id | INTEGER FK → jewels | |
 | skill_id | INTEGER FK → skills | |
-| skill_level | INTEGER | Livelli forniti |
+| skill_level | INTEGER | Livelli forniti (compound jewels: 2 righe per jewel) |
 
 ### skills
 | Campo | Tipo | Note |

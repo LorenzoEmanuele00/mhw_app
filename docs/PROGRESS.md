@@ -21,10 +21,13 @@ Update this file at every session.
 
 ### Phase 1: Data Layer ✅ COMPLETE (partial — Supabase deferred to Phase 5)
 - [x] Python script `scripts/parse_excel.py` — extracts skills, weapon mods, motion values
-- [x] SQL seeds generated: `01_skills.sql` (168 skills), `02_skill_levels.sql` (427 levels)
-- [x] `03_weapon_mods.json` — RMV/EMV/sharpness for 14 weapon types
-- [x] `04_motion_values.sql` — 1216 motion value entries (for future DPH calc)
-- [x] `SeedService` — loads SQL seeds on first launch if DB is empty
+- [x] SQL seeds: `01_skills.sql` (179 skills), `02_skill_levels.sql` (442 levels with pieces_required)
+- [x] SQL seeds: `03_armor.sql` (194 sets, 714 pieces, 275 set-skills, 2119 piece-skills)
+- [x] SQL seeds: `04_weapons.sql` (1188 weapons across 14 types)
+- [x] SQL seeds: `05_jewels.sql` (361 jewels, 534 jewel-skill rows)
+- [x] `scripts/generate_seeds_from_json.py` — skills from Skill.json + Excel calc cross-reference
+- [x] `scripts/generate_game_data.py` — armor/weapons/jewels from merged JSON files
+- [x] `SeedService` — loads all 5 SQL seeds on first launch if DB is empty
 - [x] Repository layer: WeaponsRepository, ArmorRepository, JewelsRepository, TalismansRepository, BuildsRepository, SkillsRepository
 - [x] Riverpod providers for all repositories + StreamProvider for lists
 - [x] `main.dart` updated — seedInitProvider active, splash during init
@@ -36,12 +39,14 @@ Update this file at every session.
 - [x] Enum types for all limited-value text columns (WeaponType, ElementType, DamageType,
       SharpnessLevel, ArmorSlotType, SkillCategory, SkillSubcategory, SetSkillType, JewelSlotSource)
 - [x] TypeConverters — pure Dart-layer, no SQL schema change (stored values: lowercase snake_case)
+- [x] ElementType extended: poison, sleep, paralysis, blast added
+- [x] SkillCategory.series → SkillCategory.set; SetSkillType.series → SetSkillType.set
 - [x] Seed `01_skills.sql` updated to lowercase type1/type2 values
 - [x] All code, comments, and documentation translated to English
 - [x] i18n infrastructure: flutter_localizations + intl, l10n.yaml, app_en.arb + app_it.arb
-- [x] Automated tests: 27 tests (converter unit tests + DAO integration tests with in-memory DB)
+- [x] Automated tests: 43 tests (converter unit tests + DAO integration tests with in-memory DB)
 - [x] `flutter analyze` → No issues found
-- [x] `flutter test` → All 27 tests passed
+- [x] `flutter test` → All 43 tests passed
 
 ### Phase 2: Equipment Browser ⬜ TODO
 - [ ] Weapon list screen with type filter
@@ -84,15 +89,22 @@ Update this file at every session.
 ## Session notes
 
 ### 2026-05-07 — Session 4
-- Review from REVIEW.md applied: source of truth for skills changed to `assets/output/merged/Skill.json`
-- `SkillCategory.series` renamed to `SkillCategory.set` (matches JSON `kind` field)
-- `SetSkillType.series` renamed to `SetSkillType.set`
-- `SkillLevels` table: added `pieces_required` (nullable int) for set/group activation threshold
-- Schema bumped to v3 with migration (`ALTER TABLE skill_levels ADD COLUMN pieces_required INTEGER`)
-- New seed generator: `scripts/generate_seeds_from_json.py` — reads JSON (179 skills), cross-references with Excel calc data (158/179 matched), adds null rows for new skills
-- Seeds regenerated: 179 skills, 442 skill_levels with `pieces_required` for set/group ranks
+- Review from REVIEW.md applied: source of truth for skills changed to `scripts/output/merged/Skill.json`
+- `SkillCategory.series` → `SkillCategory.set`; `SetSkillType.series` → `SetSkillType.set`
+- `ElementType` extended with poison, sleep, paralysis, blast
+- `SkillLevels` table: added `pieces_required` nullable int (set/group activation threshold)
+- `Jewels` table: replaced `skill_id`/`skill_level` with `allowed_on` text field (default "armor")
+- New tables: `armor_piece_skills` (armor innate skills), `jewel_skills` (supports compound jewels)
+- Schema bumped v3→v4; migrations: ALTER skill_levels + drop/recreate jewels + create 2 new tables
+- `scripts/generate_seeds_from_json.py` — 179 skills from JSON, Excel cross-ref for calc bonuses
+- `scripts/generate_game_data.py` — full game data from merged JSON files:
+  - `03_armor.sql`: 194 sets, 714 pieces, 275 set-skills, 2119 piece-skills
+  - `04_weapons.sql`: 1188 weapons across 14 types
+  - `05_jewels.sql`: 361 jewels, 534 jewel-skill rows (173 compound jewels)
+- Game JSON source files moved to `scripts/output/merged/` (not bundled in app)
+- Automated tests expanded to 43 (added armor DAO tests + jewel DAO tests)
 - `flutter analyze` → No issues found
-- `flutter test` → All 28 tests passed
+- `flutter test` → All 43 tests passed
 
 ### 2026-05-05 — Session 1
 - Project created from scratch on shared plan with user

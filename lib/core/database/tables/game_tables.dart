@@ -69,11 +69,25 @@ class Jewels extends Table {
   TextColumn get name => text()();
   IntColumn get rarity => integer().withDefault(const Constant(1))();
   IntColumn get slotSize => integer()();
-  IntColumn get skillId => integer().references(Skills, #id)();
-  IntColumn get skillLevel => integer()();
+  // allowed_on: 'armor' or 'weapon' — constrains which slot this jewel can go into.
+  TextColumn get allowedOn => text().withDefault(const Constant('armor'))();
 
   @override
   List<Set<Column>> get uniqueKeys => [{slug}];
+}
+
+class JewelSkills extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get jewelId => integer().references(Jewels, #id)();
+  IntColumn get skillId => integer().references(Skills, #id)();
+  IntColumn get skillLevel => integer()();
+}
+
+class ArmorPieceSkills extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get armorPieceId => integer().references(ArmorPieces, #id)();
+  IntColumn get skillId => integer().references(Skills, #id)();
+  IntColumn get skillLevel => integer()();
 }
 
 class Skills extends Table {
