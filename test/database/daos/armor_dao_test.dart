@@ -199,4 +199,74 @@ void main() {
       expect(row.skillCategory, SetSkillType.group);
     });
   });
+
+  // ---------------------------------------------------------------------------
+  // ArmorDao.getPieceSkills — join query
+  // ---------------------------------------------------------------------------
+
+  group('ArmorDao.getPieceSkills', () {
+    test('returns skills joined for a piece', () async {
+      final setId = await insertSet();
+      final pieceId = await insertPiece(setId: setId);
+      final skill1 = await insertSkill('critical_eye', 'Critical Eye');
+      final skill2 = await insertSkill('attack_boost', 'Attack Boost');
+
+      await db.into(db.armorPieceSkills).insert(
+            ArmorPieceSkillsCompanion.insert(
+              armorPieceId: pieceId,
+              skillId: skill1,
+              skillLevel: 3,
+            ),
+          );
+      await db.into(db.armorPieceSkills).insert(
+            ArmorPieceSkillsCompanion.insert(
+              armorPieceId: pieceId,
+              skillId: skill2,
+              skillLevel: 1,
+            ),
+          );
+
+      final result = await db.armorDao.getPieceSkills(pieceId);
+
+      expect(result.length, 2);
+      final names = result.map((r) => r.skill.name).toList();
+      expect(names, containsAll(['Critical Eye', 'Attack Boost']));
+
+      final critRow = result.firstWhere((r) => r.skill.name == 'Critical Eye');
+      expect(critRow.level, 3);
+
+      final atkRow = result.firstWhere((r) => r.skill.name == 'Attack Boost');
+      expect(atkRow.level, 1);
+    });
+
+    test('returns empty list for a piece with no skills', () async {
+      final setId = await insertSet();
+      final pieceId = await insertPiece(setId: setId);
+
+      final result = await db.armorDao.getPieceSkills(pieceId);
+      expect(result, isEmpty);
+    });
+
+    test('does not return skills from a different piece', () async {
+      final setId = await insertSet();
+      final piece1 = await insertPiece(setId: setId, slug: 'p1', name: 'Piece 1');
+      final piece2 = await insertPiece(
+          setId: setId,
+          slug: 'p2',
+          name: 'Piece 2',
+          kind: ArmorSlotType.chest);
+      final skillId = await insertSkill('critical_eye', 'Critical Eye');
+
+      await db.into(db.armorPieceSkills).insert(
+            ArmorPieceSkillsCompanion.insert(
+              armorPieceId: piece2,
+              skillId: skillId,
+              skillLevel: 2,
+            ),
+          );
+
+      final result = await db.armorDao.getPieceSkills(piece1);
+      expect(result, isEmpty);
+    });
+  });
 }

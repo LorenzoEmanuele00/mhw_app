@@ -3,15 +3,105 @@
 
   "appTitle": "MHW Builder",
 
+  "navBuild": "Build",
   "navEquipment": "Equipment",
-  "navBuilds": "Builds",
-  "navBuilder": "Builder",
+  "navStats": "Stats",
+  "navLoadouts": "Loadouts",
 
-  "screenWeapons": "Weapons",
-  "screenArmor": "Armor",
-  "screenJewels": "Jewels",
-  "screenTalismans": "Talismans",
-  "screenBuilds": "Builds",
+  "equipWeapons": "Weapons",
+  "equipArmor": "Armor",
+  "equipCharm": "Charm",
+
+  "armorSlotHead": "Head",
+  "armorSlotChest": "Chest",
+  "armorSlotArms": "Arms",
+  "armorSlotWaist": "Waist",
+  "armorSlotLegs": "Legs",
+
+  "statAttack": "Attack",
+  "statDefense": "Defense",
+  "statAffinity": "Affinity",
+  "statElement": "Element",
+  "statSharpness": "Sharpness",
+  "statRarity": "Rarity",
+
+  "elemFire": "Fire",
+  "elemWater": "Water",
+  "elemThunder": "Thunder",
+  "elemIce": "Ice",
+  "elemDragon": "Dragon",
+  "elemPoison": "Poison",
+  "elemSleep": "Sleep",
+  "elemParalysis": "Paralysis",
+  "elemBlast": "Blast",
+
+  "resistFire": "Fire Res",
+  "resistWater": "Water Res",
+  "resistThunder": "Thunder Res",
+  "resistIce": "Ice Res",
+  "resistDragon": "Dragon Res",
+
+  "weaponTypeGs": "Greatsword",
+  "weaponTypeLs": "Longsword",
+  "weaponTypeSns": "Sword & Shield",
+  "weaponTypeDb": "Dual Blades",
+  "weaponTypeHmr": "Hammer",
+  "weaponTypeHh": "Hunting Horn",
+  "weaponTypeLan": "Lance",
+  "weaponTypeGl": "Gunlance",
+  "weaponTypeSa": "Switch Axe",
+  "weaponTypeCb": "Charge Blade",
+  "weaponTypeIg": "Insect Glaive",
+  "weaponTypeLbg": "Light Bowgun",
+  "weaponTypeHbg": "Heavy Bowgun",
+  "weaponTypeBow": "Bow",
+
+  "sharpnessRed": "Red",
+  "sharpnessOrange": "Orange",
+  "sharpnessYellow": "Yellow",
+  "sharpnessGreen": "Green",
+  "sharpnessBlue": "Blue",
+  "sharpnessWhite": "White",
+  "sharpnessPurple": "Purple",
+
+  "sectionSkills": "Skills",
+  "sectionDecoSlots": "Decoration Slots",
+  "sectionWeapon": "Weapon",
+  "sectionArmor": "Armor",
+
+  "detailRarity": "R{n}",
+  "@detailRarity": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+
+  "detailSlot": "Slot {index} · Level {level}",
+  "@detailSlot": {
+    "placeholders": {
+      "index": { "type": "int" },
+      "level": { "type": "int" }
+    }
+  },
+
+  "charmSkillsOnly": "Charms grant skills only — no defense or resistances.",
+
+  "catalogCount": "{count} items in catalog",
+  "@catalogCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "searchEquipment": "Search equipment",
+  "searchJewels": "Search jewels",
+  "filterButton": "Filter",
+  "searchNoResults": "Nothing matches \"{query}\".",
+  "@searchNoResults": {
+    "placeholders": {
+      "query": { "type": "String" }
+    }
+  },
 
   "comingSoon": "Coming soon",
 

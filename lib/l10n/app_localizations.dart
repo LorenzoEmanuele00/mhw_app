@@ -104,53 +104,395 @@ abstract class AppLocalizations {
   /// **'MHW Builder'**
   String get appTitle;
 
+  /// No description provided for @navBuild.
+  ///
+  /// In en, this message translates to:
+  /// **'Build'**
+  String get navBuild;
+
   /// No description provided for @navEquipment.
   ///
   /// In en, this message translates to:
   /// **'Equipment'**
   String get navEquipment;
 
-  /// No description provided for @navBuilds.
+  /// No description provided for @navStats.
   ///
   /// In en, this message translates to:
-  /// **'Builds'**
-  String get navBuilds;
+  /// **'Stats'**
+  String get navStats;
 
-  /// No description provided for @navBuilder.
+  /// No description provided for @navLoadouts.
   ///
   /// In en, this message translates to:
-  /// **'Builder'**
-  String get navBuilder;
+  /// **'Loadouts'**
+  String get navLoadouts;
 
-  /// No description provided for @screenWeapons.
+  /// No description provided for @equipWeapons.
   ///
   /// In en, this message translates to:
   /// **'Weapons'**
-  String get screenWeapons;
+  String get equipWeapons;
 
-  /// No description provided for @screenArmor.
+  /// No description provided for @equipArmor.
   ///
   /// In en, this message translates to:
   /// **'Armor'**
-  String get screenArmor;
+  String get equipArmor;
 
-  /// No description provided for @screenJewels.
+  /// No description provided for @equipCharm.
   ///
   /// In en, this message translates to:
-  /// **'Jewels'**
-  String get screenJewels;
+  /// **'Charm'**
+  String get equipCharm;
 
-  /// No description provided for @screenTalismans.
+  /// No description provided for @armorSlotHead.
   ///
   /// In en, this message translates to:
-  /// **'Talismans'**
-  String get screenTalismans;
+  /// **'Head'**
+  String get armorSlotHead;
 
-  /// No description provided for @screenBuilds.
+  /// No description provided for @armorSlotChest.
   ///
   /// In en, this message translates to:
-  /// **'Builds'**
-  String get screenBuilds;
+  /// **'Chest'**
+  String get armorSlotChest;
+
+  /// No description provided for @armorSlotArms.
+  ///
+  /// In en, this message translates to:
+  /// **'Arms'**
+  String get armorSlotArms;
+
+  /// No description provided for @armorSlotWaist.
+  ///
+  /// In en, this message translates to:
+  /// **'Waist'**
+  String get armorSlotWaist;
+
+  /// No description provided for @armorSlotLegs.
+  ///
+  /// In en, this message translates to:
+  /// **'Legs'**
+  String get armorSlotLegs;
+
+  /// No description provided for @statAttack.
+  ///
+  /// In en, this message translates to:
+  /// **'Attack'**
+  String get statAttack;
+
+  /// No description provided for @statDefense.
+  ///
+  /// In en, this message translates to:
+  /// **'Defense'**
+  String get statDefense;
+
+  /// No description provided for @statAffinity.
+  ///
+  /// In en, this message translates to:
+  /// **'Affinity'**
+  String get statAffinity;
+
+  /// No description provided for @statElement.
+  ///
+  /// In en, this message translates to:
+  /// **'Element'**
+  String get statElement;
+
+  /// No description provided for @statSharpness.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharpness'**
+  String get statSharpness;
+
+  /// No description provided for @statRarity.
+  ///
+  /// In en, this message translates to:
+  /// **'Rarity'**
+  String get statRarity;
+
+  /// No description provided for @elemFire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire'**
+  String get elemFire;
+
+  /// No description provided for @elemWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get elemWater;
+
+  /// No description provided for @elemThunder.
+  ///
+  /// In en, this message translates to:
+  /// **'Thunder'**
+  String get elemThunder;
+
+  /// No description provided for @elemIce.
+  ///
+  /// In en, this message translates to:
+  /// **'Ice'**
+  String get elemIce;
+
+  /// No description provided for @elemDragon.
+  ///
+  /// In en, this message translates to:
+  /// **'Dragon'**
+  String get elemDragon;
+
+  /// No description provided for @elemPoison.
+  ///
+  /// In en, this message translates to:
+  /// **'Poison'**
+  String get elemPoison;
+
+  /// No description provided for @elemSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get elemSleep;
+
+  /// No description provided for @elemParalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Paralysis'**
+  String get elemParalysis;
+
+  /// No description provided for @elemBlast.
+  ///
+  /// In en, this message translates to:
+  /// **'Blast'**
+  String get elemBlast;
+
+  /// No description provided for @resistFire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire Res'**
+  String get resistFire;
+
+  /// No description provided for @resistWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water Res'**
+  String get resistWater;
+
+  /// No description provided for @resistThunder.
+  ///
+  /// In en, this message translates to:
+  /// **'Thunder Res'**
+  String get resistThunder;
+
+  /// No description provided for @resistIce.
+  ///
+  /// In en, this message translates to:
+  /// **'Ice Res'**
+  String get resistIce;
+
+  /// No description provided for @resistDragon.
+  ///
+  /// In en, this message translates to:
+  /// **'Dragon Res'**
+  String get resistDragon;
+
+  /// No description provided for @weaponTypeGs.
+  ///
+  /// In en, this message translates to:
+  /// **'Greatsword'**
+  String get weaponTypeGs;
+
+  /// No description provided for @weaponTypeLs.
+  ///
+  /// In en, this message translates to:
+  /// **'Longsword'**
+  String get weaponTypeLs;
+
+  /// No description provided for @weaponTypeSns.
+  ///
+  /// In en, this message translates to:
+  /// **'Sword & Shield'**
+  String get weaponTypeSns;
+
+  /// No description provided for @weaponTypeDb.
+  ///
+  /// In en, this message translates to:
+  /// **'Dual Blades'**
+  String get weaponTypeDb;
+
+  /// No description provided for @weaponTypeHmr.
+  ///
+  /// In en, this message translates to:
+  /// **'Hammer'**
+  String get weaponTypeHmr;
+
+  /// No description provided for @weaponTypeHh.
+  ///
+  /// In en, this message translates to:
+  /// **'Hunting Horn'**
+  String get weaponTypeHh;
+
+  /// No description provided for @weaponTypeLan.
+  ///
+  /// In en, this message translates to:
+  /// **'Lance'**
+  String get weaponTypeLan;
+
+  /// No description provided for @weaponTypeGl.
+  ///
+  /// In en, this message translates to:
+  /// **'Gunlance'**
+  String get weaponTypeGl;
+
+  /// No description provided for @weaponTypeSa.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Axe'**
+  String get weaponTypeSa;
+
+  /// No description provided for @weaponTypeCb.
+  ///
+  /// In en, this message translates to:
+  /// **'Charge Blade'**
+  String get weaponTypeCb;
+
+  /// No description provided for @weaponTypeIg.
+  ///
+  /// In en, this message translates to:
+  /// **'Insect Glaive'**
+  String get weaponTypeIg;
+
+  /// No description provided for @weaponTypeLbg.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Bowgun'**
+  String get weaponTypeLbg;
+
+  /// No description provided for @weaponTypeHbg.
+  ///
+  /// In en, this message translates to:
+  /// **'Heavy Bowgun'**
+  String get weaponTypeHbg;
+
+  /// No description provided for @weaponTypeBow.
+  ///
+  /// In en, this message translates to:
+  /// **'Bow'**
+  String get weaponTypeBow;
+
+  /// No description provided for @sharpnessRed.
+  ///
+  /// In en, this message translates to:
+  /// **'Red'**
+  String get sharpnessRed;
+
+  /// No description provided for @sharpnessOrange.
+  ///
+  /// In en, this message translates to:
+  /// **'Orange'**
+  String get sharpnessOrange;
+
+  /// No description provided for @sharpnessYellow.
+  ///
+  /// In en, this message translates to:
+  /// **'Yellow'**
+  String get sharpnessYellow;
+
+  /// No description provided for @sharpnessGreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Green'**
+  String get sharpnessGreen;
+
+  /// No description provided for @sharpnessBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get sharpnessBlue;
+
+  /// No description provided for @sharpnessWhite.
+  ///
+  /// In en, this message translates to:
+  /// **'White'**
+  String get sharpnessWhite;
+
+  /// No description provided for @sharpnessPurple.
+  ///
+  /// In en, this message translates to:
+  /// **'Purple'**
+  String get sharpnessPurple;
+
+  /// No description provided for @sectionSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'Skills'**
+  String get sectionSkills;
+
+  /// No description provided for @sectionDecoSlots.
+  ///
+  /// In en, this message translates to:
+  /// **'Decoration Slots'**
+  String get sectionDecoSlots;
+
+  /// No description provided for @sectionWeapon.
+  ///
+  /// In en, this message translates to:
+  /// **'Weapon'**
+  String get sectionWeapon;
+
+  /// No description provided for @sectionArmor.
+  ///
+  /// In en, this message translates to:
+  /// **'Armor'**
+  String get sectionArmor;
+
+  /// No description provided for @detailRarity.
+  ///
+  /// In en, this message translates to:
+  /// **'R{n}'**
+  String detailRarity(int n);
+
+  /// No description provided for @detailSlot.
+  ///
+  /// In en, this message translates to:
+  /// **'Slot {index} · Level {level}'**
+  String detailSlot(int index, int level);
+
+  /// No description provided for @charmSkillsOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Charms grant skills only — no defense or resistances.'**
+  String get charmSkillsOnly;
+
+  /// No description provided for @catalogCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items in catalog'**
+  String catalogCount(int count);
+
+  /// No description provided for @searchEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Search equipment'**
+  String get searchEquipment;
+
+  /// No description provided for @searchJewels.
+  ///
+  /// In en, this message translates to:
+  /// **'Search jewels'**
+  String get searchJewels;
+
+  /// No description provided for @filterButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filterButton;
+
+  /// No description provided for @searchNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches \"{query}\".'**
+  String searchNoResults(String query);
 
   /// No description provided for @comingSoon.
   ///

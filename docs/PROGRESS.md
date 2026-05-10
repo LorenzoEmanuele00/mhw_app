@@ -2,7 +2,7 @@
 
 Update this file at every session.
 
-## Current phase: 2 — Equipment Browser
+## Current phase: 3 — Build System
 
 ### Phase 0: Setup ✅ COMPLETE
 - [x] Flutter project created (`flutter create mhw_app`)
@@ -50,32 +50,33 @@ Update this file at every session.
 
 ---
 
-### Phase 2: Equipment Browser ⬜ TODO
+### Phase 2: Equipment Browser ✅ COMPLETE
 
 Deliver the Equipment tab. No build editing yet — items are read-only browsable.
 
 **Routing & scaffold**
-- [ ] Update go_router to 4-tab StatefulShellRoute: Build / Equipment / Stats / Loadouts
-- [ ] Implement app-level theme tokens (light/dark, element colors, skill colors, sharpness colors)
-- [ ] Shared widgets: `GlyphTile`, `SlotGlyph`, `DecoSlotsRow`, `SkillChip`, `StatBar`, `SharpnessGauge`
+- [x] Update go_router to 4-tab StatefulShellRoute: Build / Equipment / Stats / Loadouts
+- [x] Implement app-level theme tokens (light/dark, element colors, skill colors, sharpness colors)
+- [x] Shared widgets: `GlyphTile`, `SlotGlyph`, `DecoSlotsRow`, `SkillChip`, `StatBar`, `SharpnessGauge`
 
 **EquipmentScreen**
-- [ ] Segmented control: Weapons | Armor | Charm
-- [ ] Search field with real-time name filter
-- [ ] Weapon list: flat `EquipmentRow` list (name, attack/affinity, type, element, deco slots)
-- [ ] Armor list: grouped by slot type (Head / Chest / Arms / Waist / Legs) with section labels
-- [ ] Charm list: flat list (backed by talismans table)
-- [ ] `EquipmentRow` widget with "Equipped" badge support
+- [x] Segmented control: Weapons | Armor | Charm
+- [x] Search field with real-time name filter
+- [x] Weapon list: flat `EquipmentRow` list (name, attack/affinity, type, element, deco slots)
+- [x] Armor list: grouped by slot type (Head / Chest / Arms / Waist / Legs) with section labels
+- [x] Charm list: flat list (backed by talismans table)
+- [x] `EquipmentRow` widget with "Equipped" badge support
 
 **EquipmentDetail sheet (read-only)**
-- [ ] Hero: GlyphTile, type label + rarity badge, item name
-- [ ] Stats section: weapon → attack/affinity/element bars + sharpness gauge; armor → defense + 5 elemental res bars; charm → text note
-- [ ] Skills section: list with colored dot, name, description, +level
-- [ ] Decoration Slots section (read-only — no JewelPicker yet)
+- [x] Hero: GlyphTile, type label + rarity badge, item name
+- [x] Stats section: weapon → attack/affinity/element bars + sharpness gauge; armor → defense + 5 elemental res bars; charm → text note
+- [x] Skills section: list with colored dot, name, description, +level
+- [x] Decoration Slots section (read-only — no JewelPicker yet)
 
 **Tests**
-- [ ] Widget tests for EquipmentRow (weapon / armor / charm variants)
-- [ ] `flutter test` → all pass
+- [x] `ArmorDao.getPieceSkills` join query (3 tests)
+- [x] Widget tests for EquipmentRow (weapon / armor / charm variants — 13 tests)
+- [x] `flutter test` → 59/59 passed
 
 ---
 
@@ -185,6 +186,11 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 ---
 
 ## Session notes
+
+### 2026-05-10 — Session 6
+- Phase 2 tests completed: `ArmorDao.getPieceSkills` join tests (3) + `EquipmentRow` widget tests (13 — weapon/armor/charm variants)
+- `flutter test` → 59/59 passed
+- PROGRESS.md updated: Phase 2 marked ✅ COMPLETE, current phase set to 3
 
 ### 2026-05-10 — Session 5
 - Design prototype reviewed (Claude Design zip in `/docs/mhw_app_design/`)

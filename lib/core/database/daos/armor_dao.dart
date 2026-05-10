@@ -5,7 +5,7 @@ import '../tables/enums.dart';
 
 part 'armor_dao.g.dart';
 
-@DriftAccessor(tables: [ArmorPieces, ArmorSets, ArmorSetSkills])
+@DriftAccessor(tables: [ArmorPieces, ArmorSets, ArmorSetSkills, ArmorPieceSkills, Skills])
 class ArmorDao extends DatabaseAccessor<AppDatabase> with _$ArmorDaoMixin {
   ArmorDao(super.db);
 
@@ -24,6 +24,21 @@ class ArmorDao extends DatabaseAccessor<AppDatabase> with _$ArmorDaoMixin {
 
   Future<List<ArmorSetSkill>> getSetSkills(int setId) =>
       (select(armorSetSkills)..where((s) => s.setId.equals(setId))).get();
+
+  /// Returns skills attached to a specific armor piece via [ArmorPieceSkills],
+  /// joined with the [Skills] table for name and meta info.
+  Future<List<({Skill skill, int level})>> getPieceSkills(int armorPieceId) {
+    final query = select(armorPieceSkills).join([
+      innerJoin(skills, skills.id.equalsExp(armorPieceSkills.skillId)),
+    ]);
+    query.where(armorPieceSkills.armorPieceId.equals(armorPieceId));
+    return query
+        .map((row) => (
+              skill: row.readTable(skills),
+              level: row.readTable(armorPieceSkills).skillLevel,
+            ))
+        .get();
+  }
 
   Future<void> replaceAllPieces(List<ArmorPiecesCompanion> rows) =>
       transaction(() async {

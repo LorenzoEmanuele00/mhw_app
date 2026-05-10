@@ -1,80 +1,42 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/equipment/weapons/weapons_screen.dart';
-import '../../features/equipment/armor/armor_screen.dart';
-import '../../features/equipment/jewels/jewels_screen.dart';
-import '../../features/equipment/talismans/talismans_screen.dart';
-import '../../features/builds/builds_screen.dart';
-import '../../features/builder/builder_screen.dart';
+import '../../features/build/build_screen.dart';
+import '../../features/equipment/equipment_screen.dart';
+import '../../features/loadouts/loadouts_screen.dart';
+import '../../features/stats/stats_screen.dart';
+import 'app_scaffold.dart';
 
 final router = GoRouter(
-  initialLocation: '/equipment/weapons',
+  initialLocation: '/build',
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
-          ScaffoldWithNav(navigationShell: navigationShell),
+          AppScaffold(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(routes: [
           GoRoute(
+            path: '/build',
+            builder: (_, _) => const BuildScreen(),
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
             path: '/equipment',
-            redirect: (_, _) => '/equipment/weapons',
-          ),
-          GoRoute(
-            path: '/equipment/weapons',
-            builder: (_, _) => const WeaponsScreen(),
-          ),
-          GoRoute(
-            path: '/equipment/armor',
-            builder: (_, _) => const ArmorScreen(),
-          ),
-          GoRoute(
-            path: '/equipment/jewels',
-            builder: (_, _) => const JewelsScreen(),
-          ),
-          GoRoute(
-            path: '/equipment/talismans',
-            builder: (_, _) => const TalismansScreen(),
+            builder: (_, _) => const EquipmentScreen(),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
-            path: '/builds',
-            builder: (_, _) => const BuildsScreen(),
+            path: '/stats',
+            builder: (_, _) => const StatsScreen(),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
-            path: '/builder',
-            builder: (_, _) => const BuilderScreen(),
-          ),
-          GoRoute(
-            path: '/builder/:id',
-            builder: (_, state) =>
-                BuilderScreen(buildId: int.tryParse(state.pathParameters['id']!)),
+            path: '/loadouts',
+            builder: (_, _) => const LoadoutsScreen(),
           ),
         ]),
       ],
     ),
   ],
 );
-
-class ScaffoldWithNav extends StatelessWidget {
-  final StatefulNavigationShell navigationShell;
-  const ScaffoldWithNav({super.key, required this.navigationShell});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: navigationShell,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationShell.currentIndex,
-        onDestinationSelected: navigationShell.goBranch,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.shield), label: 'Equipment'),
-          NavigationDestination(icon: Icon(Icons.list), label: 'Builds'),
-          NavigationDestination(icon: Icon(Icons.build), label: 'Builder'),
-        ],
-      ),
-    );
-  }
-}
