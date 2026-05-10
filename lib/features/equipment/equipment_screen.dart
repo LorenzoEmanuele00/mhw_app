@@ -108,7 +108,7 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
   }
 
   // ---------------------------------------------------------------------------
-  // Weapons list
+  // Weapons list — grouped by weapon type
   // ---------------------------------------------------------------------------
 
   Widget _buildWeaponsList(
@@ -117,16 +117,47 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
     AppLocalizations l10n,
     AppTokens tokens,
   ) {
-    final filtered = _filterItems(
-      weapons,
-      (w) => w.name,
+    const typeOrder = WeaponType.values;
+
+    final hasAny = typeOrder.any((type) => weapons.any(
+          (w) =>
+              w.weaponType == type &&
+              (_query.isEmpty ||
+                  w.name.toLowerCase().contains(_query.toLowerCase())),
+        ));
+
+    if (!hasAny && _query.isNotEmpty) {
+      return _EmptySearch(query: _query, l10n: l10n, tokens: tokens);
+    }
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
+      children: [
+        for (final type in typeOrder)
+          ..._buildWeaponGroup(context, weapons, type, l10n, tokens),
+      ],
     );
-    return _ItemList(
-      isEmpty: filtered.isEmpty,
-      query: _query,
-      l10n: l10n,
-      tokens: tokens,
-      builder: (context) => AppCard(
+  }
+
+  List<Widget> _buildWeaponGroup(
+    BuildContext context,
+    List<Weapon> allWeapons,
+    WeaponType type,
+    AppLocalizations l10n,
+    AppTokens tokens,
+  ) {
+    final filtered = allWeapons
+        .where((w) =>
+            w.weaponType == type &&
+            (_query.isEmpty ||
+                w.name.toLowerCase().contains(_query.toLowerCase())))
+        .toList();
+
+    if (filtered.isEmpty) return [];
+
+    return [
+      SectionLabel(text: weaponTypeName(type, l10n)),
+      AppCard(
         padding: 0,
         child: Column(
           children: filtered.asMap().entries.map((e) {
@@ -140,7 +171,8 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
           }).toList(),
         ),
       ),
-    );
+      const SizedBox(height: 20),
+    ];
   }
 
   // ---------------------------------------------------------------------------

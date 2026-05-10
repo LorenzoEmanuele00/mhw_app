@@ -103,14 +103,14 @@ void main() {
       expect(find.textContaining('Attack'), findsOneWidget);
     });
 
-    testWidgets('shows weapon type label', (tester) async {
+    testWidgets('does not show weapon type label in row', (tester) async {
       final item = WeaponEquipItem(_weapon(type: WeaponType.ls));
 
       await tester.pumpWidget(
         _wrap(EquipmentRow(item: item, onTap: () {})),
       );
 
-      expect(find.textContaining('Longsword'), findsOneWidget);
+      expect(find.textContaining('Longsword'), findsNothing);
     });
 
     testWidgets('shows affinity when non-zero', (tester) async {
@@ -191,14 +191,14 @@ void main() {
       expect(find.textContaining('Defense'), findsOneWidget);
     });
 
-    testWidgets('shows slot type label', (tester) async {
+    testWidgets('does not show slot type label in row', (tester) async {
       final item = ArmorEquipItem(_armorPiece(slotType: ArmorSlotType.chest));
 
       await tester.pumpWidget(
         _wrap(EquipmentRow(item: item, onTap: () {})),
       );
 
-      expect(find.textContaining('Chest'), findsOneWidget);
+      expect(find.textContaining('Chest'), findsNothing);
     });
 
     testWidgets('shows deco slots row for piece with slots', (tester) async {

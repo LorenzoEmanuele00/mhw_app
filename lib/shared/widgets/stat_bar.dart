@@ -71,7 +71,14 @@ class StatBar extends StatelessWidget {
                   FractionallySizedBox(
                     widthFactor: pct,
                     alignment: Alignment.centerLeft,
-                    child: Container(color: color),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: const BorderRadius.horizontal(
+                          right: Radius.circular(999),
+                        ),
+                      ),
+                    ),
                   ),
                 // Centre divider for signed bars
                 if (signed)
@@ -79,7 +86,7 @@ class StatBar extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Container(
                       width: 1,
-                      color: tokens.label3,
+                      color: Colors.black,
                     ),
                   ),
               ],
@@ -115,7 +122,16 @@ class _SignedFill extends StatelessWidget {
               left: isNeg ? half - fillW : half,
               width: fillW,
               child: Container(
-                color: isNeg ? AppColors.negativeRed : color,
+                decoration: BoxDecoration(
+                  color: isNeg ? AppColors.negativeRed : color,
+                  borderRadius: isNeg
+                      ? const BorderRadius.horizontal(
+                          left: Radius.circular(999),
+                        )
+                      : const BorderRadius.horizontal(
+                          right: Radius.circular(999),
+                        ),
+                ),
               ),
             ),
           ],

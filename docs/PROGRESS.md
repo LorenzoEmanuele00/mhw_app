@@ -187,6 +187,16 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 
 ## Session notes
 
+### 2026-05-10 — Session 7
+- Applied review fixes from REVIEW.md (equipment browsing screen):
+  1. Weapons list now grouped by weapon type (14 sublists) — weapon type label removed from row
+  2. Armor rows no longer show slot type label (redundant with section header)
+  3. StatBar: signed bar center divider is now black; fill rectangle rounded at trailing end
+- `equipment_row.dart`: removed `_typeLabel`, removed `_armorSlotName`, made `weaponTypeName` public
+- `equipment_screen.dart`: replaced flat weapons list with grouped-by-type list
+- Widget tests updated to match new row behavior (2 tests inverted)
+- `flutter test` → 59/59 passed
+
 ### 2026-05-10 — Session 6
 - Phase 2 tests completed: `ArmorDao.getPieceSkills` join tests (3) + `EquipmentRow` widget tests (13 — weapon/armor/charm variants)
 - `flutter test` → 59/59 passed

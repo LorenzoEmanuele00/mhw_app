@@ -32,7 +32,6 @@ class EquipmentRow extends StatelessWidget {
 
     final kind = _kind(item);
     final mainStat = _mainStat(item, l10n);
-    final typeLabel = _typeLabel(item, l10n);
     final elementInfo = _elementInfo(item, brightness);
     final slots = _slots(item);
 
@@ -79,13 +78,6 @@ class EquipmentRow extends StatelessWidget {
                         mainStat,
                         style: TextStyle(fontSize: 13, color: tokens.label2),
                       ),
-                      if (typeLabel != null) ...[
-                        Text('·', style: TextStyle(color: tokens.label2, fontSize: 13)),
-                        Text(
-                          typeLabel,
-                          style: TextStyle(fontSize: 13, color: tokens.label2),
-                        ),
-                      ],
                       if (elementInfo != null) ...[
                         Text('·', style: TextStyle(color: tokens.label2, fontSize: 13)),
                         Text(
@@ -125,12 +117,6 @@ class EquipmentRow extends StatelessWidget {
         CharmEquipItem() => '${l10n.statRarity} ${item.rarity}',
       };
 
-  String? _typeLabel(EquipItem item, AppLocalizations l10n) => switch (item) {
-        WeaponEquipItem(:final weapon) => _weaponTypeName(weapon.weaponType, l10n),
-        ArmorEquipItem(:final piece) => _armorSlotName(piece.slotType, l10n),
-        CharmEquipItem() => null,
-      };
-
   ({String label, Color color})? _elementInfo(EquipItem item, Brightness b) {
     if (item is! WeaponEquipItem) return null;
     final w = item.weapon;
@@ -148,7 +134,7 @@ class EquipmentRow extends StatelessWidget {
       };
 }
 
-String _weaponTypeName(WeaponType type, AppLocalizations l10n) => switch (type) {
+String weaponTypeName(WeaponType type, AppLocalizations l10n) => switch (type) {
       WeaponType.gs  => l10n.weaponTypeGs,
       WeaponType.ls  => l10n.weaponTypeLs,
       WeaponType.sns => l10n.weaponTypeSns,
@@ -163,14 +149,6 @@ String _weaponTypeName(WeaponType type, AppLocalizations l10n) => switch (type) 
       WeaponType.lbg => l10n.weaponTypeLbg,
       WeaponType.hbg => l10n.weaponTypeHbg,
       WeaponType.bow => l10n.weaponTypeBow,
-    };
-
-String _armorSlotName(ArmorSlotType slot, AppLocalizations l10n) => switch (slot) {
-      ArmorSlotType.head  => l10n.armorSlotHead,
-      ArmorSlotType.chest => l10n.armorSlotChest,
-      ArmorSlotType.arms  => l10n.armorSlotArms,
-      ArmorSlotType.waist => l10n.armorSlotWaist,
-      ArmorSlotType.legs  => l10n.armorSlotLegs,
     };
 
 class _EquippedBadge extends StatelessWidget {
