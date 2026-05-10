@@ -12,9 +12,11 @@ class ArmorRepository {
   Stream<List<ArmorPiece>> watchBySlot(ArmorSlotType slotType) =>
       _db.armorDao.watchBySlot(slotType);
 
-  Future<ArmorPiece?> getById(String id) => _db.armorDao.getById(id);
+  Future<ArmorPiece?> getById(int id) => _db.armorDao.getById(id);
 
-  Future<List<ArmorSetSkill>> getSetSkills(String setId) =>
+  Future<ArmorPiece?> getBySlug(String slug) => _db.armorDao.getBySlug(slug);
+
+  Future<List<ArmorSetSkill>> getSetSkills(int setId) =>
       _db.armorDao.getSetSkills(setId);
 }
 

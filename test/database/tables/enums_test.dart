@@ -44,6 +44,10 @@ void main() {
       expect(converter.fromSql('thunder'), ElementType.thunder);
       expect(converter.fromSql('ice'), ElementType.ice);
       expect(converter.fromSql('dragon'), ElementType.dragon);
+      expect(converter.fromSql('poison'), ElementType.poison);
+      expect(converter.fromSql('sleep'), ElementType.sleep);
+      expect(converter.fromSql('paralysis'), ElementType.paralysis);
+      expect(converter.fromSql('blast'), ElementType.blast);
     });
 
     test('toSql round-trips for all values', () {
@@ -113,7 +117,7 @@ void main() {
     test('fromSql maps all skill categories (lowercase, as stored in DB)', () {
       expect(converter.fromSql('armor'), SkillCategory.armor);
       expect(converter.fromSql('group'), SkillCategory.group);
-      expect(converter.fromSql('series'), SkillCategory.series);
+      expect(converter.fromSql('set'), SkillCategory.set);
       expect(converter.fromSql('weapon'), SkillCategory.weapon);
     });
 
@@ -146,9 +150,9 @@ void main() {
   group('SetSkillTypeConverter', () {
     const converter = SetSkillTypeConverter();
 
-    test('fromSql maps group and series', () {
+    test('fromSql maps group and set', () {
       expect(converter.fromSql('group'), SetSkillType.group);
-      expect(converter.fromSql('series'), SetSkillType.series);
+      expect(converter.fromSql('set'), SetSkillType.set);
     });
 
     test('toSql round-trips for all values', () {

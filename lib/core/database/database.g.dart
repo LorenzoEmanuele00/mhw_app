@@ -10,8 +10,21 @@ class $WeaponsTable extends Weapons with TableInfo<$WeaponsTable, Weapon> {
   $WeaponsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
     'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _slugMeta = const VerificationMeta('slug');
+  @override
+  late final GeneratedColumn<String> slug = GeneratedColumn<String>(
+    'slug',
     aliasedName,
     false,
     type: DriftSqlType.string,
@@ -153,6 +166,7 @@ class $WeaponsTable extends Weapons with TableInfo<$WeaponsTable, Weapon> {
   @override
   List<GeneratedColumn> get $columns => [
     id,
+    slug,
     name,
     weaponType,
     baseAttack,
@@ -181,8 +195,14 @@ class $WeaponsTable extends Weapons with TableInfo<$WeaponsTable, Weapon> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('slug')) {
+      context.handle(
+        _slugMeta,
+        slug.isAcceptableOrUnknown(data['slug']!, _slugMeta),
+      );
     } else if (isInserting) {
-      context.missing(_idMeta);
+      context.missing(_slugMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -254,12 +274,20 @@ class $WeaponsTable extends Weapons with TableInfo<$WeaponsTable, Weapon> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {slug},
+  ];
+  @override
   Weapon map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Weapon(
       id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}id'],
+      )!,
+      slug: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}slug'],
       )!,
       name: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -342,7 +370,8 @@ class $WeaponsTable extends Weapons with TableInfo<$WeaponsTable, Weapon> {
 }
 
 class Weapon extends DataClass implements Insertable<Weapon> {
-  final String id;
+  final int id;
+  final String slug;
   final String name;
   final WeaponType weaponType;
   final int baseAttack;
@@ -358,6 +387,7 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   final String burstGroup;
   const Weapon({
     required this.id,
+    required this.slug,
     required this.name,
     required this.weaponType,
     required this.baseAttack,
@@ -375,7 +405,8 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
+    map['id'] = Variable<int>(id);
+    map['slug'] = Variable<String>(slug);
     map['name'] = Variable<String>(name);
     {
       map['weapon_type'] = Variable<String>(
@@ -413,6 +444,7 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   WeaponsCompanion toCompanion(bool nullToAbsent) {
     return WeaponsCompanion(
       id: Value(id),
+      slug: Value(slug),
       name: Value(name),
       weaponType: Value(weaponType),
       baseAttack: Value(baseAttack),
@@ -439,7 +471,8 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Weapon(
-      id: serializer.fromJson<String>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
+      slug: serializer.fromJson<String>(json['slug']),
       name: serializer.fromJson<String>(json['name']),
       weaponType: serializer.fromJson<WeaponType>(json['weaponType']),
       baseAttack: serializer.fromJson<int>(json['baseAttack']),
@@ -459,7 +492,8 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
+      'id': serializer.toJson<int>(id),
+      'slug': serializer.toJson<String>(slug),
       'name': serializer.toJson<String>(name),
       'weaponType': serializer.toJson<WeaponType>(weaponType),
       'baseAttack': serializer.toJson<int>(baseAttack),
@@ -477,7 +511,8 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   }
 
   Weapon copyWith({
-    String? id,
+    int? id,
+    String? slug,
     String? name,
     WeaponType? weaponType,
     int? baseAttack,
@@ -493,6 +528,7 @@ class Weapon extends DataClass implements Insertable<Weapon> {
     String? burstGroup,
   }) => Weapon(
     id: id ?? this.id,
+    slug: slug ?? this.slug,
     name: name ?? this.name,
     weaponType: weaponType ?? this.weaponType,
     baseAttack: baseAttack ?? this.baseAttack,
@@ -510,6 +546,7 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   Weapon copyWithCompanion(WeaponsCompanion data) {
     return Weapon(
       id: data.id.present ? data.id.value : this.id,
+      slug: data.slug.present ? data.slug.value : this.slug,
       name: data.name.present ? data.name.value : this.name,
       weaponType: data.weaponType.present
           ? data.weaponType.value
@@ -546,6 +583,7 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   String toString() {
     return (StringBuffer('Weapon(')
           ..write('id: $id, ')
+          ..write('slug: $slug, ')
           ..write('name: $name, ')
           ..write('weaponType: $weaponType, ')
           ..write('baseAttack: $baseAttack, ')
@@ -566,6 +604,7 @@ class Weapon extends DataClass implements Insertable<Weapon> {
   @override
   int get hashCode => Object.hash(
     id,
+    slug,
     name,
     weaponType,
     baseAttack,
@@ -585,6 +624,7 @@ class Weapon extends DataClass implements Insertable<Weapon> {
       identical(this, other) ||
       (other is Weapon &&
           other.id == this.id &&
+          other.slug == this.slug &&
           other.name == this.name &&
           other.weaponType == this.weaponType &&
           other.baseAttack == this.baseAttack &&
@@ -601,7 +641,8 @@ class Weapon extends DataClass implements Insertable<Weapon> {
 }
 
 class WeaponsCompanion extends UpdateCompanion<Weapon> {
-  final Value<String> id;
+  final Value<int> id;
+  final Value<String> slug;
   final Value<String> name;
   final Value<WeaponType> weaponType;
   final Value<int> baseAttack;
@@ -615,9 +656,9 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
   final Value<double> emv;
   final Value<DamageType> damageType;
   final Value<String> burstGroup;
-  final Value<int> rowid;
   const WeaponsCompanion({
     this.id = const Value.absent(),
+    this.slug = const Value.absent(),
     this.name = const Value.absent(),
     this.weaponType = const Value.absent(),
     this.baseAttack = const Value.absent(),
@@ -631,10 +672,10 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
     this.emv = const Value.absent(),
     this.damageType = const Value.absent(),
     this.burstGroup = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   WeaponsCompanion.insert({
-    required String id,
+    this.id = const Value.absent(),
+    required String slug,
     required String name,
     required WeaponType weaponType,
     required int baseAttack,
@@ -648,13 +689,13 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
     this.emv = const Value.absent(),
     this.damageType = const Value.absent(),
     this.burstGroup = const Value.absent(),
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
+  }) : slug = Value(slug),
        name = Value(name),
        weaponType = Value(weaponType),
        baseAttack = Value(baseAttack);
   static Insertable<Weapon> custom({
-    Expression<String>? id,
+    Expression<int>? id,
+    Expression<String>? slug,
     Expression<String>? name,
     Expression<String>? weaponType,
     Expression<int>? baseAttack,
@@ -668,10 +709,10 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
     Expression<double>? emv,
     Expression<String>? damageType,
     Expression<String>? burstGroup,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (slug != null) 'slug': slug,
       if (name != null) 'name': name,
       if (weaponType != null) 'weapon_type': weaponType,
       if (baseAttack != null) 'base_attack': baseAttack,
@@ -685,12 +726,12 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
       if (emv != null) 'emv': emv,
       if (damageType != null) 'damage_type': damageType,
       if (burstGroup != null) 'burst_group': burstGroup,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
   WeaponsCompanion copyWith({
-    Value<String>? id,
+    Value<int>? id,
+    Value<String>? slug,
     Value<String>? name,
     Value<WeaponType>? weaponType,
     Value<int>? baseAttack,
@@ -704,10 +745,10 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
     Value<double>? emv,
     Value<DamageType>? damageType,
     Value<String>? burstGroup,
-    Value<int>? rowid,
   }) {
     return WeaponsCompanion(
       id: id ?? this.id,
+      slug: slug ?? this.slug,
       name: name ?? this.name,
       weaponType: weaponType ?? this.weaponType,
       baseAttack: baseAttack ?? this.baseAttack,
@@ -721,7 +762,6 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
       emv: emv ?? this.emv,
       damageType: damageType ?? this.damageType,
       burstGroup: burstGroup ?? this.burstGroup,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -729,7 +769,10 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<int>(id.value);
+    }
+    if (slug.present) {
+      map['slug'] = Variable<String>(slug.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -778,9 +821,6 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
     if (burstGroup.present) {
       map['burst_group'] = Variable<String>(burstGroup.value);
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -788,6 +828,7 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
   String toString() {
     return (StringBuffer('WeaponsCompanion(')
           ..write('id: $id, ')
+          ..write('slug: $slug, ')
           ..write('name: $name, ')
           ..write('weaponType: $weaponType, ')
           ..write('baseAttack: $baseAttack, ')
@@ -800,8 +841,7 @@ class WeaponsCompanion extends UpdateCompanion<Weapon> {
           ..write('rmv: $rmv, ')
           ..write('emv: $emv, ')
           ..write('damageType: $damageType, ')
-          ..write('burstGroup: $burstGroup, ')
-          ..write('rowid: $rowid')
+          ..write('burstGroup: $burstGroup')
           ..write(')'))
         .toString();
   }
@@ -815,8 +855,21 @@ class $ArmorSetsTable extends ArmorSets
   $ArmorSetsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
     'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _slugMeta = const VerificationMeta('slug');
+  @override
+  late final GeneratedColumn<String> slug = GeneratedColumn<String>(
+    'slug',
     aliasedName,
     false,
     type: DriftSqlType.string,
@@ -832,7 +885,7 @@ class $ArmorSetsTable extends ArmorSets
     requiredDuringInsert: true,
   );
   @override
-  List<GeneratedColumn> get $columns => [id, name];
+  List<GeneratedColumn> get $columns => [id, slug, name];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -847,8 +900,14 @@ class $ArmorSetsTable extends ArmorSets
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('slug')) {
+      context.handle(
+        _slugMeta,
+        slug.isAcceptableOrUnknown(data['slug']!, _slugMeta),
+      );
     } else if (isInserting) {
-      context.missing(_idMeta);
+      context.missing(_slugMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -864,12 +923,20 @@ class $ArmorSetsTable extends ArmorSets
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {slug},
+  ];
+  @override
   ArmorSet map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return ArmorSet(
       id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}id'],
+      )!,
+      slug: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}slug'],
       )!,
       name: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -885,19 +952,25 @@ class $ArmorSetsTable extends ArmorSets
 }
 
 class ArmorSet extends DataClass implements Insertable<ArmorSet> {
-  final String id;
+  final int id;
+  final String slug;
   final String name;
-  const ArmorSet({required this.id, required this.name});
+  const ArmorSet({required this.id, required this.slug, required this.name});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
+    map['id'] = Variable<int>(id);
+    map['slug'] = Variable<String>(slug);
     map['name'] = Variable<String>(name);
     return map;
   }
 
   ArmorSetsCompanion toCompanion(bool nullToAbsent) {
-    return ArmorSetsCompanion(id: Value(id), name: Value(name));
+    return ArmorSetsCompanion(
+      id: Value(id),
+      slug: Value(slug),
+      name: Value(name),
+    );
   }
 
   factory ArmorSet.fromJson(
@@ -906,7 +979,8 @@ class ArmorSet extends DataClass implements Insertable<ArmorSet> {
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ArmorSet(
-      id: serializer.fromJson<String>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
+      slug: serializer.fromJson<String>(json['slug']),
       name: serializer.fromJson<String>(json['name']),
     );
   }
@@ -914,16 +988,21 @@ class ArmorSet extends DataClass implements Insertable<ArmorSet> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
+      'id': serializer.toJson<int>(id),
+      'slug': serializer.toJson<String>(slug),
       'name': serializer.toJson<String>(name),
     };
   }
 
-  ArmorSet copyWith({String? id, String? name}) =>
-      ArmorSet(id: id ?? this.id, name: name ?? this.name);
+  ArmorSet copyWith({int? id, String? slug, String? name}) => ArmorSet(
+    id: id ?? this.id,
+    slug: slug ?? this.slug,
+    name: name ?? this.name,
+  );
   ArmorSet copyWithCompanion(ArmorSetsCompanion data) {
     return ArmorSet(
       id: data.id.present ? data.id.value : this.id,
+      slug: data.slug.present ? data.slug.value : this.slug,
       name: data.name.present ? data.name.value : this.name,
     );
   }
@@ -932,55 +1011,59 @@ class ArmorSet extends DataClass implements Insertable<ArmorSet> {
   String toString() {
     return (StringBuffer('ArmorSet(')
           ..write('id: $id, ')
+          ..write('slug: $slug, ')
           ..write('name: $name')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, name);
+  int get hashCode => Object.hash(id, slug, name);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is ArmorSet && other.id == this.id && other.name == this.name);
+      (other is ArmorSet &&
+          other.id == this.id &&
+          other.slug == this.slug &&
+          other.name == this.name);
 }
 
 class ArmorSetsCompanion extends UpdateCompanion<ArmorSet> {
-  final Value<String> id;
+  final Value<int> id;
+  final Value<String> slug;
   final Value<String> name;
-  final Value<int> rowid;
   const ArmorSetsCompanion({
     this.id = const Value.absent(),
+    this.slug = const Value.absent(),
     this.name = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   ArmorSetsCompanion.insert({
-    required String id,
+    this.id = const Value.absent(),
+    required String slug,
     required String name,
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
+  }) : slug = Value(slug),
        name = Value(name);
   static Insertable<ArmorSet> custom({
-    Expression<String>? id,
+    Expression<int>? id,
+    Expression<String>? slug,
     Expression<String>? name,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (slug != null) 'slug': slug,
       if (name != null) 'name': name,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
   ArmorSetsCompanion copyWith({
-    Value<String>? id,
+    Value<int>? id,
+    Value<String>? slug,
     Value<String>? name,
-    Value<int>? rowid,
   }) {
     return ArmorSetsCompanion(
       id: id ?? this.id,
+      slug: slug ?? this.slug,
       name: name ?? this.name,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -988,13 +1071,13 @@ class ArmorSetsCompanion extends UpdateCompanion<ArmorSet> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<int>(id.value);
+    }
+    if (slug.present) {
+      map['slug'] = Variable<String>(slug.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
     }
     return map;
   }
@@ -1003,8 +1086,8 @@ class ArmorSetsCompanion extends UpdateCompanion<ArmorSet> {
   String toString() {
     return (StringBuffer('ArmorSetsCompanion(')
           ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('rowid: $rowid')
+          ..write('slug: $slug, ')
+          ..write('name: $name')
           ..write(')'))
         .toString();
   }
@@ -1018,8 +1101,21 @@ class $ArmorPiecesTable extends ArmorPieces
   $ArmorPiecesTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
     'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _slugMeta = const VerificationMeta('slug');
+  @override
+  late final GeneratedColumn<String> slug = GeneratedColumn<String>(
+    'slug',
     aliasedName,
     false,
     type: DriftSqlType.string,
@@ -1135,11 +1231,11 @@ class $ArmorPiecesTable extends ArmorPieces
   );
   static const VerificationMeta _setIdMeta = const VerificationMeta('setId');
   @override
-  late final GeneratedColumn<String> setId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> setId = GeneratedColumn<int>(
     'set_id',
     aliasedName,
     false,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: true,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES armor_sets (id)',
@@ -1148,6 +1244,7 @@ class $ArmorPiecesTable extends ArmorPieces
   @override
   List<GeneratedColumn> get $columns => [
     id,
+    slug,
     name,
     slotType,
     baseDefense,
@@ -1174,8 +1271,14 @@ class $ArmorPiecesTable extends ArmorPieces
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('slug')) {
+      context.handle(
+        _slugMeta,
+        slug.isAcceptableOrUnknown(data['slug']!, _slugMeta),
+      );
     } else if (isInserting) {
-      context.missing(_idMeta);
+      context.missing(_slugMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -1250,12 +1353,20 @@ class $ArmorPiecesTable extends ArmorPieces
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {slug},
+  ];
+  @override
   ArmorPiece map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return ArmorPiece(
       id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}id'],
+      )!,
+      slug: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}slug'],
       )!,
       name: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -1300,7 +1411,7 @@ class $ArmorPiecesTable extends ArmorPieces
         data['${effectivePrefix}slots'],
       )!,
       setId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}set_id'],
       )!,
     );
@@ -1316,7 +1427,8 @@ class $ArmorPiecesTable extends ArmorPieces
 }
 
 class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
-  final String id;
+  final int id;
+  final String slug;
   final String name;
   final ArmorSlotType slotType;
   final int baseDefense;
@@ -1327,9 +1439,10 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
   final int dragonRes;
   final int rarity;
   final String slots;
-  final String setId;
+  final int setId;
   const ArmorPiece({
     required this.id,
+    required this.slug,
     required this.name,
     required this.slotType,
     required this.baseDefense,
@@ -1345,7 +1458,8 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
+    map['id'] = Variable<int>(id);
+    map['slug'] = Variable<String>(slug);
     map['name'] = Variable<String>(name);
     {
       map['slot_type'] = Variable<String>(
@@ -1360,13 +1474,14 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
     map['dragon_res'] = Variable<int>(dragonRes);
     map['rarity'] = Variable<int>(rarity);
     map['slots'] = Variable<String>(slots);
-    map['set_id'] = Variable<String>(setId);
+    map['set_id'] = Variable<int>(setId);
     return map;
   }
 
   ArmorPiecesCompanion toCompanion(bool nullToAbsent) {
     return ArmorPiecesCompanion(
       id: Value(id),
+      slug: Value(slug),
       name: Value(name),
       slotType: Value(slotType),
       baseDefense: Value(baseDefense),
@@ -1387,7 +1502,8 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ArmorPiece(
-      id: serializer.fromJson<String>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
+      slug: serializer.fromJson<String>(json['slug']),
       name: serializer.fromJson<String>(json['name']),
       slotType: serializer.fromJson<ArmorSlotType>(json['slotType']),
       baseDefense: serializer.fromJson<int>(json['baseDefense']),
@@ -1398,14 +1514,15 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
       dragonRes: serializer.fromJson<int>(json['dragonRes']),
       rarity: serializer.fromJson<int>(json['rarity']),
       slots: serializer.fromJson<String>(json['slots']),
-      setId: serializer.fromJson<String>(json['setId']),
+      setId: serializer.fromJson<int>(json['setId']),
     );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
+      'id': serializer.toJson<int>(id),
+      'slug': serializer.toJson<String>(slug),
       'name': serializer.toJson<String>(name),
       'slotType': serializer.toJson<ArmorSlotType>(slotType),
       'baseDefense': serializer.toJson<int>(baseDefense),
@@ -1416,12 +1533,13 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
       'dragonRes': serializer.toJson<int>(dragonRes),
       'rarity': serializer.toJson<int>(rarity),
       'slots': serializer.toJson<String>(slots),
-      'setId': serializer.toJson<String>(setId),
+      'setId': serializer.toJson<int>(setId),
     };
   }
 
   ArmorPiece copyWith({
-    String? id,
+    int? id,
+    String? slug,
     String? name,
     ArmorSlotType? slotType,
     int? baseDefense,
@@ -1432,9 +1550,10 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
     int? dragonRes,
     int? rarity,
     String? slots,
-    String? setId,
+    int? setId,
   }) => ArmorPiece(
     id: id ?? this.id,
+    slug: slug ?? this.slug,
     name: name ?? this.name,
     slotType: slotType ?? this.slotType,
     baseDefense: baseDefense ?? this.baseDefense,
@@ -1450,6 +1569,7 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
   ArmorPiece copyWithCompanion(ArmorPiecesCompanion data) {
     return ArmorPiece(
       id: data.id.present ? data.id.value : this.id,
+      slug: data.slug.present ? data.slug.value : this.slug,
       name: data.name.present ? data.name.value : this.name,
       slotType: data.slotType.present ? data.slotType.value : this.slotType,
       baseDefense: data.baseDefense.present
@@ -1472,6 +1592,7 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
   String toString() {
     return (StringBuffer('ArmorPiece(')
           ..write('id: $id, ')
+          ..write('slug: $slug, ')
           ..write('name: $name, ')
           ..write('slotType: $slotType, ')
           ..write('baseDefense: $baseDefense, ')
@@ -1490,6 +1611,7 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
   @override
   int get hashCode => Object.hash(
     id,
+    slug,
     name,
     slotType,
     baseDefense,
@@ -1507,6 +1629,7 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
       identical(this, other) ||
       (other is ArmorPiece &&
           other.id == this.id &&
+          other.slug == this.slug &&
           other.name == this.name &&
           other.slotType == this.slotType &&
           other.baseDefense == this.baseDefense &&
@@ -1521,7 +1644,8 @@ class ArmorPiece extends DataClass implements Insertable<ArmorPiece> {
 }
 
 class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
-  final Value<String> id;
+  final Value<int> id;
+  final Value<String> slug;
   final Value<String> name;
   final Value<ArmorSlotType> slotType;
   final Value<int> baseDefense;
@@ -1532,10 +1656,10 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
   final Value<int> dragonRes;
   final Value<int> rarity;
   final Value<String> slots;
-  final Value<String> setId;
-  final Value<int> rowid;
+  final Value<int> setId;
   const ArmorPiecesCompanion({
     this.id = const Value.absent(),
+    this.slug = const Value.absent(),
     this.name = const Value.absent(),
     this.slotType = const Value.absent(),
     this.baseDefense = const Value.absent(),
@@ -1547,10 +1671,10 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
     this.rarity = const Value.absent(),
     this.slots = const Value.absent(),
     this.setId = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   ArmorPiecesCompanion.insert({
-    required String id,
+    this.id = const Value.absent(),
+    required String slug,
     required String name,
     required ArmorSlotType slotType,
     this.baseDefense = const Value.absent(),
@@ -1561,14 +1685,14 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
     this.dragonRes = const Value.absent(),
     this.rarity = const Value.absent(),
     this.slots = const Value.absent(),
-    required String setId,
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
+    required int setId,
+  }) : slug = Value(slug),
        name = Value(name),
        slotType = Value(slotType),
        setId = Value(setId);
   static Insertable<ArmorPiece> custom({
-    Expression<String>? id,
+    Expression<int>? id,
+    Expression<String>? slug,
     Expression<String>? name,
     Expression<String>? slotType,
     Expression<int>? baseDefense,
@@ -1579,11 +1703,11 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
     Expression<int>? dragonRes,
     Expression<int>? rarity,
     Expression<String>? slots,
-    Expression<String>? setId,
-    Expression<int>? rowid,
+    Expression<int>? setId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (slug != null) 'slug': slug,
       if (name != null) 'name': name,
       if (slotType != null) 'slot_type': slotType,
       if (baseDefense != null) 'base_defense': baseDefense,
@@ -1595,12 +1719,12 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
       if (rarity != null) 'rarity': rarity,
       if (slots != null) 'slots': slots,
       if (setId != null) 'set_id': setId,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
   ArmorPiecesCompanion copyWith({
-    Value<String>? id,
+    Value<int>? id,
+    Value<String>? slug,
     Value<String>? name,
     Value<ArmorSlotType>? slotType,
     Value<int>? baseDefense,
@@ -1611,11 +1735,11 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
     Value<int>? dragonRes,
     Value<int>? rarity,
     Value<String>? slots,
-    Value<String>? setId,
-    Value<int>? rowid,
+    Value<int>? setId,
   }) {
     return ArmorPiecesCompanion(
       id: id ?? this.id,
+      slug: slug ?? this.slug,
       name: name ?? this.name,
       slotType: slotType ?? this.slotType,
       baseDefense: baseDefense ?? this.baseDefense,
@@ -1627,7 +1751,6 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
       rarity: rarity ?? this.rarity,
       slots: slots ?? this.slots,
       setId: setId ?? this.setId,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -1635,7 +1758,10 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<int>(id.value);
+    }
+    if (slug.present) {
+      map['slug'] = Variable<String>(slug.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -1670,10 +1796,7 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
       map['slots'] = Variable<String>(slots.value);
     }
     if (setId.present) {
-      map['set_id'] = Variable<String>(setId.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
+      map['set_id'] = Variable<int>(setId.value);
     }
     return map;
   }
@@ -1682,6 +1805,7 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
   String toString() {
     return (StringBuffer('ArmorPiecesCompanion(')
           ..write('id: $id, ')
+          ..write('slug: $slug, ')
           ..write('name: $name, ')
           ..write('slotType: $slotType, ')
           ..write('baseDefense: $baseDefense, ')
@@ -1692,8 +1816,7 @@ class ArmorPiecesCompanion extends UpdateCompanion<ArmorPiece> {
           ..write('dragonRes: $dragonRes, ')
           ..write('rarity: $rarity, ')
           ..write('slots: $slots, ')
-          ..write('setId: $setId, ')
-          ..write('rowid: $rowid')
+          ..write('setId: $setId')
           ..write(')'))
         .toString();
   }
@@ -1706,8 +1829,21 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
   $SkillsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
     'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _slugMeta = const VerificationMeta('slug');
+  @override
+  late final GeneratedColumn<String> slug = GeneratedColumn<String>(
+    'slug',
     aliasedName,
     false,
     type: DriftSqlType.string,
@@ -1754,7 +1890,14 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
         defaultValue: const Constant('utility'),
       ).withConverter<SkillSubcategory>($SkillsTable.$convertertype2);
   @override
-  List<GeneratedColumn> get $columns => [id, name, maxLevel, type1, type2];
+  List<GeneratedColumn> get $columns => [
+    id,
+    slug,
+    name,
+    maxLevel,
+    type1,
+    type2,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1769,8 +1912,14 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('slug')) {
+      context.handle(
+        _slugMeta,
+        slug.isAcceptableOrUnknown(data['slug']!, _slugMeta),
+      );
     } else if (isInserting) {
-      context.missing(_idMeta);
+      context.missing(_slugMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -1794,12 +1943,20 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {slug},
+  ];
+  @override
   Skill map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Skill(
       id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}id'],
+      )!,
+      slug: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}slug'],
       )!,
       name: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -1836,13 +1993,15 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
 }
 
 class Skill extends DataClass implements Insertable<Skill> {
-  final String id;
+  final int id;
+  final String slug;
   final String name;
   final int maxLevel;
   final SkillCategory type1;
   final SkillSubcategory type2;
   const Skill({
     required this.id,
+    required this.slug,
     required this.name,
     required this.maxLevel,
     required this.type1,
@@ -1851,7 +2010,8 @@ class Skill extends DataClass implements Insertable<Skill> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
+    map['id'] = Variable<int>(id);
+    map['slug'] = Variable<String>(slug);
     map['name'] = Variable<String>(name);
     map['max_level'] = Variable<int>(maxLevel);
     {
@@ -1870,6 +2030,7 @@ class Skill extends DataClass implements Insertable<Skill> {
   SkillsCompanion toCompanion(bool nullToAbsent) {
     return SkillsCompanion(
       id: Value(id),
+      slug: Value(slug),
       name: Value(name),
       maxLevel: Value(maxLevel),
       type1: Value(type1),
@@ -1883,7 +2044,8 @@ class Skill extends DataClass implements Insertable<Skill> {
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Skill(
-      id: serializer.fromJson<String>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
+      slug: serializer.fromJson<String>(json['slug']),
       name: serializer.fromJson<String>(json['name']),
       maxLevel: serializer.fromJson<int>(json['maxLevel']),
       type1: serializer.fromJson<SkillCategory>(json['type1']),
@@ -1894,7 +2056,8 @@ class Skill extends DataClass implements Insertable<Skill> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
+      'id': serializer.toJson<int>(id),
+      'slug': serializer.toJson<String>(slug),
       'name': serializer.toJson<String>(name),
       'maxLevel': serializer.toJson<int>(maxLevel),
       'type1': serializer.toJson<SkillCategory>(type1),
@@ -1903,13 +2066,15 @@ class Skill extends DataClass implements Insertable<Skill> {
   }
 
   Skill copyWith({
-    String? id,
+    int? id,
+    String? slug,
     String? name,
     int? maxLevel,
     SkillCategory? type1,
     SkillSubcategory? type2,
   }) => Skill(
     id: id ?? this.id,
+    slug: slug ?? this.slug,
     name: name ?? this.name,
     maxLevel: maxLevel ?? this.maxLevel,
     type1: type1 ?? this.type1,
@@ -1918,6 +2083,7 @@ class Skill extends DataClass implements Insertable<Skill> {
   Skill copyWithCompanion(SkillsCompanion data) {
     return Skill(
       id: data.id.present ? data.id.value : this.id,
+      slug: data.slug.present ? data.slug.value : this.slug,
       name: data.name.present ? data.name.value : this.name,
       maxLevel: data.maxLevel.present ? data.maxLevel.value : this.maxLevel,
       type1: data.type1.present ? data.type1.value : this.type1,
@@ -1929,6 +2095,7 @@ class Skill extends DataClass implements Insertable<Skill> {
   String toString() {
     return (StringBuffer('Skill(')
           ..write('id: $id, ')
+          ..write('slug: $slug, ')
           ..write('name: $name, ')
           ..write('maxLevel: $maxLevel, ')
           ..write('type1: $type1, ')
@@ -1938,12 +2105,13 @@ class Skill extends DataClass implements Insertable<Skill> {
   }
 
   @override
-  int get hashCode => Object.hash(id, name, maxLevel, type1, type2);
+  int get hashCode => Object.hash(id, slug, name, maxLevel, type1, type2);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Skill &&
           other.id == this.id &&
+          other.slug == this.slug &&
           other.name == this.name &&
           other.maxLevel == this.maxLevel &&
           other.type1 == this.type1 &&
@@ -1951,63 +2119,63 @@ class Skill extends DataClass implements Insertable<Skill> {
 }
 
 class SkillsCompanion extends UpdateCompanion<Skill> {
-  final Value<String> id;
+  final Value<int> id;
+  final Value<String> slug;
   final Value<String> name;
   final Value<int> maxLevel;
   final Value<SkillCategory> type1;
   final Value<SkillSubcategory> type2;
-  final Value<int> rowid;
   const SkillsCompanion({
     this.id = const Value.absent(),
+    this.slug = const Value.absent(),
     this.name = const Value.absent(),
     this.maxLevel = const Value.absent(),
     this.type1 = const Value.absent(),
     this.type2 = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   SkillsCompanion.insert({
-    required String id,
+    this.id = const Value.absent(),
+    required String slug,
     required String name,
     required int maxLevel,
     this.type1 = const Value.absent(),
     this.type2 = const Value.absent(),
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
+  }) : slug = Value(slug),
        name = Value(name),
        maxLevel = Value(maxLevel);
   static Insertable<Skill> custom({
-    Expression<String>? id,
+    Expression<int>? id,
+    Expression<String>? slug,
     Expression<String>? name,
     Expression<int>? maxLevel,
     Expression<String>? type1,
     Expression<String>? type2,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (slug != null) 'slug': slug,
       if (name != null) 'name': name,
       if (maxLevel != null) 'max_level': maxLevel,
       if (type1 != null) 'type1': type1,
       if (type2 != null) 'type2': type2,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
   SkillsCompanion copyWith({
-    Value<String>? id,
+    Value<int>? id,
+    Value<String>? slug,
     Value<String>? name,
     Value<int>? maxLevel,
     Value<SkillCategory>? type1,
     Value<SkillSubcategory>? type2,
-    Value<int>? rowid,
   }) {
     return SkillsCompanion(
       id: id ?? this.id,
+      slug: slug ?? this.slug,
       name: name ?? this.name,
       maxLevel: maxLevel ?? this.maxLevel,
       type1: type1 ?? this.type1,
       type2: type2 ?? this.type2,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -2015,7 +2183,10 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<int>(id.value);
+    }
+    if (slug.present) {
+      map['slug'] = Variable<String>(slug.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -2033,9 +2204,6 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
         $SkillsTable.$convertertype2.toSql(type2.value),
       );
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -2043,11 +2211,11 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
   String toString() {
     return (StringBuffer('SkillsCompanion(')
           ..write('id: $id, ')
+          ..write('slug: $slug, ')
           ..write('name: $name, ')
           ..write('maxLevel: $maxLevel, ')
           ..write('type1: $type1, ')
-          ..write('type2: $type2, ')
-          ..write('rowid: $rowid')
+          ..write('type2: $type2')
           ..write(')'))
         .toString();
   }
@@ -2074,11 +2242,11 @@ class $ArmorSetSkillsTable extends ArmorSetSkills
   );
   static const VerificationMeta _setIdMeta = const VerificationMeta('setId');
   @override
-  late final GeneratedColumn<String> setId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> setId = GeneratedColumn<int>(
     'set_id',
     aliasedName,
     false,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: true,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES armor_sets (id)',
@@ -2099,11 +2267,11 @@ class $ArmorSetSkillsTable extends ArmorSetSkills
     'skillId',
   );
   @override
-  late final GeneratedColumn<String> skillId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> skillId = GeneratedColumn<int>(
     'skill_id',
     aliasedName,
     false,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: true,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES skills (id)',
@@ -2202,7 +2370,7 @@ class $ArmorSetSkillsTable extends ArmorSetSkills
         data['${effectivePrefix}id'],
       )!,
       setId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}set_id'],
       )!,
       requiredPieces: attachedDatabase.typeMapping.read(
@@ -2210,7 +2378,7 @@ class $ArmorSetSkillsTable extends ArmorSetSkills
         data['${effectivePrefix}required_pieces'],
       )!,
       skillId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}skill_id'],
       )!,
       skillLevel: attachedDatabase.typeMapping.read(
@@ -2237,9 +2405,9 @@ class $ArmorSetSkillsTable extends ArmorSetSkills
 
 class ArmorSetSkill extends DataClass implements Insertable<ArmorSetSkill> {
   final int id;
-  final String setId;
+  final int setId;
   final int requiredPieces;
-  final String skillId;
+  final int skillId;
   final int skillLevel;
   final SetSkillType skillCategory;
   const ArmorSetSkill({
@@ -2254,9 +2422,9 @@ class ArmorSetSkill extends DataClass implements Insertable<ArmorSetSkill> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['set_id'] = Variable<String>(setId);
+    map['set_id'] = Variable<int>(setId);
     map['required_pieces'] = Variable<int>(requiredPieces);
-    map['skill_id'] = Variable<String>(skillId);
+    map['skill_id'] = Variable<int>(skillId);
     map['skill_level'] = Variable<int>(skillLevel);
     {
       map['skill_category'] = Variable<String>(
@@ -2284,9 +2452,9 @@ class ArmorSetSkill extends DataClass implements Insertable<ArmorSetSkill> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ArmorSetSkill(
       id: serializer.fromJson<int>(json['id']),
-      setId: serializer.fromJson<String>(json['setId']),
+      setId: serializer.fromJson<int>(json['setId']),
       requiredPieces: serializer.fromJson<int>(json['requiredPieces']),
-      skillId: serializer.fromJson<String>(json['skillId']),
+      skillId: serializer.fromJson<int>(json['skillId']),
       skillLevel: serializer.fromJson<int>(json['skillLevel']),
       skillCategory: serializer.fromJson<SetSkillType>(json['skillCategory']),
     );
@@ -2296,9 +2464,9 @@ class ArmorSetSkill extends DataClass implements Insertable<ArmorSetSkill> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'setId': serializer.toJson<String>(setId),
+      'setId': serializer.toJson<int>(setId),
       'requiredPieces': serializer.toJson<int>(requiredPieces),
-      'skillId': serializer.toJson<String>(skillId),
+      'skillId': serializer.toJson<int>(skillId),
       'skillLevel': serializer.toJson<int>(skillLevel),
       'skillCategory': serializer.toJson<SetSkillType>(skillCategory),
     };
@@ -2306,9 +2474,9 @@ class ArmorSetSkill extends DataClass implements Insertable<ArmorSetSkill> {
 
   ArmorSetSkill copyWith({
     int? id,
-    String? setId,
+    int? setId,
     int? requiredPieces,
-    String? skillId,
+    int? skillId,
     int? skillLevel,
     SetSkillType? skillCategory,
   }) => ArmorSetSkill(
@@ -2372,9 +2540,9 @@ class ArmorSetSkill extends DataClass implements Insertable<ArmorSetSkill> {
 
 class ArmorSetSkillsCompanion extends UpdateCompanion<ArmorSetSkill> {
   final Value<int> id;
-  final Value<String> setId;
+  final Value<int> setId;
   final Value<int> requiredPieces;
-  final Value<String> skillId;
+  final Value<int> skillId;
   final Value<int> skillLevel;
   final Value<SetSkillType> skillCategory;
   const ArmorSetSkillsCompanion({
@@ -2387,9 +2555,9 @@ class ArmorSetSkillsCompanion extends UpdateCompanion<ArmorSetSkill> {
   });
   ArmorSetSkillsCompanion.insert({
     this.id = const Value.absent(),
-    required String setId,
+    required int setId,
     required int requiredPieces,
-    required String skillId,
+    required int skillId,
     required int skillLevel,
     required SetSkillType skillCategory,
   }) : setId = Value(setId),
@@ -2399,9 +2567,9 @@ class ArmorSetSkillsCompanion extends UpdateCompanion<ArmorSetSkill> {
        skillCategory = Value(skillCategory);
   static Insertable<ArmorSetSkill> custom({
     Expression<int>? id,
-    Expression<String>? setId,
+    Expression<int>? setId,
     Expression<int>? requiredPieces,
-    Expression<String>? skillId,
+    Expression<int>? skillId,
     Expression<int>? skillLevel,
     Expression<String>? skillCategory,
   }) {
@@ -2417,9 +2585,9 @@ class ArmorSetSkillsCompanion extends UpdateCompanion<ArmorSetSkill> {
 
   ArmorSetSkillsCompanion copyWith({
     Value<int>? id,
-    Value<String>? setId,
+    Value<int>? setId,
     Value<int>? requiredPieces,
-    Value<String>? skillId,
+    Value<int>? skillId,
     Value<int>? skillLevel,
     Value<SetSkillType>? skillCategory,
   }) {
@@ -2440,13 +2608,13 @@ class ArmorSetSkillsCompanion extends UpdateCompanion<ArmorSetSkill> {
       map['id'] = Variable<int>(id.value);
     }
     if (setId.present) {
-      map['set_id'] = Variable<String>(setId.value);
+      map['set_id'] = Variable<int>(setId.value);
     }
     if (requiredPieces.present) {
       map['required_pieces'] = Variable<int>(requiredPieces.value);
     }
     if (skillId.present) {
-      map['skill_id'] = Variable<String>(skillId.value);
+      map['skill_id'] = Variable<int>(skillId.value);
     }
     if (skillLevel.present) {
       map['skill_level'] = Variable<int>(skillLevel.value);
@@ -2473,6 +2641,319 @@ class ArmorSetSkillsCompanion extends UpdateCompanion<ArmorSetSkill> {
   }
 }
 
+class $ArmorPieceSkillsTable extends ArmorPieceSkills
+    with TableInfo<$ArmorPieceSkillsTable, ArmorPieceSkill> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ArmorPieceSkillsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _armorPieceIdMeta = const VerificationMeta(
+    'armorPieceId',
+  );
+  @override
+  late final GeneratedColumn<int> armorPieceId = GeneratedColumn<int>(
+    'armor_piece_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES armor_pieces (id)',
+    ),
+  );
+  static const VerificationMeta _skillIdMeta = const VerificationMeta(
+    'skillId',
+  );
+  @override
+  late final GeneratedColumn<int> skillId = GeneratedColumn<int>(
+    'skill_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES skills (id)',
+    ),
+  );
+  static const VerificationMeta _skillLevelMeta = const VerificationMeta(
+    'skillLevel',
+  );
+  @override
+  late final GeneratedColumn<int> skillLevel = GeneratedColumn<int>(
+    'skill_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, armorPieceId, skillId, skillLevel];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'armor_piece_skills';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ArmorPieceSkill> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('armor_piece_id')) {
+      context.handle(
+        _armorPieceIdMeta,
+        armorPieceId.isAcceptableOrUnknown(
+          data['armor_piece_id']!,
+          _armorPieceIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_armorPieceIdMeta);
+    }
+    if (data.containsKey('skill_id')) {
+      context.handle(
+        _skillIdMeta,
+        skillId.isAcceptableOrUnknown(data['skill_id']!, _skillIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_skillIdMeta);
+    }
+    if (data.containsKey('skill_level')) {
+      context.handle(
+        _skillLevelMeta,
+        skillLevel.isAcceptableOrUnknown(data['skill_level']!, _skillLevelMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_skillLevelMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ArmorPieceSkill map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ArmorPieceSkill(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      armorPieceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}armor_piece_id'],
+      )!,
+      skillId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skill_id'],
+      )!,
+      skillLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skill_level'],
+      )!,
+    );
+  }
+
+  @override
+  $ArmorPieceSkillsTable createAlias(String alias) {
+    return $ArmorPieceSkillsTable(attachedDatabase, alias);
+  }
+}
+
+class ArmorPieceSkill extends DataClass implements Insertable<ArmorPieceSkill> {
+  final int id;
+  final int armorPieceId;
+  final int skillId;
+  final int skillLevel;
+  const ArmorPieceSkill({
+    required this.id,
+    required this.armorPieceId,
+    required this.skillId,
+    required this.skillLevel,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['armor_piece_id'] = Variable<int>(armorPieceId);
+    map['skill_id'] = Variable<int>(skillId);
+    map['skill_level'] = Variable<int>(skillLevel);
+    return map;
+  }
+
+  ArmorPieceSkillsCompanion toCompanion(bool nullToAbsent) {
+    return ArmorPieceSkillsCompanion(
+      id: Value(id),
+      armorPieceId: Value(armorPieceId),
+      skillId: Value(skillId),
+      skillLevel: Value(skillLevel),
+    );
+  }
+
+  factory ArmorPieceSkill.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ArmorPieceSkill(
+      id: serializer.fromJson<int>(json['id']),
+      armorPieceId: serializer.fromJson<int>(json['armorPieceId']),
+      skillId: serializer.fromJson<int>(json['skillId']),
+      skillLevel: serializer.fromJson<int>(json['skillLevel']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'armorPieceId': serializer.toJson<int>(armorPieceId),
+      'skillId': serializer.toJson<int>(skillId),
+      'skillLevel': serializer.toJson<int>(skillLevel),
+    };
+  }
+
+  ArmorPieceSkill copyWith({
+    int? id,
+    int? armorPieceId,
+    int? skillId,
+    int? skillLevel,
+  }) => ArmorPieceSkill(
+    id: id ?? this.id,
+    armorPieceId: armorPieceId ?? this.armorPieceId,
+    skillId: skillId ?? this.skillId,
+    skillLevel: skillLevel ?? this.skillLevel,
+  );
+  ArmorPieceSkill copyWithCompanion(ArmorPieceSkillsCompanion data) {
+    return ArmorPieceSkill(
+      id: data.id.present ? data.id.value : this.id,
+      armorPieceId: data.armorPieceId.present
+          ? data.armorPieceId.value
+          : this.armorPieceId,
+      skillId: data.skillId.present ? data.skillId.value : this.skillId,
+      skillLevel: data.skillLevel.present
+          ? data.skillLevel.value
+          : this.skillLevel,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ArmorPieceSkill(')
+          ..write('id: $id, ')
+          ..write('armorPieceId: $armorPieceId, ')
+          ..write('skillId: $skillId, ')
+          ..write('skillLevel: $skillLevel')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, armorPieceId, skillId, skillLevel);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ArmorPieceSkill &&
+          other.id == this.id &&
+          other.armorPieceId == this.armorPieceId &&
+          other.skillId == this.skillId &&
+          other.skillLevel == this.skillLevel);
+}
+
+class ArmorPieceSkillsCompanion extends UpdateCompanion<ArmorPieceSkill> {
+  final Value<int> id;
+  final Value<int> armorPieceId;
+  final Value<int> skillId;
+  final Value<int> skillLevel;
+  const ArmorPieceSkillsCompanion({
+    this.id = const Value.absent(),
+    this.armorPieceId = const Value.absent(),
+    this.skillId = const Value.absent(),
+    this.skillLevel = const Value.absent(),
+  });
+  ArmorPieceSkillsCompanion.insert({
+    this.id = const Value.absent(),
+    required int armorPieceId,
+    required int skillId,
+    required int skillLevel,
+  }) : armorPieceId = Value(armorPieceId),
+       skillId = Value(skillId),
+       skillLevel = Value(skillLevel);
+  static Insertable<ArmorPieceSkill> custom({
+    Expression<int>? id,
+    Expression<int>? armorPieceId,
+    Expression<int>? skillId,
+    Expression<int>? skillLevel,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (armorPieceId != null) 'armor_piece_id': armorPieceId,
+      if (skillId != null) 'skill_id': skillId,
+      if (skillLevel != null) 'skill_level': skillLevel,
+    });
+  }
+
+  ArmorPieceSkillsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? armorPieceId,
+    Value<int>? skillId,
+    Value<int>? skillLevel,
+  }) {
+    return ArmorPieceSkillsCompanion(
+      id: id ?? this.id,
+      armorPieceId: armorPieceId ?? this.armorPieceId,
+      skillId: skillId ?? this.skillId,
+      skillLevel: skillLevel ?? this.skillLevel,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (armorPieceId.present) {
+      map['armor_piece_id'] = Variable<int>(armorPieceId.value);
+    }
+    if (skillId.present) {
+      map['skill_id'] = Variable<int>(skillId.value);
+    }
+    if (skillLevel.present) {
+      map['skill_level'] = Variable<int>(skillLevel.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ArmorPieceSkillsCompanion(')
+          ..write('id: $id, ')
+          ..write('armorPieceId: $armorPieceId, ')
+          ..write('skillId: $skillId, ')
+          ..write('skillLevel: $skillLevel')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -2480,8 +2961,21 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
   $JewelsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
     'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _slugMeta = const VerificationMeta('slug');
+  @override
+  late final GeneratedColumn<String> slug = GeneratedColumn<String>(
+    'slug',
     aliasedName,
     false,
     type: DriftSqlType.string,
@@ -2517,39 +3011,26 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _skillIdMeta = const VerificationMeta(
-    'skillId',
+  static const VerificationMeta _allowedOnMeta = const VerificationMeta(
+    'allowedOn',
   );
   @override
-  late final GeneratedColumn<String> skillId = GeneratedColumn<String>(
-    'skill_id',
+  late final GeneratedColumn<String> allowedOn = GeneratedColumn<String>(
+    'allowed_on',
     aliasedName,
     false,
     type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES skills (id)',
-    ),
-  );
-  static const VerificationMeta _skillLevelMeta = const VerificationMeta(
-    'skillLevel',
-  );
-  @override
-  late final GeneratedColumn<int> skillLevel = GeneratedColumn<int>(
-    'skill_level',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('armor'),
   );
   @override
   List<GeneratedColumn> get $columns => [
     id,
+    slug,
     name,
     rarity,
     slotSize,
-    skillId,
-    skillLevel,
+    allowedOn,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -2565,8 +3046,14 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('slug')) {
+      context.handle(
+        _slugMeta,
+        slug.isAcceptableOrUnknown(data['slug']!, _slugMeta),
+      );
     } else if (isInserting) {
-      context.missing(_idMeta);
+      context.missing(_slugMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -2590,6 +3077,358 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
     } else if (isInserting) {
       context.missing(_slotSizeMeta);
     }
+    if (data.containsKey('allowed_on')) {
+      context.handle(
+        _allowedOnMeta,
+        allowedOn.isAcceptableOrUnknown(data['allowed_on']!, _allowedOnMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {slug},
+  ];
+  @override
+  Jewel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Jewel(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      slug: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}slug'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      rarity: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rarity'],
+      )!,
+      slotSize: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}slot_size'],
+      )!,
+      allowedOn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}allowed_on'],
+      )!,
+    );
+  }
+
+  @override
+  $JewelsTable createAlias(String alias) {
+    return $JewelsTable(attachedDatabase, alias);
+  }
+}
+
+class Jewel extends DataClass implements Insertable<Jewel> {
+  final int id;
+  final String slug;
+  final String name;
+  final int rarity;
+  final int slotSize;
+  final String allowedOn;
+  const Jewel({
+    required this.id,
+    required this.slug,
+    required this.name,
+    required this.rarity,
+    required this.slotSize,
+    required this.allowedOn,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['slug'] = Variable<String>(slug);
+    map['name'] = Variable<String>(name);
+    map['rarity'] = Variable<int>(rarity);
+    map['slot_size'] = Variable<int>(slotSize);
+    map['allowed_on'] = Variable<String>(allowedOn);
+    return map;
+  }
+
+  JewelsCompanion toCompanion(bool nullToAbsent) {
+    return JewelsCompanion(
+      id: Value(id),
+      slug: Value(slug),
+      name: Value(name),
+      rarity: Value(rarity),
+      slotSize: Value(slotSize),
+      allowedOn: Value(allowedOn),
+    );
+  }
+
+  factory Jewel.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Jewel(
+      id: serializer.fromJson<int>(json['id']),
+      slug: serializer.fromJson<String>(json['slug']),
+      name: serializer.fromJson<String>(json['name']),
+      rarity: serializer.fromJson<int>(json['rarity']),
+      slotSize: serializer.fromJson<int>(json['slotSize']),
+      allowedOn: serializer.fromJson<String>(json['allowedOn']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'slug': serializer.toJson<String>(slug),
+      'name': serializer.toJson<String>(name),
+      'rarity': serializer.toJson<int>(rarity),
+      'slotSize': serializer.toJson<int>(slotSize),
+      'allowedOn': serializer.toJson<String>(allowedOn),
+    };
+  }
+
+  Jewel copyWith({
+    int? id,
+    String? slug,
+    String? name,
+    int? rarity,
+    int? slotSize,
+    String? allowedOn,
+  }) => Jewel(
+    id: id ?? this.id,
+    slug: slug ?? this.slug,
+    name: name ?? this.name,
+    rarity: rarity ?? this.rarity,
+    slotSize: slotSize ?? this.slotSize,
+    allowedOn: allowedOn ?? this.allowedOn,
+  );
+  Jewel copyWithCompanion(JewelsCompanion data) {
+    return Jewel(
+      id: data.id.present ? data.id.value : this.id,
+      slug: data.slug.present ? data.slug.value : this.slug,
+      name: data.name.present ? data.name.value : this.name,
+      rarity: data.rarity.present ? data.rarity.value : this.rarity,
+      slotSize: data.slotSize.present ? data.slotSize.value : this.slotSize,
+      allowedOn: data.allowedOn.present ? data.allowedOn.value : this.allowedOn,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Jewel(')
+          ..write('id: $id, ')
+          ..write('slug: $slug, ')
+          ..write('name: $name, ')
+          ..write('rarity: $rarity, ')
+          ..write('slotSize: $slotSize, ')
+          ..write('allowedOn: $allowedOn')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, slug, name, rarity, slotSize, allowedOn);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Jewel &&
+          other.id == this.id &&
+          other.slug == this.slug &&
+          other.name == this.name &&
+          other.rarity == this.rarity &&
+          other.slotSize == this.slotSize &&
+          other.allowedOn == this.allowedOn);
+}
+
+class JewelsCompanion extends UpdateCompanion<Jewel> {
+  final Value<int> id;
+  final Value<String> slug;
+  final Value<String> name;
+  final Value<int> rarity;
+  final Value<int> slotSize;
+  final Value<String> allowedOn;
+  const JewelsCompanion({
+    this.id = const Value.absent(),
+    this.slug = const Value.absent(),
+    this.name = const Value.absent(),
+    this.rarity = const Value.absent(),
+    this.slotSize = const Value.absent(),
+    this.allowedOn = const Value.absent(),
+  });
+  JewelsCompanion.insert({
+    this.id = const Value.absent(),
+    required String slug,
+    required String name,
+    this.rarity = const Value.absent(),
+    required int slotSize,
+    this.allowedOn = const Value.absent(),
+  }) : slug = Value(slug),
+       name = Value(name),
+       slotSize = Value(slotSize);
+  static Insertable<Jewel> custom({
+    Expression<int>? id,
+    Expression<String>? slug,
+    Expression<String>? name,
+    Expression<int>? rarity,
+    Expression<int>? slotSize,
+    Expression<String>? allowedOn,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (slug != null) 'slug': slug,
+      if (name != null) 'name': name,
+      if (rarity != null) 'rarity': rarity,
+      if (slotSize != null) 'slot_size': slotSize,
+      if (allowedOn != null) 'allowed_on': allowedOn,
+    });
+  }
+
+  JewelsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? slug,
+    Value<String>? name,
+    Value<int>? rarity,
+    Value<int>? slotSize,
+    Value<String>? allowedOn,
+  }) {
+    return JewelsCompanion(
+      id: id ?? this.id,
+      slug: slug ?? this.slug,
+      name: name ?? this.name,
+      rarity: rarity ?? this.rarity,
+      slotSize: slotSize ?? this.slotSize,
+      allowedOn: allowedOn ?? this.allowedOn,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (slug.present) {
+      map['slug'] = Variable<String>(slug.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (rarity.present) {
+      map['rarity'] = Variable<int>(rarity.value);
+    }
+    if (slotSize.present) {
+      map['slot_size'] = Variable<int>(slotSize.value);
+    }
+    if (allowedOn.present) {
+      map['allowed_on'] = Variable<String>(allowedOn.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JewelsCompanion(')
+          ..write('id: $id, ')
+          ..write('slug: $slug, ')
+          ..write('name: $name, ')
+          ..write('rarity: $rarity, ')
+          ..write('slotSize: $slotSize, ')
+          ..write('allowedOn: $allowedOn')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $JewelSkillsTable extends JewelSkills
+    with TableInfo<$JewelSkillsTable, JewelSkill> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $JewelSkillsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _jewelIdMeta = const VerificationMeta(
+    'jewelId',
+  );
+  @override
+  late final GeneratedColumn<int> jewelId = GeneratedColumn<int>(
+    'jewel_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES jewels (id)',
+    ),
+  );
+  static const VerificationMeta _skillIdMeta = const VerificationMeta(
+    'skillId',
+  );
+  @override
+  late final GeneratedColumn<int> skillId = GeneratedColumn<int>(
+    'skill_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES skills (id)',
+    ),
+  );
+  static const VerificationMeta _skillLevelMeta = const VerificationMeta(
+    'skillLevel',
+  );
+  @override
+  late final GeneratedColumn<int> skillLevel = GeneratedColumn<int>(
+    'skill_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, jewelId, skillId, skillLevel];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'jewel_skills';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<JewelSkill> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('jewel_id')) {
+      context.handle(
+        _jewelIdMeta,
+        jewelId.isAcceptableOrUnknown(data['jewel_id']!, _jewelIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_jewelIdMeta);
+    }
     if (data.containsKey('skill_id')) {
       context.handle(
         _skillIdMeta,
@@ -2612,27 +3451,19 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Jewel map(Map<String, dynamic> data, {String? tablePrefix}) {
+  JewelSkill map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Jewel(
+    return JewelSkill(
       id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}id'],
       )!,
-      name: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}name'],
-      )!,
-      rarity: attachedDatabase.typeMapping.read(
+      jewelId: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
-        data['${effectivePrefix}rarity'],
-      )!,
-      slotSize: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}slot_size'],
+        data['${effectivePrefix}jewel_id'],
       )!,
       skillId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}skill_id'],
       )!,
       skillLevel: attachedDatabase.typeMapping.read(
@@ -2643,60 +3474,50 @@ class $JewelsTable extends Jewels with TableInfo<$JewelsTable, Jewel> {
   }
 
   @override
-  $JewelsTable createAlias(String alias) {
-    return $JewelsTable(attachedDatabase, alias);
+  $JewelSkillsTable createAlias(String alias) {
+    return $JewelSkillsTable(attachedDatabase, alias);
   }
 }
 
-class Jewel extends DataClass implements Insertable<Jewel> {
-  final String id;
-  final String name;
-  final int rarity;
-  final int slotSize;
-  final String skillId;
+class JewelSkill extends DataClass implements Insertable<JewelSkill> {
+  final int id;
+  final int jewelId;
+  final int skillId;
   final int skillLevel;
-  const Jewel({
+  const JewelSkill({
     required this.id,
-    required this.name,
-    required this.rarity,
-    required this.slotSize,
+    required this.jewelId,
     required this.skillId,
     required this.skillLevel,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
-    map['name'] = Variable<String>(name);
-    map['rarity'] = Variable<int>(rarity);
-    map['slot_size'] = Variable<int>(slotSize);
-    map['skill_id'] = Variable<String>(skillId);
+    map['id'] = Variable<int>(id);
+    map['jewel_id'] = Variable<int>(jewelId);
+    map['skill_id'] = Variable<int>(skillId);
     map['skill_level'] = Variable<int>(skillLevel);
     return map;
   }
 
-  JewelsCompanion toCompanion(bool nullToAbsent) {
-    return JewelsCompanion(
+  JewelSkillsCompanion toCompanion(bool nullToAbsent) {
+    return JewelSkillsCompanion(
       id: Value(id),
-      name: Value(name),
-      rarity: Value(rarity),
-      slotSize: Value(slotSize),
+      jewelId: Value(jewelId),
       skillId: Value(skillId),
       skillLevel: Value(skillLevel),
     );
   }
 
-  factory Jewel.fromJson(
+  factory JewelSkill.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Jewel(
-      id: serializer.fromJson<String>(json['id']),
-      name: serializer.fromJson<String>(json['name']),
-      rarity: serializer.fromJson<int>(json['rarity']),
-      slotSize: serializer.fromJson<int>(json['slotSize']),
-      skillId: serializer.fromJson<String>(json['skillId']),
+    return JewelSkill(
+      id: serializer.fromJson<int>(json['id']),
+      jewelId: serializer.fromJson<int>(json['jewelId']),
+      skillId: serializer.fromJson<int>(json['skillId']),
       skillLevel: serializer.fromJson<int>(json['skillLevel']),
     );
   }
@@ -2704,36 +3525,24 @@ class Jewel extends DataClass implements Insertable<Jewel> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
-      'name': serializer.toJson<String>(name),
-      'rarity': serializer.toJson<int>(rarity),
-      'slotSize': serializer.toJson<int>(slotSize),
-      'skillId': serializer.toJson<String>(skillId),
+      'id': serializer.toJson<int>(id),
+      'jewelId': serializer.toJson<int>(jewelId),
+      'skillId': serializer.toJson<int>(skillId),
       'skillLevel': serializer.toJson<int>(skillLevel),
     };
   }
 
-  Jewel copyWith({
-    String? id,
-    String? name,
-    int? rarity,
-    int? slotSize,
-    String? skillId,
-    int? skillLevel,
-  }) => Jewel(
-    id: id ?? this.id,
-    name: name ?? this.name,
-    rarity: rarity ?? this.rarity,
-    slotSize: slotSize ?? this.slotSize,
-    skillId: skillId ?? this.skillId,
-    skillLevel: skillLevel ?? this.skillLevel,
-  );
-  Jewel copyWithCompanion(JewelsCompanion data) {
-    return Jewel(
+  JewelSkill copyWith({int? id, int? jewelId, int? skillId, int? skillLevel}) =>
+      JewelSkill(
+        id: id ?? this.id,
+        jewelId: jewelId ?? this.jewelId,
+        skillId: skillId ?? this.skillId,
+        skillLevel: skillLevel ?? this.skillLevel,
+      );
+  JewelSkill copyWithCompanion(JewelSkillsCompanion data) {
+    return JewelSkill(
       id: data.id.present ? data.id.value : this.id,
-      name: data.name.present ? data.name.value : this.name,
-      rarity: data.rarity.present ? data.rarity.value : this.rarity,
-      slotSize: data.slotSize.present ? data.slotSize.value : this.slotSize,
+      jewelId: data.jewelId.present ? data.jewelId.value : this.jewelId,
       skillId: data.skillId.present ? data.skillId.value : this.skillId,
       skillLevel: data.skillLevel.present
           ? data.skillLevel.value
@@ -2743,11 +3552,9 @@ class Jewel extends DataClass implements Insertable<Jewel> {
 
   @override
   String toString() {
-    return (StringBuffer('Jewel(')
+    return (StringBuffer('JewelSkill(')
           ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('rarity: $rarity, ')
-          ..write('slotSize: $slotSize, ')
+          ..write('jewelId: $jewelId, ')
           ..write('skillId: $skillId, ')
           ..write('skillLevel: $skillLevel')
           ..write(')'))
@@ -2755,87 +3562,61 @@ class Jewel extends DataClass implements Insertable<Jewel> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, name, rarity, slotSize, skillId, skillLevel);
+  int get hashCode => Object.hash(id, jewelId, skillId, skillLevel);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Jewel &&
+      (other is JewelSkill &&
           other.id == this.id &&
-          other.name == this.name &&
-          other.rarity == this.rarity &&
-          other.slotSize == this.slotSize &&
+          other.jewelId == this.jewelId &&
           other.skillId == this.skillId &&
           other.skillLevel == this.skillLevel);
 }
 
-class JewelsCompanion extends UpdateCompanion<Jewel> {
-  final Value<String> id;
-  final Value<String> name;
-  final Value<int> rarity;
-  final Value<int> slotSize;
-  final Value<String> skillId;
+class JewelSkillsCompanion extends UpdateCompanion<JewelSkill> {
+  final Value<int> id;
+  final Value<int> jewelId;
+  final Value<int> skillId;
   final Value<int> skillLevel;
-  final Value<int> rowid;
-  const JewelsCompanion({
+  const JewelSkillsCompanion({
     this.id = const Value.absent(),
-    this.name = const Value.absent(),
-    this.rarity = const Value.absent(),
-    this.slotSize = const Value.absent(),
+    this.jewelId = const Value.absent(),
     this.skillId = const Value.absent(),
     this.skillLevel = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
-  JewelsCompanion.insert({
-    required String id,
-    required String name,
-    this.rarity = const Value.absent(),
-    required int slotSize,
-    required String skillId,
+  JewelSkillsCompanion.insert({
+    this.id = const Value.absent(),
+    required int jewelId,
+    required int skillId,
     required int skillLevel,
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       name = Value(name),
-       slotSize = Value(slotSize),
+  }) : jewelId = Value(jewelId),
        skillId = Value(skillId),
        skillLevel = Value(skillLevel);
-  static Insertable<Jewel> custom({
-    Expression<String>? id,
-    Expression<String>? name,
-    Expression<int>? rarity,
-    Expression<int>? slotSize,
-    Expression<String>? skillId,
+  static Insertable<JewelSkill> custom({
+    Expression<int>? id,
+    Expression<int>? jewelId,
+    Expression<int>? skillId,
     Expression<int>? skillLevel,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (name != null) 'name': name,
-      if (rarity != null) 'rarity': rarity,
-      if (slotSize != null) 'slot_size': slotSize,
+      if (jewelId != null) 'jewel_id': jewelId,
       if (skillId != null) 'skill_id': skillId,
       if (skillLevel != null) 'skill_level': skillLevel,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
-  JewelsCompanion copyWith({
-    Value<String>? id,
-    Value<String>? name,
-    Value<int>? rarity,
-    Value<int>? slotSize,
-    Value<String>? skillId,
+  JewelSkillsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? jewelId,
+    Value<int>? skillId,
     Value<int>? skillLevel,
-    Value<int>? rowid,
   }) {
-    return JewelsCompanion(
+    return JewelSkillsCompanion(
       id: id ?? this.id,
-      name: name ?? this.name,
-      rarity: rarity ?? this.rarity,
-      slotSize: slotSize ?? this.slotSize,
+      jewelId: jewelId ?? this.jewelId,
       skillId: skillId ?? this.skillId,
       skillLevel: skillLevel ?? this.skillLevel,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -2843,39 +3624,27 @@ class JewelsCompanion extends UpdateCompanion<Jewel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
-    if (name.present) {
-      map['name'] = Variable<String>(name.value);
-    }
-    if (rarity.present) {
-      map['rarity'] = Variable<int>(rarity.value);
-    }
-    if (slotSize.present) {
-      map['slot_size'] = Variable<int>(slotSize.value);
+    if (jewelId.present) {
+      map['jewel_id'] = Variable<int>(jewelId.value);
     }
     if (skillId.present) {
-      map['skill_id'] = Variable<String>(skillId.value);
+      map['skill_id'] = Variable<int>(skillId.value);
     }
     if (skillLevel.present) {
       map['skill_level'] = Variable<int>(skillLevel.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
     }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('JewelsCompanion(')
+    return (StringBuffer('JewelSkillsCompanion(')
           ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('rarity: $rarity, ')
-          ..write('slotSize: $slotSize, ')
+          ..write('jewelId: $jewelId, ')
           ..write('skillId: $skillId, ')
-          ..write('skillLevel: $skillLevel, ')
-          ..write('rowid: $rowid')
+          ..write('skillLevel: $skillLevel')
           ..write(')'))
         .toString();
   }
@@ -2904,11 +3673,11 @@ class $SkillLevelsTable extends SkillLevels
     'skillId',
   );
   @override
-  late final GeneratedColumn<String> skillId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> skillId = GeneratedColumn<int>(
     'skill_id',
     aliasedName,
     false,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: true,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES skills (id)',
@@ -2922,6 +3691,17 @@ class $SkillLevelsTable extends SkillLevels
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
+  );
+  static const VerificationMeta _piecesRequiredMeta = const VerificationMeta(
+    'piecesRequired',
+  );
+  @override
+  late final GeneratedColumn<int> piecesRequired = GeneratedColumn<int>(
+    'pieces_required',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
   );
   static const VerificationMeta _bonus1ValueMeta = const VerificationMeta(
     'bonus1Value',
@@ -3016,6 +3796,7 @@ class $SkillLevelsTable extends SkillLevels
     id,
     skillId,
     level,
+    piecesRequired,
     bonus1Value,
     bonus1Type,
     bonus2Value,
@@ -3055,6 +3836,15 @@ class $SkillLevelsTable extends SkillLevels
       );
     } else if (isInserting) {
       context.missing(_levelMeta);
+    }
+    if (data.containsKey('pieces_required')) {
+      context.handle(
+        _piecesRequiredMeta,
+        piecesRequired.isAcceptableOrUnknown(
+          data['pieces_required']!,
+          _piecesRequiredMeta,
+        ),
+      );
     }
     if (data.containsKey('bonus1_value')) {
       context.handle(
@@ -3127,13 +3917,17 @@ class $SkillLevelsTable extends SkillLevels
         data['${effectivePrefix}id'],
       )!,
       skillId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}skill_id'],
       )!,
       level: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}level'],
       )!,
+      piecesRequired: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}pieces_required'],
+      ),
       bonus1Value: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}bonus1_value'],
@@ -3177,8 +3971,9 @@ class $SkillLevelsTable extends SkillLevels
 
 class SkillLevel extends DataClass implements Insertable<SkillLevel> {
   final int id;
-  final String skillId;
+  final int skillId;
   final int level;
+  final int? piecesRequired;
   final double? bonus1Value;
   final String? bonus1Type;
   final double? bonus2Value;
@@ -3191,6 +3986,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     required this.id,
     required this.skillId,
     required this.level,
+    this.piecesRequired,
     this.bonus1Value,
     this.bonus1Type,
     this.bonus2Value,
@@ -3204,8 +4000,11 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['skill_id'] = Variable<String>(skillId);
+    map['skill_id'] = Variable<int>(skillId);
     map['level'] = Variable<int>(level);
+    if (!nullToAbsent || piecesRequired != null) {
+      map['pieces_required'] = Variable<int>(piecesRequired);
+    }
     if (!nullToAbsent || bonus1Value != null) {
       map['bonus1_value'] = Variable<double>(bonus1Value);
     }
@@ -3238,6 +4037,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
       id: Value(id),
       skillId: Value(skillId),
       level: Value(level),
+      piecesRequired: piecesRequired == null && nullToAbsent
+          ? const Value.absent()
+          : Value(piecesRequired),
       bonus1Value: bonus1Value == null && nullToAbsent
           ? const Value.absent()
           : Value(bonus1Value),
@@ -3272,8 +4074,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return SkillLevel(
       id: serializer.fromJson<int>(json['id']),
-      skillId: serializer.fromJson<String>(json['skillId']),
+      skillId: serializer.fromJson<int>(json['skillId']),
       level: serializer.fromJson<int>(json['level']),
+      piecesRequired: serializer.fromJson<int?>(json['piecesRequired']),
       bonus1Value: serializer.fromJson<double?>(json['bonus1Value']),
       bonus1Type: serializer.fromJson<String?>(json['bonus1Type']),
       bonus2Value: serializer.fromJson<double?>(json['bonus2Value']),
@@ -3289,8 +4092,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'skillId': serializer.toJson<String>(skillId),
+      'skillId': serializer.toJson<int>(skillId),
       'level': serializer.toJson<int>(level),
+      'piecesRequired': serializer.toJson<int?>(piecesRequired),
       'bonus1Value': serializer.toJson<double?>(bonus1Value),
       'bonus1Type': serializer.toJson<String?>(bonus1Type),
       'bonus2Value': serializer.toJson<double?>(bonus2Value),
@@ -3304,8 +4108,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
 
   SkillLevel copyWith({
     int? id,
-    String? skillId,
+    int? skillId,
     int? level,
+    Value<int?> piecesRequired = const Value.absent(),
     Value<double?> bonus1Value = const Value.absent(),
     Value<String?> bonus1Type = const Value.absent(),
     Value<double?> bonus2Value = const Value.absent(),
@@ -3318,6 +4123,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     id: id ?? this.id,
     skillId: skillId ?? this.skillId,
     level: level ?? this.level,
+    piecesRequired: piecesRequired.present
+        ? piecesRequired.value
+        : this.piecesRequired,
     bonus1Value: bonus1Value.present ? bonus1Value.value : this.bonus1Value,
     bonus1Type: bonus1Type.present ? bonus1Type.value : this.bonus1Type,
     bonus2Value: bonus2Value.present ? bonus2Value.value : this.bonus2Value,
@@ -3332,6 +4140,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
       id: data.id.present ? data.id.value : this.id,
       skillId: data.skillId.present ? data.skillId.value : this.skillId,
       level: data.level.present ? data.level.value : this.level,
+      piecesRequired: data.piecesRequired.present
+          ? data.piecesRequired.value
+          : this.piecesRequired,
       bonus1Value: data.bonus1Value.present
           ? data.bonus1Value.value
           : this.bonus1Value,
@@ -3361,6 +4172,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
           ..write('id: $id, ')
           ..write('skillId: $skillId, ')
           ..write('level: $level, ')
+          ..write('piecesRequired: $piecesRequired, ')
           ..write('bonus1Value: $bonus1Value, ')
           ..write('bonus1Type: $bonus1Type, ')
           ..write('bonus2Value: $bonus2Value, ')
@@ -3378,6 +4190,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     id,
     skillId,
     level,
+    piecesRequired,
     bonus1Value,
     bonus1Type,
     bonus2Value,
@@ -3394,6 +4207,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
           other.id == this.id &&
           other.skillId == this.skillId &&
           other.level == this.level &&
+          other.piecesRequired == this.piecesRequired &&
           other.bonus1Value == this.bonus1Value &&
           other.bonus1Type == this.bonus1Type &&
           other.bonus2Value == this.bonus2Value &&
@@ -3406,8 +4220,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
 
 class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
   final Value<int> id;
-  final Value<String> skillId;
+  final Value<int> skillId;
   final Value<int> level;
+  final Value<int?> piecesRequired;
   final Value<double?> bonus1Value;
   final Value<String?> bonus1Type;
   final Value<double?> bonus2Value;
@@ -3420,6 +4235,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
     this.id = const Value.absent(),
     this.skillId = const Value.absent(),
     this.level = const Value.absent(),
+    this.piecesRequired = const Value.absent(),
     this.bonus1Value = const Value.absent(),
     this.bonus1Type = const Value.absent(),
     this.bonus2Value = const Value.absent(),
@@ -3431,8 +4247,9 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
   });
   SkillLevelsCompanion.insert({
     this.id = const Value.absent(),
-    required String skillId,
+    required int skillId,
     required int level,
+    this.piecesRequired = const Value.absent(),
     this.bonus1Value = const Value.absent(),
     this.bonus1Type = const Value.absent(),
     this.bonus2Value = const Value.absent(),
@@ -3445,8 +4262,9 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
        level = Value(level);
   static Insertable<SkillLevel> custom({
     Expression<int>? id,
-    Expression<String>? skillId,
+    Expression<int>? skillId,
     Expression<int>? level,
+    Expression<int>? piecesRequired,
     Expression<double>? bonus1Value,
     Expression<String>? bonus1Type,
     Expression<double>? bonus2Value,
@@ -3460,6 +4278,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
       if (id != null) 'id': id,
       if (skillId != null) 'skill_id': skillId,
       if (level != null) 'level': level,
+      if (piecesRequired != null) 'pieces_required': piecesRequired,
       if (bonus1Value != null) 'bonus1_value': bonus1Value,
       if (bonus1Type != null) 'bonus1_type': bonus1Type,
       if (bonus2Value != null) 'bonus2_value': bonus2Value,
@@ -3473,8 +4292,9 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
 
   SkillLevelsCompanion copyWith({
     Value<int>? id,
-    Value<String>? skillId,
+    Value<int>? skillId,
     Value<int>? level,
+    Value<int?>? piecesRequired,
     Value<double?>? bonus1Value,
     Value<String?>? bonus1Type,
     Value<double?>? bonus2Value,
@@ -3488,6 +4308,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
       id: id ?? this.id,
       skillId: skillId ?? this.skillId,
       level: level ?? this.level,
+      piecesRequired: piecesRequired ?? this.piecesRequired,
       bonus1Value: bonus1Value ?? this.bonus1Value,
       bonus1Type: bonus1Type ?? this.bonus1Type,
       bonus2Value: bonus2Value ?? this.bonus2Value,
@@ -3506,10 +4327,13 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
       map['id'] = Variable<int>(id.value);
     }
     if (skillId.present) {
-      map['skill_id'] = Variable<String>(skillId.value);
+      map['skill_id'] = Variable<int>(skillId.value);
     }
     if (level.present) {
       map['level'] = Variable<int>(level.value);
+    }
+    if (piecesRequired.present) {
+      map['pieces_required'] = Variable<int>(piecesRequired.value);
     }
     if (bonus1Value.present) {
       map['bonus1_value'] = Variable<double>(bonus1Value.value);
@@ -3544,6 +4368,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
           ..write('id: $id, ')
           ..write('skillId: $skillId, ')
           ..write('level: $level, ')
+          ..write('piecesRequired: $piecesRequired, ')
           ..write('bonus1Value: $bonus1Value, ')
           ..write('bonus1Type: $bonus1Type, ')
           ..write('bonus2Value: $bonus2Value, ')
@@ -3589,11 +4414,11 @@ class $TalismansTable extends Talismans
     'skill1Id',
   );
   @override
-  late final GeneratedColumn<String> skill1Id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> skill1Id = GeneratedColumn<int>(
     'skill1_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES skills (id)',
@@ -3614,11 +4439,11 @@ class $TalismansTable extends Talismans
     'skill2Id',
   );
   @override
-  late final GeneratedColumn<String> skill2Id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> skill2Id = GeneratedColumn<int>(
     'skill2_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES skills (id)',
@@ -3752,7 +4577,7 @@ class $TalismansTable extends Talismans
         data['${effectivePrefix}name'],
       )!,
       skill1Id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}skill1_id'],
       ),
       skill1Level: attachedDatabase.typeMapping.read(
@@ -3760,7 +4585,7 @@ class $TalismansTable extends Talismans
         data['${effectivePrefix}skill1_level'],
       ),
       skill2Id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}skill2_id'],
       ),
       skill2Level: attachedDatabase.typeMapping.read(
@@ -3787,9 +4612,9 @@ class $TalismansTable extends Talismans
 class Talisman extends DataClass implements Insertable<Talisman> {
   final int id;
   final String name;
-  final String? skill1Id;
+  final int? skill1Id;
   final int? skill1Level;
-  final String? skill2Id;
+  final int? skill2Id;
   final int? skill2Level;
   final String slots;
   final int createdAt;
@@ -3809,13 +4634,13 @@ class Talisman extends DataClass implements Insertable<Talisman> {
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || skill1Id != null) {
-      map['skill1_id'] = Variable<String>(skill1Id);
+      map['skill1_id'] = Variable<int>(skill1Id);
     }
     if (!nullToAbsent || skill1Level != null) {
       map['skill1_level'] = Variable<int>(skill1Level);
     }
     if (!nullToAbsent || skill2Id != null) {
-      map['skill2_id'] = Variable<String>(skill2Id);
+      map['skill2_id'] = Variable<int>(skill2Id);
     }
     if (!nullToAbsent || skill2Level != null) {
       map['skill2_level'] = Variable<int>(skill2Level);
@@ -3854,9 +4679,9 @@ class Talisman extends DataClass implements Insertable<Talisman> {
     return Talisman(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      skill1Id: serializer.fromJson<String?>(json['skill1Id']),
+      skill1Id: serializer.fromJson<int?>(json['skill1Id']),
       skill1Level: serializer.fromJson<int?>(json['skill1Level']),
-      skill2Id: serializer.fromJson<String?>(json['skill2Id']),
+      skill2Id: serializer.fromJson<int?>(json['skill2Id']),
       skill2Level: serializer.fromJson<int?>(json['skill2Level']),
       slots: serializer.fromJson<String>(json['slots']),
       createdAt: serializer.fromJson<int>(json['createdAt']),
@@ -3868,9 +4693,9 @@ class Talisman extends DataClass implements Insertable<Talisman> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
-      'skill1Id': serializer.toJson<String?>(skill1Id),
+      'skill1Id': serializer.toJson<int?>(skill1Id),
       'skill1Level': serializer.toJson<int?>(skill1Level),
-      'skill2Id': serializer.toJson<String?>(skill2Id),
+      'skill2Id': serializer.toJson<int?>(skill2Id),
       'skill2Level': serializer.toJson<int?>(skill2Level),
       'slots': serializer.toJson<String>(slots),
       'createdAt': serializer.toJson<int>(createdAt),
@@ -3880,9 +4705,9 @@ class Talisman extends DataClass implements Insertable<Talisman> {
   Talisman copyWith({
     int? id,
     String? name,
-    Value<String?> skill1Id = const Value.absent(),
+    Value<int?> skill1Id = const Value.absent(),
     Value<int?> skill1Level = const Value.absent(),
-    Value<String?> skill2Id = const Value.absent(),
+    Value<int?> skill2Id = const Value.absent(),
     Value<int?> skill2Level = const Value.absent(),
     String? slots,
     int? createdAt,
@@ -3956,9 +4781,9 @@ class Talisman extends DataClass implements Insertable<Talisman> {
 class TalismansCompanion extends UpdateCompanion<Talisman> {
   final Value<int> id;
   final Value<String> name;
-  final Value<String?> skill1Id;
+  final Value<int?> skill1Id;
   final Value<int?> skill1Level;
-  final Value<String?> skill2Id;
+  final Value<int?> skill2Id;
   final Value<int?> skill2Level;
   final Value<String> slots;
   final Value<int> createdAt;
@@ -3986,9 +4811,9 @@ class TalismansCompanion extends UpdateCompanion<Talisman> {
   static Insertable<Talisman> custom({
     Expression<int>? id,
     Expression<String>? name,
-    Expression<String>? skill1Id,
+    Expression<int>? skill1Id,
     Expression<int>? skill1Level,
-    Expression<String>? skill2Id,
+    Expression<int>? skill2Id,
     Expression<int>? skill2Level,
     Expression<String>? slots,
     Expression<int>? createdAt,
@@ -4008,9 +4833,9 @@ class TalismansCompanion extends UpdateCompanion<Talisman> {
   TalismansCompanion copyWith({
     Value<int>? id,
     Value<String>? name,
-    Value<String?>? skill1Id,
+    Value<int?>? skill1Id,
     Value<int?>? skill1Level,
-    Value<String?>? skill2Id,
+    Value<int?>? skill2Id,
     Value<int?>? skill2Level,
     Value<String>? slots,
     Value<int>? createdAt,
@@ -4037,13 +4862,13 @@ class TalismansCompanion extends UpdateCompanion<Talisman> {
       map['name'] = Variable<String>(name.value);
     }
     if (skill1Id.present) {
-      map['skill1_id'] = Variable<String>(skill1Id.value);
+      map['skill1_id'] = Variable<int>(skill1Id.value);
     }
     if (skill1Level.present) {
       map['skill1_level'] = Variable<int>(skill1Level.value);
     }
     if (skill2Id.present) {
-      map['skill2_id'] = Variable<String>(skill2Id.value);
+      map['skill2_id'] = Variable<int>(skill2Id.value);
     }
     if (skill2Level.present) {
       map['skill2_level'] = Variable<int>(skill2Level.value);
@@ -4104,11 +4929,11 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
     'weaponId',
   );
   @override
-  late final GeneratedColumn<String> weaponId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> weaponId = GeneratedColumn<int>(
     'weapon_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES weapons (id)',
@@ -4116,11 +4941,11 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
   );
   static const VerificationMeta _headIdMeta = const VerificationMeta('headId');
   @override
-  late final GeneratedColumn<String> headId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> headId = GeneratedColumn<int>(
     'head_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES armor_pieces (id)',
@@ -4130,11 +4955,11 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
     'chestId',
   );
   @override
-  late final GeneratedColumn<String> chestId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> chestId = GeneratedColumn<int>(
     'chest_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES armor_pieces (id)',
@@ -4142,11 +4967,11 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
   );
   static const VerificationMeta _armsIdMeta = const VerificationMeta('armsId');
   @override
-  late final GeneratedColumn<String> armsId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> armsId = GeneratedColumn<int>(
     'arms_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES armor_pieces (id)',
@@ -4156,11 +4981,11 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
     'waistId',
   );
   @override
-  late final GeneratedColumn<String> waistId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> waistId = GeneratedColumn<int>(
     'waist_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES armor_pieces (id)',
@@ -4168,11 +4993,11 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
   );
   static const VerificationMeta _legsIdMeta = const VerificationMeta('legsId');
   @override
-  late final GeneratedColumn<String> legsId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> legsId = GeneratedColumn<int>(
     'legs_id',
     aliasedName,
     true,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES armor_pieces (id)',
@@ -4327,27 +5152,27 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
         data['${effectivePrefix}name'],
       )!,
       weaponId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}weapon_id'],
       ),
       headId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}head_id'],
       ),
       chestId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}chest_id'],
       ),
       armsId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}arms_id'],
       ),
       waistId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}waist_id'],
       ),
       legsId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}legs_id'],
       ),
       talismanId: attachedDatabase.typeMapping.read(
@@ -4374,12 +5199,12 @@ class $BuildsTable extends Builds with TableInfo<$BuildsTable, Build> {
 class Build extends DataClass implements Insertable<Build> {
   final int id;
   final String name;
-  final String? weaponId;
-  final String? headId;
-  final String? chestId;
-  final String? armsId;
-  final String? waistId;
-  final String? legsId;
+  final int? weaponId;
+  final int? headId;
+  final int? chestId;
+  final int? armsId;
+  final int? waistId;
+  final int? legsId;
   final int? talismanId;
   final int createdAt;
   final int updatedAt;
@@ -4402,22 +5227,22 @@ class Build extends DataClass implements Insertable<Build> {
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || weaponId != null) {
-      map['weapon_id'] = Variable<String>(weaponId);
+      map['weapon_id'] = Variable<int>(weaponId);
     }
     if (!nullToAbsent || headId != null) {
-      map['head_id'] = Variable<String>(headId);
+      map['head_id'] = Variable<int>(headId);
     }
     if (!nullToAbsent || chestId != null) {
-      map['chest_id'] = Variable<String>(chestId);
+      map['chest_id'] = Variable<int>(chestId);
     }
     if (!nullToAbsent || armsId != null) {
-      map['arms_id'] = Variable<String>(armsId);
+      map['arms_id'] = Variable<int>(armsId);
     }
     if (!nullToAbsent || waistId != null) {
-      map['waist_id'] = Variable<String>(waistId);
+      map['waist_id'] = Variable<int>(waistId);
     }
     if (!nullToAbsent || legsId != null) {
-      map['legs_id'] = Variable<String>(legsId);
+      map['legs_id'] = Variable<int>(legsId);
     }
     if (!nullToAbsent || talismanId != null) {
       map['talisman_id'] = Variable<int>(talismanId);
@@ -4465,12 +5290,12 @@ class Build extends DataClass implements Insertable<Build> {
     return Build(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      weaponId: serializer.fromJson<String?>(json['weaponId']),
-      headId: serializer.fromJson<String?>(json['headId']),
-      chestId: serializer.fromJson<String?>(json['chestId']),
-      armsId: serializer.fromJson<String?>(json['armsId']),
-      waistId: serializer.fromJson<String?>(json['waistId']),
-      legsId: serializer.fromJson<String?>(json['legsId']),
+      weaponId: serializer.fromJson<int?>(json['weaponId']),
+      headId: serializer.fromJson<int?>(json['headId']),
+      chestId: serializer.fromJson<int?>(json['chestId']),
+      armsId: serializer.fromJson<int?>(json['armsId']),
+      waistId: serializer.fromJson<int?>(json['waistId']),
+      legsId: serializer.fromJson<int?>(json['legsId']),
       talismanId: serializer.fromJson<int?>(json['talismanId']),
       createdAt: serializer.fromJson<int>(json['createdAt']),
       updatedAt: serializer.fromJson<int>(json['updatedAt']),
@@ -4482,12 +5307,12 @@ class Build extends DataClass implements Insertable<Build> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
-      'weaponId': serializer.toJson<String?>(weaponId),
-      'headId': serializer.toJson<String?>(headId),
-      'chestId': serializer.toJson<String?>(chestId),
-      'armsId': serializer.toJson<String?>(armsId),
-      'waistId': serializer.toJson<String?>(waistId),
-      'legsId': serializer.toJson<String?>(legsId),
+      'weaponId': serializer.toJson<int?>(weaponId),
+      'headId': serializer.toJson<int?>(headId),
+      'chestId': serializer.toJson<int?>(chestId),
+      'armsId': serializer.toJson<int?>(armsId),
+      'waistId': serializer.toJson<int?>(waistId),
+      'legsId': serializer.toJson<int?>(legsId),
       'talismanId': serializer.toJson<int?>(talismanId),
       'createdAt': serializer.toJson<int>(createdAt),
       'updatedAt': serializer.toJson<int>(updatedAt),
@@ -4497,12 +5322,12 @@ class Build extends DataClass implements Insertable<Build> {
   Build copyWith({
     int? id,
     String? name,
-    Value<String?> weaponId = const Value.absent(),
-    Value<String?> headId = const Value.absent(),
-    Value<String?> chestId = const Value.absent(),
-    Value<String?> armsId = const Value.absent(),
-    Value<String?> waistId = const Value.absent(),
-    Value<String?> legsId = const Value.absent(),
+    Value<int?> weaponId = const Value.absent(),
+    Value<int?> headId = const Value.absent(),
+    Value<int?> chestId = const Value.absent(),
+    Value<int?> armsId = const Value.absent(),
+    Value<int?> waistId = const Value.absent(),
+    Value<int?> legsId = const Value.absent(),
     Value<int?> talismanId = const Value.absent(),
     int? createdAt,
     int? updatedAt,
@@ -4589,12 +5414,12 @@ class Build extends DataClass implements Insertable<Build> {
 class BuildsCompanion extends UpdateCompanion<Build> {
   final Value<int> id;
   final Value<String> name;
-  final Value<String?> weaponId;
-  final Value<String?> headId;
-  final Value<String?> chestId;
-  final Value<String?> armsId;
-  final Value<String?> waistId;
-  final Value<String?> legsId;
+  final Value<int?> weaponId;
+  final Value<int?> headId;
+  final Value<int?> chestId;
+  final Value<int?> armsId;
+  final Value<int?> waistId;
+  final Value<int?> legsId;
   final Value<int?> talismanId;
   final Value<int> createdAt;
   final Value<int> updatedAt;
@@ -4629,12 +5454,12 @@ class BuildsCompanion extends UpdateCompanion<Build> {
   static Insertable<Build> custom({
     Expression<int>? id,
     Expression<String>? name,
-    Expression<String>? weaponId,
-    Expression<String>? headId,
-    Expression<String>? chestId,
-    Expression<String>? armsId,
-    Expression<String>? waistId,
-    Expression<String>? legsId,
+    Expression<int>? weaponId,
+    Expression<int>? headId,
+    Expression<int>? chestId,
+    Expression<int>? armsId,
+    Expression<int>? waistId,
+    Expression<int>? legsId,
     Expression<int>? talismanId,
     Expression<int>? createdAt,
     Expression<int>? updatedAt,
@@ -4657,12 +5482,12 @@ class BuildsCompanion extends UpdateCompanion<Build> {
   BuildsCompanion copyWith({
     Value<int>? id,
     Value<String>? name,
-    Value<String?>? weaponId,
-    Value<String?>? headId,
-    Value<String?>? chestId,
-    Value<String?>? armsId,
-    Value<String?>? waistId,
-    Value<String?>? legsId,
+    Value<int?>? weaponId,
+    Value<int?>? headId,
+    Value<int?>? chestId,
+    Value<int?>? armsId,
+    Value<int?>? waistId,
+    Value<int?>? legsId,
     Value<int?>? talismanId,
     Value<int>? createdAt,
     Value<int>? updatedAt,
@@ -4692,22 +5517,22 @@ class BuildsCompanion extends UpdateCompanion<Build> {
       map['name'] = Variable<String>(name.value);
     }
     if (weaponId.present) {
-      map['weapon_id'] = Variable<String>(weaponId.value);
+      map['weapon_id'] = Variable<int>(weaponId.value);
     }
     if (headId.present) {
-      map['head_id'] = Variable<String>(headId.value);
+      map['head_id'] = Variable<int>(headId.value);
     }
     if (chestId.present) {
-      map['chest_id'] = Variable<String>(chestId.value);
+      map['chest_id'] = Variable<int>(chestId.value);
     }
     if (armsId.present) {
-      map['arms_id'] = Variable<String>(armsId.value);
+      map['arms_id'] = Variable<int>(armsId.value);
     }
     if (waistId.present) {
-      map['waist_id'] = Variable<String>(waistId.value);
+      map['waist_id'] = Variable<int>(waistId.value);
     }
     if (legsId.present) {
-      map['legs_id'] = Variable<String>(legsId.value);
+      map['legs_id'] = Variable<int>(legsId.value);
     }
     if (talismanId.present) {
       map['talisman_id'] = Variable<int>(talismanId.value);
@@ -4797,11 +5622,11 @@ class $BuildJewelsTable extends BuildJewels
     'jewelId',
   );
   @override
-  late final GeneratedColumn<String> jewelId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> jewelId = GeneratedColumn<int>(
     'jewel_id',
     aliasedName,
     false,
-    type: DriftSqlType.string,
+    type: DriftSqlType.int,
     requiredDuringInsert: true,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES jewels (id)',
@@ -4882,7 +5707,7 @@ class $BuildJewelsTable extends BuildJewels
         data['${effectivePrefix}slot_index'],
       )!,
       jewelId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
+        DriftSqlType.int,
         data['${effectivePrefix}jewel_id'],
       )!,
     );
@@ -4902,7 +5727,7 @@ class BuildJewel extends DataClass implements Insertable<BuildJewel> {
   final int buildId;
   final JewelSlotSource slotSource;
   final int slotIndex;
-  final String jewelId;
+  final int jewelId;
   const BuildJewel({
     required this.id,
     required this.buildId,
@@ -4921,7 +5746,7 @@ class BuildJewel extends DataClass implements Insertable<BuildJewel> {
       );
     }
     map['slot_index'] = Variable<int>(slotIndex);
-    map['jewel_id'] = Variable<String>(jewelId);
+    map['jewel_id'] = Variable<int>(jewelId);
     return map;
   }
 
@@ -4945,7 +5770,7 @@ class BuildJewel extends DataClass implements Insertable<BuildJewel> {
       buildId: serializer.fromJson<int>(json['buildId']),
       slotSource: serializer.fromJson<JewelSlotSource>(json['slotSource']),
       slotIndex: serializer.fromJson<int>(json['slotIndex']),
-      jewelId: serializer.fromJson<String>(json['jewelId']),
+      jewelId: serializer.fromJson<int>(json['jewelId']),
     );
   }
   @override
@@ -4956,7 +5781,7 @@ class BuildJewel extends DataClass implements Insertable<BuildJewel> {
       'buildId': serializer.toJson<int>(buildId),
       'slotSource': serializer.toJson<JewelSlotSource>(slotSource),
       'slotIndex': serializer.toJson<int>(slotIndex),
-      'jewelId': serializer.toJson<String>(jewelId),
+      'jewelId': serializer.toJson<int>(jewelId),
     };
   }
 
@@ -4965,7 +5790,7 @@ class BuildJewel extends DataClass implements Insertable<BuildJewel> {
     int? buildId,
     JewelSlotSource? slotSource,
     int? slotIndex,
-    String? jewelId,
+    int? jewelId,
   }) => BuildJewel(
     id: id ?? this.id,
     buildId: buildId ?? this.buildId,
@@ -5015,7 +5840,7 @@ class BuildJewelsCompanion extends UpdateCompanion<BuildJewel> {
   final Value<int> buildId;
   final Value<JewelSlotSource> slotSource;
   final Value<int> slotIndex;
-  final Value<String> jewelId;
+  final Value<int> jewelId;
   const BuildJewelsCompanion({
     this.id = const Value.absent(),
     this.buildId = const Value.absent(),
@@ -5028,7 +5853,7 @@ class BuildJewelsCompanion extends UpdateCompanion<BuildJewel> {
     required int buildId,
     required JewelSlotSource slotSource,
     required int slotIndex,
-    required String jewelId,
+    required int jewelId,
   }) : buildId = Value(buildId),
        slotSource = Value(slotSource),
        slotIndex = Value(slotIndex),
@@ -5038,7 +5863,7 @@ class BuildJewelsCompanion extends UpdateCompanion<BuildJewel> {
     Expression<int>? buildId,
     Expression<String>? slotSource,
     Expression<int>? slotIndex,
-    Expression<String>? jewelId,
+    Expression<int>? jewelId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -5054,7 +5879,7 @@ class BuildJewelsCompanion extends UpdateCompanion<BuildJewel> {
     Value<int>? buildId,
     Value<JewelSlotSource>? slotSource,
     Value<int>? slotIndex,
-    Value<String>? jewelId,
+    Value<int>? jewelId,
   }) {
     return BuildJewelsCompanion(
       id: id ?? this.id,
@@ -5083,7 +5908,7 @@ class BuildJewelsCompanion extends UpdateCompanion<BuildJewel> {
       map['slot_index'] = Variable<int>(slotIndex.value);
     }
     if (jewelId.present) {
-      map['jewel_id'] = Variable<String>(jewelId.value);
+      map['jewel_id'] = Variable<int>(jewelId.value);
     }
     return map;
   }
@@ -5397,7 +6222,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ArmorPiecesTable armorPieces = $ArmorPiecesTable(this);
   late final $SkillsTable skills = $SkillsTable(this);
   late final $ArmorSetSkillsTable armorSetSkills = $ArmorSetSkillsTable(this);
+  late final $ArmorPieceSkillsTable armorPieceSkills = $ArmorPieceSkillsTable(
+    this,
+  );
   late final $JewelsTable jewels = $JewelsTable(this);
+  late final $JewelSkillsTable jewelSkills = $JewelSkillsTable(this);
   late final $SkillLevelsTable skillLevels = $SkillLevelsTable(this);
   late final $TalismansTable talismans = $TalismansTable(this);
   late final $BuildsTable builds = $BuildsTable(this);
@@ -5418,7 +6247,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     armorPieces,
     skills,
     armorSetSkills,
+    armorPieceSkills,
     jewels,
+    jewelSkills,
     skillLevels,
     talismans,
     builds,
@@ -5429,7 +6260,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
 typedef $$WeaponsTableCreateCompanionBuilder =
     WeaponsCompanion Function({
-      required String id,
+      Value<int> id,
+      required String slug,
       required String name,
       required WeaponType weaponType,
       required int baseAttack,
@@ -5443,11 +6275,11 @@ typedef $$WeaponsTableCreateCompanionBuilder =
       Value<double> emv,
       Value<DamageType> damageType,
       Value<String> burstGroup,
-      Value<int> rowid,
     });
 typedef $$WeaponsTableUpdateCompanionBuilder =
     WeaponsCompanion Function({
-      Value<String> id,
+      Value<int> id,
+      Value<String> slug,
       Value<String> name,
       Value<WeaponType> weaponType,
       Value<int> baseAttack,
@@ -5461,7 +6293,6 @@ typedef $$WeaponsTableUpdateCompanionBuilder =
       Value<double> emv,
       Value<DamageType> damageType,
       Value<String> burstGroup,
-      Value<int> rowid,
     });
 
 final class $$WeaponsTableReferences
@@ -5479,7 +6310,7 @@ final class $$WeaponsTableReferences
     final manager = $$BuildsTableTableManager(
       $_db,
       $_db.builds,
-    ).filter((f) => f.weaponId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.weaponId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_buildsRefsTable($_db));
     return ProcessedTableManager(
@@ -5497,8 +6328,13 @@ class $$WeaponsTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id => $composableBuilder(
+  ColumnFilters<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -5606,8 +6442,13 @@ class $$WeaponsTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id => $composableBuilder(
+  ColumnOrderings<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -5686,8 +6527,11 @@ class $$WeaponsTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get id =>
+  GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get slug =>
+      $composableBuilder(column: $table.slug, builder: (column) => column);
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
@@ -5802,7 +6646,8 @@ class $$WeaponsTableTableManager
               $$WeaponsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> id = const Value.absent(),
+                Value<int> id = const Value.absent(),
+                Value<String> slug = const Value.absent(),
                 Value<String> name = const Value.absent(),
                 Value<WeaponType> weaponType = const Value.absent(),
                 Value<int> baseAttack = const Value.absent(),
@@ -5816,9 +6661,9 @@ class $$WeaponsTableTableManager
                 Value<double> emv = const Value.absent(),
                 Value<DamageType> damageType = const Value.absent(),
                 Value<String> burstGroup = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
               }) => WeaponsCompanion(
                 id: id,
+                slug: slug,
                 name: name,
                 weaponType: weaponType,
                 baseAttack: baseAttack,
@@ -5832,11 +6677,11 @@ class $$WeaponsTableTableManager
                 emv: emv,
                 damageType: damageType,
                 burstGroup: burstGroup,
-                rowid: rowid,
               ),
           createCompanionCallback:
               ({
-                required String id,
+                Value<int> id = const Value.absent(),
+                required String slug,
                 required String name,
                 required WeaponType weaponType,
                 required int baseAttack,
@@ -5850,9 +6695,9 @@ class $$WeaponsTableTableManager
                 Value<double> emv = const Value.absent(),
                 Value<DamageType> damageType = const Value.absent(),
                 Value<String> burstGroup = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
               }) => WeaponsCompanion.insert(
                 id: id,
+                slug: slug,
                 name: name,
                 weaponType: weaponType,
                 baseAttack: baseAttack,
@@ -5866,7 +6711,6 @@ class $$WeaponsTableTableManager
                 emv: emv,
                 damageType: damageType,
                 burstGroup: burstGroup,
-                rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -5918,15 +6762,15 @@ typedef $$WeaponsTableProcessedTableManager =
     >;
 typedef $$ArmorSetsTableCreateCompanionBuilder =
     ArmorSetsCompanion Function({
-      required String id,
+      Value<int> id,
+      required String slug,
       required String name,
-      Value<int> rowid,
     });
 typedef $$ArmorSetsTableUpdateCompanionBuilder =
     ArmorSetsCompanion Function({
-      Value<String> id,
+      Value<int> id,
+      Value<String> slug,
       Value<String> name,
-      Value<int> rowid,
     });
 
 final class $$ArmorSetsTableReferences
@@ -5943,7 +6787,7 @@ final class $$ArmorSetsTableReferences
     final manager = $$ArmorPiecesTableTableManager(
       $_db,
       $_db.armorPieces,
-    ).filter((f) => f.setId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.setId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_armorPiecesRefsTable($_db));
     return ProcessedTableManager(
@@ -5961,7 +6805,7 @@ final class $$ArmorSetsTableReferences
     final manager = $$ArmorSetSkillsTableTableManager(
       $_db,
       $_db.armorSetSkills,
-    ).filter((f) => f.setId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.setId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_armorSetSkillsRefsTable($_db));
     return ProcessedTableManager(
@@ -5979,8 +6823,13 @@ class $$ArmorSetsTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id => $composableBuilder(
+  ColumnFilters<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -6049,8 +6898,13 @@ class $$ArmorSetsTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id => $composableBuilder(
+  ColumnOrderings<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -6069,8 +6923,11 @@ class $$ArmorSetsTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get id =>
+  GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get slug =>
+      $composableBuilder(column: $table.slug, builder: (column) => column);
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
@@ -6157,16 +7014,16 @@ class $$ArmorSetsTableTableManager
               $$ArmorSetsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> id = const Value.absent(),
+                Value<int> id = const Value.absent(),
+                Value<String> slug = const Value.absent(),
                 Value<String> name = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => ArmorSetsCompanion(id: id, name: name, rowid: rowid),
+              }) => ArmorSetsCompanion(id: id, slug: slug, name: name),
           createCompanionCallback:
               ({
-                required String id,
+                Value<int> id = const Value.absent(),
+                required String slug,
                 required String name,
-                Value<int> rowid = const Value.absent(),
-              }) => ArmorSetsCompanion.insert(id: id, name: name, rowid: rowid),
+              }) => ArmorSetsCompanion.insert(id: id, slug: slug, name: name),
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
@@ -6252,7 +7109,8 @@ typedef $$ArmorSetsTableProcessedTableManager =
     >;
 typedef $$ArmorPiecesTableCreateCompanionBuilder =
     ArmorPiecesCompanion Function({
-      required String id,
+      Value<int> id,
+      required String slug,
       required String name,
       required ArmorSlotType slotType,
       Value<int> baseDefense,
@@ -6263,12 +7121,12 @@ typedef $$ArmorPiecesTableCreateCompanionBuilder =
       Value<int> dragonRes,
       Value<int> rarity,
       Value<String> slots,
-      required String setId,
-      Value<int> rowid,
+      required int setId,
     });
 typedef $$ArmorPiecesTableUpdateCompanionBuilder =
     ArmorPiecesCompanion Function({
-      Value<String> id,
+      Value<int> id,
+      Value<String> slug,
       Value<String> name,
       Value<ArmorSlotType> slotType,
       Value<int> baseDefense,
@@ -6279,8 +7137,7 @@ typedef $$ArmorPiecesTableUpdateCompanionBuilder =
       Value<int> dragonRes,
       Value<int> rarity,
       Value<String> slots,
-      Value<String> setId,
-      Value<int> rowid,
+      Value<int> setId,
     });
 
 final class $$ArmorPiecesTableReferences
@@ -6291,7 +7148,7 @@ final class $$ArmorPiecesTableReferences
       .createAlias($_aliasNameGenerator(db.armorPieces.setId, db.armorSets.id));
 
   $$ArmorSetsTableProcessedTableManager get setId {
-    final $_column = $_itemColumn<String>('set_id')!;
+    final $_column = $_itemColumn<int>('set_id')!;
 
     final manager = $$ArmorSetsTableTableManager(
       $_db,
@@ -6301,6 +7158,29 @@ final class $$ArmorPiecesTableReferences
     if (item == null) return manager;
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static MultiTypedResultKey<$ArmorPieceSkillsTable, List<ArmorPieceSkill>>
+  _armorPieceSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.armorPieceSkills,
+    aliasName: $_aliasNameGenerator(
+      db.armorPieces.id,
+      db.armorPieceSkills.armorPieceId,
+    ),
+  );
+
+  $$ArmorPieceSkillsTableProcessedTableManager get armorPieceSkillsRefs {
+    final manager = $$ArmorPieceSkillsTableTableManager(
+      $_db,
+      $_db.armorPieceSkills,
+    ).filter((f) => f.armorPieceId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _armorPieceSkillsRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
     );
   }
 
@@ -6315,7 +7195,7 @@ final class $$ArmorPiecesTableReferences
     final manager = $$BuildsTableTableManager(
       $_db,
       $_db.builds,
-    ).filter((f) => f.headId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.headId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_buildHeadRefsTable($_db));
     return ProcessedTableManager(
@@ -6334,7 +7214,7 @@ final class $$ArmorPiecesTableReferences
     final manager = $$BuildsTableTableManager(
       $_db,
       $_db.builds,
-    ).filter((f) => f.chestId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.chestId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_buildChestRefsTable($_db));
     return ProcessedTableManager(
@@ -6353,7 +7233,7 @@ final class $$ArmorPiecesTableReferences
     final manager = $$BuildsTableTableManager(
       $_db,
       $_db.builds,
-    ).filter((f) => f.armsId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.armsId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_buildArmsRefsTable($_db));
     return ProcessedTableManager(
@@ -6372,7 +7252,7 @@ final class $$ArmorPiecesTableReferences
     final manager = $$BuildsTableTableManager(
       $_db,
       $_db.builds,
-    ).filter((f) => f.waistId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.waistId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_buildWaistRefsTable($_db));
     return ProcessedTableManager(
@@ -6391,7 +7271,7 @@ final class $$ArmorPiecesTableReferences
     final manager = $$BuildsTableTableManager(
       $_db,
       $_db.builds,
-    ).filter((f) => f.legsId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.legsId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_buildLegsRefsTable($_db));
     return ProcessedTableManager(
@@ -6409,8 +7289,13 @@ class $$ArmorPiecesTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id => $composableBuilder(
+  ColumnFilters<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -6486,6 +7371,31 @@ class $$ArmorPiecesTableFilterComposer
           ),
     );
     return composer;
+  }
+
+  Expression<bool> armorPieceSkillsRefs(
+    Expression<bool> Function($$ArmorPieceSkillsTableFilterComposer f) f,
+  ) {
+    final $$ArmorPieceSkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.armorPieceSkills,
+      getReferencedColumn: (t) => t.armorPieceId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPieceSkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
   }
 
   Expression<bool> buildHeadRefs(
@@ -6623,8 +7533,13 @@ class $$ArmorPiecesTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id => $composableBuilder(
+  ColumnOrderings<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -6711,8 +7626,11 @@ class $$ArmorPiecesTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get id =>
+  GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get slug =>
+      $composableBuilder(column: $table.slug, builder: (column) => column);
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
@@ -6769,6 +7687,31 @@ class $$ArmorPiecesTableAnnotationComposer
           ),
     );
     return composer;
+  }
+
+  Expression<T> armorPieceSkillsRefs<T extends Object>(
+    Expression<T> Function($$ArmorPieceSkillsTableAnnotationComposer a) f,
+  ) {
+    final $$ArmorPieceSkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.armorPieceSkills,
+      getReferencedColumn: (t) => t.armorPieceId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPieceSkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
   }
 
   Expression<T> buildHeadRefs<T extends Object>(
@@ -6912,6 +7855,7 @@ class $$ArmorPiecesTableTableManager
           ArmorPiece,
           PrefetchHooks Function({
             bool setId,
+            bool armorPieceSkillsRefs,
             bool buildHeadRefs,
             bool buildChestRefs,
             bool buildArmsRefs,
@@ -6932,7 +7876,8 @@ class $$ArmorPiecesTableTableManager
               $$ArmorPiecesTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> id = const Value.absent(),
+                Value<int> id = const Value.absent(),
+                Value<String> slug = const Value.absent(),
                 Value<String> name = const Value.absent(),
                 Value<ArmorSlotType> slotType = const Value.absent(),
                 Value<int> baseDefense = const Value.absent(),
@@ -6943,10 +7888,10 @@ class $$ArmorPiecesTableTableManager
                 Value<int> dragonRes = const Value.absent(),
                 Value<int> rarity = const Value.absent(),
                 Value<String> slots = const Value.absent(),
-                Value<String> setId = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
+                Value<int> setId = const Value.absent(),
               }) => ArmorPiecesCompanion(
                 id: id,
+                slug: slug,
                 name: name,
                 slotType: slotType,
                 baseDefense: baseDefense,
@@ -6958,11 +7903,11 @@ class $$ArmorPiecesTableTableManager
                 rarity: rarity,
                 slots: slots,
                 setId: setId,
-                rowid: rowid,
               ),
           createCompanionCallback:
               ({
-                required String id,
+                Value<int> id = const Value.absent(),
+                required String slug,
                 required String name,
                 required ArmorSlotType slotType,
                 Value<int> baseDefense = const Value.absent(),
@@ -6973,10 +7918,10 @@ class $$ArmorPiecesTableTableManager
                 Value<int> dragonRes = const Value.absent(),
                 Value<int> rarity = const Value.absent(),
                 Value<String> slots = const Value.absent(),
-                required String setId,
-                Value<int> rowid = const Value.absent(),
+                required int setId,
               }) => ArmorPiecesCompanion.insert(
                 id: id,
+                slug: slug,
                 name: name,
                 slotType: slotType,
                 baseDefense: baseDefense,
@@ -6988,7 +7933,6 @@ class $$ArmorPiecesTableTableManager
                 rarity: rarity,
                 slots: slots,
                 setId: setId,
-                rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -7001,6 +7945,7 @@ class $$ArmorPiecesTableTableManager
           prefetchHooksCallback:
               ({
                 setId = false,
+                armorPieceSkillsRefs = false,
                 buildHeadRefs = false,
                 buildChestRefs = false,
                 buildArmsRefs = false,
@@ -7010,6 +7955,7 @@ class $$ArmorPiecesTableTableManager
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
+                    if (armorPieceSkillsRefs) db.armorPieceSkills,
                     if (buildHeadRefs) db.builds,
                     if (buildChestRefs) db.builds,
                     if (buildArmsRefs) db.builds,
@@ -7052,6 +7998,27 @@ class $$ArmorPiecesTableTableManager
                       },
                   getPrefetchedDataCallback: (items) async {
                     return [
+                      if (armorPieceSkillsRefs)
+                        await $_getPrefetchedData<
+                          ArmorPiece,
+                          $ArmorPiecesTable,
+                          ArmorPieceSkill
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ArmorPiecesTableReferences
+                              ._armorPieceSkillsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ArmorPiecesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).armorPieceSkillsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.armorPieceId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                       if (buildHeadRefs)
                         await $_getPrefetchedData<
                           ArmorPiece,
@@ -7179,6 +8146,7 @@ typedef $$ArmorPiecesTableProcessedTableManager =
       ArmorPiece,
       PrefetchHooks Function({
         bool setId,
+        bool armorPieceSkillsRefs,
         bool buildHeadRefs,
         bool buildChestRefs,
         bool buildArmsRefs,
@@ -7188,21 +8156,21 @@ typedef $$ArmorPiecesTableProcessedTableManager =
     >;
 typedef $$SkillsTableCreateCompanionBuilder =
     SkillsCompanion Function({
-      required String id,
+      Value<int> id,
+      required String slug,
       required String name,
       required int maxLevel,
       Value<SkillCategory> type1,
       Value<SkillSubcategory> type2,
-      Value<int> rowid,
     });
 typedef $$SkillsTableUpdateCompanionBuilder =
     SkillsCompanion Function({
-      Value<String> id,
+      Value<int> id,
+      Value<String> slug,
       Value<String> name,
       Value<int> maxLevel,
       Value<SkillCategory> type1,
       Value<SkillSubcategory> type2,
-      Value<int> rowid,
     });
 
 final class $$SkillsTableReferences
@@ -7219,7 +8187,7 @@ final class $$SkillsTableReferences
     final manager = $$ArmorSetSkillsTableTableManager(
       $_db,
       $_db.armorSetSkills,
-    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_armorSetSkillsRefsTable($_db));
     return ProcessedTableManager(
@@ -7227,20 +8195,39 @@ final class $$SkillsTableReferences
     );
   }
 
-  static MultiTypedResultKey<$JewelsTable, List<Jewel>> _jewelsRefsTable(
-    _$AppDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.jewels,
-    aliasName: $_aliasNameGenerator(db.skills.id, db.jewels.skillId),
+  static MultiTypedResultKey<$ArmorPieceSkillsTable, List<ArmorPieceSkill>>
+  _armorPieceSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.armorPieceSkills,
+    aliasName: $_aliasNameGenerator(db.skills.id, db.armorPieceSkills.skillId),
   );
 
-  $$JewelsTableProcessedTableManager get jewelsRefs {
-    final manager = $$JewelsTableTableManager(
+  $$ArmorPieceSkillsTableProcessedTableManager get armorPieceSkillsRefs {
+    final manager = $$ArmorPieceSkillsTableTableManager(
       $_db,
-      $_db.jewels,
-    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<String>('id')!));
+      $_db.armorPieceSkills,
+    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache = $_typedResult.readTableOrNull(_jewelsRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _armorPieceSkillsRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$JewelSkillsTable, List<JewelSkill>>
+  _jewelSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.jewelSkills,
+    aliasName: $_aliasNameGenerator(db.skills.id, db.jewelSkills.skillId),
+  );
+
+  $$JewelSkillsTableProcessedTableManager get jewelSkillsRefs {
+    final manager = $$JewelSkillsTableTableManager(
+      $_db,
+      $_db.jewelSkills,
+    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_jewelSkillsRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -7256,7 +8243,7 @@ final class $$SkillsTableReferences
     final manager = $$SkillLevelsTableTableManager(
       $_db,
       $_db.skillLevels,
-    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.skillId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_skillLevelsRefsTable($_db));
     return ProcessedTableManager(
@@ -7274,7 +8261,7 @@ final class $$SkillsTableReferences
     final manager = $$TalismansTableTableManager(
       $_db,
       $_db.talismans,
-    ).filter((f) => f.skill1Id.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.skill1Id.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_talismanSkill1RefsTable($_db));
     return ProcessedTableManager(
@@ -7292,7 +8279,7 @@ final class $$SkillsTableReferences
     final manager = $$TalismansTableTableManager(
       $_db,
       $_db.talismans,
-    ).filter((f) => f.skill2Id.id.sqlEquals($_itemColumn<String>('id')!));
+    ).filter((f) => f.skill2Id.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_talismanSkill2RefsTable($_db));
     return ProcessedTableManager(
@@ -7310,8 +8297,13 @@ class $$SkillsTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id => $composableBuilder(
+  ColumnFilters<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -7362,22 +8354,47 @@ class $$SkillsTableFilterComposer
     return f(composer);
   }
 
-  Expression<bool> jewelsRefs(
-    Expression<bool> Function($$JewelsTableFilterComposer f) f,
+  Expression<bool> armorPieceSkillsRefs(
+    Expression<bool> Function($$ArmorPieceSkillsTableFilterComposer f) f,
   ) {
-    final $$JewelsTableFilterComposer composer = $composerBuilder(
+    final $$ArmorPieceSkillsTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.jewels,
+      referencedTable: $db.armorPieceSkills,
       getReferencedColumn: (t) => t.skillId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$JewelsTableFilterComposer(
+          }) => $$ArmorPieceSkillsTableFilterComposer(
             $db: $db,
-            $table: $db.jewels,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> jewelSkillsRefs(
+    Expression<bool> Function($$JewelSkillsTableFilterComposer f) f,
+  ) {
+    final $$JewelSkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.skillId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelSkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.jewelSkills,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -7472,8 +8489,13 @@ class $$SkillsTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id => $composableBuilder(
+  ColumnOrderings<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -7507,8 +8529,11 @@ class $$SkillsTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get id =>
+  GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get slug =>
+      $composableBuilder(column: $table.slug, builder: (column) => column);
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
@@ -7547,22 +8572,47 @@ class $$SkillsTableAnnotationComposer
     return f(composer);
   }
 
-  Expression<T> jewelsRefs<T extends Object>(
-    Expression<T> Function($$JewelsTableAnnotationComposer a) f,
+  Expression<T> armorPieceSkillsRefs<T extends Object>(
+    Expression<T> Function($$ArmorPieceSkillsTableAnnotationComposer a) f,
   ) {
-    final $$JewelsTableAnnotationComposer composer = $composerBuilder(
+    final $$ArmorPieceSkillsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.jewels,
+      referencedTable: $db.armorPieceSkills,
       getReferencedColumn: (t) => t.skillId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$JewelsTableAnnotationComposer(
+          }) => $$ArmorPieceSkillsTableAnnotationComposer(
             $db: $db,
-            $table: $db.jewels,
+            $table: $db.armorPieceSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> jewelSkillsRefs<T extends Object>(
+    Expression<T> Function($$JewelSkillsTableAnnotationComposer a) f,
+  ) {
+    final $$JewelSkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.skillId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelSkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.jewelSkills,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -7663,7 +8713,8 @@ class $$SkillsTableTableManager
           Skill,
           PrefetchHooks Function({
             bool armorSetSkillsRefs,
-            bool jewelsRefs,
+            bool armorPieceSkillsRefs,
+            bool jewelSkillsRefs,
             bool skillLevelsRefs,
             bool talismanSkill1Refs,
             bool talismanSkill2Refs,
@@ -7682,35 +8733,35 @@ class $$SkillsTableTableManager
               $$SkillsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> id = const Value.absent(),
+                Value<int> id = const Value.absent(),
+                Value<String> slug = const Value.absent(),
                 Value<String> name = const Value.absent(),
                 Value<int> maxLevel = const Value.absent(),
                 Value<SkillCategory> type1 = const Value.absent(),
                 Value<SkillSubcategory> type2 = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
               }) => SkillsCompanion(
                 id: id,
+                slug: slug,
                 name: name,
                 maxLevel: maxLevel,
                 type1: type1,
                 type2: type2,
-                rowid: rowid,
               ),
           createCompanionCallback:
               ({
-                required String id,
+                Value<int> id = const Value.absent(),
+                required String slug,
                 required String name,
                 required int maxLevel,
                 Value<SkillCategory> type1 = const Value.absent(),
                 Value<SkillSubcategory> type2 = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
               }) => SkillsCompanion.insert(
                 id: id,
+                slug: slug,
                 name: name,
                 maxLevel: maxLevel,
                 type1: type1,
                 type2: type2,
-                rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -7721,7 +8772,8 @@ class $$SkillsTableTableManager
           prefetchHooksCallback:
               ({
                 armorSetSkillsRefs = false,
-                jewelsRefs = false,
+                armorPieceSkillsRefs = false,
+                jewelSkillsRefs = false,
                 skillLevelsRefs = false,
                 talismanSkill1Refs = false,
                 talismanSkill2Refs = false,
@@ -7730,7 +8782,8 @@ class $$SkillsTableTableManager
                   db: db,
                   explicitlyWatchedTables: [
                     if (armorSetSkillsRefs) db.armorSetSkills,
-                    if (jewelsRefs) db.jewels,
+                    if (armorPieceSkillsRefs) db.armorPieceSkills,
+                    if (jewelSkillsRefs) db.jewelSkills,
                     if (skillLevelsRefs) db.skillLevels,
                     if (talismanSkill1Refs) db.talismans,
                     if (talismanSkill2Refs) db.talismans,
@@ -7759,13 +8812,42 @@ class $$SkillsTableTableManager
                               ),
                           typedResults: items,
                         ),
-                      if (jewelsRefs)
-                        await $_getPrefetchedData<Skill, $SkillsTable, Jewel>(
+                      if (armorPieceSkillsRefs)
+                        await $_getPrefetchedData<
+                          Skill,
+                          $SkillsTable,
+                          ArmorPieceSkill
+                        >(
                           currentTable: table,
                           referencedTable: $$SkillsTableReferences
-                              ._jewelsRefsTable(db),
+                              ._armorPieceSkillsRefsTable(db),
                           managerFromTypedResult: (p0) =>
-                              $$SkillsTableReferences(db, table, p0).jewelsRefs,
+                              $$SkillsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).armorPieceSkillsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.skillId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (jewelSkillsRefs)
+                        await $_getPrefetchedData<
+                          Skill,
+                          $SkillsTable,
+                          JewelSkill
+                        >(
+                          currentTable: table,
+                          referencedTable: $$SkillsTableReferences
+                              ._jewelSkillsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$SkillsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).jewelSkillsRefs,
                           referencedItemsForCurrentItem:
                               (item, referencedItems) => referencedItems.where(
                                 (e) => e.skillId == item.id,
@@ -7857,7 +8939,8 @@ typedef $$SkillsTableProcessedTableManager =
       Skill,
       PrefetchHooks Function({
         bool armorSetSkillsRefs,
-        bool jewelsRefs,
+        bool armorPieceSkillsRefs,
+        bool jewelSkillsRefs,
         bool skillLevelsRefs,
         bool talismanSkill1Refs,
         bool talismanSkill2Refs,
@@ -7866,18 +8949,18 @@ typedef $$SkillsTableProcessedTableManager =
 typedef $$ArmorSetSkillsTableCreateCompanionBuilder =
     ArmorSetSkillsCompanion Function({
       Value<int> id,
-      required String setId,
+      required int setId,
       required int requiredPieces,
-      required String skillId,
+      required int skillId,
       required int skillLevel,
       required SetSkillType skillCategory,
     });
 typedef $$ArmorSetSkillsTableUpdateCompanionBuilder =
     ArmorSetSkillsCompanion Function({
       Value<int> id,
-      Value<String> setId,
+      Value<int> setId,
       Value<int> requiredPieces,
-      Value<String> skillId,
+      Value<int> skillId,
       Value<int> skillLevel,
       Value<SetSkillType> skillCategory,
     });
@@ -7896,7 +8979,7 @@ final class $$ArmorSetSkillsTableReferences
       );
 
   $$ArmorSetsTableProcessedTableManager get setId {
-    final $_column = $_itemColumn<String>('set_id')!;
+    final $_column = $_itemColumn<int>('set_id')!;
 
     final manager = $$ArmorSetsTableTableManager(
       $_db,
@@ -7914,7 +8997,7 @@ final class $$ArmorSetSkillsTableReferences
   );
 
   $$SkillsTableProcessedTableManager get skillId {
-    final $_column = $_itemColumn<String>('skill_id')!;
+    final $_column = $_itemColumn<int>('skill_id')!;
 
     final manager = $$SkillsTableTableManager(
       $_db,
@@ -8187,9 +9270,9 @@ class $$ArmorSetSkillsTableTableManager
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                Value<String> setId = const Value.absent(),
+                Value<int> setId = const Value.absent(),
                 Value<int> requiredPieces = const Value.absent(),
-                Value<String> skillId = const Value.absent(),
+                Value<int> skillId = const Value.absent(),
                 Value<int> skillLevel = const Value.absent(),
                 Value<SetSkillType> skillCategory = const Value.absent(),
               }) => ArmorSetSkillsCompanion(
@@ -8203,9 +9286,9 @@ class $$ArmorSetSkillsTableTableManager
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                required String setId,
+                required int setId,
                 required int requiredPieces,
-                required String skillId,
+                required int skillId,
                 required int skillLevel,
                 required SetSkillType skillCategory,
               }) => ArmorSetSkillsCompanion.insert(
@@ -8298,37 +9381,58 @@ typedef $$ArmorSetSkillsTableProcessedTableManager =
       ArmorSetSkill,
       PrefetchHooks Function({bool setId, bool skillId})
     >;
-typedef $$JewelsTableCreateCompanionBuilder =
-    JewelsCompanion Function({
-      required String id,
-      required String name,
-      Value<int> rarity,
-      required int slotSize,
-      required String skillId,
+typedef $$ArmorPieceSkillsTableCreateCompanionBuilder =
+    ArmorPieceSkillsCompanion Function({
+      Value<int> id,
+      required int armorPieceId,
+      required int skillId,
       required int skillLevel,
-      Value<int> rowid,
     });
-typedef $$JewelsTableUpdateCompanionBuilder =
-    JewelsCompanion Function({
-      Value<String> id,
-      Value<String> name,
-      Value<int> rarity,
-      Value<int> slotSize,
-      Value<String> skillId,
+typedef $$ArmorPieceSkillsTableUpdateCompanionBuilder =
+    ArmorPieceSkillsCompanion Function({
+      Value<int> id,
+      Value<int> armorPieceId,
+      Value<int> skillId,
       Value<int> skillLevel,
-      Value<int> rowid,
     });
 
-final class $$JewelsTableReferences
-    extends BaseReferences<_$AppDatabase, $JewelsTable, Jewel> {
-  $$JewelsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+final class $$ArmorPieceSkillsTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $ArmorPieceSkillsTable, ArmorPieceSkill> {
+  $$ArmorPieceSkillsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $ArmorPiecesTable _armorPieceIdTable(_$AppDatabase db) =>
+      db.armorPieces.createAlias(
+        $_aliasNameGenerator(
+          db.armorPieceSkills.armorPieceId,
+          db.armorPieces.id,
+        ),
+      );
+
+  $$ArmorPiecesTableProcessedTableManager get armorPieceId {
+    final $_column = $_itemColumn<int>('armor_piece_id')!;
+
+    final manager = $$ArmorPiecesTableTableManager(
+      $_db,
+      $_db.armorPieces,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_armorPieceIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
 
   static $SkillsTable _skillIdTable(_$AppDatabase db) => db.skills.createAlias(
-    $_aliasNameGenerator(db.jewels.skillId, db.skills.id),
+    $_aliasNameGenerator(db.armorPieceSkills.skillId, db.skills.id),
   );
 
   $$SkillsTableProcessedTableManager get skillId {
-    final $_column = $_itemColumn<String>('skill_id')!;
+    final $_column = $_itemColumn<int>('skill_id')!;
 
     final manager = $$SkillsTableTableManager(
       $_db,
@@ -8340,52 +9444,19 @@ final class $$JewelsTableReferences
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
-
-  static MultiTypedResultKey<$BuildJewelsTable, List<BuildJewel>>
-  _buildJewelsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.buildJewels,
-    aliasName: $_aliasNameGenerator(db.jewels.id, db.buildJewels.jewelId),
-  );
-
-  $$BuildJewelsTableProcessedTableManager get buildJewelsRefs {
-    final manager = $$BuildJewelsTableTableManager(
-      $_db,
-      $_db.buildJewels,
-    ).filter((f) => f.jewelId.id.sqlEquals($_itemColumn<String>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(_buildJewelsRefsTable($_db));
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
 }
 
-class $$JewelsTableFilterComposer
-    extends Composer<_$AppDatabase, $JewelsTable> {
-  $$JewelsTableFilterComposer({
+class $$ArmorPieceSkillsTableFilterComposer
+    extends Composer<_$AppDatabase, $ArmorPieceSkillsTable> {
+  $$ArmorPieceSkillsTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id => $composableBuilder(
+  ColumnFilters<int> get id => $composableBuilder(
     column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get name => $composableBuilder(
-    column: $table.name,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get rarity => $composableBuilder(
-    column: $table.rarity,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get slotSize => $composableBuilder(
-    column: $table.slotSize,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -8393,6 +9464,29 @@ class $$JewelsTableFilterComposer
     column: $table.skillLevel,
     builder: (column) => ColumnFilters(column),
   );
+
+  $$ArmorPiecesTableFilterComposer get armorPieceId {
+    final $$ArmorPiecesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.armorPieceId,
+      referencedTable: $db.armorPieces,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPiecesTableFilterComposer(
+            $db: $db,
+            $table: $db.armorPieces,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 
   $$SkillsTableFilterComposer get skillId {
     final $$SkillsTableFilterComposer composer = $composerBuilder(
@@ -8415,6 +9509,397 @@ class $$JewelsTableFilterComposer
           ),
     );
     return composer;
+  }
+}
+
+class $$ArmorPieceSkillsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ArmorPieceSkillsTable> {
+  $$ArmorPieceSkillsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ArmorPiecesTableOrderingComposer get armorPieceId {
+    final $$ArmorPiecesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.armorPieceId,
+      referencedTable: $db.armorPieces,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPiecesTableOrderingComposer(
+            $db: $db,
+            $table: $db.armorPieces,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableOrderingComposer get skillId {
+    final $$SkillsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableOrderingComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ArmorPieceSkillsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ArmorPieceSkillsTable> {
+  $$ArmorPieceSkillsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => column,
+  );
+
+  $$ArmorPiecesTableAnnotationComposer get armorPieceId {
+    final $$ArmorPiecesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.armorPieceId,
+      referencedTable: $db.armorPieces,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ArmorPiecesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.armorPieces,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableAnnotationComposer get skillId {
+    final $$SkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ArmorPieceSkillsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ArmorPieceSkillsTable,
+          ArmorPieceSkill,
+          $$ArmorPieceSkillsTableFilterComposer,
+          $$ArmorPieceSkillsTableOrderingComposer,
+          $$ArmorPieceSkillsTableAnnotationComposer,
+          $$ArmorPieceSkillsTableCreateCompanionBuilder,
+          $$ArmorPieceSkillsTableUpdateCompanionBuilder,
+          (ArmorPieceSkill, $$ArmorPieceSkillsTableReferences),
+          ArmorPieceSkill,
+          PrefetchHooks Function({bool armorPieceId, bool skillId})
+        > {
+  $$ArmorPieceSkillsTableTableManager(
+    _$AppDatabase db,
+    $ArmorPieceSkillsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ArmorPieceSkillsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ArmorPieceSkillsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ArmorPieceSkillsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> armorPieceId = const Value.absent(),
+                Value<int> skillId = const Value.absent(),
+                Value<int> skillLevel = const Value.absent(),
+              }) => ArmorPieceSkillsCompanion(
+                id: id,
+                armorPieceId: armorPieceId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int armorPieceId,
+                required int skillId,
+                required int skillLevel,
+              }) => ArmorPieceSkillsCompanion.insert(
+                id: id,
+                armorPieceId: armorPieceId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$ArmorPieceSkillsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({armorPieceId = false, skillId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (armorPieceId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.armorPieceId,
+                                referencedTable:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._armorPieceIdTable(db),
+                                referencedColumn:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._armorPieceIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (skillId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.skillId,
+                                referencedTable:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._skillIdTable(db),
+                                referencedColumn:
+                                    $$ArmorPieceSkillsTableReferences
+                                        ._skillIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$ArmorPieceSkillsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ArmorPieceSkillsTable,
+      ArmorPieceSkill,
+      $$ArmorPieceSkillsTableFilterComposer,
+      $$ArmorPieceSkillsTableOrderingComposer,
+      $$ArmorPieceSkillsTableAnnotationComposer,
+      $$ArmorPieceSkillsTableCreateCompanionBuilder,
+      $$ArmorPieceSkillsTableUpdateCompanionBuilder,
+      (ArmorPieceSkill, $$ArmorPieceSkillsTableReferences),
+      ArmorPieceSkill,
+      PrefetchHooks Function({bool armorPieceId, bool skillId})
+    >;
+typedef $$JewelsTableCreateCompanionBuilder =
+    JewelsCompanion Function({
+      Value<int> id,
+      required String slug,
+      required String name,
+      Value<int> rarity,
+      required int slotSize,
+      Value<String> allowedOn,
+    });
+typedef $$JewelsTableUpdateCompanionBuilder =
+    JewelsCompanion Function({
+      Value<int> id,
+      Value<String> slug,
+      Value<String> name,
+      Value<int> rarity,
+      Value<int> slotSize,
+      Value<String> allowedOn,
+    });
+
+final class $$JewelsTableReferences
+    extends BaseReferences<_$AppDatabase, $JewelsTable, Jewel> {
+  $$JewelsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$JewelSkillsTable, List<JewelSkill>>
+  _jewelSkillsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.jewelSkills,
+    aliasName: $_aliasNameGenerator(db.jewels.id, db.jewelSkills.jewelId),
+  );
+
+  $$JewelSkillsTableProcessedTableManager get jewelSkillsRefs {
+    final manager = $$JewelSkillsTableTableManager(
+      $_db,
+      $_db.jewelSkills,
+    ).filter((f) => f.jewelId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_jewelSkillsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$BuildJewelsTable, List<BuildJewel>>
+  _buildJewelsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.buildJewels,
+    aliasName: $_aliasNameGenerator(db.jewels.id, db.buildJewels.jewelId),
+  );
+
+  $$BuildJewelsTableProcessedTableManager get buildJewelsRefs {
+    final manager = $$BuildJewelsTableTableManager(
+      $_db,
+      $_db.buildJewels,
+    ).filter((f) => f.jewelId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_buildJewelsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$JewelsTableFilterComposer
+    extends Composer<_$AppDatabase, $JewelsTable> {
+  $$JewelsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get slug => $composableBuilder(
+    column: $table.slug,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get rarity => $composableBuilder(
+    column: $table.rarity,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get slotSize => $composableBuilder(
+    column: $table.slotSize,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get allowedOn => $composableBuilder(
+    column: $table.allowedOn,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  Expression<bool> jewelSkillsRefs(
+    Expression<bool> Function($$JewelSkillsTableFilterComposer f) f,
+  ) {
+    final $$JewelSkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.jewelId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelSkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.jewelSkills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
   }
 
   Expression<bool> buildJewelsRefs(
@@ -8452,8 +9937,13 @@ class $$JewelsTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id => $composableBuilder(
+  ColumnOrderings<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get slug => $composableBuilder(
+    column: $table.slug,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -8472,33 +9962,10 @@ class $$JewelsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<int> get skillLevel => $composableBuilder(
-    column: $table.skillLevel,
+  ColumnOrderings<String> get allowedOn => $composableBuilder(
+    column: $table.allowedOn,
     builder: (column) => ColumnOrderings(column),
   );
-
-  $$SkillsTableOrderingComposer get skillId {
-    final $$SkillsTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.skillId,
-      referencedTable: $db.skills,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$SkillsTableOrderingComposer(
-            $db: $db,
-            $table: $db.skills,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
 }
 
 class $$JewelsTableAnnotationComposer
@@ -8510,8 +9977,11 @@ class $$JewelsTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get id =>
+  GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get slug =>
+      $composableBuilder(column: $table.slug, builder: (column) => column);
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
@@ -8522,32 +9992,32 @@ class $$JewelsTableAnnotationComposer
   GeneratedColumn<int> get slotSize =>
       $composableBuilder(column: $table.slotSize, builder: (column) => column);
 
-  GeneratedColumn<int> get skillLevel => $composableBuilder(
-    column: $table.skillLevel,
-    builder: (column) => column,
-  );
+  GeneratedColumn<String> get allowedOn =>
+      $composableBuilder(column: $table.allowedOn, builder: (column) => column);
 
-  $$SkillsTableAnnotationComposer get skillId {
-    final $$SkillsTableAnnotationComposer composer = $composerBuilder(
+  Expression<T> jewelSkillsRefs<T extends Object>(
+    Expression<T> Function($$JewelSkillsTableAnnotationComposer a) f,
+  ) {
+    final $$JewelSkillsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
-      getCurrentColumn: (t) => t.skillId,
-      referencedTable: $db.skills,
-      getReferencedColumn: (t) => t.id,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.jewelSkills,
+      getReferencedColumn: (t) => t.jewelId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$SkillsTableAnnotationComposer(
+          }) => $$JewelSkillsTableAnnotationComposer(
             $db: $db,
-            $table: $db.skills,
+            $table: $db.jewelSkills,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
                 $removeJoinBuilderFromRootComposer,
           ),
     );
-    return composer;
+    return f(composer);
   }
 
   Expression<T> buildJewelsRefs<T extends Object>(
@@ -8589,7 +10059,7 @@ class $$JewelsTableTableManager
           $$JewelsTableUpdateCompanionBuilder,
           (Jewel, $$JewelsTableReferences),
           Jewel,
-          PrefetchHooks Function({bool skillId, bool buildJewelsRefs})
+          PrefetchHooks Function({bool jewelSkillsRefs, bool buildJewelsRefs})
         > {
   $$JewelsTableTableManager(_$AppDatabase db, $JewelsTable table)
     : super(
@@ -8604,39 +10074,35 @@ class $$JewelsTableTableManager
               $$JewelsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> id = const Value.absent(),
+                Value<int> id = const Value.absent(),
+                Value<String> slug = const Value.absent(),
                 Value<String> name = const Value.absent(),
                 Value<int> rarity = const Value.absent(),
                 Value<int> slotSize = const Value.absent(),
-                Value<String> skillId = const Value.absent(),
-                Value<int> skillLevel = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
+                Value<String> allowedOn = const Value.absent(),
               }) => JewelsCompanion(
                 id: id,
+                slug: slug,
                 name: name,
                 rarity: rarity,
                 slotSize: slotSize,
-                skillId: skillId,
-                skillLevel: skillLevel,
-                rowid: rowid,
+                allowedOn: allowedOn,
               ),
           createCompanionCallback:
               ({
-                required String id,
+                Value<int> id = const Value.absent(),
+                required String slug,
                 required String name,
                 Value<int> rarity = const Value.absent(),
                 required int slotSize,
-                required String skillId,
-                required int skillLevel,
-                Value<int> rowid = const Value.absent(),
+                Value<String> allowedOn = const Value.absent(),
               }) => JewelsCompanion.insert(
                 id: id,
+                slug: slug,
                 name: name,
                 rarity: rarity,
                 slotSize: slotSize,
-                skillId: skillId,
-                skillLevel: skillLevel,
-                rowid: rowid,
+                allowedOn: allowedOn,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -8644,62 +10110,63 @@ class $$JewelsTableTableManager
                     (e.readTable(table), $$JewelsTableReferences(db, table, e)),
               )
               .toList(),
-          prefetchHooksCallback: ({skillId = false, buildJewelsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [if (buildJewelsRefs) db.buildJewels],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (skillId) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.skillId,
-                                referencedTable: $$JewelsTableReferences
-                                    ._skillIdTable(db),
-                                referencedColumn: $$JewelsTableReferences
-                                    ._skillIdTable(db)
-                                    .id,
-                              )
-                              as T;
-                    }
-
-                    return state;
+          prefetchHooksCallback:
+              ({jewelSkillsRefs = false, buildJewelsRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (jewelSkillsRefs) db.jewelSkills,
+                    if (buildJewelsRefs) db.buildJewels,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (jewelSkillsRefs)
+                        await $_getPrefetchedData<
+                          Jewel,
+                          $JewelsTable,
+                          JewelSkill
+                        >(
+                          currentTable: table,
+                          referencedTable: $$JewelsTableReferences
+                              ._jewelSkillsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$JewelsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).jewelSkillsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.jewelId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (buildJewelsRefs)
+                        await $_getPrefetchedData<
+                          Jewel,
+                          $JewelsTable,
+                          BuildJewel
+                        >(
+                          currentTable: table,
+                          referencedTable: $$JewelsTableReferences
+                              ._buildJewelsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$JewelsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).buildJewelsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.jewelId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
                   },
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (buildJewelsRefs)
-                    await $_getPrefetchedData<Jewel, $JewelsTable, BuildJewel>(
-                      currentTable: table,
-                      referencedTable: $$JewelsTableReferences
-                          ._buildJewelsRefsTable(db),
-                      managerFromTypedResult: (p0) => $$JewelsTableReferences(
-                        db,
-                        table,
-                        p0,
-                      ).buildJewelsRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.jewelId == item.id),
-                      typedResults: items,
-                    ),
-                ];
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -8716,13 +10183,396 @@ typedef $$JewelsTableProcessedTableManager =
       $$JewelsTableUpdateCompanionBuilder,
       (Jewel, $$JewelsTableReferences),
       Jewel,
-      PrefetchHooks Function({bool skillId, bool buildJewelsRefs})
+      PrefetchHooks Function({bool jewelSkillsRefs, bool buildJewelsRefs})
+    >;
+typedef $$JewelSkillsTableCreateCompanionBuilder =
+    JewelSkillsCompanion Function({
+      Value<int> id,
+      required int jewelId,
+      required int skillId,
+      required int skillLevel,
+    });
+typedef $$JewelSkillsTableUpdateCompanionBuilder =
+    JewelSkillsCompanion Function({
+      Value<int> id,
+      Value<int> jewelId,
+      Value<int> skillId,
+      Value<int> skillLevel,
+    });
+
+final class $$JewelSkillsTableReferences
+    extends BaseReferences<_$AppDatabase, $JewelSkillsTable, JewelSkill> {
+  $$JewelSkillsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $JewelsTable _jewelIdTable(_$AppDatabase db) => db.jewels.createAlias(
+    $_aliasNameGenerator(db.jewelSkills.jewelId, db.jewels.id),
+  );
+
+  $$JewelsTableProcessedTableManager get jewelId {
+    final $_column = $_itemColumn<int>('jewel_id')!;
+
+    final manager = $$JewelsTableTableManager(
+      $_db,
+      $_db.jewels,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_jewelIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $SkillsTable _skillIdTable(_$AppDatabase db) => db.skills.createAlias(
+    $_aliasNameGenerator(db.jewelSkills.skillId, db.skills.id),
+  );
+
+  $$SkillsTableProcessedTableManager get skillId {
+    final $_column = $_itemColumn<int>('skill_id')!;
+
+    final manager = $$SkillsTableTableManager(
+      $_db,
+      $_db.skills,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_skillIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$JewelSkillsTableFilterComposer
+    extends Composer<_$AppDatabase, $JewelSkillsTable> {
+  $$JewelSkillsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$JewelsTableFilterComposer get jewelId {
+    final $$JewelsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.jewelId,
+      referencedTable: $db.jewels,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelsTableFilterComposer(
+            $db: $db,
+            $table: $db.jewels,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableFilterComposer get skillId {
+    final $$SkillsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableFilterComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$JewelSkillsTableOrderingComposer
+    extends Composer<_$AppDatabase, $JewelSkillsTable> {
+  $$JewelSkillsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$JewelsTableOrderingComposer get jewelId {
+    final $$JewelsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.jewelId,
+      referencedTable: $db.jewels,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelsTableOrderingComposer(
+            $db: $db,
+            $table: $db.jewels,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableOrderingComposer get skillId {
+    final $$SkillsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableOrderingComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$JewelSkillsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JewelSkillsTable> {
+  $$JewelSkillsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get skillLevel => $composableBuilder(
+    column: $table.skillLevel,
+    builder: (column) => column,
+  );
+
+  $$JewelsTableAnnotationComposer get jewelId {
+    final $$JewelsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.jewelId,
+      referencedTable: $db.jewels,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JewelsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.jewels,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SkillsTableAnnotationComposer get skillId {
+    final $$SkillsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.skillId,
+      referencedTable: $db.skills,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SkillsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.skills,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$JewelSkillsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $JewelSkillsTable,
+          JewelSkill,
+          $$JewelSkillsTableFilterComposer,
+          $$JewelSkillsTableOrderingComposer,
+          $$JewelSkillsTableAnnotationComposer,
+          $$JewelSkillsTableCreateCompanionBuilder,
+          $$JewelSkillsTableUpdateCompanionBuilder,
+          (JewelSkill, $$JewelSkillsTableReferences),
+          JewelSkill,
+          PrefetchHooks Function({bool jewelId, bool skillId})
+        > {
+  $$JewelSkillsTableTableManager(_$AppDatabase db, $JewelSkillsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$JewelSkillsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$JewelSkillsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$JewelSkillsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> jewelId = const Value.absent(),
+                Value<int> skillId = const Value.absent(),
+                Value<int> skillLevel = const Value.absent(),
+              }) => JewelSkillsCompanion(
+                id: id,
+                jewelId: jewelId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int jewelId,
+                required int skillId,
+                required int skillLevel,
+              }) => JewelSkillsCompanion.insert(
+                id: id,
+                jewelId: jewelId,
+                skillId: skillId,
+                skillLevel: skillLevel,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$JewelSkillsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({jewelId = false, skillId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (jewelId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.jewelId,
+                                referencedTable: $$JewelSkillsTableReferences
+                                    ._jewelIdTable(db),
+                                referencedColumn: $$JewelSkillsTableReferences
+                                    ._jewelIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+                    if (skillId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.skillId,
+                                referencedTable: $$JewelSkillsTableReferences
+                                    ._skillIdTable(db),
+                                referencedColumn: $$JewelSkillsTableReferences
+                                    ._skillIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$JewelSkillsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $JewelSkillsTable,
+      JewelSkill,
+      $$JewelSkillsTableFilterComposer,
+      $$JewelSkillsTableOrderingComposer,
+      $$JewelSkillsTableAnnotationComposer,
+      $$JewelSkillsTableCreateCompanionBuilder,
+      $$JewelSkillsTableUpdateCompanionBuilder,
+      (JewelSkill, $$JewelSkillsTableReferences),
+      JewelSkill,
+      PrefetchHooks Function({bool jewelId, bool skillId})
     >;
 typedef $$SkillLevelsTableCreateCompanionBuilder =
     SkillLevelsCompanion Function({
       Value<int> id,
-      required String skillId,
+      required int skillId,
       required int level,
+      Value<int?> piecesRequired,
       Value<double?> bonus1Value,
       Value<String?> bonus1Type,
       Value<double?> bonus2Value,
@@ -8735,8 +10585,9 @@ typedef $$SkillLevelsTableCreateCompanionBuilder =
 typedef $$SkillLevelsTableUpdateCompanionBuilder =
     SkillLevelsCompanion Function({
       Value<int> id,
-      Value<String> skillId,
+      Value<int> skillId,
       Value<int> level,
+      Value<int?> piecesRequired,
       Value<double?> bonus1Value,
       Value<String?> bonus1Type,
       Value<double?> bonus2Value,
@@ -8756,7 +10607,7 @@ final class $$SkillLevelsTableReferences
   );
 
   $$SkillsTableProcessedTableManager get skillId {
-    final $_column = $_itemColumn<String>('skill_id')!;
+    final $_column = $_itemColumn<int>('skill_id')!;
 
     final manager = $$SkillsTableTableManager(
       $_db,
@@ -8786,6 +10637,11 @@ class $$SkillLevelsTableFilterComposer
 
   ColumnFilters<int> get level => $composableBuilder(
     column: $table.level,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get piecesRequired => $composableBuilder(
+    column: $table.piecesRequired,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -8872,6 +10728,11 @@ class $$SkillLevelsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get piecesRequired => $composableBuilder(
+    column: $table.piecesRequired,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<double> get bonus1Value => $composableBuilder(
     column: $table.bonus1Value,
     builder: (column) => ColumnOrderings(column),
@@ -8950,6 +10811,11 @@ class $$SkillLevelsTableAnnotationComposer
 
   GeneratedColumn<int> get level =>
       $composableBuilder(column: $table.level, builder: (column) => column);
+
+  GeneratedColumn<int> get piecesRequired => $composableBuilder(
+    column: $table.piecesRequired,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<double> get bonus1Value => $composableBuilder(
     column: $table.bonus1Value,
@@ -9040,8 +10906,9 @@ class $$SkillLevelsTableTableManager
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                Value<String> skillId = const Value.absent(),
+                Value<int> skillId = const Value.absent(),
                 Value<int> level = const Value.absent(),
+                Value<int?> piecesRequired = const Value.absent(),
                 Value<double?> bonus1Value = const Value.absent(),
                 Value<String?> bonus1Type = const Value.absent(),
                 Value<double?> bonus2Value = const Value.absent(),
@@ -9054,6 +10921,7 @@ class $$SkillLevelsTableTableManager
                 id: id,
                 skillId: skillId,
                 level: level,
+                piecesRequired: piecesRequired,
                 bonus1Value: bonus1Value,
                 bonus1Type: bonus1Type,
                 bonus2Value: bonus2Value,
@@ -9066,8 +10934,9 @@ class $$SkillLevelsTableTableManager
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                required String skillId,
+                required int skillId,
                 required int level,
+                Value<int?> piecesRequired = const Value.absent(),
                 Value<double?> bonus1Value = const Value.absent(),
                 Value<String?> bonus1Type = const Value.absent(),
                 Value<double?> bonus2Value = const Value.absent(),
@@ -9080,6 +10949,7 @@ class $$SkillLevelsTableTableManager
                 id: id,
                 skillId: skillId,
                 level: level,
+                piecesRequired: piecesRequired,
                 bonus1Value: bonus1Value,
                 bonus1Type: bonus1Type,
                 bonus2Value: bonus2Value,
@@ -9160,9 +11030,9 @@ typedef $$TalismansTableCreateCompanionBuilder =
     TalismansCompanion Function({
       Value<int> id,
       required String name,
-      Value<String?> skill1Id,
+      Value<int?> skill1Id,
       Value<int?> skill1Level,
-      Value<String?> skill2Id,
+      Value<int?> skill2Id,
       Value<int?> skill2Level,
       Value<String> slots,
       required int createdAt,
@@ -9171,9 +11041,9 @@ typedef $$TalismansTableUpdateCompanionBuilder =
     TalismansCompanion Function({
       Value<int> id,
       Value<String> name,
-      Value<String?> skill1Id,
+      Value<int?> skill1Id,
       Value<int?> skill1Level,
-      Value<String?> skill2Id,
+      Value<int?> skill2Id,
       Value<int?> skill2Level,
       Value<String> slots,
       Value<int> createdAt,
@@ -9188,7 +11058,7 @@ final class $$TalismansTableReferences
   );
 
   $$SkillsTableProcessedTableManager? get skill1Id {
-    final $_column = $_itemColumn<String>('skill1_id');
+    final $_column = $_itemColumn<int>('skill1_id');
     if ($_column == null) return null;
     final manager = $$SkillsTableTableManager(
       $_db,
@@ -9206,7 +11076,7 @@ final class $$TalismansTableReferences
   );
 
   $$SkillsTableProcessedTableManager? get skill2Id {
-    final $_column = $_itemColumn<String>('skill2_id');
+    final $_column = $_itemColumn<int>('skill2_id');
     if ($_column == null) return null;
     final manager = $$SkillsTableTableManager(
       $_db,
@@ -9573,9 +11443,9 @@ class $$TalismansTableTableManager
               ({
                 Value<int> id = const Value.absent(),
                 Value<String> name = const Value.absent(),
-                Value<String?> skill1Id = const Value.absent(),
+                Value<int?> skill1Id = const Value.absent(),
                 Value<int?> skill1Level = const Value.absent(),
-                Value<String?> skill2Id = const Value.absent(),
+                Value<int?> skill2Id = const Value.absent(),
                 Value<int?> skill2Level = const Value.absent(),
                 Value<String> slots = const Value.absent(),
                 Value<int> createdAt = const Value.absent(),
@@ -9593,9 +11463,9 @@ class $$TalismansTableTableManager
               ({
                 Value<int> id = const Value.absent(),
                 required String name,
-                Value<String?> skill1Id = const Value.absent(),
+                Value<int?> skill1Id = const Value.absent(),
                 Value<int?> skill1Level = const Value.absent(),
-                Value<String?> skill2Id = const Value.absent(),
+                Value<int?> skill2Id = const Value.absent(),
                 Value<int?> skill2Level = const Value.absent(),
                 Value<String> slots = const Value.absent(),
                 required int createdAt,
@@ -9716,12 +11586,12 @@ typedef $$BuildsTableCreateCompanionBuilder =
     BuildsCompanion Function({
       Value<int> id,
       required String name,
-      Value<String?> weaponId,
-      Value<String?> headId,
-      Value<String?> chestId,
-      Value<String?> armsId,
-      Value<String?> waistId,
-      Value<String?> legsId,
+      Value<int?> weaponId,
+      Value<int?> headId,
+      Value<int?> chestId,
+      Value<int?> armsId,
+      Value<int?> waistId,
+      Value<int?> legsId,
       Value<int?> talismanId,
       required int createdAt,
       required int updatedAt,
@@ -9730,12 +11600,12 @@ typedef $$BuildsTableUpdateCompanionBuilder =
     BuildsCompanion Function({
       Value<int> id,
       Value<String> name,
-      Value<String?> weaponId,
-      Value<String?> headId,
-      Value<String?> chestId,
-      Value<String?> armsId,
-      Value<String?> waistId,
-      Value<String?> legsId,
+      Value<int?> weaponId,
+      Value<int?> headId,
+      Value<int?> chestId,
+      Value<int?> armsId,
+      Value<int?> waistId,
+      Value<int?> legsId,
       Value<int?> talismanId,
       Value<int> createdAt,
       Value<int> updatedAt,
@@ -9749,7 +11619,7 @@ final class $$BuildsTableReferences
       .createAlias($_aliasNameGenerator(db.builds.weaponId, db.weapons.id));
 
   $$WeaponsTableProcessedTableManager? get weaponId {
-    final $_column = $_itemColumn<String>('weapon_id');
+    final $_column = $_itemColumn<int>('weapon_id');
     if ($_column == null) return null;
     final manager = $$WeaponsTableTableManager(
       $_db,
@@ -9766,7 +11636,7 @@ final class $$BuildsTableReferences
       .createAlias($_aliasNameGenerator(db.builds.headId, db.armorPieces.id));
 
   $$ArmorPiecesTableProcessedTableManager? get headId {
-    final $_column = $_itemColumn<String>('head_id');
+    final $_column = $_itemColumn<int>('head_id');
     if ($_column == null) return null;
     final manager = $$ArmorPiecesTableTableManager(
       $_db,
@@ -9783,7 +11653,7 @@ final class $$BuildsTableReferences
       .createAlias($_aliasNameGenerator(db.builds.chestId, db.armorPieces.id));
 
   $$ArmorPiecesTableProcessedTableManager? get chestId {
-    final $_column = $_itemColumn<String>('chest_id');
+    final $_column = $_itemColumn<int>('chest_id');
     if ($_column == null) return null;
     final manager = $$ArmorPiecesTableTableManager(
       $_db,
@@ -9800,7 +11670,7 @@ final class $$BuildsTableReferences
       .createAlias($_aliasNameGenerator(db.builds.armsId, db.armorPieces.id));
 
   $$ArmorPiecesTableProcessedTableManager? get armsId {
-    final $_column = $_itemColumn<String>('arms_id');
+    final $_column = $_itemColumn<int>('arms_id');
     if ($_column == null) return null;
     final manager = $$ArmorPiecesTableTableManager(
       $_db,
@@ -9817,7 +11687,7 @@ final class $$BuildsTableReferences
       .createAlias($_aliasNameGenerator(db.builds.waistId, db.armorPieces.id));
 
   $$ArmorPiecesTableProcessedTableManager? get waistId {
-    final $_column = $_itemColumn<String>('waist_id');
+    final $_column = $_itemColumn<int>('waist_id');
     if ($_column == null) return null;
     final manager = $$ArmorPiecesTableTableManager(
       $_db,
@@ -9834,7 +11704,7 @@ final class $$BuildsTableReferences
       .createAlias($_aliasNameGenerator(db.builds.legsId, db.armorPieces.id));
 
   $$ArmorPiecesTableProcessedTableManager? get legsId {
-    final $_column = $_itemColumn<String>('legs_id');
+    final $_column = $_itemColumn<int>('legs_id');
     if ($_column == null) return null;
     final manager = $$ArmorPiecesTableTableManager(
       $_db,
@@ -10537,12 +12407,12 @@ class $$BuildsTableTableManager
               ({
                 Value<int> id = const Value.absent(),
                 Value<String> name = const Value.absent(),
-                Value<String?> weaponId = const Value.absent(),
-                Value<String?> headId = const Value.absent(),
-                Value<String?> chestId = const Value.absent(),
-                Value<String?> armsId = const Value.absent(),
-                Value<String?> waistId = const Value.absent(),
-                Value<String?> legsId = const Value.absent(),
+                Value<int?> weaponId = const Value.absent(),
+                Value<int?> headId = const Value.absent(),
+                Value<int?> chestId = const Value.absent(),
+                Value<int?> armsId = const Value.absent(),
+                Value<int?> waistId = const Value.absent(),
+                Value<int?> legsId = const Value.absent(),
                 Value<int?> talismanId = const Value.absent(),
                 Value<int> createdAt = const Value.absent(),
                 Value<int> updatedAt = const Value.absent(),
@@ -10563,12 +12433,12 @@ class $$BuildsTableTableManager
               ({
                 Value<int> id = const Value.absent(),
                 required String name,
-                Value<String?> weaponId = const Value.absent(),
-                Value<String?> headId = const Value.absent(),
-                Value<String?> chestId = const Value.absent(),
-                Value<String?> armsId = const Value.absent(),
-                Value<String?> waistId = const Value.absent(),
-                Value<String?> legsId = const Value.absent(),
+                Value<int?> weaponId = const Value.absent(),
+                Value<int?> headId = const Value.absent(),
+                Value<int?> chestId = const Value.absent(),
+                Value<int?> armsId = const Value.absent(),
+                Value<int?> waistId = const Value.absent(),
+                Value<int?> legsId = const Value.absent(),
                 Value<int?> talismanId = const Value.absent(),
                 required int createdAt,
                 required int updatedAt,
@@ -10777,7 +12647,7 @@ typedef $$BuildJewelsTableCreateCompanionBuilder =
       required int buildId,
       required JewelSlotSource slotSource,
       required int slotIndex,
-      required String jewelId,
+      required int jewelId,
     });
 typedef $$BuildJewelsTableUpdateCompanionBuilder =
     BuildJewelsCompanion Function({
@@ -10785,7 +12655,7 @@ typedef $$BuildJewelsTableUpdateCompanionBuilder =
       Value<int> buildId,
       Value<JewelSlotSource> slotSource,
       Value<int> slotIndex,
-      Value<String> jewelId,
+      Value<int> jewelId,
     });
 
 final class $$BuildJewelsTableReferences
@@ -10815,7 +12685,7 @@ final class $$BuildJewelsTableReferences
   );
 
   $$JewelsTableProcessedTableManager get jewelId {
-    final $_column = $_itemColumn<String>('jewel_id')!;
+    final $_column = $_itemColumn<int>('jewel_id')!;
 
     final manager = $$JewelsTableTableManager(
       $_db,
@@ -11072,7 +12942,7 @@ class $$BuildJewelsTableTableManager
                 Value<int> buildId = const Value.absent(),
                 Value<JewelSlotSource> slotSource = const Value.absent(),
                 Value<int> slotIndex = const Value.absent(),
-                Value<String> jewelId = const Value.absent(),
+                Value<int> jewelId = const Value.absent(),
               }) => BuildJewelsCompanion(
                 id: id,
                 buildId: buildId,
@@ -11086,7 +12956,7 @@ class $$BuildJewelsTableTableManager
                 required int buildId,
                 required JewelSlotSource slotSource,
                 required int slotIndex,
-                required String jewelId,
+                required int jewelId,
               }) => BuildJewelsCompanion.insert(
                 id: id,
                 buildId: buildId,
@@ -11356,8 +13226,12 @@ class $AppDatabaseManager {
       $$SkillsTableTableManager(_db, _db.skills);
   $$ArmorSetSkillsTableTableManager get armorSetSkills =>
       $$ArmorSetSkillsTableTableManager(_db, _db.armorSetSkills);
+  $$ArmorPieceSkillsTableTableManager get armorPieceSkills =>
+      $$ArmorPieceSkillsTableTableManager(_db, _db.armorPieceSkills);
   $$JewelsTableTableManager get jewels =>
       $$JewelsTableTableManager(_db, _db.jewels);
+  $$JewelSkillsTableTableManager get jewelSkills =>
+      $$JewelSkillsTableTableManager(_db, _db.jewelSkills);
   $$SkillLevelsTableTableManager get skillLevels =>
       $$SkillLevelsTableTableManager(_db, _db.skillLevels);
   $$TalismansTableTableManager get talismans =>

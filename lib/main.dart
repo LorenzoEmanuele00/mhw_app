@@ -38,12 +38,13 @@ class MhwApp extends ConsumerWidget {
       // Show splash screen until DB seed is ready
       builder: seed.when(
         data: (_) => null,
-        loading: () => (context, child) => const Scaffold(
+        loading: () =>
+            (context, child) => const Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
-        error: (e, _) => (context, child) => Scaffold(
-              body: Center(child: Text('Init error: $e')),
-            ),
+        error: (e, _) =>
+            (context, child) =>
+                Scaffold(body: Center(child: Text('Init error: $e'))),
       ),
     );
   }

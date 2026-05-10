@@ -17,8 +17,8 @@ from pathlib import Path
 from typing import Optional
 
 EXCEL_PATH = Path('/Users/loke/Downloads/Alpha Calulator.xlsx')
-OUTPUT_DIR = Path(__file__).parent / 'seeds'
-OUTPUT_DIR.mkdir(exist_ok=True)
+SCRIPTS_DIR = Path(__file__).parent
+SCRIPTS_DIR.mkdir(exist_ok=True)
 
 # ─── Fogli Excel ────────────────────────────────────────────────────────────
 SHEET_SKILL_DATA    = 20   # Skill Data
@@ -227,26 +227,13 @@ def parse_skills(z: zipfile.ZipFile, ss: list[str]):
     return list(skills.values()), skill_levels
 
 def write_skills_sql(skills: list[dict], skill_levels: list[dict]):
-    # File 01_skills.sql
-    with open(OUTPUT_DIR / '01_skills.sql', 'w', encoding='utf-8') as f:
+    # excel_calc_levels.sql — calc bonuses keyed by Excel slug.
+    # Read by generate_seeds_from_json.py; NOT bundled in the app.
+    with open(SCRIPTS_DIR / 'excel_calc_levels.sql', 'w', encoding='utf-8') as f:
         f.write('-- Generato da parse_excel.py\n')
-        f.write('-- Source: Alpha Calulator.xlsx, Sheet "Skill Data"\n\n')
-        f.write('DELETE FROM skill_levels;\n')
-        f.write('DELETE FROM skills;\n\n')
-        f.write('INSERT INTO skills (id, name, max_level, type1, type2) VALUES\n')
-        rows = []
-        for s in skills:
-            rows.append(
-                f"  ({sql_str(s['id'])}, {sql_str(s['name'])}, "
-                f"{s['max_level']}, {sql_str(s['type1'])}, {sql_str(s['type2'])})"
-            )
-        f.write(',\n'.join(rows))
-        f.write(';\n')
-
-    # File 02_skill_levels.sql
-    with open(OUTPUT_DIR / '02_skill_levels.sql', 'w', encoding='utf-8') as f:
-        f.write('-- Generato da parse_excel.py\n')
-        f.write('-- Source: Alpha Calulator.xlsx, Sheet "Skill Data"\n\n')
+        f.write('-- Source: Alpha Calulator.xlsx, Sheet "Skill Data"\n')
+        f.write('-- Letto da generate_seeds_from_json.py per associare i bonus di calcolo alle skill del JSON.\n')
+        f.write('-- NON è un seed da caricare nel DB direttamente.\n\n')
         f.write('INSERT INTO skill_levels '
                 '(skill_id, level, bonus1_value, bonus1_type, '
                 'bonus2_value, bonus2_type, bonus3_value, bonus3_type, '
@@ -323,7 +310,7 @@ def parse_weapon_mods(z: zipfile.ZipFile, ss: list[str]) -> dict:
     }
 
 def write_weapon_mods(data: dict):
-    path = OUTPUT_DIR / '03_weapon_mods.json'
+    path = SCRIPTS_DIR / '03_weapon_mods.json'
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
@@ -359,7 +346,7 @@ def parse_motion_values(z: zipfile.ZipFile, ss: list[str]) -> list[dict]:
     return all_mvs
 
 def write_motion_values_sql(mvs: list[dict]):
-    with open(OUTPUT_DIR / '04_motion_values.sql', 'w', encoding='utf-8') as f:
+    with open(SCRIPTS_DIR / '04_motion_values.sql', 'w', encoding='utf-8') as f:
         f.write('-- Generato da parse_excel.py\n')
         f.write('-- Source: Alpha Calulator.xlsx, Sheets GS/LS/SnS/DB/HMR/HH/LAN/GL/SA/CB/IG/BOW/LBG/HBG\n')
         f.write('-- USO FUTURO: per calcolo DPH per hitzone (Fase 2 calc engine)\n\n')
@@ -426,8 +413,8 @@ def main():
         write_motion_values_sql(mvs)
         print(f'     {len(mvs)} motion value entries')
 
-    print(f'\nOutput in {OUTPUT_DIR}:')
-    for f in sorted(OUTPUT_DIR.iterdir()):
+    print(f'\nOutput in {SCRIPTS_DIR}:')
+    for f in sorted(SCRIPTS_DIR.iterdir()):
         size = f.stat().st_size
         print(f'  {f.name:35s} {size:>8,} bytes')
 

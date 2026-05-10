@@ -8,12 +8,14 @@ class SkillsRepository {
 
   Stream<List<Skill>> watchAll() => _db.skillsDao.watchAll();
 
-  Future<Skill?> getById(String id) => _db.skillsDao.getById(id);
+  Future<Skill?> getById(int id) => _db.skillsDao.getById(id);
 
-  Future<List<SkillLevel>> getLevels(String skillId) =>
+  Future<Skill?> getBySlug(String slug) => _db.skillsDao.getBySlug(slug);
+
+  Future<List<SkillLevel>> getLevels(int skillId) =>
       _db.skillsDao.getLevelsForSkill(skillId);
 
-  Future<SkillLevel?> getLevel(String skillId, int level) =>
+  Future<SkillLevel?> getLevel(int skillId, int level) =>
       _db.skillsDao.getSkillLevel(skillId, level);
 }
 

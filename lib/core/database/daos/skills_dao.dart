@@ -10,13 +10,16 @@ class SkillsDao extends DatabaseAccessor<AppDatabase> with _$SkillsDaoMixin {
 
   Stream<List<Skill>> watchAll() => select(skills).watch();
 
-  Future<Skill?> getById(String id) =>
+  Future<Skill?> getById(int id) =>
       (select(skills)..where((s) => s.id.equals(id))).getSingleOrNull();
 
-  Future<List<SkillLevel>> getLevelsForSkill(String skillId) =>
+  Future<Skill?> getBySlug(String slug) =>
+      (select(skills)..where((s) => s.slug.equals(slug))).getSingleOrNull();
+
+  Future<List<SkillLevel>> getLevelsForSkill(int skillId) =>
       (select(skillLevels)..where((sl) => sl.skillId.equals(skillId))).get();
 
-  Future<SkillLevel?> getSkillLevel(String skillId, int level) =>
+  Future<SkillLevel?> getSkillLevel(int skillId, int level) =>
       (select(skillLevels)
             ..where((sl) => sl.skillId.equals(skillId) & sl.level.equals(level)))
           .getSingleOrNull();

@@ -15,7 +15,7 @@ void main() {
   group('WeaponsDao', () {
     Future<void> insertGreatsword() => db.weaponsDao.replaceAll([
           WeaponsCompanion.insert(
-            id: 'gs_iron_1',
+            slug: 'gs_iron_1',
             name: 'Iron Greatsword I',
             weaponType: WeaponType.gs,
             baseAttack: 100,
@@ -26,20 +26,20 @@ void main() {
       await insertGreatsword();
       final weapons = await db.weaponsDao.watchAll().first;
       expect(weapons.length, 1);
-      expect(weapons.first.id, 'gs_iron_1');
+      expect(weapons.first.slug, 'gs_iron_1');
       expect(weapons.first.weaponType, WeaponType.gs);
     });
 
     test('watchByType filters by weapon type', () async {
       await db.weaponsDao.replaceAll([
         WeaponsCompanion.insert(
-          id: 'gs_iron_1',
+          slug: 'gs_iron_1',
           name: 'Iron Greatsword I',
           weaponType: WeaponType.gs,
           baseAttack: 100,
         ),
         WeaponsCompanion.insert(
-          id: 'ls_iron_1',
+          slug: 'ls_iron_1',
           name: 'Iron Longsword I',
           weaponType: WeaponType.ls,
           baseAttack: 120,
@@ -55,23 +55,32 @@ void main() {
       expect(longswords.first.weaponType, WeaponType.ls);
     });
 
-    test('getById returns null for unknown id', () async {
-      final result = await db.weaponsDao.getById('nonexistent');
+    test('getBySlug returns null for unknown slug', () async {
+      final result = await db.weaponsDao.getBySlug('nonexistent');
       expect(result, isNull);
     });
 
-    test('getById returns the weapon when found', () async {
+    test('getBySlug returns the weapon when found', () async {
       await insertGreatsword();
-      final weapon = await db.weaponsDao.getById('gs_iron_1');
+      final weapon = await db.weaponsDao.getBySlug('gs_iron_1');
       expect(weapon, isNotNull);
       expect(weapon!.name, 'Iron Greatsword I');
+    });
+
+    test('getById returns the weapon by integer PK', () async {
+      await insertGreatsword();
+      final all = await db.weaponsDao.watchAll().first;
+      final insertedId = all.first.id;
+      final weapon = await db.weaponsDao.getById(insertedId);
+      expect(weapon, isNotNull);
+      expect(weapon!.slug, 'gs_iron_1');
     });
 
     test('replaceAll clears existing rows before inserting', () async {
       await insertGreatsword();
       await db.weaponsDao.replaceAll([
         WeaponsCompanion.insert(
-          id: 'new_weapon',
+          slug: 'new_weapon',
           name: 'New Weapon',
           weaponType: WeaponType.sns,
           baseAttack: 90,
@@ -79,14 +88,14 @@ void main() {
       ]);
       final weapons = await db.weaponsDao.watchAll().first;
       expect(weapons.length, 1);
-      expect(weapons.first.id, 'new_weapon');
+      expect(weapons.first.slug, 'new_weapon');
     });
 
     test('enum round-trip: WeaponType is preserved through DB', () async {
       for (final type in WeaponType.values) {
         await db.weaponsDao.replaceAll([
           WeaponsCompanion.insert(
-            id: 'test_${type.name}',
+            slug: 'test_${type.name}',
             name: 'Test ${type.name}',
             weaponType: type,
             baseAttack: 100,

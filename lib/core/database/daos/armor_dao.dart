@@ -16,10 +16,13 @@ class ArmorDao extends DatabaseAccessor<AppDatabase> with _$ArmorDaoMixin {
 
   Stream<List<ArmorPiece>> watchAll() => select(armorPieces).watch();
 
-  Future<ArmorPiece?> getById(String id) =>
+  Future<ArmorPiece?> getById(int id) =>
       (select(armorPieces)..where((a) => a.id.equals(id))).getSingleOrNull();
 
-  Future<List<ArmorSetSkill>> getSetSkills(String setId) =>
+  Future<ArmorPiece?> getBySlug(String slug) =>
+      (select(armorPieces)..where((a) => a.slug.equals(slug))).getSingleOrNull();
+
+  Future<List<ArmorSetSkill>> getSetSkills(int setId) =>
       (select(armorSetSkills)..where((s) => s.setId.equals(setId))).get();
 
   Future<void> replaceAllPieces(List<ArmorPiecesCompanion> rows) =>
