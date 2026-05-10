@@ -55,7 +55,7 @@ class AppDatabase extends _$AppDatabase {
         },
         onUpgrade: (m, from, to) async {
           if (from < 2) {
-            // v2: integer PKs + slug unique; integer FKs on user tables.
+            // v2: nuclear reset — schema changed too broadly, easier to recreate.
             await m.drop(buildJewels);
             await m.drop(builds);
             await m.drop(talismans);
@@ -68,6 +68,7 @@ class AppDatabase extends _$AppDatabase {
             await m.drop(skills);
             await m.createAll();
             await _seedSyncMetadata();
+            return; // createAll already applies all subsequent schema changes
           }
           if (from < 3) {
             // v3: add pieces_required to skill_levels.
