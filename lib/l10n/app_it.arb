@@ -1,0 +1,24 @@
+{
+  "@@locale": "it",
+
+  "appTitle": "MHW Builder",
+
+  "navEquipment": "Equipaggiamento",
+  "navBuilds": "Build",
+  "navBuilder": "Costruttore",
+
+  "screenWeapons": "Armi",
+  "screenArmor": "Armature",
+  "screenJewels": "Gioielli",
+  "screenTalismans": "Talismani",
+  "screenBuilds": "Build",
+
+  "comingSoon": "Prossimamente",
+
+  "initError": "Errore inizializzazione: {error}",
+  "@initError": {
+    "placeholders": {
+      "error": { "type": "Object" }
+    }
+  }
+}

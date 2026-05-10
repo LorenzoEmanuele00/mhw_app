@@ -1,0 +1,24 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "MHW Builder",
+
+  "navEquipment": "Equipment",
+  "navBuilds": "Builds",
+  "navBuilder": "Builder",
+
+  "screenWeapons": "Weapons",
+  "screenArmor": "Armor",
+  "screenJewels": "Jewels",
+  "screenTalismans": "Talismans",
+  "screenBuilds": "Builds",
+
+  "comingSoon": "Coming soon",
+
+  "initError": "Init error: {error}",
+  "@initError": {
+    "placeholders": {
+      "error": { "type": "Object" }
+    }
+  }
+}

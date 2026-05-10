@@ -5,7 +5,8 @@
 ### weapons
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | TEXT PK | slug es. "gs_rathalos_blade" |
+| id | INTEGER PK autoincrement | |
+| slug | TEXT UNIQUE | es. "gs_rathalos_blade" |
 | name | TEXT | Nome visualizzato |
 | weapon_type | TEXT | gs/ls/sns/db/hmr/hh/lan/gl/sa/cb/ig/bow/lbg/hbg |
 | base_attack | INTEGER | Valore grezzo in-game |
@@ -23,7 +24,8 @@
 ### armor_pieces
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | TEXT PK | |
+| id | INTEGER PK autoincrement | |
+| slug | TEXT UNIQUE | |
 | name | TEXT | |
 | slot_type | TEXT | head/chest/arms/waist/legs |
 | base_defense | INTEGER | |
@@ -34,49 +36,71 @@
 | dragon_res | INTEGER | |
 | rarity | INTEGER | |
 | slots | TEXT | JSON array es. [2,1] |
-| set_id | TEXT FK → armor_sets | |
+| set_id | INTEGER FK → armor_sets | |
 
 ### armor_sets
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | TEXT PK | |
+| id | INTEGER PK autoincrement | |
+| slug | TEXT UNIQUE | |
 | name | TEXT | Nome serie (es. "Rathalos", "Gore Magala") |
 
 ### armor_set_skills
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | INTEGER PK | |
-| set_id | TEXT FK | |
+| id | INTEGER PK autoincrement | |
+| set_id | INTEGER FK → armor_sets | |
 | required_pieces | INTEGER | Quanti pezzi per attivare |
-| skill_id | TEXT FK | |
+| skill_id | INTEGER FK → skills | |
 | skill_level | INTEGER | |
-| skill_category | TEXT | GROUP / SERIES |
+| skill_category | TEXT | group / set |
+
+### armor_piece_skills
+| Campo | Tipo | Note |
+|-------|------|------|
+| id | INTEGER PK autoincrement | |
+| armor_piece_id | INTEGER FK → armor_pieces | |
+| skill_id | INTEGER FK → skills | |
+| skill_level | INTEGER | Livelli forniti da questo pezzo |
 
 ### jewels
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | TEXT PK | |
+| id | INTEGER PK autoincrement | |
+| slug | TEXT UNIQUE | |
 | name | TEXT | |
-| rarity | INTEGER | |
 | slot_size | INTEGER | 1/2/3/4 |
-| skill_id | TEXT FK | |
-| skill_level | INTEGER | Livelli forniti |
+| allowed_on | TEXT | "armor" / "weapon" — default "armor" |
+
+### jewel_skills
+| Campo | Tipo | Note |
+|-------|------|------|
+| id | INTEGER PK autoincrement | |
+| jewel_id | INTEGER FK → jewels | |
+| skill_id | INTEGER FK → skills | |
+| skill_level | INTEGER | Livelli forniti (compound jewels: 2 righe per jewel) |
 
 ### skills
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | TEXT PK | Nome slug es. "attack_boost" |
-| name | TEXT | Nome visualizzato es. "Attack Boost" |
+| id | INTEGER PK | Numeric ID from Skill.json (source of truth) |
+| slug | TEXT UNIQUE | es. "attack_boost" |
+| name | TEXT | Nome visualizzato (English) |
 | max_level | INTEGER | |
-| type1 | TEXT | Armor / Weapon |
-| type2 | TEXT | Offensive / Defensive / Utility |
+| type1 | TEXT | armor / weapon / set / group |
+| type2 | TEXT | utility (default — from Excel subcategory data) |
+
+**type1 semantics:**
+- `armor` / `weapon`: skill equippable on armor/weapon jewels (constrains jewel assignment)
+- `set` / `group`: activated by equipping N armor pieces — no skill points needed
 
 ### skill_levels
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | INTEGER PK | |
-| skill_id | TEXT FK | |
-| level | INTEGER | |
+| id | INTEGER PK autoincrement | |
+| skill_id | INTEGER FK → skills | |
+| level | INTEGER | Skill rank (1, 2, 3 ...) |
+| pieces_required | INTEGER? | For set/group only: armor pieces needed to activate this rank |
 | bonus1_value | REAL? | |
 | bonus1_type | TEXT? | Vedi tipi bonus sotto |
 | bonus2_value | REAL? | |
@@ -108,9 +132,9 @@
 |-------|------|------|
 | id | INTEGER PK autoincrement | |
 | name | TEXT | Nome custom utente |
-| skill1_id | TEXT? FK | Prima skill |
+| skill1_id | INTEGER? FK → skills | Prima skill |
 | skill1_level | INTEGER? | |
-| skill2_id | TEXT? FK | Seconda skill (opzionale) |
+| skill2_id | INTEGER? FK → skills | Seconda skill (opzionale) |
 | skill2_level | INTEGER? | |
 | slots | TEXT | JSON array es. [2,1] |
 | created_at | INTEGER | Unix timestamp |
@@ -120,12 +144,12 @@
 |-------|------|------|
 | id | INTEGER PK autoincrement | |
 | name | TEXT | Nome build |
-| weapon_id | TEXT? FK | |
-| head_id | TEXT? FK → armor_pieces | |
-| chest_id | TEXT? FK | |
-| arms_id | TEXT? FK | |
-| waist_id | TEXT? FK | |
-| legs_id | TEXT? FK | |
+| weapon_id | INTEGER? FK → weapons | |
+| head_id | INTEGER? FK → armor_pieces | |
+| chest_id | INTEGER? FK → armor_pieces | |
+| arms_id | INTEGER? FK → armor_pieces | |
+| waist_id | INTEGER? FK → armor_pieces | |
+| legs_id | INTEGER? FK → armor_pieces | |
 | talisman_id | INTEGER? FK → talismans | |
 | created_at | INTEGER | |
 | updated_at | INTEGER | |
@@ -133,11 +157,11 @@
 ### build_jewels
 | Campo | Tipo | Note |
 |-------|------|------|
-| id | INTEGER PK | |
+| id | INTEGER PK autoincrement | |
 | build_id | INTEGER FK → builds | |
 | slot_source | TEXT | weapon/head/chest/arms/waist/legs/talisman |
 | slot_index | INTEGER | 0-based index nello slot source |
-| jewel_id | TEXT FK → jewels | |
+| jewel_id | INTEGER FK → jewels | |
 
 ---
 

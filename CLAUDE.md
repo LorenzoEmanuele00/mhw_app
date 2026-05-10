@@ -21,29 +21,55 @@ App Flutter per Monster Hunter Wilds (MHW). Permette di creare e gestire build d
 ```
 lib/
   core/
-    database/       ← drift database, tables, DAOs
-    providers/      ← provider globali (db, supabase, connectivity)
-    router/         ← go_router config
+    database/
+      tables/         ← game_tables.dart, user_tables.dart
+      daos/           ← 5 DAO (weapons, armor, skills, builds, talismans)
+      database.dart   ← AppDatabase drift
+      seed_service.dart ← carica SQL seed al primo avvio
+    providers/
+      database_provider.dart
+      seed_provider.dart  ← seedInitProvider (FutureProvider)
+    router/
+      router.dart     ← go_router shell route 3 tab
   features/
     equipment/
-      weapons/      ← list, detail, filter
-      armor/        ← list, detail, filter
-      jewels/       ← list, detail
-      talismans/    ← CRUD utente
-    builds/         ← lista build + detail read-only
-    builder/        ← creazione/modifica build con stats live
+      weapons/
+        repository/weapons_repository.dart
+        weapons_screen.dart
+      armor/
+        repository/armor_repository.dart
+        armor_screen.dart
+      jewels/
+        repository/jewels_repository.dart
+        jewels_screen.dart
+      talismans/
+        repository/talismans_repository.dart
+        talismans_screen.dart
+    builds/
+      repository/builds_repository.dart
+      builds_screen.dart
+    builder/
+      builder_screen.dart
   shared/
-    models/         ← modelli dart puri (no drift)
-    widgets/        ← widget riusabili
-    calc/           ← motore di calcolo statistiche
+    calc/
+      skills_repository.dart  ← SkillsRepository + allSkillsProvider
+      calc_engine.dart        ← (Fase 4)
+    models/
+    widgets/
 docs/
-  ARCHITECTURE.md   ← schema DB e architettura dettagliata
-  DATA_MODEL.md     ← tutti i modelli e le relazioni
+  ARCHITECTURE.md   ← stack e struttura dettagliata
+  DATA_MODEL.md     ← schema DB completo
   CALC_ENGINE.md    ← formule di calcolo (da Excel)
   PROGRESS.md       ← stato avanzamento fasi
-  SUPABASE.md       ← configurazione e schema remoto
 scripts/
   parse_excel.py    ← estrae dati da Excel → SQL seed
+  seeds/
+    01_skills.sql       ← 168 skill
+    02_skill_levels.sql ← 427 livelli con bonus tipizzati
+    03_weapon_mods.json ← RMV/EMV/sharpness 14 tipi arma
+    04_motion_values.sql ← 1216 MV per DPH futuro
+assets/
+  seeds/            ← copia dei seed SQL bundled nell'app
 ```
 
 ## Schema DB (drift)
@@ -99,10 +125,11 @@ Vedere `/docs/PROGRESS.md` per stato aggiornato.
 
 ## Dati sorgente
 **Excel**: `/Users/loke/Downloads/Alpha Calulator.xlsx`
-- Sheet "Skill Data": ~200 skill con bonus tipizzati (già parsati)
+- Sheet "Skill Data": 168 skill, 427 livelli con bonus tipizzati (già parsati → `scripts/seeds/`)
 - Sheet "Weapon Modifier": 14 armi con RMV, EMV, sharpness mods
 - Sheet 4-17 (GS/LS/SnS/...): motion values per arma (per DPH futuro)
 - Sheet "Calculator": formula calcolo danni completa
 - Sheet "Builder": struttura skill per categoria (ARMOR/GROUP/SERIES/WEAPON)
 
-**Dati mancanti** (da raccogliere): stats base armi, armature con defense/res/slot, gioielli
+**Dati già estratti**: 168 skill, 427 livelli skill, RMV/EMV 14 tipi arma, 1216 motion values  
+**Dati mancanti** (da raccogliere esternamente): stats base armi, armature con defense/res/slot, gioielli

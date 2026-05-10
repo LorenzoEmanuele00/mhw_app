@@ -1,0 +1,28 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/database/database.dart';
+import '../../core/providers/database_provider.dart';
+
+class SkillsRepository {
+  final AppDatabase _db;
+  SkillsRepository(this._db);
+
+  Stream<List<Skill>> watchAll() => _db.skillsDao.watchAll();
+
+  Future<Skill?> getById(int id) => _db.skillsDao.getById(id);
+
+  Future<Skill?> getBySlug(String slug) => _db.skillsDao.getBySlug(slug);
+
+  Future<List<SkillLevel>> getLevels(int skillId) =>
+      _db.skillsDao.getLevelsForSkill(skillId);
+
+  Future<SkillLevel?> getLevel(int skillId, int level) =>
+      _db.skillsDao.getSkillLevel(skillId, level);
+}
+
+final skillsRepositoryProvider = Provider<SkillsRepository>((ref) {
+  return SkillsRepository(ref.watch(databaseProvider));
+});
+
+final allSkillsProvider = StreamProvider<List<Skill>>((ref) {
+  return ref.watch(skillsRepositoryProvider).watchAll();
+});
