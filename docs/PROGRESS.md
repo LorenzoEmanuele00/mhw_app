@@ -14,7 +14,7 @@ Update this file at every session.
 - [x] `pubspec.yaml` updated with dependencies (drift, supabase, riverpod, go_router, connectivity_plus)
 - [x] `lib/` folder structure created (core/features/shared)
 - [x] Drift schema defined — game + user tables + DAO per domain
-- [x] go_router configured with StatefulShellRoute (3 tabs: Equipment/Builds/Builder)
+- [x] go_router configured with StatefulShellRoute (3 tabs placeholder — to be expanded to 4)
 - [x] `main.dart` entry point configured with ProviderScope + MaterialApp.router
 - [x] Drift codegen complete (zero warnings, zero errors)
 - [x] `flutter analyze` → No issues found
@@ -48,45 +48,153 @@ Update this file at every session.
 - [x] `flutter analyze` → No issues found
 - [x] `flutter test` → All 43 tests passed
 
+---
+
 ### Phase 2: Equipment Browser ⬜ TODO
-- [ ] Weapon list screen with type filter
-- [ ] Weapon detail screen
-- [ ] Armor list screen with slot/set filter
-- [ ] Armor detail screen
-- [ ] Jewel list screen
-- [ ] Talisman list screen
-- [ ] Talisman create/edit/delete
+
+Deliver the Equipment tab. No build editing yet — items are read-only browsable.
+
+**Routing & scaffold**
+- [ ] Update go_router to 4-tab StatefulShellRoute: Build / Equipment / Stats / Loadouts
+- [ ] Implement app-level theme tokens (light/dark, element colors, skill colors, sharpness colors)
+- [ ] Shared widgets: `GlyphTile`, `SlotGlyph`, `DecoSlotsRow`, `SkillChip`, `StatBar`, `SharpnessGauge`
+
+**EquipmentScreen**
+- [ ] Segmented control: Weapons | Armor | Charm
+- [ ] Search field with real-time name filter
+- [ ] Weapon list: flat `EquipmentRow` list (name, attack/affinity, type, element, deco slots)
+- [ ] Armor list: grouped by slot type (Head / Chest / Arms / Waist / Legs) with section labels
+- [ ] Charm list: flat list (backed by talismans table)
+- [ ] `EquipmentRow` widget with "Equipped" badge support
+
+**EquipmentDetail sheet (read-only)**
+- [ ] Hero: GlyphTile, type label + rarity badge, item name
+- [ ] Stats section: weapon → attack/affinity/element bars + sharpness gauge; armor → defense + 5 elemental res bars; charm → text note
+- [ ] Skills section: list with colored dot, name, description, +level
+- [ ] Decoration Slots section (read-only — no JewelPicker yet)
+
+**Tests**
+- [ ] Widget tests for EquipmentRow (weapon / armor / charm variants)
+- [ ] `flutter test` → all pass
+
+---
 
 ### Phase 3: Build System ⬜ TODO
-- [ ] Build list screen
-- [ ] Builder screen — weapon slot
-- [ ] Builder screen — 5 armor slots
-- [ ] Builder screen — talisman slot
-- [ ] Builder screen — dynamic jewel slots
-- [ ] Save build
+
+Deliver the Build tab and Loadouts tab with full slot management.
+
+**BuildScreen**
+- [ ] WeaponHero card: icon tile, name, type + rarity badge, deco slots row, Attack/Affinity/Element stat grid, SharpnessGauge
+- [ ] Empty weapon state: dashed placeholder with "No weapon equipped"
+- [ ] ArmorSlotRow × 5 (head/chest/arms/waist/legs): slot icon, label, item name (or "Empty slot"), DEF value, deco slots, chevron
+- [ ] Charm slot row (no DEF value)
+- [ ] Active Skills panel: colored SkillChip list (sorted by level desc)
+- [ ] Quick Summary card: 2×2 grid (Attack, Defense, Affinity, Element)
+
+**SlotPicker sheet**
+- [ ] Opens when tapping an empty slot (weapon/head/chest/arms/waist/legs/charm)
+- [ ] Cancel + Clear buttons
+- [ ] Search field
+- [ ] Filtered list of items for that slot kind
+
+**EquipmentDetail sheet (interactive)**
+- [ ] Interactive Decoration Slots (tap slot → opens JewelPicker)
+- [ ] "Equip to {buildName}" CTA when item not equipped
+- [ ] "Change" CTA when item already equipped (navigates to Equipment tab filtered to that category)
+
+**JewelPicker sheet**
+- [ ] Slot info header (slot index + level)
+- [ ] Cancel + Clear buttons
+- [ ] Search field (filter by jewel name or skill name)
+- [ ] "Available" section: jewels with level ≤ slot level
+- [ ] "Need a larger slot" section: jewels too large (dimmed, not tappable)
+- [ ] Checkmark on currently selected jewel
+
+**Build state management**
+- [ ] `BuildNotifier` (StateNotifier) holding active build + decoration map
+- [ ] Actions: equip, clearSlot, setJewel, clearJewel
+- [ ] Persist to drift via BuildsRepository on every action
+
+**LoadoutsScreen**
+- [ ] Swipeable card list with iOS Mail-style swipe-left actions
+- [ ] LoadoutCard: name + "Active" badge, note, ATK/DEF mini stats, 7 slot icons (filled/empty), up to 4 skill chips + overflow count
+- [ ] Swipe actions: Edit (rename via prompt), Delete (with ConfirmDialog)
+- [ ] "+ New" button → creates empty build + activates it + switches to Build tab
+- [ ] Empty state when no builds
+
+**Tests**
+- [ ] BuildNotifier unit tests (equip, setJewel, clearJewel, newBuild, deleteBuild)
+- [ ] `flutter test` → all pass
+
+---
 
 ### Phase 4: Stats Engine ⬜ TODO
-- [ ] Calc Engine: skill aggregation from build
-- [ ] Calc Engine: True Raw
-- [ ] Calc Engine: Effective Affinity
-- [ ] Calc Engine: True Element
-- [ ] Calc Engine: Defense + Elem Resistances
-- [ ] Live stats panel in builder
-- [ ] Stats view in build detail
+
+Deliver the Stats tab with a live calc engine powering all stat displays.
+
+**CalcEngine** (`lib/shared/calc/calc_engine.dart`)
+- [ ] Skill aggregation: sum from weapon + 5 armor pieces + charm + jewels, capped at max_level per skill
+- [ ] Set bonus activation: count armor pieces with same set_id, apply group/set skill levels
+- [ ] True Raw: `base_attack × Π(atk_multiplier) + Σ(atk_additive)`
+- [ ] Effective Affinity: `base_affinity + Σ(affinity_additive × uptime)`
+- [ ] Crit multiplier: `0.25 × Π(crit_bonus_multiplier)` → affinity damage factor
+- [ ] True Element: `base_element × 0.1 × Π(elem_multiplier) + Σ(elem_additive)`
+- [ ] Sharpness: apply sharpness_max + handicraft levels → lookup raw/elem sharpness modifiers
+- [ ] Defense: `Σ(armor_piece.base_defense) × Π(def_multiplier) + Σ(def_additive)`
+- [ ] Elemental Resistances: `Σ(armor_piece.X_res) + Σ(X_res_additive)` for each element
+- [ ] `BuildStats` model (pure Dart, no drift dependency)
+
+**StatsScreen**
+- [ ] Headline 2×2 card: Attack (red) / Defense (accent) / Affinity (orange/red) / Element (element color + type label)
+- [ ] Sharpness section with SharpnessGauge + 7 segment labels
+- [ ] Elemental Resistances: toggle Radar ↔ Bars
+  - Radar: pentagon SVG chart, element labels + signed values at vertices
+  - Bars: 5 signed StatBars, red fill for negatives
+- [ ] Skills list: name, `Lv X / max` badge, description text, pip progress bar (colored segments)
+- [ ] Decoration Slots summary: all slots from full build in a single DecoSlotsRow
+- [ ] Compare button → placeholder alert (Phase 6)
+
+**BuildScreen updates**
+- [ ] Quick Summary uses real CalcEngine values (not raw weapon.attack)
+- [ ] Active Skills panel uses CalcEngine aggregation (includes jewels + set bonuses)
+
+**Tests**
+- [ ] CalcEngine unit tests: skill aggregation, true raw, effective affinity, defense, elemental res
+- [ ] Set bonus activation test (2/4/5 piece combinations)
+- [ ] `flutter test` → all pass
+
+---
 
 ### Phase 5: Supabase Sync ⬜ TODO
-- [ ] Connectivity detection
-- [ ] Version check
-- [ ] Delta sync for game data tables
-- [ ] Sync status UI indicator
+- [ ] Supabase project created and schema loaded
+- [ ] Connectivity detection (connectivity_plus)
+- [ ] Version check: fetch `current_version` per table from Supabase
+- [ ] Delta sync: if local version < remote → download + replace local rows
+- [ ] Sync status UI indicator (small badge or inline text)
+
+---
 
 ### Phase 6: Polish ⬜ TODO
-- [ ] Equipment filters (by type, rarity, skill)
-- [ ] Text search
-- [ ] Sorting
-- [ ] UI/UX refinement
+- [ ] Equipment filters: by weapon type, rarity, element, skill
+- [ ] Sorting: by name / attack / defense / rarity
+- [ ] Filter UI (sheet or popover)
+- [ ] Compare mode: side-by-side two builds on StatsScreen
+- [ ] Talisman create/edit/delete UI (currently charm slots can only use seeded talismans)
+- [ ] UI/UX refinement: animations, transitions, empty states
+
+---
 
 ## Session notes
+
+### 2026-05-10 — Session 5
+- Design prototype reviewed (Claude Design zip in `/docs/mhw_app_design/`)
+- Navigation revised: 3 tabs → 4 tabs (Build / Equipment / Stats / Loadouts)
+- Builder tab removed — build editing is inline on Build tab via bottom sheets
+- Jewels are NOT browseable in Equipment tab — accessible only through JewelPicker sheet
+- Charm = Talisman in UI (label "Charm", DB table `talismans`)
+- Phases 2–4 completely rewritten to match the actual design
+- `ARCHITECTURE.md` updated: 4-tab routing, screen inventory, design tokens, lib structure
+- `PROGRESS.md` updated: phases 2–6 task lists aligned to prototype
 
 ### 2026-05-07 — Session 4
 - Review from REVIEW.md applied: source of truth for skills changed to `scripts/output/merged/Skill.json`

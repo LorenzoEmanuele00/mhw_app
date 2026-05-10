@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Loadout — Build & Equipment</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+  body {
+    background: #e9e9ee;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Helvetica Neue", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #1d1d1f;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    transition: background 240ms ease;
+  }
+  body.dark { background: #0e0e10; color: #e8e6df; }
+  #root { width: 100%; }
+  .stage {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 32px;
+  }
+  /* prevent text selection drags inside the prototype */
+  .stage * { user-select: none; -webkit-user-select: none; }
+  .stage input { user-select: text; -webkit-user-select: text; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"><div class="stage"></div></div>
+
+<script src="data.js"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="screens.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<script>
+  // dark-mode hook to body bg so the device shadow blends
+  const obs = new MutationObserver(() => {});
+  // simple: poll body class via our app, just attach a global
+  window.__setDark = (d) => document.body.classList.toggle('dark', !!d);
+</script>
+</body>
+</html>
