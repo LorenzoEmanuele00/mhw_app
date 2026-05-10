@@ -106,6 +106,13 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dir = await getApplicationDocumentsDirectory();
     final file = File(p.join(dir.path, 'mhw_app.db'));
-    return NativeDatabase.createInBackground(file);
+    return NativeDatabase.createInBackground(
+      file,
+      setup: (rawDb) {
+        // Force WAL checkpoint on open so stale WAL/SHM files from a previous
+        // session (e.g. app killed by iOS watchdog) don't cause open failures.
+        rawDb.execute('PRAGMA wal_checkpoint(FULL)');
+      },
+    );
   });
 }

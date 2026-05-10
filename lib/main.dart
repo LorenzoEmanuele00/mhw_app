@@ -43,8 +43,11 @@ class MhwApp extends ConsumerWidget {
               body: Center(
                 child: Builder(
                   builder: (ctx) {
-                    final l10n = AppLocalizations.of(ctx);
-                    return Text(l10n.initError(e));
+                    final l10n = Localizations.of<AppLocalizations>(
+                      ctx,
+                      AppLocalizations,
+                    );
+                    return Text(l10n?.initError(e) ?? 'Init error: $e');
                   },
                 ),
               ),
