@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
@@ -38,15 +37,9 @@ class DecoSlot extends StatelessWidget {
       );
     }
     if (level == 2) {
-      return Transform.rotate(
-        angle: math.pi / 4,
-        child: Container(
-          width: size * 0.85,
-          height: size * 0.85,
-          decoration: BoxDecoration(
-            border: Border.all(color: c, width: 1.4),
-          ),
-        ),
+      return CustomPaint(
+        size: Size(size, size),
+        painter: _TrianglePainter(color: c),
       );
     }
     // level 3 — diamond
@@ -55,6 +48,29 @@ class DecoSlot extends StatelessWidget {
       painter: _DiamondPainter(color: c),
     );
   }
+}
+
+class _TrianglePainter extends CustomPainter {
+  const _TrianglePainter({required this.color});
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.6
+      ..strokeJoin = StrokeJoin.round;
+    final path = Path()
+      ..moveTo(size.width / 2, 0)
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+      ..close();
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(_TrianglePainter old) => old.color != color;
 }
 
 class _DiamondPainter extends CustomPainter {

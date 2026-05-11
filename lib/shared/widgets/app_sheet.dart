@@ -14,10 +14,7 @@ Future<T?> showAppSheet<T>({
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
-    builder: (_) => _AppSheetWrapper(
-      initialSize: initialSize,
-      child: child,
-    ),
+    builder: (_) => _AppSheetWrapper(initialSize: initialSize, child: child),
   );
 }
 
@@ -39,14 +36,16 @@ class _AppSheetWrapper extends StatelessWidget {
         width: sheetWidth,
         child: DraggableScrollableSheet(
           initialChildSize: initialSize,
-          minChildSize: 0.4,
-          maxChildSize: 0.95,
+          minChildSize: 0.8,
+          maxChildSize: initialSize,
           expand: false,
           builder: (context, scrollController) {
             return Container(
               decoration: BoxDecoration(
                 color: tokens.card,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(14),
+                ),
                 boxShadow: const [
                   BoxShadow(
                     color: Color(0x2E000000),

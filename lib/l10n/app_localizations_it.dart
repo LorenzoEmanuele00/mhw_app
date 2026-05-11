@@ -111,19 +111,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get weaponTypeGs => 'Spadone';
 
   @override
-  String get weaponTypeLs => 'Nodachi';
+  String get weaponTypeLs => 'Spada Lunga';
 
   @override
   String get weaponTypeSns => 'Spada e Scudo';
 
   @override
-  String get weaponTypeDb => 'Doppio Artiglio';
+  String get weaponTypeDb => 'Doppie Lame';
 
   @override
   String get weaponTypeHmr => 'Martello';
 
   @override
-  String get weaponTypeHh => 'Corno Caccia';
+  String get weaponTypeHh => 'Corno da Caccia';
 
   @override
   String get weaponTypeLan => 'Lancia';
@@ -132,19 +132,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get weaponTypeGl => 'Lancia Fucile';
 
   @override
-  String get weaponTypeSa => 'Ascia Commutante';
+  String get weaponTypeSa => 'Spada Ascia';
 
   @override
-  String get weaponTypeCb => 'Ascia da Carica';
+  String get weaponTypeCb => 'Lama Caricata';
 
   @override
-  String get weaponTypeIg => 'Insettoglaive';
+  String get weaponTypeIg => 'Falcione Insetto';
 
   @override
-  String get weaponTypeLbg => 'Balistalite';
+  String get weaponTypeLbg => 'Balestra Leggera';
 
   @override
-  String get weaponTypeHbg => 'Balistagrande';
+  String get weaponTypeHbg => 'Balestra Pesante';
 
   @override
   String get weaponTypeBow => 'Arco';

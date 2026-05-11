@@ -59,17 +59,12 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
     final armor = ref.watch(allArmorProvider);
     final charms = ref.watch(allTalismansProvider);
 
-    final totalCount = (weapons.asData?.value.length ?? 0) +
-        (armor.asData?.value.length ?? 0) +
-        (charms.asData?.value.length ?? 0);
-
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           LargeTitleBar(
             title: l10n.navEquipment,
-            subtitle: l10n.catalogCount(totalCount),
             trailing: HeaderAction(
               label: l10n.filterButton,
               onTap: () {}, // Phase 6

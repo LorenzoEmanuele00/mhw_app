@@ -200,7 +200,7 @@ abstract final class AppTheme {
       // NavigationBar styling
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: tokens.tabBar,
-        indicatorColor: tokens.accent.withValues(alpha: 0.15),
+        indicatorColor: Colors.transparent,
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final active = states.contains(WidgetState.selected);
           return IconThemeData(color: active ? tokens.accent : tokens.label2);
@@ -214,6 +214,7 @@ abstract final class AppTheme {
           );
         }),
         surfaceTintColor: Colors.transparent,
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
         elevation: 0,
       ),
       // NavigationRail for landscape
@@ -223,7 +224,7 @@ abstract final class AppTheme {
         unselectedIconTheme: IconThemeData(color: tokens.label2),
         selectedLabelTextStyle: TextStyle(color: tokens.accent, fontSize: 12, fontWeight: FontWeight.w600),
         unselectedLabelTextStyle: TextStyle(color: tokens.label2, fontSize: 12),
-        indicatorColor: tokens.accent.withValues(alpha: 0.15),
+        indicatorColor: Colors.transparent,
         elevation: 0,
       ),
       dividerTheme: DividerThemeData(color: tokens.sep, space: 0, thickness: 0.5),
