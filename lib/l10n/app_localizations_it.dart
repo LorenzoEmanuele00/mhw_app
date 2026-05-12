@@ -216,6 +216,108 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String get buildSlotEmpty => 'Slot vuoto';
+
+  @override
+  String get buildNoWeapon => 'Nessuna arma equipaggiata';
+
+  @override
+  String get buildActiveSkills => 'Abilità attive';
+
+  @override
+  String get buildNoSkills => 'Nessuna abilità attiva';
+
+  @override
+  String get buildSummary => 'Riepilogo';
+
+  @override
+  String get slotPickerSelectWeapon => 'Seleziona arma';
+
+  @override
+  String slotPickerSelectArmor(String slot) {
+    return 'Seleziona $slot';
+  }
+
+  @override
+  String get slotPickerSelectCharm => 'Seleziona talismano';
+
+  @override
+  String get slotPickerClear => 'Rimuovi';
+
+  @override
+  String get jewelPickerTitle => 'Seleziona decorazione';
+
+  @override
+  String jewelPickerSlotLevel(int level) {
+    return 'Slot livello $level';
+  }
+
+  @override
+  String get jewelPickerAvailable => 'Disponibili';
+
+  @override
+  String get jewelPickerTooLarge => 'Slot troppo piccolo';
+
+  @override
+  String get jewelPickerEmpty => 'Nessuno slot selezionato';
+
+  @override
+  String jewelSkillLabel(int level) {
+    return 'Lv $level';
+  }
+
+  @override
+  String get equipTo => 'Equipaggia';
+
+  @override
+  String get equipChange => 'Cambia';
+
+  @override
+  String get equipped => 'Equipaggiato';
+
+  @override
+  String get loadoutsNew => 'Nuovo';
+
+  @override
+  String get loadoutsEmpty => 'Nessuna build';
+
+  @override
+  String get loadoutsEmptyHint =>
+      'Tocca + Nuovo per creare la tua prima build.';
+
+  @override
+  String get loadoutsDeleteTitle => 'Eliminare la build?';
+
+  @override
+  String loadoutsDeleteMessage(String name) {
+    return 'Questa azione eliminerà definitivamente \"$name\".';
+  }
+
+  @override
+  String get loadoutsDeleteConfirm => 'Elimina';
+
+  @override
+  String get loadoutsCancel => 'Annulla';
+
+  @override
+  String get loadoutsRenameTitle => 'Rinomina build';
+
+  @override
+  String get loadoutsRenameHint => 'Nome build';
+
+  @override
+  String get loadoutsRenameSave => 'Salva';
+
+  @override
+  String get loadoutsActive => 'Attiva';
+
+  @override
+  String get loadoutsAtk => 'ATT';
+
+  @override
+  String get loadoutsDef => 'DIF';
+
+  @override
   String get comingSoon => 'Prossimamente';
 
   @override

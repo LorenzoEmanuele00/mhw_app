@@ -494,6 +494,192 @@ abstract class AppLocalizations {
   /// **'Nothing matches \"{query}\".'**
   String searchNoResults(String query);
 
+  /// No description provided for @buildSlotEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty slot'**
+  String get buildSlotEmpty;
+
+  /// No description provided for @buildNoWeapon.
+  ///
+  /// In en, this message translates to:
+  /// **'No weapon equipped'**
+  String get buildNoWeapon;
+
+  /// No description provided for @buildActiveSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Skills'**
+  String get buildActiveSkills;
+
+  /// No description provided for @buildNoSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'No skills active'**
+  String get buildNoSkills;
+
+  /// No description provided for @buildSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get buildSummary;
+
+  /// No description provided for @slotPickerSelectWeapon.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Weapon'**
+  String get slotPickerSelectWeapon;
+
+  /// No description provided for @slotPickerSelectArmor.
+  ///
+  /// In en, this message translates to:
+  /// **'Select {slot}'**
+  String slotPickerSelectArmor(String slot);
+
+  /// No description provided for @slotPickerSelectCharm.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Charm'**
+  String get slotPickerSelectCharm;
+
+  /// No description provided for @slotPickerClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get slotPickerClear;
+
+  /// No description provided for @jewelPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Decoration'**
+  String get jewelPickerTitle;
+
+  /// No description provided for @jewelPickerSlotLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {level} slot'**
+  String jewelPickerSlotLevel(int level);
+
+  /// No description provided for @jewelPickerAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get jewelPickerAvailable;
+
+  /// No description provided for @jewelPickerTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Need a larger slot'**
+  String get jewelPickerTooLarge;
+
+  /// No description provided for @jewelPickerEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No slot selected'**
+  String get jewelPickerEmpty;
+
+  /// No description provided for @jewelSkillLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lv {level}'**
+  String jewelSkillLabel(int level);
+
+  /// No description provided for @equipTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Equip'**
+  String get equipTo;
+
+  /// No description provided for @equipChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get equipChange;
+
+  /// No description provided for @equipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Equipped'**
+  String get equipped;
+
+  /// No description provided for @loadoutsNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get loadoutsNew;
+
+  /// No description provided for @loadoutsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No builds yet'**
+  String get loadoutsEmpty;
+
+  /// No description provided for @loadoutsEmptyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap + New to create your first build.'**
+  String get loadoutsEmptyHint;
+
+  /// No description provided for @loadoutsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Build?'**
+  String get loadoutsDeleteTitle;
+
+  /// No description provided for @loadoutsDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete \"{name}\".'**
+  String loadoutsDeleteMessage(String name);
+
+  /// No description provided for @loadoutsDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get loadoutsDeleteConfirm;
+
+  /// No description provided for @loadoutsCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get loadoutsCancel;
+
+  /// No description provided for @loadoutsRenameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename Build'**
+  String get loadoutsRenameTitle;
+
+  /// No description provided for @loadoutsRenameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Build name'**
+  String get loadoutsRenameHint;
+
+  /// No description provided for @loadoutsRenameSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get loadoutsRenameSave;
+
+  /// No description provided for @loadoutsActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get loadoutsActive;
+
+  /// No description provided for @loadoutsAtk.
+  ///
+  /// In en, this message translates to:
+  /// **'ATK'**
+  String get loadoutsAtk;
+
+  /// No description provided for @loadoutsDef.
+  ///
+  /// In en, this message translates to:
+  /// **'DEF'**
+  String get loadoutsDef;
+
   /// No description provided for @comingSoon.
   ///
   /// In en, this message translates to:

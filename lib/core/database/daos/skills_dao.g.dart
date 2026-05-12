@@ -7,6 +7,7 @@ mixin _$SkillsDaoMixin on DatabaseAccessor<AppDatabase> {
   $SkillsTable get skills => attachedDatabase.skills;
   $SkillLevelsTable get skillLevels => attachedDatabase.skillLevels;
   $JewelsTable get jewels => attachedDatabase.jewels;
+  $JewelSkillsTable get jewelSkills => attachedDatabase.jewelSkills;
   SkillsDaoManager get managers => SkillsDaoManager(this);
 }
 
@@ -19,4 +20,6 @@ class SkillsDaoManager {
       $$SkillLevelsTableTableManager(_db.attachedDatabase, _db.skillLevels);
   $$JewelsTableTableManager get jewels =>
       $$JewelsTableTableManager(_db.attachedDatabase, _db.jewels);
+  $$JewelSkillsTableTableManager get jewelSkills =>
+      $$JewelSkillsTableTableManager(_db.attachedDatabase, _db.jewelSkills);
 }
