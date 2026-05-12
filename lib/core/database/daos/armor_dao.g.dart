@@ -8,6 +8,8 @@ mixin _$ArmorDaoMixin on DatabaseAccessor<AppDatabase> {
   $ArmorPiecesTable get armorPieces => attachedDatabase.armorPieces;
   $SkillsTable get skills => attachedDatabase.skills;
   $ArmorSetSkillsTable get armorSetSkills => attachedDatabase.armorSetSkills;
+  $ArmorPieceSkillsTable get armorPieceSkills =>
+      attachedDatabase.armorPieceSkills;
   ArmorDaoManager get managers => ArmorDaoManager(this);
 }
 
@@ -24,5 +26,10 @@ class ArmorDaoManager {
       $$ArmorSetSkillsTableTableManager(
         _db.attachedDatabase,
         _db.armorSetSkills,
+      );
+  $$ArmorPieceSkillsTableTableManager get armorPieceSkills =>
+      $$ArmorPieceSkillsTableTableManager(
+        _db.attachedDatabase,
+        _db.armorPieceSkills,
       );
 }

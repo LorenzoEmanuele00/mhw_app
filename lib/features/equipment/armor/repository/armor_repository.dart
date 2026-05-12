@@ -18,6 +18,9 @@ class ArmorRepository {
 
   Future<List<ArmorSetSkill>> getSetSkills(int setId) =>
       _db.armorDao.getSetSkills(setId);
+
+  Future<List<({Skill skill, int level})>> getPieceSkills(int armorPieceId) =>
+      _db.armorDao.getPieceSkills(armorPieceId);
 }
 
 final armorRepositoryProvider = Provider<ArmorRepository>((ref) {
@@ -31,4 +34,9 @@ final allArmorProvider = StreamProvider<List<ArmorPiece>>((ref) {
 final armorBySlotProvider =
     StreamProvider.family<List<ArmorPiece>, ArmorSlotType>((ref, slot) {
   return ref.watch(armorRepositoryProvider).watchBySlot(slot);
+});
+
+final armorPieceSkillsProvider =
+    FutureProvider.family<List<({Skill skill, int level})>, int>((ref, pieceId) {
+  return ref.watch(armorRepositoryProvider).getPieceSkills(pieceId);
 });

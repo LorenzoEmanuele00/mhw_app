@@ -55,7 +55,7 @@ class AppDatabase extends _$AppDatabase {
         },
         onUpgrade: (m, from, to) async {
           if (from < 2) {
-            // v2: integer PKs + slug unique; integer FKs on user tables.
+            // v2: nuclear reset — schema changed too broadly, easier to recreate.
             await m.drop(buildJewels);
             await m.drop(builds);
             await m.drop(talismans);
@@ -68,6 +68,7 @@ class AppDatabase extends _$AppDatabase {
             await m.drop(skills);
             await m.createAll();
             await _seedSyncMetadata();
+            return; // createAll already applies all subsequent schema changes
           }
           if (from < 3) {
             // v3: add pieces_required to skill_levels.
@@ -105,6 +106,13 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dir = await getApplicationDocumentsDirectory();
     final file = File(p.join(dir.path, 'mhw_app.db'));
-    return NativeDatabase.createInBackground(file);
+    return NativeDatabase.createInBackground(
+      file,
+      setup: (rawDb) {
+        // Force WAL checkpoint on open so stale WAL/SHM files from a previous
+        // session (e.g. app killed by iOS watchdog) don't cause open failures.
+        rawDb.execute('PRAGMA wal_checkpoint(FULL)');
+      },
+    );
   });
 }

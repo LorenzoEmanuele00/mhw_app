@@ -3,19 +3,109 @@
 
   "appTitle": "MHW Builder",
 
+  "navBuild": "Build",
   "navEquipment": "Equipaggiamento",
-  "navBuilds": "Build",
-  "navBuilder": "Costruttore",
+  "navStats": "Statistiche",
+  "navLoadouts": "Loadout",
 
-  "screenWeapons": "Armi",
-  "screenArmor": "Armature",
-  "screenJewels": "Gioielli",
-  "screenTalismans": "Talismani",
-  "screenBuilds": "Build",
+  "equipWeapons": "Armi",
+  "equipArmor": "Armature",
+  "equipCharm": "Talismani",
+
+  "armorSlotHead": "Testa",
+  "armorSlotChest": "Petto",
+  "armorSlotArms": "Braccia",
+  "armorSlotWaist": "Vita",
+  "armorSlotLegs": "Gambe",
+
+  "statAttack": "Attacco",
+  "statDefense": "Difesa",
+  "statAffinity": "Affinità",
+  "statElement": "Elemento",
+  "statSharpness": "Affilatura",
+  "statRarity": "Rarità",
+
+  "elemFire": "Fuoco",
+  "elemWater": "Acqua",
+  "elemThunder": "Tuono",
+  "elemIce": "Ghiaccio",
+  "elemDragon": "Drago",
+  "elemPoison": "Veleno",
+  "elemSleep": "Sonno",
+  "elemParalysis": "Paralisi",
+  "elemBlast": "Esplosione",
+
+  "resistFire": "Res. Fuoco",
+  "resistWater": "Res. Acqua",
+  "resistThunder": "Res. Tuono",
+  "resistIce": "Res. Ghiaccio",
+  "resistDragon": "Res. Drago",
+
+  "weaponTypeGs": "Spadone",
+  "weaponTypeLs": "Spada Lunga",
+  "weaponTypeSns": "Spada e Scudo",
+  "weaponTypeDb": "Doppie Lame",
+  "weaponTypeHmr": "Martello",
+  "weaponTypeHh": "Corno da Caccia",
+  "weaponTypeLan": "Lancia",
+  "weaponTypeGl": "Lancia Fucile",
+  "weaponTypeSa": "Spada Ascia",
+  "weaponTypeCb": "Lama Caricata",
+  "weaponTypeIg": "Falcione Insetto",
+  "weaponTypeLbg": "Balestra Leggera",
+  "weaponTypeHbg": "Balestra Pesante",
+  "weaponTypeBow": "Arco",
+
+  "sharpnessRed": "Rosso",
+  "sharpnessOrange": "Arancione",
+  "sharpnessYellow": "Giallo",
+  "sharpnessGreen": "Verde",
+  "sharpnessBlue": "Blu",
+  "sharpnessWhite": "Bianco",
+  "sharpnessPurple": "Viola",
+
+  "sectionSkills": "Abilità",
+  "sectionDecoSlots": "Slot Decorazioni",
+  "sectionWeapon": "Arma",
+  "sectionArmor": "Armatura",
+
+  "detailRarity": "R{n}",
+  "@detailRarity": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+
+  "detailSlot": "Slot {index} · Livello {level}",
+  "@detailSlot": {
+    "placeholders": {
+      "index": { "type": "int" },
+      "level": { "type": "int" }
+    }
+  },
+
+  "charmSkillsOnly": "I talismani conferiscono solo abilità — nessuna difesa o resistenza.",
+
+  "catalogCount": "{count} oggetti nel catalogo",
+  "@catalogCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "searchEquipment": "Cerca equipaggiamento",
+  "searchJewels": "Cerca gioielli",
+  "filterButton": "Filtro",
+  "searchNoResults": "Nessun risultato per \"{query}\".",
+  "@searchNoResults": {
+    "placeholders": {
+      "query": { "type": "String" }
+    }
+  },
 
   "comingSoon": "Prossimamente",
 
-  "initError": "Errore inizializzazione: {error}",
+  "initError": "Errore di inizializzazione: {error}",
   "@initError": {
     "placeholders": {
       "error": { "type": "Object" }

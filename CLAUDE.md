@@ -89,11 +89,16 @@ Vedere `/docs/DATA_MODEL.md` per schema completo.
 
 ## Schermate (go_router shell)
 ```
-Bottom Nav 3 tab:
-├── /equipment          ← tab Equipment (sub-tab: weapons/armor/jewels/talismans)
-├── /builds             ← lista build → /builds/:id (dettaglio)
-└── /builder            ← /builder/new o /builder/:id (modifica)
+Bottom Nav 4 tab:
+├── /build        ← Build tab: weapon hero + armor slots + charm + skills attive + quick summary
+├── /equipment    ← Equipment tab: segmented (Weapons | Armor | Charm), search, detail sheet
+├── /stats        ← Stats tab: headline stats + sharpness + resistances radar/bars + skill pips
+└── /loadouts     ← Loadouts tab: swipeable build cards, new/rename/delete
 ```
+
+**Nota**: non esiste un tab Builder separato. La modifica della build avviene inline sul tab Build tramite bottom sheets (SlotPicker, EquipmentDetail, JewelPicker).
+**Nota**: i gioielli non sono navigabili nell'Equipment tab — si selezionano solo tramite il JewelPicker sheet aperto dai slot della build.
+**Nota**: Talisman = Charm nella UI (label "Charm", ma DB table `talismans`).
 
 ## Motore di calcolo (MVP)
 Vedere `/docs/CALC_ENGINE.md` per formule complete.
@@ -117,11 +122,11 @@ Vedere `/docs/PROGRESS.md` per stato aggiornato.
 |------|-------------|
 | 0 | Setup: dipendenze, DB schema drift, routing base |
 | 1 | Data layer: seed da Excel, repository, sync base |
-| 2 | Equipment browser: armi/armature/gioielli + CRUD talismani |
-| 3 | Build system: builder UI, slot management, salvataggio |
-| 4 | Stats engine: Calc Engine MVP, stats panel live |
+| 2 | Equipment browser: 4-tab nav, schermata Equipment (weapons/armor/charm + detail sheet) |
+| 3 | Build system: Build tab con slot editing, JewelPicker, Loadouts tab |
+| 4 | Stats engine: Calc Engine MVP, Stats tab con radar + skill pips |
 | 5 | Supabase sync completo con versioning |
-| 6 | Polish: filtri, ricerca, sorting, UI refinement |
+| 6 | Polish: filtri, sorting, compare mode, CRUD talismani, UI refinement |
 
 ## Dati sorgente
 **Excel**: `/Users/loke/Downloads/Alpha Calulator.xlsx`

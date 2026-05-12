@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/providers/seed_provider.dart';
 import 'core/router/router.dart';
 import 'l10n/app_localizations.dart';
+import 'shared/theme/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ class MhwApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'MHW Builder',
       debugShowCheckedModeBanner: false,
+      // i18n — picks EN or IT automatically from system locale
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -27,24 +29,29 @@ class MhwApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF8B1A1A),
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
+      // Adaptive dark/light mode
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.system,
       routerConfig: router,
-      // Show splash screen until DB seed is ready
       builder: seed.when(
         data: (_) => null,
-        loading: () =>
-            (context, child) => const Scaffold(
+        loading: () => (context, child) => const Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
-        error: (e, _) =>
-            (context, child) =>
-                Scaffold(body: Center(child: Text('Init error: $e'))),
+        error: (e, _) => (context, child) => Scaffold(
+              body: Center(
+                child: Builder(
+                  builder: (ctx) {
+                    final l10n = Localizations.of<AppLocalizations>(
+                      ctx,
+                      AppLocalizations,
+                    );
+                    return Text(l10n?.initError(e) ?? 'Init error: $e');
+                  },
+                ),
+              ),
+            ),
       ),
     );
   }
