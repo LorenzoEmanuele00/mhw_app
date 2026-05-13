@@ -6,6 +6,7 @@
 
 1. Vorrei un bordo colorato attorno al loadout attualmente attivo. Il bordo deve essere sulla card, quindi trascinandola deve rimanere attaccato ad essa.
 2. Il bottone cancella non è necessario. Il bottone modifica invece può essere solo un icona
+3. Quando seleziono un jewel e lo inserisco in uno slot non vedo il nome del jewel ma il suo id. Voglio vedere il nome
 
 ### Review widget generici:
 
