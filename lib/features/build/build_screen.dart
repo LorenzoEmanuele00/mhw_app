@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/database/tables/enums.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/theme/app_theme.dart';
@@ -12,12 +13,9 @@ import '../../shared/widgets/large_title.dart';
 import '../../shared/widgets/section_label.dart';
 import '../../shared/widgets/sharpness_gauge.dart';
 import '../../shared/widgets/skill_chip.dart';
-import '../equipment/armor/repository/armor_repository.dart';
+import '../equipment/equipment_screen.dart';
 import '../equipment/models/equip_item.dart';
-import '../equipment/talismans/repository/talismans_repository.dart';
-import '../equipment/weapons/repository/weapons_repository.dart';
 import '../equipment/widgets/equipment_detail_sheet.dart';
-import '../equipment/widgets/slot_picker_sheet.dart';
 import 'build_notifier.dart';
 
 class BuildScreen extends ConsumerWidget {
@@ -143,7 +141,7 @@ class _WeaponHero extends ConsumerWidget {
 
     if (weapon == null) {
       return GestureDetector(
-        onTap: () => _openWeaponPicker(context, ref),
+        onTap: () => _navigateToEquipment(context, ref, EquipmentCategory.weapons),
         child: AppCard(
           child: Row(
             spacing: 12,
@@ -259,26 +257,6 @@ class _WeaponHero extends ConsumerWidget {
     );
   }
 
-  void _openWeaponPicker(BuildContext context, WidgetRef ref) {
-    final stream = ref.read(weaponsRepositoryProvider).watchAll()
-        .map((ws) => ws.map((w) => WeaponEquipItem(w) as EquipItem).toList());
-    showAppSheet(
-      context: context,
-      child: SlotPickerSheet(
-        title: AppLocalizations.of(context).slotPickerSelectWeapon,
-        itemsStream: stream,
-        currentId: buildState.weapon?.id,
-        onSelected: (item) {
-          if (item is WeaponEquipItem) {
-            ref.read(buildNotifierProvider.notifier).equipWeapon(item.weapon.id);
-          }
-        },
-        onClear: buildState.weapon != null
-            ? () => ref.read(buildNotifierProvider.notifier).equipWeapon(null)
-            : null,
-      ),
-    );
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -304,7 +282,7 @@ class _ArmorSlotRow extends ConsumerWidget {
                 context: context,
                 child: EquipmentDetailSheet(item: ArmorEquipItem(piece)),
               )
-          : () => _openArmorPicker(context, ref),
+          : () => _navigateToEquipment(context, ref, EquipmentCategory.armor),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
@@ -362,29 +340,6 @@ class _ArmorSlotRow extends ConsumerWidget {
     );
   }
 
-  void _openArmorPicker(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final stream = ref.read(armorRepositoryProvider).watchBySlot(slot)
-        .map((ps) => ps.map((p) => ArmorEquipItem(p) as EquipItem).toList());
-    final slotLabel = _slotLabel(slot, l10n);
-    showAppSheet(
-      context: context,
-      child: SlotPickerSheet(
-        title: l10n.slotPickerSelectArmor(slotLabel),
-        itemsStream: stream,
-        currentId: buildState.pieceForSlot(slot)?.id,
-        onSelected: (item) {
-          if (item is ArmorEquipItem) {
-            ref.read(buildNotifierProvider.notifier).equipArmor(slot, item.piece.id);
-          }
-        },
-        onClear: buildState.pieceForSlot(slot) != null
-            ? () => ref.read(buildNotifierProvider.notifier).equipArmor(slot, null)
-            : null,
-      ),
-    );
-  }
-
   String _slotLabel(ArmorSlotType s, AppLocalizations l10n) => switch (s) {
         ArmorSlotType.head  => l10n.armorSlotHead,
         ArmorSlotType.chest => l10n.armorSlotChest,
@@ -415,7 +370,7 @@ class _CharmSlotRow extends ConsumerWidget {
                 context: context,
                 child: EquipmentDetailSheet(item: CharmEquipItem(talisman)),
               )
-          : () => _openCharmPicker(context, ref),
+          : () => _navigateToEquipment(context, ref, EquipmentCategory.charm),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Row(
@@ -455,27 +410,6 @@ class _CharmSlotRow extends ConsumerWidget {
     );
   }
 
-  void _openCharmPicker(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final stream = ref.read(talismansRepositoryProvider).watchAll()
-        .map((ts) => ts.map((t) => CharmEquipItem(t) as EquipItem).toList());
-    showAppSheet(
-      context: context,
-      child: SlotPickerSheet(
-        title: l10n.slotPickerSelectCharm,
-        itemsStream: stream,
-        currentId: buildState.talisman?.id,
-        onSelected: (item) {
-          if (item is CharmEquipItem) {
-            ref.read(buildNotifierProvider.notifier).equipCharm(item.talisman.id);
-          }
-        },
-        onClear: buildState.talisman != null
-            ? () => ref.read(buildNotifierProvider.notifier).equipCharm(null)
-            : null,
-      ),
-    );
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -612,6 +546,11 @@ class _StatPill extends StatelessWidget {
 // ---------------------------------------------------------------------------
 // Label helpers
 // ---------------------------------------------------------------------------
+
+void _navigateToEquipment(BuildContext context, WidgetRef ref, EquipmentCategory category) {
+  ref.read(equipmentCategoryProvider.notifier).set(category);
+  context.go('/equipment');
+}
 
 String _weaponTypeLabel(WeaponType type, AppLocalizations l10n) => switch (type) {
       WeaponType.gs  => l10n.weaponTypeGs,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/database/database.dart';
 import '../../../core/database/tables/enums.dart';
 import '../../../l10n/app_localizations.dart';
@@ -14,6 +15,8 @@ import '../../../shared/widgets/sharpness_gauge.dart';
 import '../../../shared/widgets/skill_chip.dart';
 import '../../../shared/widgets/stat_bar.dart';
 import '../armor/repository/armor_repository.dart';
+import '../equipment_screen.dart';
+import '../jewels/repository/jewels_repository.dart';
 import '../models/equip_item.dart';
 import '../../build/build_notifier.dart';
 import '../../jewels/widgets/jewel_picker_sheet.dart';
@@ -196,12 +199,16 @@ class _WeaponDetail extends ConsumerWidget {
               buildState: buildState,
             ),
 
-          // Equip CTA
+          // Equip / Change CTA
           _EquipButton(
-            label: isEquipped ? l10n.equipped : l10n.equipTo,
+            label: isEquipped ? l10n.equipChange : l10n.equipTo,
             isEquipped: isEquipped,
             onTap: isEquipped
-                ? null
+                ? () {
+                    ref.read(equipmentCategoryProvider.notifier).set(EquipmentCategory.weapons);
+                    context.go('/equipment');
+                    Navigator.of(context).pop();
+                  }
                 : () {
                     ref.read(buildNotifierProvider.notifier).equipWeapon(weapon.id);
                     Navigator.of(context).pop();
@@ -311,15 +318,19 @@ class _ArmorDetail extends ConsumerWidget {
               buildState: ref.watch(buildNotifierProvider).asData?.value,
             ),
 
-          // Equip CTA
+          // Equip / Change CTA
           Builder(builder: (context) {
             final buildState = ref.watch(buildNotifierProvider).asData?.value;
             final isEquipped = buildState?.pieceForSlot(piece.slotType)?.id == piece.id;
             return _EquipButton(
-              label: isEquipped ? l10n.equipped : l10n.equipTo,
+              label: isEquipped ? l10n.equipChange : l10n.equipTo,
               isEquipped: isEquipped,
               onTap: isEquipped
-                  ? null
+                  ? () {
+                      ref.read(equipmentCategoryProvider.notifier).set(EquipmentCategory.armor);
+                      context.go('/equipment');
+                      Navigator.of(context).pop();
+                    }
                   : () {
                       ref.read(buildNotifierProvider.notifier).equipArmor(piece.slotType, piece.id);
                       Navigator.of(context).pop();
@@ -376,11 +387,16 @@ class _CharmDetail extends ConsumerWidget {
               slotSource: JewelSlotSource.talisman,
               buildState: buildState,
             ),
+          // Equip / Change CTA
           _EquipButton(
-            label: isEquipped ? l10n.equipped : l10n.equipTo,
+            label: isEquipped ? l10n.equipChange : l10n.equipTo,
             isEquipped: isEquipped,
             onTap: isEquipped
-                ? null
+                ? () {
+                    ref.read(equipmentCategoryProvider.notifier).set(EquipmentCategory.charm);
+                    context.go('/equipment');
+                    Navigator.of(context).pop();
+                  }
                 : () {
                     ref.read(buildNotifierProvider.notifier).equipCharm(talisman.id);
                     Navigator.of(context).pop();
@@ -446,6 +462,9 @@ class _DecoSlotsCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final tokens = AppTokens.of(context);
+    final jewelsMap = {
+      for (final j in ref.watch(allJewelsProvider).asData?.value ?? []) j.id: j
+    };
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -460,6 +479,7 @@ class _DecoSlotsCard extends ConsumerWidget {
               final isLast = idx == slots.length - 1;
               final jewelId = buildState?.jewelIdForSlot(slotSource, idx);
               final isFilled = jewelId != null;
+              final jewelName = jewelId != null ? jewelsMap[jewelId]?.name : null;
 
               return GestureDetector(
                 behavior: HitTestBehavior.opaque,
@@ -509,7 +529,7 @@ class _DecoSlotsCard extends ConsumerWidget {
                             ),
                             const SizedBox(height: 1),
                             Text(
-                              isFilled ? '(Jewel #$jewelId)' : 'Empty',
+                              jewelName ?? l10n.buildSlotEmpty,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -545,7 +565,7 @@ class _EquipButton extends StatelessWidget {
 
   final String label;
   final bool isEquipped;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
