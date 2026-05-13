@@ -119,7 +119,32 @@ class _SwipeableLoadoutCard extends ConsumerWidget {
     return Dismissible(
       key: ValueKey(loadout.id),
       direction: DismissDirection.endToStart,
-      confirmDismiss: (_) async => false,
+      confirmDismiss: (_) async {
+        return await showDialog<bool>(
+          context: context,
+          builder: (ctx) {
+            final l10n = AppLocalizations.of(ctx);
+            return AlertDialog(
+              title: Text(l10n.loadoutsDeleteTitle),
+              content: Text(l10n.loadoutsDeleteMessage(loadout.name)),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(ctx).pop(false),
+                  child: Text(l10n.loadoutsCancel),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(ctx).pop(true),
+                  child: Text(
+                    l10n.loadoutsDeleteConfirm,
+                    style: const TextStyle(color: AppColors.negativeRed),
+                  ),
+                ),
+              ],
+            );
+          },
+        ) ?? false;
+      },
+      onDismissed: (_) => ref.read(buildNotifierProvider.notifier).deleteBuild(loadout.id),
       background: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 16),

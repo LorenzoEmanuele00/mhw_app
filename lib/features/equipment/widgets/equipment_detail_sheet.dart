@@ -5,6 +5,7 @@ import '../../../core/database/database.dart';
 import '../../../core/database/tables/enums.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/theme/app_theme.dart';
+import '../../../shared/utils/label_helpers.dart';
 import '../../../shared/utils/slots_parser.dart';
 import '../../../shared/widgets/app_card.dart';
 import '../../../shared/widgets/app_sheet.dart';
@@ -140,7 +141,7 @@ class _WeaponDetail extends ConsumerWidget {
             child: _DetailHero(
               kind: 'weapon',
               name: weapon.name,
-              typeLabel: _weaponTypeLabel(weapon.weaponType, l10n),
+              typeLabel: weaponTypeLabel(weapon.weaponType, l10n),
               rarity: weapon.rarity,
             ),
           ),
@@ -166,7 +167,7 @@ class _WeaponDetail extends ConsumerWidget {
                 ),
                 if (weapon.elementType != null && weapon.elementValue != null)
                   StatBar(
-                    label: _elementLabel(weapon.elementType!, l10n),
+                    label: elementLabel(weapon.elementType!, l10n),
                     value: weapon.elementValue!,
                     max: 600,
                     color: AppColors.element(weapon.elementType!, brightness),
@@ -234,6 +235,8 @@ class _ArmorDetail extends ConsumerWidget {
     final brightness = Theme.of(context).brightness;
     final slots = parseSlots(piece.slots);
     final skillsAsync = ref.watch(armorPieceSkillsProvider(piece.id));
+    final buildState = ref.watch(buildNotifierProvider).asData?.value;
+    final isEquipped = buildState?.pieceForSlot(piece.slotType)?.id == piece.id;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
@@ -315,28 +318,24 @@ class _ArmorDetail extends ConsumerWidget {
             _DecoSlotsCard(
               slots: slots,
               slotSource: _armorSlotSource(piece.slotType),
-              buildState: ref.watch(buildNotifierProvider).asData?.value,
+              buildState: buildState,
             ),
 
           // Equip / Change CTA
-          Builder(builder: (context) {
-            final buildState = ref.watch(buildNotifierProvider).asData?.value;
-            final isEquipped = buildState?.pieceForSlot(piece.slotType)?.id == piece.id;
-            return _EquipButton(
-              label: isEquipped ? l10n.equipChange : l10n.equipTo,
-              isEquipped: isEquipped,
-              onTap: isEquipped
-                  ? () {
-                      ref.read(equipmentCategoryProvider.notifier).set(EquipmentCategory.armor);
-                      context.go('/equipment');
-                      Navigator.of(context).pop();
-                    }
-                  : () {
-                      ref.read(buildNotifierProvider.notifier).equipArmor(piece.slotType, piece.id);
-                      Navigator.of(context).pop();
-                    },
-            );
-          }),
+          _EquipButton(
+            label: isEquipped ? l10n.equipChange : l10n.equipTo,
+            isEquipped: isEquipped,
+            onTap: isEquipped
+                ? () {
+                    ref.read(equipmentCategoryProvider.notifier).set(EquipmentCategory.armor);
+                    context.go('/equipment');
+                    Navigator.of(context).pop();
+                  }
+                : () {
+                    ref.read(buildNotifierProvider.notifier).equipArmor(piece.slotType, piece.id);
+                    Navigator.of(context).pop();
+                  },
+          ),
         ],
       ),
     );
@@ -609,39 +608,10 @@ JewelSlotSource _armorSlotSource(ArmorSlotType slot) => switch (slot) {
       ArmorSlotType.legs  => JewelSlotSource.legs,
     };
 
-String _weaponTypeLabel(WeaponType type, AppLocalizations l10n) => switch (type) {
-      WeaponType.gs  => l10n.weaponTypeGs,
-      WeaponType.ls  => l10n.weaponTypeLs,
-      WeaponType.sns => l10n.weaponTypeSns,
-      WeaponType.db  => l10n.weaponTypeDb,
-      WeaponType.hmr => l10n.weaponTypeHmr,
-      WeaponType.hh  => l10n.weaponTypeHh,
-      WeaponType.lan => l10n.weaponTypeLan,
-      WeaponType.gl  => l10n.weaponTypeGl,
-      WeaponType.sa  => l10n.weaponTypeSa,
-      WeaponType.cb  => l10n.weaponTypeCb,
-      WeaponType.ig  => l10n.weaponTypeIg,
-      WeaponType.lbg => l10n.weaponTypeLbg,
-      WeaponType.hbg => l10n.weaponTypeHbg,
-      WeaponType.bow => l10n.weaponTypeBow,
-    };
-
 String _armorSlotLabel(ArmorSlotType slot, AppLocalizations l10n) => switch (slot) {
       ArmorSlotType.head  => l10n.armorSlotHead,
       ArmorSlotType.chest => l10n.armorSlotChest,
       ArmorSlotType.arms  => l10n.armorSlotArms,
       ArmorSlotType.waist => l10n.armorSlotWaist,
       ArmorSlotType.legs  => l10n.armorSlotLegs,
-    };
-
-String _elementLabel(ElementType type, AppLocalizations l10n) => switch (type) {
-      ElementType.fire      => l10n.elemFire,
-      ElementType.water     => l10n.elemWater,
-      ElementType.thunder   => l10n.elemThunder,
-      ElementType.ice       => l10n.elemIce,
-      ElementType.dragon    => l10n.elemDragon,
-      ElementType.poison    => l10n.elemPoison,
-      ElementType.sleep     => l10n.elemSleep,
-      ElementType.paralysis => l10n.elemParalysis,
-      ElementType.blast     => l10n.elemBlast,
     };

@@ -143,7 +143,7 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
     final talismansRepo = ref.read(talismansRepositoryProvider);
     final buildsRepo = ref.read(buildsRepositoryProvider);
 
-    final results = await Future.wait([
+    final (weapon, head, chest, arms, waist, legs, talisman, jewels) = await (
       build.weaponId != null
           ? weaponsRepo.getById(build.weaponId!)
           : Future<Weapon?>.value(null),
@@ -166,16 +166,7 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
           ? talismansRepo.getById(build.talismanId!)
           : Future<Talisman?>.value(null),
       buildsRepo.getJewels(build.id),
-    ]);
-
-    final weapon = results[0] as Weapon?;
-    final head = results[1] as ArmorPiece?;
-    final chest = results[2] as ArmorPiece?;
-    final arms = results[3] as ArmorPiece?;
-    final waist = results[4] as ArmorPiece?;
-    final legs = results[5] as ArmorPiece?;
-    final talisman = results[6] as Talisman?;
-    final jewels = results[7] as List<BuildJewel>;
+    ).wait;
 
     // Aggregate skills from armor pieces + talisman (Phase 3 — no jewels, no set bonuses)
     final skillMap = <int, ({Skill skill, int level})>{};
