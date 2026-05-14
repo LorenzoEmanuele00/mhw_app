@@ -91,8 +91,8 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> _seedSyncMetadata() async {
     const tables = [
-      'weapons', 'armor_pieces', 'armor_sets',
-      'armor_set_skills', 'jewels', 'skills', 'skill_levels',
+      'weapons', 'armor_pieces', 'armor_sets', 'armor_set_skills',
+      'armor_piece_skills', 'jewels', 'jewel_skills', 'skills', 'skill_levels',
     ];
     for (final table in tables) {
       await into(syncMetadata).insertOnConflictUpdate(

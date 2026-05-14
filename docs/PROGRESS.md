@@ -191,6 +191,20 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 
 ## Session notes
 
+### 2026-05-14 — Session 9
+- Doc review and consistency check against real codebase
+- Fixed `database.dart` `_seedSyncMetadata()`: added missing `armor_piece_skills` and `jewel_skills`
+- Fixed `DATA_MODEL.md`: added missing `rarity` field to `jewels` table
+- Written `docs/SUPABASE.md`: Postgres DDL, seed import order, RLS policies, Flutter config, SyncService outline
+- Folder structure cleanup:
+  - Deleted 4 stale placeholder screens (`armor_screen`, `weapons_screen`, `talismans_screen`, `jewels_screen`)
+  - Consolidated `features/builds/` into `features/build/repository/` (was split inconsistently)
+  - Flattened `features/equipment/{type}/repository/{type}_repository.dart` → `features/equipment/{type}/{type}_repository.dart`
+  - Moved `features/jewels/widgets/jewel_picker_sheet.dart` → `features/equipment/widgets/jewel_picker_sheet.dart`
+  - Removed now-empty `features/builds/` and `features/jewels/` folders
+  - Updated all import paths across 4 callers; `flutter analyze` + `flutter test` → 59/59 ✓
+- Updated `ARCHITECTURE.md` lib/ structure section to reflect current (not aspirational) state
+
 ### 2026-05-12 — Session 8
 - Phase 3 (Build System) implemented from scratch
 - `BuildNotifier` uses Riverpod 3.x `Notifier` (StateNotifier removed in 3.x)

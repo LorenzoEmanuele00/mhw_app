@@ -69,6 +69,7 @@
 | id | INTEGER PK autoincrement | |
 | slug | TEXT UNIQUE | |
 | name | TEXT | |
+| rarity | INTEGER | 1-6 |
 | slot_size | INTEGER | 1/2/3/4 |
 | allowed_on | TEXT | "armor" / "weapon" — default "armor" |
 

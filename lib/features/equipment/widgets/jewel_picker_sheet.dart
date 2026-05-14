@@ -10,7 +10,7 @@ import '../../../shared/widgets/deco_slots_row.dart';
 import '../../../shared/widgets/search_field.dart';
 import '../../../shared/widgets/section_label.dart';
 import '../../build/build_notifier.dart';
-import '../../equipment/jewels/repository/jewels_repository.dart';
+import '../jewels/jewels_repository.dart';
 
 // ---------------------------------------------------------------------------
 // Helper: skills keyed by ID for fast lookup (sync Provider, reacts to stream)

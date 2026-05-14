@@ -6,9 +6,9 @@ import '../../shared/theme/app_theme.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/large_title.dart';
 import '../build/build_notifier.dart';
-import '../builds/repository/builds_repository.dart';
-import '../equipment/armor/repository/armor_repository.dart';
-import '../equipment/weapons/repository/weapons_repository.dart';
+import '../build/repository/builds_repository.dart';
+import '../equipment/armor/armor_repository.dart';
+import '../equipment/weapons/weapons_repository.dart';
 
 class LoadoutsScreen extends ConsumerWidget {
   const LoadoutsScreen({super.key});

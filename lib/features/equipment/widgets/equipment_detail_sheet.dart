@@ -15,12 +15,12 @@ import '../../../shared/widgets/section_label.dart';
 import '../../../shared/widgets/sharpness_gauge.dart';
 import '../../../shared/widgets/skill_chip.dart';
 import '../../../shared/widgets/stat_bar.dart';
-import '../armor/repository/armor_repository.dart';
+import '../armor/armor_repository.dart';
 import '../equipment_screen.dart';
-import '../jewels/repository/jewels_repository.dart';
+import '../jewels/jewels_repository.dart';
 import '../models/equip_item.dart';
 import '../../build/build_notifier.dart';
-import '../../jewels/widgets/jewel_picker_sheet.dart';
+import 'jewel_picker_sheet.dart';
 
 /// Full-screen-height content for the equipment detail bottom sheet.
 class EquipmentDetailSheet extends ConsumerWidget {

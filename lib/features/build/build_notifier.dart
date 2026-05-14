@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/database/database.dart';
 import '../../core/database/tables/enums.dart';
 import '../../shared/calc/skills_repository.dart';
-import '../builds/repository/builds_repository.dart';
-import '../equipment/armor/repository/armor_repository.dart';
-import '../equipment/talismans/repository/talismans_repository.dart';
-import '../equipment/weapons/repository/weapons_repository.dart';
+import 'repository/builds_repository.dart';
+import '../equipment/armor/armor_repository.dart';
+import '../equipment/talismans/talismans_repository.dart';
+import '../equipment/weapons/weapons_repository.dart';
 
 // ---------------------------------------------------------------------------
 // State

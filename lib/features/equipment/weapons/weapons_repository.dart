@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/database/database.dart';
-import '../../../../core/database/tables/enums.dart';
-import '../../../../core/providers/database_provider.dart';
+import '../../../core/database/database.dart';
+import '../../../core/database/tables/enums.dart';
+import '../../../core/providers/database_provider.dart';
 
 class WeaponsRepository {
   final AppDatabase _db;
