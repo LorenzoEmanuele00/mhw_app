@@ -191,6 +191,63 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 
 ---
 
+### Phase 7: Analytics — PostHog ⬜ TODO
+
+Add product analytics via PostHog before production release. No PII collected — all events are anonymous game-app usage patterns.
+
+**Package & setup**
+- [ ] Add `posthog_flutter: ^5.x` to `pubspec.yaml`
+- [ ] Add `shared_preferences: ^2.x` to `pubspec.yaml` (for persisting anonymous user ID)
+- [ ] Create PostHog project (cloud or self-hosted) and obtain API key
+- [ ] Add `POSTHOG_API_KEY` to `.env` / build config (never commit the key)
+
+**AnalyticsService abstraction** (`lib/core/analytics/`)
+- [ ] `analytics_service.dart` — abstract class with `capture()`, `identify()`, `screen()`, `reset()` methods
+- [ ] `posthog_analytics_service.dart` — `PostHogAnalyticsService implements AnalyticsService`
+- [ ] `noop_analytics_service.dart` — `NoopAnalyticsService` used in tests and debug builds
+- [ ] `analytics_provider.dart` — Riverpod `Provider<AnalyticsService>` (returns PostHog in release, Noop in test)
+- [ ] `anonymous_id_service.dart` — generates UUID v4 on first launch, persists via SharedPreferences
+
+**Initialization** (`lib/main.dart`)
+- [ ] Init PostHog before `runApp` with `PostHogConfig` (apiKey, host, captureApplicationLifecycleEvents: true, sessionReplay: false)
+- [ ] Generate/load anonymous user ID; call `analyticsService.identify(anonymousId)` at startup
+- [ ] Disable analytics in debug builds (or use a dev PostHog project)
+
+**Navigation tracking** (`lib/core/router/router.dart`)
+- [ ] Add `NavigatorObserver` subclass `AnalyticsNavigatorObserver` that calls `analyticsService.screen(routeName)` on each route change
+- [ ] Register observer in `GoRouter` configuration
+- Events tracked: `screen_viewed` with property `screen` (build / equipment / stats / loadouts)
+
+**Build actions** (`lib/features/build/build_notifier.dart`)
+- [ ] `build_created` — when `newBuild()` is called
+- [ ] `build_loaded` — when `loadBuild()` is called (property: `build_id` hashed, not raw)
+- [ ] `build_renamed` — when `renameBuild()` is called
+- [ ] `build_deleted` — when `deleteBuild()` is called
+- [ ] `item_equipped` — on `equipWeapon`, `equipArmor`, `equipCharm` (property: `slot_type`)
+- [ ] `item_cleared` — on clear actions (property: `slot_type`)
+- [ ] `jewel_equipped` — on `setJewel` (property: `slot_level`)
+- [ ] `jewel_cleared` — on `clearJewel`
+
+**Equipment search** (`lib/features/equipment/equipment_screen.dart`)
+- [ ] `equipment_searched` — debounced, fired after 500ms of no input (properties: `segment`: weapons/armor/charm, `query_length`, `has_results`)
+
+**Sync tracking** (Phase 5, `lib/core/sync/sync_service.dart`)
+- [ ] `sync_completed` — properties: `tables_updated` count, `duration_ms`
+- [ ] `sync_skipped` — when version already up-to-date
+- [ ] `sync_failed` — property: `error_type` (no stack trace content)
+
+**Error tracking**
+- [ ] `error_occurred` — property: `feature_area` (build / equipment / stats / sync), `error_type` string (no user-identifiable content)
+- [ ] Wire into top-level `FlutterError.onError` and `PlatformDispatcher.instance.onError` in `main.dart`
+
+**Tests**
+- [ ] Unit test `AnonymousIdService`: generates ID on first call, returns same ID on subsequent calls
+- [ ] Unit test `NoopAnalyticsService`: all methods are no-ops, no throws
+- [ ] Widget/integration tests: inject `NoopAnalyticsService` via provider override — no PostHog calls in test suite
+- [ ] `flutter test` → all pass
+
+---
+
 ## Session notes
 
 ### 2026-05-15 — Session 10

@@ -140,13 +140,13 @@ CREATE TABLE jewel_skills (
 I file seed sono già pronti in `assets/seeds/`. Sono SQL standard compatibile con Postgres.
 Eseguili **in ordine** nell'SQL Editor di Supabase (uno alla volta o concatenati):
 
-| Ordine | File | Contenuto |
-|--------|------|-----------|
-| 1 | `01_skills.sql` | 179 skill |
-| 2 | `02_skill_levels.sql` | 442 livelli con bonus tipizzati |
-| 3 | `03_armor.sql` | 194 set, 714 pezzi, 275 set-skill, 2119 piece-skill |
-| 4 | `04_weapons.sql` | 1188 armi |
-| 5 | `05_jewels.sql` | 361 gioielli, 534 jewel-skill row |
+| Ordine | File                  | Contenuto                                           |
+| ------ | --------------------- | --------------------------------------------------- |
+| 1      | `01_skills.sql`       | 179 skill                                           |
+| 2      | `02_skill_levels.sql` | 442 livelli con bonus tipizzati                     |
+| 3      | `03_armor.sql`        | 194 set, 714 pezzi, 275 set-skill, 2119 piece-skill |
+| 4      | `04_weapons.sql`      | 1188 armi                                           |
+| 5      | `05_jewels.sql`       | 361 gioielli, 534 jewel-skill row                   |
 
 Dopo il seeding, inserisci le versioni iniziali:
 
@@ -175,28 +175,28 @@ Tutti i dati di gioco sono pubblicamente leggibili — nessuna autenticazione ne
 
 ```sql
 -- Abilita RLS su tutte le tabelle di gioco
-ALTER TABLE skills           ENABLE ROW LEVEL SECURITY;
-ALTER TABLE skill_levels     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE armor_sets       ENABLE ROW LEVEL SECURITY;
-ALTER TABLE armor_pieces     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE armor_set_skills ENABLE ROW LEVEL SECURITY;
+ALTER TABLE skills             ENABLE ROW LEVEL SECURITY;
+ALTER TABLE skill_levels       ENABLE ROW LEVEL SECURITY;
+ALTER TABLE armor_sets         ENABLE ROW LEVEL SECURITY;
+ALTER TABLE armor_pieces       ENABLE ROW LEVEL SECURITY;
+ALTER TABLE armor_set_skills.  ENABLE ROW LEVEL SECURITY;
 ALTER TABLE armor_piece_skills ENABLE ROW LEVEL SECURITY;
-ALTER TABLE weapons          ENABLE ROW LEVEL SECURITY;
-ALTER TABLE jewels           ENABLE ROW LEVEL SECURITY;
-ALTER TABLE jewel_skills     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE data_versions    ENABLE ROW LEVEL SECURITY;
+ALTER TABLE weapons            ENABLE ROW LEVEL SECURITY;
+ALTER TABLE jewels             ENABLE ROW LEVEL SECURITY;
+ALTER TABLE jewel_skills       ENABLE ROW LEVEL SECURITY;
+ALTER TABLE data_versions      ENABLE ROW LEVEL SECURITY;
 
 -- Policy lettura pubblica (anon key)
-CREATE POLICY "public read" ON skills           FOR SELECT USING (true);
-CREATE POLICY "public read" ON skill_levels     FOR SELECT USING (true);
-CREATE POLICY "public read" ON armor_sets       FOR SELECT USING (true);
-CREATE POLICY "public read" ON armor_pieces     FOR SELECT USING (true);
-CREATE POLICY "public read" ON armor_set_skills FOR SELECT USING (true);
+CREATE POLICY "public read" ON skills             FOR SELECT USING (true);
+CREATE POLICY "public read" ON skill_levels       FOR SELECT USING (true);
+CREATE POLICY "public read" ON armor_sets         FOR SELECT USING (true);
+CREATE POLICY "public read" ON armor_pieces       FOR SELECT USING (true);
+CREATE POLICY "public read" ON armor_set_skills   FOR SELECT USING (true);
 CREATE POLICY "public read" ON armor_piece_skills FOR SELECT USING (true);
-CREATE POLICY "public read" ON weapons          FOR SELECT USING (true);
-CREATE POLICY "public read" ON jewels           FOR SELECT USING (true);
-CREATE POLICY "public read" ON jewel_skills     FOR SELECT USING (true);
-CREATE POLICY "public read" ON data_versions    FOR SELECT USING (true);
+CREATE POLICY "public read" ON weapons            FOR SELECT USING (true);
+CREATE POLICY "public read" ON jewels             FOR SELECT USING (true);
+CREATE POLICY "public read" ON jewel_skills       FOR SELECT USING (true);
+CREATE POLICY "public read" ON data_versions      FOR SELECT USING (true);
 ```
 
 Nessuna policy INSERT/UPDATE/DELETE dai client — i dati di gioco si aggiornano solo via SQL Editor
@@ -257,6 +257,7 @@ class SyncService {
 ```
 
 Le 9 tabelle sincronizzate (in ordine di dipendenza FK):
+
 1. `skills`
 2. `skill_levels`
 3. `armor_sets`
