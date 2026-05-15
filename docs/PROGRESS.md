@@ -102,6 +102,7 @@ Deliver the Build tab and Loadouts tab with full slot management.
 - [x] Interactive Decoration Slots (tap slot → opens JewelPicker)
 - [x] "Equip" CTA when item not equipped; "Equipped" when already equipped
 - [x] Equip actions call BuildNotifier and close sheet
+- [x] Deco slots show jewels only for the equipped item; all others show empty slots
 
 **JewelPicker sheet**
 - [x] Slot info header (slot index + level)
@@ -117,7 +118,8 @@ Deliver the Build tab and Loadouts tab with full slot management.
 - [x] Actions: equipWeapon, equipArmor, equipCharm, setJewel, clearJewel
 - [x] newBuild, loadBuild, renameBuild, deleteBuild
 - [x] Persist to drift via BuildsRepository on every action
-- [x] Skill aggregation from armor pieces + talisman (Phase 4 adds jewels + set bonuses)
+- [x] Skill aggregation from armor pieces + talisman + jewels (set bonuses → Phase 4)
+- [x] Equipping a new piece clears its jewel slots automatically
 
 **LoadoutsScreen**
 - [x] Card list per saved build
@@ -161,7 +163,7 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 
 **BuildScreen updates**
 - [ ] Quick Summary uses real CalcEngine values (not raw weapon.attack)
-- [ ] Active Skills panel uses CalcEngine aggregation (includes jewels + set bonuses)
+- [x] Active Skills panel includes jewel skill contributions (set bonuses still Phase 4)
 
 **Tests**
 - [ ] CalcEngine unit tests: skill aggregation, true raw, effective affinity, defense, elemental res
@@ -190,6 +192,16 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 ---
 
 ## Session notes
+
+### 2026-05-15 — Session 10
+- Review fixes applied (from REVIEW.md — generic):
+  - Equipping a new piece now clears its jewel slots: `equipWeapon/equipArmor/equipCharm` call `_clearJewelsForSource` before persisting if the item ID changed
+  - Equipment tab deco slots: `_DecoSlotsCard` receives `buildState: null` for non-equipped items → empty slots, tap disabled
+- Jewel skill contributions added to Build skill aggregation:
+  - `_resolve` in `BuildNotifier` now fetches `jewel_skills`, builds a per-jewel lookup map, and folds each equipped jewel's skills into the shared `skillMap` with the same cap logic
+  - Phase 4 remaining: set bonus activation, CalcEngine for stats
+- `flutter analyze` → No issues found
+- `flutter test` → 59/59 passed
 
 ### 2026-05-14 — Session 9
 - Doc review and consistency check against real codebase

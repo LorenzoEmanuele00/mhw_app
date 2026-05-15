@@ -6,6 +6,7 @@ import '../../core/database/tables/enums.dart';
 import '../../shared/calc/skills_repository.dart';
 import 'repository/builds_repository.dart';
 import '../equipment/armor/armor_repository.dart';
+import '../equipment/jewels/jewels_repository.dart';
 import '../equipment/talismans/talismans_repository.dart';
 import '../equipment/weapons/weapons_repository.dart';
 
@@ -168,7 +169,7 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
       buildsRepo.getJewels(build.id),
     ).wait;
 
-    // Aggregate skills from armor pieces + talisman (Phase 3 — no jewels, no set bonuses)
+    // Aggregate skills from armor pieces + talisman + jewels (no set bonuses — Phase 4)
     final skillMap = <int, ({Skill skill, int level})>{};
 
     void addSkill(Skill skill, int addedLevel) {
@@ -190,8 +191,9 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
         }),
     ]);
 
+    final skillsRepo = ref.read(skillsRepositoryProvider);
+
     if (talisman != null) {
-      final skillsRepo = ref.read(skillsRepositoryProvider);
       for (final (skillId, level) in [
         (talisman.skill1Id, talisman.skill1Level),
         (talisman.skill2Id, talisman.skill2Level),
@@ -199,6 +201,20 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
         if (skillId != null && level != null) {
           final skill = await skillsRepo.getById(skillId);
           if (skill != null) addSkill(skill, level);
+        }
+      }
+    }
+
+    if (jewels.isNotEmpty) {
+      final allJewelSkills = await ref.read(jewelsRepositoryProvider).getAllJewelSkills();
+      final jewelSkillsByJewelId = <int, List<JewelSkill>>{};
+      for (final js in allJewelSkills) {
+        jewelSkillsByJewelId.putIfAbsent(js.jewelId, () => []).add(js);
+      }
+      for (final buildJewel in jewels) {
+        for (final js in jewelSkillsByJewelId[buildJewel.jewelId] ?? []) {
+          final skill = await skillsRepo.getById(js.skillId);
+          if (skill != null) addSkill(skill, js.skillLevel);
         }
       }
     }
@@ -244,21 +260,43 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
   // Equip / clear slots
   // ---------------------------------------------------------------------------
 
-  Future<void> equipWeapon(int? weaponId) async {
-    final current = state.asData?.value?.build;
+  Future<void> _clearJewelsForSource(JewelSlotSource source) async {
+    final current = state.asData?.value;
     if (current == null) return;
+    final remaining = current.jewels
+        .where((j) => j.slotSource != source)
+        .map((j) => BuildJewelsCompanion(
+              buildId: Value(j.buildId),
+              slotSource: Value(j.slotSource),
+              slotIndex: Value(j.slotIndex),
+              jewelId: Value(j.jewelId),
+            ))
+        .toList();
+    await ref.read(buildsRepositoryProvider).replaceJewels(current.build.id, remaining);
+  }
+
+  Future<void> equipWeapon(int? weaponId) async {
+    final current = state.asData?.value;
+    if (current == null) return;
+    if (weaponId != current.weapon?.id) {
+      await _clearJewelsForSource(JewelSlotSource.weapon);
+    }
     await _persistBuild(BuildsCompanion(
-      id: Value(current.id),
+      id: Value(current.build.id),
       weaponId: Value(weaponId),
       updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
     ));
   }
 
   Future<void> equipArmor(ArmorSlotType slot, int? pieceId) async {
-    final current = state.asData?.value?.build;
+    final current = state.asData?.value;
     if (current == null) return;
+    final source = JewelSlotSource.values.byName(slot.name);
+    if (pieceId != current.pieceForSlot(slot)?.id) {
+      await _clearJewelsForSource(source);
+    }
     final base = BuildsCompanion(
-      id: Value(current.id),
+      id: Value(current.build.id),
       updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
     );
     final companion = switch (slot) {
@@ -272,10 +310,13 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
   }
 
   Future<void> equipCharm(int? talismanId) async {
-    final current = state.asData?.value?.build;
+    final current = state.asData?.value;
     if (current == null) return;
+    if (talismanId != current.talisman?.id) {
+      await _clearJewelsForSource(JewelSlotSource.talisman);
+    }
     await _persistBuild(BuildsCompanion(
-      id: Value(current.id),
+      id: Value(current.build.id),
       talismanId: Value(talismanId),
       updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
     ));

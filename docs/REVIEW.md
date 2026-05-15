@@ -6,8 +6,6 @@
 
 ### Review generici:
 
-- Quando associo un gioiello in uno slot arma o armatura, e poi vado nella tab per scegliere un altro pezzo dello stesso tipo, vedo i jewel già equipaggiati in quel pezzo. Voglio che i jewel che metto negli slot di un pezzo siano associati a quel pezzo esatto (es: metto un jewel ad elmo1. se dalla tab equip apro elmo1 allora è corretto vedere il jewel, ma se apro elmo4 allora non voglio vederlo. questo vale per ogni equip)
-
 ### Review progetto:
 
 ### Review traduzioni:

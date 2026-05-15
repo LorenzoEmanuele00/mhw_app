@@ -192,12 +192,12 @@ class _WeaponDetail extends ConsumerWidget {
             ),
           ),
 
-          // Interactive decoration slots
+          // Interactive decoration slots (jewels shown only when equipped)
           if (slots.isNotEmpty)
             _DecoSlotsCard(
               slots: slots,
               slotSource: JewelSlotSource.weapon,
-              buildState: buildState,
+              buildState: isEquipped ? buildState : null,
             ),
 
           // Equip / Change CTA
@@ -313,12 +313,12 @@ class _ArmorDetail extends ConsumerWidget {
                 : _SkillsCard(entries: entries),
           ),
 
-          // Interactive decoration slots
+          // Interactive decoration slots (jewels shown only when equipped)
           if (slots.isNotEmpty)
             _DecoSlotsCard(
               slots: slots,
               slotSource: _armorSlotSource(piece.slotType),
-              buildState: buildState,
+              buildState: isEquipped ? buildState : null,
             ),
 
           // Equip / Change CTA
@@ -380,11 +380,12 @@ class _CharmDetail extends ConsumerWidget {
               style: TextStyle(fontSize: 14, color: tokens.label2),
             ),
           ),
+          // Interactive decoration slots (jewels shown only when equipped)
           if (slots.isNotEmpty)
             _DecoSlotsCard(
               slots: slots,
               slotSource: JewelSlotSource.talisman,
-              buildState: buildState,
+              buildState: isEquipped ? buildState : null,
             ),
           // Equip / Change CTA
           _EquipButton(
