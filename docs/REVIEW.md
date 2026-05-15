@@ -2,12 +2,16 @@
 
 **_ATTENZIONE: Questo documento contiene le review al codice che verranno fatte. Leggile soltanto quando viene espressamente richiesto_**
 
-### Review per Armor browsing screen
+### Review per Loadouts screen:
 
-### Review widget generici:
+### Review generici:
 
 ### Review progetto:
 
 ### Review traduzioni:
 
-### Review scaffolding
+### Review scafolding:
+
+### Review da NON fare adesso:
+
+- Le skill offensive possono essere rosse le defensive blue e utility verdi

@@ -216,6 +216,107 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get buildSlotEmpty => 'Empty slot';
+
+  @override
+  String get buildNoWeapon => 'No weapon equipped';
+
+  @override
+  String get buildActiveSkills => 'Active Skills';
+
+  @override
+  String get buildNoSkills => 'No skills active';
+
+  @override
+  String get buildSummary => 'Summary';
+
+  @override
+  String get slotPickerSelectWeapon => 'Select Weapon';
+
+  @override
+  String slotPickerSelectArmor(String slot) {
+    return 'Select $slot';
+  }
+
+  @override
+  String get slotPickerSelectCharm => 'Select Charm';
+
+  @override
+  String get slotPickerClear => 'Clear';
+
+  @override
+  String get jewelPickerTitle => 'Select Decoration';
+
+  @override
+  String jewelPickerSlotLevel(int level) {
+    return 'Level $level slot';
+  }
+
+  @override
+  String get jewelPickerAvailable => 'Available';
+
+  @override
+  String get jewelPickerTooLarge => 'Need a larger slot';
+
+  @override
+  String get jewelPickerEmpty => 'No slot selected';
+
+  @override
+  String jewelSkillLabel(int level) {
+    return 'Lv $level';
+  }
+
+  @override
+  String get equipTo => 'Equip';
+
+  @override
+  String get equipChange => 'Change';
+
+  @override
+  String get equipped => 'Equipped';
+
+  @override
+  String get loadoutsNew => 'New';
+
+  @override
+  String get loadoutsEmpty => 'No builds yet';
+
+  @override
+  String get loadoutsEmptyHint => 'Tap + New to create your first build.';
+
+  @override
+  String get loadoutsDeleteTitle => 'Delete Build?';
+
+  @override
+  String loadoutsDeleteMessage(String name) {
+    return 'This will permanently delete \"$name\".';
+  }
+
+  @override
+  String get loadoutsDeleteConfirm => 'Delete';
+
+  @override
+  String get loadoutsCancel => 'Cancel';
+
+  @override
+  String get loadoutsRenameTitle => 'Rename Build';
+
+  @override
+  String get loadoutsRenameHint => 'Build name';
+
+  @override
+  String get loadoutsRenameSave => 'Save';
+
+  @override
+  String get loadoutsActive => 'Active';
+
+  @override
+  String get loadoutsAtk => 'ATK';
+
+  @override
+  String get loadoutsDef => 'DEF';
+
+  @override
   String get comingSoon => 'Coming soon';
 
   @override

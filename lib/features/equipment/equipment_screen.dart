@@ -10,14 +10,27 @@ import '../../shared/widgets/large_title.dart';
 import '../../shared/widgets/search_field.dart';
 import '../../shared/widgets/section_label.dart';
 import '../../shared/widgets/segmented_control.dart';
-import '../equipment/armor/repository/armor_repository.dart';
-import '../equipment/talismans/repository/talismans_repository.dart';
-import '../equipment/weapons/repository/weapons_repository.dart';
+import 'armor/armor_repository.dart';
+import 'talismans/talismans_repository.dart';
+import 'weapons/weapons_repository.dart';
 import 'models/equip_item.dart';
 import 'widgets/equipment_detail_sheet.dart';
 import 'widgets/equipment_row.dart';
 
-enum _Category { weapons, armor, charm }
+enum EquipmentCategory { weapons, armor, charm }
+
+class EquipmentCategoryNotifier extends Notifier<EquipmentCategory> {
+  @override
+  EquipmentCategory build() => EquipmentCategory.weapons;
+
+  /// Set the active category. Call this before navigating to /equipment to pre-select a tab.
+  void set(EquipmentCategory category) => state = category;
+}
+
+final equipmentCategoryProvider =
+    NotifierProvider<EquipmentCategoryNotifier, EquipmentCategory>(
+  EquipmentCategoryNotifier.new,
+);
 
 /// Equipment tab: browse weapons, armor, and charms with search and grouping.
 class EquipmentScreen extends ConsumerStatefulWidget {
@@ -28,7 +41,6 @@ class EquipmentScreen extends ConsumerStatefulWidget {
 }
 
 class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
-  _Category _category = _Category.weapons;
   final _searchCtrl = TextEditingController();
   String _query = '';
 
@@ -38,21 +50,24 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
     super.dispose();
   }
 
-  void _switchCategory(_Category cat) {
-    if (cat == _category) return;
+  void _switchCategory(EquipmentCategory cat) {
+    if (cat == ref.read(equipmentCategoryProvider)) return;
     setState(() {
-      _category = cat;
       _query = '';
       _searchCtrl.clear();
     });
-  }
-
-  void _openDetail(BuildContext context, EquipItem item) {
-    showAppSheet(context: context, child: EquipmentDetailSheet(item: item));
+    ref.read(equipmentCategoryProvider.notifier).set(cat);
   }
 
   @override
   Widget build(BuildContext context) {
+    final category = ref.watch(equipmentCategoryProvider);
+
+    // Reset search when the category is changed from outside (e.g. from Build tab)
+    ref.listen<EquipmentCategory>(equipmentCategoryProvider, (prev, next) {
+      if (prev != next) setState(() { _query = ''; _searchCtrl.clear(); });
+    });
+
     final l10n = AppLocalizations.of(context);
     final tokens = AppTokens.of(context);
     final weapons = ref.watch(allWeaponsProvider);
@@ -79,22 +94,22 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
 
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 4),
-            child: AppSegmentedControl<_Category>(
+            child: AppSegmentedControl<EquipmentCategory>(
               options: [
-                (value: _Category.weapons, label: l10n.equipWeapons),
-                (value: _Category.armor,   label: l10n.equipArmor),
-                (value: _Category.charm,   label: l10n.equipCharm),
+                (value: EquipmentCategory.weapons, label: l10n.equipWeapons),
+                (value: EquipmentCategory.armor,   label: l10n.equipArmor),
+                (value: EquipmentCategory.charm,   label: l10n.equipCharm),
               ],
-              selected: _category,
+              selected: category,
               onChanged: _switchCategory,
             ),
           ),
 
           Expanded(
-            child: switch (_category) {
-              _Category.weapons => _buildWeaponsList(context, weapons.asData?.value ?? [], l10n, tokens),
-              _Category.armor   => _buildArmorList(context, armor.asData?.value ?? [], l10n, tokens),
-              _Category.charm   => _buildCharmList(context, charms.asData?.value ?? [], l10n, tokens),
+            child: switch (category) {
+              EquipmentCategory.weapons => _buildWeaponsList(context, weapons.asData?.value ?? [], l10n, tokens),
+              EquipmentCategory.armor   => _buildArmorList(context, armor.asData?.value ?? [], l10n, tokens),
+              EquipmentCategory.charm   => _buildCharmList(context, charms.asData?.value ?? [], l10n, tokens),
             },
           ),
         ],
@@ -288,6 +303,10 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
   // ---------------------------------------------------------------------------
   // Helpers
   // ---------------------------------------------------------------------------
+
+  void _openDetail(BuildContext context, EquipItem item) {
+    showAppSheet(context: context, child: EquipmentDetailSheet(item: item));
+  }
 
   List<T> _filterItems<T>(List<T> items, String Function(T) nameOf) {
     if (_query.isEmpty) return items;

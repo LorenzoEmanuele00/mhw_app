@@ -36,7 +36,7 @@ void main() {
 
   group('Jewels', () {
     test('insert and read back a jewel', () async {
-      final id = await insertJewel(name: 'Attack Jewel [1]', slotSize: 1);
+      await insertJewel(name: 'Attack Jewel [1]', slotSize: 1);
       final jewels = await db.select(db.jewels).get();
       expect(jewels.length, 1);
       expect(jewels.first.name, 'Attack Jewel [1]');

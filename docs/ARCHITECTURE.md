@@ -106,7 +106,7 @@ bg, card, card2, label, label2, label3, sep, fill, chip, overlay, barTrack, tabB
 
 ---
 
-## `lib/` structure (target)
+## `lib/` structure (current)
 
 ```
 lib/
@@ -120,11 +120,10 @@ lib/
       daos/
         weapons_dao.dart
         armor_dao.dart
-        skills_dao.dart
-        jewels_dao.dart
+        skills_dao.dart     ← also handles Jewels + JewelSkills queries
         builds_dao.dart
         talismans_dao.dart
-      database.dart         ← AppDatabase drift
+      database.dart         ← AppDatabase drift (schemaVersion 4)
       database.g.dart       ← GENERATED — do not edit
       seed_service.dart     ← loads assets/seeds/*.sql on first launch
     providers/
@@ -132,53 +131,55 @@ lib/
       seed_provider.dart
     router/
       router.dart           ← StatefulShellRoute, 4 branches
+      app_scaffold.dart     ← bottom nav shell wrapper
   features/
     build/
+      build_notifier.dart       ← BuildNotifier (Riverpod 3 Notifier) + BuildState
       build_screen.dart         ← Build tab (weapon hero + armor slots + charm + skills + summary)
-      widgets/
-        weapon_hero.dart
-        armor_slot_row.dart
-        active_skills_panel.dart
-        quick_summary.dart
+      repository/
+        builds_repository.dart
     equipment/
       equipment_screen.dart     ← Equipment tab (segmented: weapons/armor/charm)
+      models/
+        equip_item.dart         ← sealed union: EquipWeapon | EquipArmor | EquipCharm
       widgets/
         equipment_row.dart
         equipment_detail_sheet.dart
         slot_picker_sheet.dart
+        jewel_picker_sheet.dart ← deco slot picker (opened from EquipmentDetailSheet)
       weapons/
-        repository/weapons_repository.dart
+        weapons_repository.dart
       armor/
-        repository/armor_repository.dart
+        armor_repository.dart
       talismans/
-        repository/talismans_repository.dart
+        talismans_repository.dart
+      jewels/
+        jewels_repository.dart
     stats/
-      stats_screen.dart         ← Stats tab (headline + sharpness + resistances + skills)
-      widgets/
-        resistance_radar.dart
-        sharpness_gauge.dart
-        skill_pip_row.dart
+      stats_screen.dart         ← Stats tab (placeholder — Phase 4)
     loadouts/
       loadouts_screen.dart      ← Loadouts tab (swipeable build cards)
-      widgets/
-        loadout_card.dart
-        swipeable_row.dart
-    jewels/
-      repository/jewels_repository.dart
-      widgets/
-        jewel_picker_sheet.dart
   shared/
     theme/
       app_theme.dart            ← ThemeData + token constants
+    utils/
+      label_helpers.dart
+      slots_parser.dart
     widgets/
+      app_card.dart
+      app_sheet.dart            ← reusable bottom sheet wrapper
       deco_slots_row.dart
       glyph_tile.dart
-      slot_glyph.dart
-      skill_chip.dart
-      stat_bar.dart
-      sheet.dart                ← reusable bottom sheet wrapper
+      large_title.dart
+      search_field.dart
+      section_label.dart
       segmented_control.dart
+      sharpness_gauge.dart
+      skill_chip.dart
+      slot_glyph.dart
+      stat_bar.dart
     calc/
+      skills_repository.dart    ← SkillsRepository + allSkillsProvider
       calc_engine.dart          ← (Phase 4)
     models/
       build_stats.dart          ← (Phase 4 — aggregate result)

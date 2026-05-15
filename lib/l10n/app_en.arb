@@ -103,6 +103,62 @@
     }
   },
 
+  "buildSlotEmpty": "Empty slot",
+  "buildNoWeapon": "No weapon equipped",
+  "buildActiveSkills": "Active Skills",
+  "buildNoSkills": "No skills active",
+  "buildSummary": "Summary",
+
+  "slotPickerSelectWeapon": "Select Weapon",
+  "slotPickerSelectArmor": "Select {slot}",
+  "@slotPickerSelectArmor": {
+    "placeholders": {
+      "slot": { "type": "String" }
+    }
+  },
+  "slotPickerSelectCharm": "Select Charm",
+  "slotPickerClear": "Clear",
+
+  "jewelPickerTitle": "Select Decoration",
+  "jewelPickerSlotLevel": "Level {level} slot",
+  "@jewelPickerSlotLevel": {
+    "placeholders": {
+      "level": { "type": "int" }
+    }
+  },
+  "jewelPickerAvailable": "Available",
+  "jewelPickerTooLarge": "Need a larger slot",
+  "jewelPickerEmpty": "No slot selected",
+  "jewelSkillLabel": "Lv {level}",
+  "@jewelSkillLabel": {
+    "placeholders": {
+      "level": { "type": "int" }
+    }
+  },
+
+  "equipTo": "Equip",
+  "equipChange": "Change",
+  "equipped": "Equipped",
+
+  "loadoutsNew": "New",
+  "loadoutsEmpty": "No builds yet",
+  "loadoutsEmptyHint": "Tap + New to create your first build.",
+  "loadoutsDeleteTitle": "Delete Build?",
+  "loadoutsDeleteMessage": "This will permanently delete \"{name}\".",
+  "@loadoutsDeleteMessage": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "loadoutsDeleteConfirm": "Delete",
+  "loadoutsCancel": "Cancel",
+  "loadoutsRenameTitle": "Rename Build",
+  "loadoutsRenameHint": "Build name",
+  "loadoutsRenameSave": "Save",
+  "loadoutsActive": "Active",
+  "loadoutsAtk": "ATK",
+  "loadoutsDef": "DEF",
+
   "comingSoon": "Coming soon",
 
   "initError": "Init error: {error}",

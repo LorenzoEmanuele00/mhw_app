@@ -4,7 +4,7 @@ import '../tables/game_tables.dart';
 
 part 'skills_dao.g.dart';
 
-@DriftAccessor(tables: [Skills, SkillLevels, Jewels])
+@DriftAccessor(tables: [Skills, SkillLevels, Jewels, JewelSkills])
 class SkillsDao extends DatabaseAccessor<AppDatabase> with _$SkillsDaoMixin {
   SkillsDao(super.db);
 
@@ -25,6 +25,8 @@ class SkillsDao extends DatabaseAccessor<AppDatabase> with _$SkillsDaoMixin {
           .getSingleOrNull();
 
   Stream<List<Jewel>> watchAllJewels() => select(jewels).watch();
+
+  Future<List<JewelSkill>> getAllJewelSkills() => select(jewelSkills).get();
 
   Future<void> replaceAllSkills(List<SkillsCompanion> rows) =>
       transaction(() async {

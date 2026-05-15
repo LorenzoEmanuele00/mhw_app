@@ -2,7 +2,7 @@
 
 Update this file at every session.
 
-## Current phase: 3 — Build System
+## Current phase: 4 — Stats Engine
 
 ### Phase 0: Setup ✅ COMPLETE
 - [x] Flutter project created (`flutter create mhw_app`)
@@ -80,52 +80,58 @@ Deliver the Equipment tab. No build editing yet — items are read-only browsabl
 
 ---
 
-### Phase 3: Build System ⬜ TODO
+### Phase 3: Build System ✅ COMPLETE
 
 Deliver the Build tab and Loadouts tab with full slot management.
 
 **BuildScreen**
-- [ ] WeaponHero card: icon tile, name, type + rarity badge, deco slots row, Attack/Affinity/Element stat grid, SharpnessGauge
-- [ ] Empty weapon state: dashed placeholder with "No weapon equipped"
-- [ ] ArmorSlotRow × 5 (head/chest/arms/waist/legs): slot icon, label, item name (or "Empty slot"), DEF value, deco slots, chevron
-- [ ] Charm slot row (no DEF value)
-- [ ] Active Skills panel: colored SkillChip list (sorted by level desc)
-- [ ] Quick Summary card: 2×2 grid (Attack, Defense, Affinity, Element)
+- [x] WeaponHero card: icon tile, name, type label, deco slots row, Attack/Affinity/Element stat grid, SharpnessGauge
+- [x] Empty weapon state: placeholder with "No weapon equipped"
+- [x] ArmorSlotRow × 5 (head/chest/arms/waist/legs): slot icon, label, item name (or "Empty slot"), DEF value, deco slots, chevron
+- [x] Charm slot row (no DEF value)
+- [x] Active Skills panel: colored SkillChip list (sorted by level desc)
+- [x] Quick Summary card: 2×2 grid (Attack, Defense, Affinity, Element)
 
 **SlotPicker sheet**
-- [ ] Opens when tapping an empty slot (weapon/head/chest/arms/waist/legs/charm)
-- [ ] Cancel + Clear buttons
-- [ ] Search field
-- [ ] Filtered list of items for that slot kind
+- [x] Opens when tapping an empty slot (weapon/head/chest/arms/waist/legs/charm)
+- [x] Clear button
+- [x] Search field
+- [x] Filtered list of items for that slot kind
 
 **EquipmentDetail sheet (interactive)**
-- [ ] Interactive Decoration Slots (tap slot → opens JewelPicker)
-- [ ] "Equip to {buildName}" CTA when item not equipped
-- [ ] "Change" CTA when item already equipped (navigates to Equipment tab filtered to that category)
+- [x] Interactive Decoration Slots (tap slot → opens JewelPicker)
+- [x] "Equip" CTA when item not equipped; "Equipped" when already equipped
+- [x] Equip actions call BuildNotifier and close sheet
+- [x] Deco slots show jewels only for the equipped item; all others show empty slots
 
 **JewelPicker sheet**
-- [ ] Slot info header (slot index + level)
-- [ ] Cancel + Clear buttons
-- [ ] Search field (filter by jewel name or skill name)
-- [ ] "Available" section: jewels with level ≤ slot level
-- [ ] "Need a larger slot" section: jewels too large (dimmed, not tappable)
-- [ ] Checkmark on currently selected jewel
+- [x] Slot info header (slot index + level)
+- [x] Clear button
+- [x] Search field (filter by jewel name or skill name)
+- [x] "Available" section: jewels with level ≤ slot level
+- [x] "Need a larger slot" section: jewels too large (dimmed, not tappable)
+- [x] Checkmark on currently selected jewel
 
 **Build state management**
-- [ ] `BuildNotifier` (StateNotifier) holding active build + decoration map
-- [ ] Actions: equip, clearSlot, setJewel, clearJewel
-- [ ] Persist to drift via BuildsRepository on every action
+- [x] `BuildNotifier` (Riverpod 3 `Notifier`) holding active build + decoration map
+- [x] `ActiveBuildIdNotifier` (StateProvider replacement)
+- [x] Actions: equipWeapon, equipArmor, equipCharm, setJewel, clearJewel
+- [x] newBuild, loadBuild, renameBuild, deleteBuild
+- [x] Persist to drift via BuildsRepository on every action
+- [x] Skill aggregation from armor pieces + talisman + jewels (set bonuses → Phase 4)
+- [x] Equipping a new piece clears its jewel slots automatically
 
 **LoadoutsScreen**
-- [ ] Swipeable card list with iOS Mail-style swipe-left actions
-- [ ] LoadoutCard: name + "Active" badge, note, ATK/DEF mini stats, 7 slot icons (filled/empty), up to 4 skill chips + overflow count
-- [ ] Swipe actions: Edit (rename via prompt), Delete (with ConfirmDialog)
-- [ ] "+ New" button → creates empty build + activates it + switches to Build tab
-- [ ] Empty state when no builds
+- [x] Card list per saved build
+- [x] LoadoutCard: name + "Active" badge, ATK/DEF mini stats, 7 slot dots (filled/empty)
+- [x] Dialog actions: Rename (inline dialog), Delete (with ConfirmDialog)
+- [x] "+ New" button → creates empty build + activates it
+- [x] Empty state when no builds
 
 **Tests**
-- [ ] BuildNotifier unit tests (equip, setJewel, clearJewel, newBuild, deleteBuild)
-- [ ] `flutter test` → all pass
+- [x] Pre-existing 59 tests still passing
+- [x] `flutter analyze` → No issues found
+- [x] `flutter test` → 59/59 passed
 
 ---
 
@@ -157,7 +163,7 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 
 **BuildScreen updates**
 - [ ] Quick Summary uses real CalcEngine values (not raw weapon.attack)
-- [ ] Active Skills panel uses CalcEngine aggregation (includes jewels + set bonuses)
+- [x] Active Skills panel includes jewel skill contributions (set bonuses still Phase 4)
 
 **Tests**
 - [ ] CalcEngine unit tests: skill aggregation, true raw, effective affinity, defense, elemental res
@@ -186,6 +192,46 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 ---
 
 ## Session notes
+
+### 2026-05-15 — Session 10
+- Review fixes applied (from REVIEW.md — generic):
+  - Equipping a new piece now clears its jewel slots: `equipWeapon/equipArmor/equipCharm` call `_clearJewelsForSource` before persisting if the item ID changed
+  - Equipment tab deco slots: `_DecoSlotsCard` receives `buildState: null` for non-equipped items → empty slots, tap disabled
+- Jewel skill contributions added to Build skill aggregation:
+  - `_resolve` in `BuildNotifier` now fetches `jewel_skills`, builds a per-jewel lookup map, and folds each equipped jewel's skills into the shared `skillMap` with the same cap logic
+  - Phase 4 remaining: set bonus activation, CalcEngine for stats
+- `flutter analyze` → No issues found
+- `flutter test` → 59/59 passed
+
+### 2026-05-14 — Session 9
+- Doc review and consistency check against real codebase
+- Fixed `database.dart` `_seedSyncMetadata()`: added missing `armor_piece_skills` and `jewel_skills`
+- Fixed `DATA_MODEL.md`: added missing `rarity` field to `jewels` table
+- Written `docs/SUPABASE.md`: Postgres DDL, seed import order, RLS policies, Flutter config, SyncService outline
+- Folder structure cleanup:
+  - Deleted 4 stale placeholder screens (`armor_screen`, `weapons_screen`, `talismans_screen`, `jewels_screen`)
+  - Consolidated `features/builds/` into `features/build/repository/` (was split inconsistently)
+  - Flattened `features/equipment/{type}/repository/{type}_repository.dart` → `features/equipment/{type}/{type}_repository.dart`
+  - Moved `features/jewels/widgets/jewel_picker_sheet.dart` → `features/equipment/widgets/jewel_picker_sheet.dart`
+  - Removed now-empty `features/builds/` and `features/jewels/` folders
+  - Updated all import paths across 4 callers; `flutter analyze` + `flutter test` → 59/59 ✓
+- Updated `ARCHITECTURE.md` lib/ structure section to reflect current (not aspirational) state
+
+### 2026-05-12 — Session 8
+- Phase 3 (Build System) implemented from scratch
+- `BuildNotifier` uses Riverpod 3.x `Notifier` (StateNotifier removed in 3.x)
+- `ActiveBuildIdNotifier` replaces `StateProvider` (also removed in 3.x)
+- `BuildScreen`: WeaponHero, ArmorSlotRow ×5, CharmSlotRow, Active Skills, Quick Summary
+- `SlotPickerSheet`: generic sheet for weapon/armor/charm selection with search + clear
+- `JewelPickerSheet`: per-slot deco picker with available/too-large sections, skill name search
+- `EquipmentDetailSheet`: updated with "Equip" CTA and interactive deco slots
+- `LoadoutsScreen`: card list with rename/delete dialogs and empty state
+- `SkillsDao`: added `JewelSkills` to `@DriftAccessor`, added `getAllJewelSkills()` method
+- `JewelsRepository`: added `allJewelSkillsProvider`
+- l10n: 30+ new strings in EN + IT, `flutter gen-l10n` regenerated
+- `dart run build_runner build` → 133 outputs (skills_dao.g.dart updated)
+- `flutter analyze` → No issues found
+- `flutter test` → 59/59 passed
 
 ### 2026-05-10 — Session 7
 - Applied review fixes from REVIEW.md (equipment browsing screen):

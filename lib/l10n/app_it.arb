@@ -103,6 +103,62 @@
     }
   },
 
+  "buildSlotEmpty": "Slot vuoto",
+  "buildNoWeapon": "Nessuna arma equipaggiata",
+  "buildActiveSkills": "Abilità attive",
+  "buildNoSkills": "Nessuna abilità attiva",
+  "buildSummary": "Riepilogo",
+
+  "slotPickerSelectWeapon": "Seleziona arma",
+  "slotPickerSelectArmor": "Seleziona {slot}",
+  "@slotPickerSelectArmor": {
+    "placeholders": {
+      "slot": { "type": "String" }
+    }
+  },
+  "slotPickerSelectCharm": "Seleziona talismano",
+  "slotPickerClear": "Rimuovi",
+
+  "jewelPickerTitle": "Seleziona decorazione",
+  "jewelPickerSlotLevel": "Slot livello {level}",
+  "@jewelPickerSlotLevel": {
+    "placeholders": {
+      "level": { "type": "int" }
+    }
+  },
+  "jewelPickerAvailable": "Disponibili",
+  "jewelPickerTooLarge": "Slot troppo piccolo",
+  "jewelPickerEmpty": "Nessuno slot selezionato",
+  "jewelSkillLabel": "Lv {level}",
+  "@jewelSkillLabel": {
+    "placeholders": {
+      "level": { "type": "int" }
+    }
+  },
+
+  "equipTo": "Equipaggia",
+  "equipChange": "Cambia",
+  "equipped": "Equipaggiato",
+
+  "loadoutsNew": "Nuovo",
+  "loadoutsEmpty": "Nessuna build",
+  "loadoutsEmptyHint": "Tocca + Nuovo per creare la tua prima build.",
+  "loadoutsDeleteTitle": "Eliminare la build?",
+  "loadoutsDeleteMessage": "Questa azione eliminerà definitivamente \"{name}\".",
+  "@loadoutsDeleteMessage": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "loadoutsDeleteConfirm": "Elimina",
+  "loadoutsCancel": "Annulla",
+  "loadoutsRenameTitle": "Rinomina build",
+  "loadoutsRenameHint": "Nome build",
+  "loadoutsRenameSave": "Salva",
+  "loadoutsActive": "Attiva",
+  "loadoutsAtk": "ATT",
+  "loadoutsDef": "DIF",
+
   "comingSoon": "Prossimamente",
 
   "initError": "Errore di inizializzazione: {error}",

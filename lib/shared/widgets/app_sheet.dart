@@ -13,6 +13,7 @@ Future<T?> showAppSheet<T>({
   return showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
+    useRootNavigator: true,
     backgroundColor: Colors.transparent,
     builder: (_) => _AppSheetWrapper(initialSize: initialSize, child: child),
   );
