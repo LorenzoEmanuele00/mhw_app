@@ -55,7 +55,9 @@ class SkillDetailSheet extends ConsumerWidget {
           // General description
           () {
             final desc = isItalian
-                ? (skill.descriptionIt?.isNotEmpty == true ? skill.descriptionIt : skill.description)
+                ? (skill.descriptionIt?.isNotEmpty == true
+                      ? skill.descriptionIt
+                      : skill.description)
                 : skill.description;
             if (desc == null || desc.isEmpty) return const SizedBox.shrink();
             return Column(
@@ -95,8 +97,6 @@ class SkillDetailSheet extends ConsumerWidget {
             data: (levels) => Column(
               children: [
                 for (int i = 0; i < levels.length; i++) ...[
-                  if (i > 0)
-                    Divider(height: 0, indent: 14, endIndent: 0, color: tokens.sep),
                   _LevelRow(
                     skillLevel: levels[i],
                     isActive: levels[i].level == currentLevel,
@@ -134,7 +134,9 @@ class _LevelRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-        color: isActive ? color.withValues(alpha: isDark ? 0.14 : 0.09) : Colors.transparent,
+        color: isActive
+            ? color.withValues(alpha: isDark ? 0.14 : 0.09)
+            : Colors.transparent,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
