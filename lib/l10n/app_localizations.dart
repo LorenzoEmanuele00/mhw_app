@@ -680,6 +680,30 @@ abstract class AppLocalizations {
   /// **'DEF'**
   String get loadoutsDef;
 
+  /// No description provided for @statsResistances.
+  ///
+  /// In en, this message translates to:
+  /// **'Resistances'**
+  String get statsResistances;
+
+  /// No description provided for @statsCompare.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare'**
+  String get statsCompare;
+
+  /// No description provided for @statsSkillLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lv {level} / {max}'**
+  String statsSkillLevel(int level, int max);
+
+  /// No description provided for @statsNoEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Equip some gear to see your stats'**
+  String get statsNoEquipment;
+
   /// No description provided for @comingSoon.
   ///
   /// In en, this message translates to:

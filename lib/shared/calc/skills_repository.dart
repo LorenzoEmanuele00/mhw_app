@@ -17,6 +17,8 @@ class SkillsRepository {
 
   Future<SkillLevel?> getLevel(int skillId, int level) =>
       _db.skillsDao.getSkillLevel(skillId, level);
+
+  Future<List<SkillLevel>> getAllSkillLevels() => _db.skillsDao.getAllSkillLevels();
 }
 
 final skillsRepositoryProvider = Provider<SkillsRepository>((ref) {

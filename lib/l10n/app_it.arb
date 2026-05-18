@@ -159,6 +159,17 @@
   "loadoutsAtk": "ATT",
   "loadoutsDef": "DIF",
 
+  "statsResistances": "Resistenze",
+  "statsCompare": "Confronta",
+  "statsSkillLevel": "Lv {level} / {max}",
+  "@statsSkillLevel": {
+    "placeholders": {
+      "level": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+  "statsNoEquipment": "Equipaggia qualcosa per vedere le statistiche",
+
   "comingSoon": "Prossimamente",
 
   "initError": "Errore di inizializzazione: {error}",

@@ -426,17 +426,16 @@ class _QuickSummary extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final tokens = AppTokens.of(context);
     final brightness = Theme.of(context).brightness;
+    final stats = buildState.stats;
     final weapon = buildState.weapon;
-
-    final atkValue = weapon?.baseAttack.toString() ?? '—';
-    final defValue = buildState.totalDefense > 0
-        ? buildState.totalDefense.toString()
-        : '—';
+    final atkValue = weapon != null ? stats.trueRaw.round().toString() : '—';
+    final defValue = stats.totalDefense > 0 ? stats.totalDefense.toString() : '—';
+    final aff = stats.effectiveAffinity;
     final affValue = weapon != null
-        ? '${weapon.baseAffinity >= 0 ? '+' : ''}${weapon.baseAffinity.toStringAsFixed(0)}%'
+        ? '${aff >= 0 ? '+' : ''}${aff.toStringAsFixed(0)}%'
         : '—';
-    final elemValue = (weapon?.elementType != null && weapon?.elementValue != null)
-        ? weapon!.elementValue.toString()
+    final elemValue = (weapon?.elementType != null && stats.trueElement > 0)
+        ? stats.trueElement.toStringAsFixed(1)
         : '—';
     final elemColor = weapon?.elementType != null
         ? AppColors.element(weapon!.elementType!, brightness)

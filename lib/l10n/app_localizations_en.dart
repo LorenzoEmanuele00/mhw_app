@@ -317,6 +317,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadoutsDef => 'DEF';
 
   @override
+  String get statsResistances => 'Resistances';
+
+  @override
+  String get statsCompare => 'Compare';
+
+  @override
+  String statsSkillLevel(int level, int max) {
+    return 'Lv $level / $max';
+  }
+
+  @override
+  String get statsNoEquipment => 'Equip some gear to see your stats';
+
+  @override
   String get comingSoon => 'Coming soon';
 
   @override

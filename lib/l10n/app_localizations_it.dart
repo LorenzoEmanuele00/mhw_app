@@ -318,6 +318,21 @@ class AppLocalizationsIt extends AppLocalizations {
   String get loadoutsDef => 'DIF';
 
   @override
+  String get statsResistances => 'Resistenze';
+
+  @override
+  String get statsCompare => 'Confronta';
+
+  @override
+  String statsSkillLevel(int level, int max) {
+    return 'Lv $level / $max';
+  }
+
+  @override
+  String get statsNoEquipment =>
+      'Equipaggia qualcosa per vedere le statistiche';
+
+  @override
   String get comingSoon => 'Prossimamente';
 
   @override

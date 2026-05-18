@@ -9,11 +9,13 @@ class SectionLabel extends StatelessWidget {
     required this.text,
     this.action,
     this.onAction,
+    this.trailing,
   });
 
   final String text;
   final String? action;
   final VoidCallback? onAction;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,9 @@ class SectionLabel extends StatelessWidget {
               letterSpacing: 0.6,
             ),
           ),
-          if (action != null && onAction != null)
+          if (trailing != null)
+            trailing!
+          else if (action != null && onAction != null)
             GestureDetector(
               onTap: onAction,
               child: Text(

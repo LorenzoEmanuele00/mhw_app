@@ -19,6 +19,9 @@ class ArmorRepository {
   Future<List<ArmorSetSkill>> getSetSkills(int setId) =>
       _db.armorDao.getSetSkills(setId);
 
+  Future<List<ArmorSetSkill>> getSetSkillsForSets(List<int> setIds) =>
+      _db.armorDao.getSetSkillsForSets(setIds);
+
   Future<List<({Skill skill, int level})>> getPieceSkills(int armorPieceId) =>
       _db.armorDao.getPieceSkills(armorPieceId);
 }

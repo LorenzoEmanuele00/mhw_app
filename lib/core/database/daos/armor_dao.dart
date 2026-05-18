@@ -25,6 +25,9 @@ class ArmorDao extends DatabaseAccessor<AppDatabase> with _$ArmorDaoMixin {
   Future<List<ArmorSetSkill>> getSetSkills(int setId) =>
       (select(armorSetSkills)..where((s) => s.setId.equals(setId))).get();
 
+  Future<List<ArmorSetSkill>> getSetSkillsForSets(List<int> setIds) =>
+      (select(armorSetSkills)..where((s) => s.setId.isIn(setIds))).get();
+
   /// Returns skills attached to a specific armor piece via [ArmorPieceSkills],
   /// joined with the [Skills] table for name and meta info.
   Future<List<({Skill skill, int level})>> getPieceSkills(int armorPieceId) {

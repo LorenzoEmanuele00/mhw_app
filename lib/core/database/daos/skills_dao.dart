@@ -26,6 +26,8 @@ class SkillsDao extends DatabaseAccessor<AppDatabase> with _$SkillsDaoMixin {
 
   Stream<List<Jewel>> watchAllJewels() => select(jewels).watch();
 
+  Future<List<SkillLevel>> getAllSkillLevels() => select(skillLevels).get();
+
   Future<List<JewelSkill>> getAllJewelSkills() => select(jewelSkills).get();
 
   Future<void> replaceAllSkills(List<SkillsCompanion> rows) =>

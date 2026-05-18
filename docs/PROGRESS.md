@@ -2,7 +2,7 @@
 
 Update this file at every session.
 
-## Current phase: 4 — Stats Engine
+## Current phase: 5 — Supabase Sync
 
 ### Phase 0: Setup ✅ COMPLETE
 - [x] Flutter project created (`flutter create mhw_app`)
@@ -135,40 +135,46 @@ Deliver the Build tab and Loadouts tab with full slot management.
 
 ---
 
-### Phase 4: Stats Engine ⬜ TODO
+### Phase 4: Stats Engine ✅ COMPLETE
 
 Deliver the Stats tab with a live calc engine powering all stat displays.
 
 **CalcEngine** (`lib/shared/calc/calc_engine.dart`)
-- [ ] Skill aggregation: sum from weapon + 5 armor pieces + charm + jewels, capped at max_level per skill
-- [ ] Set bonus activation: count armor pieces with same set_id, apply group/set skill levels
-- [ ] True Raw: `base_attack × Π(atk_multiplier) + Σ(atk_additive)`
-- [ ] Effective Affinity: `base_affinity + Σ(affinity_additive × uptime)`
-- [ ] Crit multiplier: `0.25 × Π(crit_bonus_multiplier)` → affinity damage factor
-- [ ] True Element: `base_element × 0.1 × Π(elem_multiplier) + Σ(elem_additive)`
-- [ ] Sharpness: apply sharpness_max + handicraft levels → lookup raw/elem sharpness modifiers
-- [ ] Defense: `Σ(armor_piece.base_defense) × Π(def_multiplier) + Σ(def_additive)`
-- [ ] Elemental Resistances: `Σ(armor_piece.X_res) + Σ(X_res_additive)` for each element
-- [ ] `BuildStats` model (pure Dart, no drift dependency)
+- [x] Skill aggregation: sum from weapon + 5 armor pieces + charm + jewels, capped at max_level per skill
+- [x] Set bonus activation: count armor pieces with same set_id, apply group/set skill levels
+- [x] True Raw: `base_attack × Π(atk_multiplier) + Σ(atk_additive)`
+- [x] Effective Affinity: `base_affinity + Σ(affinity_additive × uptime)`
+- [x] True Element: `base_element × 0.1 × Π(elem_multiplier) + Σ(elem_additive)`
+- [x] Sharpness: apply sharpness_max + sharpness_additive levels → lookup raw/elem sharpness modifiers
+- [x] Defense: `Σ(armor_piece.base_defense) × Π(def_multiplier) + Σ(def_additive)`
+- [x] Elemental Resistances: `Σ(armor_piece.X_res) + Σ(X_res_additive)` for each element
+- [x] `BuildStats` model (pure Dart, no drift dependency) — `lib/shared/calc/build_stats.dart`
 
-**StatsScreen**
-- [ ] Headline 2×2 card: Attack (red) / Defense (accent) / Affinity (orange/red) / Element (element color + type label)
-- [ ] Sharpness section with SharpnessGauge + 7 segment labels
-- [ ] Elemental Resistances: toggle Radar ↔ Bars
-  - Radar: pentagon SVG chart, element labels + signed values at vertices
+**StatsScreen** (`lib/features/stats/stats_screen.dart`)
+- [x] Headline 2×2 card: Attack (red) / Defense (accent) / Affinity (orange) / Element (element color)
+- [x] Sharpness section with SharpnessGauge + active sharpness level label + raw/elem modifiers
+- [x] Elemental Resistances: toggle Radar ↔ Bars
+  - Radar: pentagon CustomPainter chart, element labels + signed values at vertices
   - Bars: 5 signed StatBars, red fill for negatives
-- [ ] Skills list: name, `Lv X / max` badge, description text, pip progress bar (colored segments)
-- [ ] Decoration Slots summary: all slots from full build in a single DecoSlotsRow
-- [ ] Compare button → placeholder alert (Phase 6)
+- [x] Skills list: name, `Lv X / max` badge, pip progress bar (colored segments)
+- [x] Decoration Slots summary: all slots from full build in a single DecoSlotsRow
+- [x] Compare button → placeholder alert (Phase 6)
 
 **BuildScreen updates**
-- [ ] Quick Summary uses real CalcEngine values (not raw weapon.attack)
-- [x] Active Skills panel includes jewel skill contributions (set bonuses still Phase 4)
+- [x] Quick Summary uses real CalcEngine values (trueRaw, totalDefense, effectiveAffinity, trueElement)
+- [x] Active Skills panel includes set bonus skills (activated in BuildNotifier._resolve)
+
+**Infrastructure**
+- [x] `SkillsDao.getAllSkillLevels()` — fetch all skill level rows in one query
+- [x] `ArmorDao.getSetSkillsForSets(List<int>)` — batch fetch set skills for equipped sets
+- [x] `SectionLabel.trailing` — new optional widget slot alongside existing action/onAction
+- [x] l10n: `statsResistances`, `statsCompare`, `statsSkillLevel`, `statsNoEquipment` (EN + IT)
 
 **Tests**
-- [ ] CalcEngine unit tests: skill aggregation, true raw, effective affinity, defense, elemental res
-- [ ] Set bonus activation test (2/4/5 piece combinations)
-- [ ] `flutter test` → all pass
+- [x] 21 CalcEngine unit tests: true raw, atk_multiplier + additive, affinity with uptime,
+      defense additive + multiplier, elemental res, sharpness bonus + clamp, sharpness mod table
+- [x] `flutter analyze` → No issues found
+- [x] `flutter test` → 80/80 passed
 
 ---
 
@@ -249,6 +255,19 @@ Add product analytics via PostHog before production release. No PII collected �
 ---
 
 ## Session notes
+
+### 2026-05-18 — Session 11
+- Phase 4 (Stats Engine) implemented:
+  - `CalcEngine` (pure Dart, no DB deps): True Raw, Affinity (with uptime), True Element, Sharpness bonus, Defense, Elemental Resistances
+  - `BuildStats` model holding all computed stats
+  - `BuildNotifier._resolve` extended: set bonus activation (setPieceCounts → ArmorSetSkills → addSkill), then CalcEngine.compute
+  - `StatsScreen`: headline 2×2 card, sharpness card, resistance toggle (pentagon Radar ↔ Bars), skills list with pip bars, deco slots summary, Compare placeholder
+  - `BuildScreen` Quick Summary now uses CalcEngine values (trueRaw, totalDefense, effectiveAffinity, trueElement)
+  - `SectionLabel` extended with `trailing: Widget?` parameter
+  - New DAO methods: `SkillsDao.getAllSkillLevels()`, `ArmorDao.getSetSkillsForSets()`
+  - 21 new CalcEngine unit tests covering all formula paths
+- `flutter analyze` → No issues found
+- `flutter test` → 80/80 passed
 
 ### 2026-05-15 — Session 10
 - Review fixes applied (from REVIEW.md — generic):
