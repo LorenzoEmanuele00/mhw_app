@@ -87,6 +87,7 @@
 | id | INTEGER PK | Numeric ID from Skill.json (source of truth) |
 | slug | TEXT UNIQUE | es. "attack_boost" |
 | name | TEXT | Nome visualizzato (English) |
+| description | TEXT? | Descrizione generale della skill (English, da Skill.json) |
 | max_level | INTEGER | |
 | type1 | TEXT | armor / weapon / set / group |
 | type2 | TEXT | utility (default — from Excel subcategory data) |
@@ -101,6 +102,7 @@
 | id | INTEGER PK autoincrement | |
 | skill_id | INTEGER FK → skills | |
 | level | INTEGER | Skill rank (1, 2, 3 ...) |
+| description | TEXT? | Descrizione del singolo livello (English, da Skill.json) |
 | pieces_required | INTEGER? | For set/group only: armor pieces needed to activate this rank |
 | bonus1_value | REAL? | |
 | bonus1_type | TEXT? | Vedi tipi bonus sotto |

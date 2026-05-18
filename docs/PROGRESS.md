@@ -256,6 +256,14 @@ Add product analytics via PostHog before production release. No PII collected �
 
 ## Session notes
 
+### 2026-05-18 — Session 12
+- Added `description` (TEXT nullable) to `skills` and `skill_levels` tables
+- Schema bumped v4 → v5; migration: `ALTER TABLE skills ADD COLUMN description TEXT` + same for `skill_levels`
+- `generate_seeds_from_json.py` updated: reads `descriptions.en` from Skill.json (skill level) and `ranks[].descriptions.en` (per-level); `\r\n` normalized to single space
+- Seeds regenerated: 179 skills with descriptions, 442 skill_levels with per-level descriptions
+- `flutter analyze` → No issues found
+- `flutter test` → 80/80 passed
+
 ### 2026-05-18 — Session 11
 - Phase 4 (Stats Engine) implemented:
   - `CalcEngine` (pure Dart, no DB deps): True Raw, Affinity (with uptime), True Element, Sharpness bonus, Defense, Elemental Resistances

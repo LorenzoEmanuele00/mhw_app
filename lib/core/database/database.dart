@@ -45,7 +45,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -85,6 +85,15 @@ class AppDatabase extends _$AppDatabase {
             await m.createTable(buildJewels);
             await m.createTable(armorPieceSkills);
             await m.createTable(jewelSkills);
+          }
+          if (from < 5) {
+            // v5: add description column to skills and skill_levels.
+            await customStatement(
+              'ALTER TABLE skills ADD COLUMN description TEXT',
+            );
+            await customStatement(
+              'ALTER TABLE skill_levels ADD COLUMN description TEXT',
+            );
           }
         },
       );

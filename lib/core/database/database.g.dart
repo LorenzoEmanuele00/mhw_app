@@ -1858,6 +1858,17 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _descriptionMeta = const VerificationMeta(
+    'description',
+  );
+  @override
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+    'description',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _maxLevelMeta = const VerificationMeta(
     'maxLevel',
   );
@@ -1894,6 +1905,7 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
     id,
     slug,
     name,
+    description,
     maxLevel,
     type1,
     type2,
@@ -1929,6 +1941,15 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
+    if (data.containsKey('description')) {
+      context.handle(
+        _descriptionMeta,
+        description.isAcceptableOrUnknown(
+          data['description']!,
+          _descriptionMeta,
+        ),
+      );
+    }
     if (data.containsKey('max_level')) {
       context.handle(
         _maxLevelMeta,
@@ -1962,6 +1983,10 @@ class $SkillsTable extends Skills with TableInfo<$SkillsTable, Skill> {
         DriftSqlType.string,
         data['${effectivePrefix}name'],
       )!,
+      description: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      ),
       maxLevel: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}max_level'],
@@ -1996,6 +2021,7 @@ class Skill extends DataClass implements Insertable<Skill> {
   final int id;
   final String slug;
   final String name;
+  final String? description;
   final int maxLevel;
   final SkillCategory type1;
   final SkillSubcategory type2;
@@ -2003,6 +2029,7 @@ class Skill extends DataClass implements Insertable<Skill> {
     required this.id,
     required this.slug,
     required this.name,
+    this.description,
     required this.maxLevel,
     required this.type1,
     required this.type2,
@@ -2013,6 +2040,9 @@ class Skill extends DataClass implements Insertable<Skill> {
     map['id'] = Variable<int>(id);
     map['slug'] = Variable<String>(slug);
     map['name'] = Variable<String>(name);
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
+    }
     map['max_level'] = Variable<int>(maxLevel);
     {
       map['type1'] = Variable<String>(
@@ -2032,6 +2062,9 @@ class Skill extends DataClass implements Insertable<Skill> {
       id: Value(id),
       slug: Value(slug),
       name: Value(name),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       maxLevel: Value(maxLevel),
       type1: Value(type1),
       type2: Value(type2),
@@ -2047,6 +2080,7 @@ class Skill extends DataClass implements Insertable<Skill> {
       id: serializer.fromJson<int>(json['id']),
       slug: serializer.fromJson<String>(json['slug']),
       name: serializer.fromJson<String>(json['name']),
+      description: serializer.fromJson<String?>(json['description']),
       maxLevel: serializer.fromJson<int>(json['maxLevel']),
       type1: serializer.fromJson<SkillCategory>(json['type1']),
       type2: serializer.fromJson<SkillSubcategory>(json['type2']),
@@ -2059,6 +2093,7 @@ class Skill extends DataClass implements Insertable<Skill> {
       'id': serializer.toJson<int>(id),
       'slug': serializer.toJson<String>(slug),
       'name': serializer.toJson<String>(name),
+      'description': serializer.toJson<String?>(description),
       'maxLevel': serializer.toJson<int>(maxLevel),
       'type1': serializer.toJson<SkillCategory>(type1),
       'type2': serializer.toJson<SkillSubcategory>(type2),
@@ -2069,6 +2104,7 @@ class Skill extends DataClass implements Insertable<Skill> {
     int? id,
     String? slug,
     String? name,
+    Value<String?> description = const Value.absent(),
     int? maxLevel,
     SkillCategory? type1,
     SkillSubcategory? type2,
@@ -2076,6 +2112,7 @@ class Skill extends DataClass implements Insertable<Skill> {
     id: id ?? this.id,
     slug: slug ?? this.slug,
     name: name ?? this.name,
+    description: description.present ? description.value : this.description,
     maxLevel: maxLevel ?? this.maxLevel,
     type1: type1 ?? this.type1,
     type2: type2 ?? this.type2,
@@ -2085,6 +2122,9 @@ class Skill extends DataClass implements Insertable<Skill> {
       id: data.id.present ? data.id.value : this.id,
       slug: data.slug.present ? data.slug.value : this.slug,
       name: data.name.present ? data.name.value : this.name,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       maxLevel: data.maxLevel.present ? data.maxLevel.value : this.maxLevel,
       type1: data.type1.present ? data.type1.value : this.type1,
       type2: data.type2.present ? data.type2.value : this.type2,
@@ -2097,6 +2137,7 @@ class Skill extends DataClass implements Insertable<Skill> {
           ..write('id: $id, ')
           ..write('slug: $slug, ')
           ..write('name: $name, ')
+          ..write('description: $description, ')
           ..write('maxLevel: $maxLevel, ')
           ..write('type1: $type1, ')
           ..write('type2: $type2')
@@ -2105,7 +2146,8 @@ class Skill extends DataClass implements Insertable<Skill> {
   }
 
   @override
-  int get hashCode => Object.hash(id, slug, name, maxLevel, type1, type2);
+  int get hashCode =>
+      Object.hash(id, slug, name, description, maxLevel, type1, type2);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2113,6 +2155,7 @@ class Skill extends DataClass implements Insertable<Skill> {
           other.id == this.id &&
           other.slug == this.slug &&
           other.name == this.name &&
+          other.description == this.description &&
           other.maxLevel == this.maxLevel &&
           other.type1 == this.type1 &&
           other.type2 == this.type2);
@@ -2122,6 +2165,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
   final Value<int> id;
   final Value<String> slug;
   final Value<String> name;
+  final Value<String?> description;
   final Value<int> maxLevel;
   final Value<SkillCategory> type1;
   final Value<SkillSubcategory> type2;
@@ -2129,6 +2173,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
     this.id = const Value.absent(),
     this.slug = const Value.absent(),
     this.name = const Value.absent(),
+    this.description = const Value.absent(),
     this.maxLevel = const Value.absent(),
     this.type1 = const Value.absent(),
     this.type2 = const Value.absent(),
@@ -2137,6 +2182,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
     this.id = const Value.absent(),
     required String slug,
     required String name,
+    this.description = const Value.absent(),
     required int maxLevel,
     this.type1 = const Value.absent(),
     this.type2 = const Value.absent(),
@@ -2147,6 +2193,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
     Expression<int>? id,
     Expression<String>? slug,
     Expression<String>? name,
+    Expression<String>? description,
     Expression<int>? maxLevel,
     Expression<String>? type1,
     Expression<String>? type2,
@@ -2155,6 +2202,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
       if (id != null) 'id': id,
       if (slug != null) 'slug': slug,
       if (name != null) 'name': name,
+      if (description != null) 'description': description,
       if (maxLevel != null) 'max_level': maxLevel,
       if (type1 != null) 'type1': type1,
       if (type2 != null) 'type2': type2,
@@ -2165,6 +2213,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
     Value<int>? id,
     Value<String>? slug,
     Value<String>? name,
+    Value<String?>? description,
     Value<int>? maxLevel,
     Value<SkillCategory>? type1,
     Value<SkillSubcategory>? type2,
@@ -2173,6 +2222,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
       id: id ?? this.id,
       slug: slug ?? this.slug,
       name: name ?? this.name,
+      description: description ?? this.description,
       maxLevel: maxLevel ?? this.maxLevel,
       type1: type1 ?? this.type1,
       type2: type2 ?? this.type2,
@@ -2190,6 +2240,9 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
     }
     if (maxLevel.present) {
       map['max_level'] = Variable<int>(maxLevel.value);
@@ -2213,6 +2266,7 @@ class SkillsCompanion extends UpdateCompanion<Skill> {
           ..write('id: $id, ')
           ..write('slug: $slug, ')
           ..write('name: $name, ')
+          ..write('description: $description, ')
           ..write('maxLevel: $maxLevel, ')
           ..write('type1: $type1, ')
           ..write('type2: $type2')
@@ -3692,6 +3746,17 @@ class $SkillLevelsTable extends SkillLevels
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _descriptionMeta = const VerificationMeta(
+    'description',
+  );
+  @override
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+    'description',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _piecesRequiredMeta = const VerificationMeta(
     'piecesRequired',
   );
@@ -3796,6 +3861,7 @@ class $SkillLevelsTable extends SkillLevels
     id,
     skillId,
     level,
+    description,
     piecesRequired,
     bonus1Value,
     bonus1Type,
@@ -3836,6 +3902,15 @@ class $SkillLevelsTable extends SkillLevels
       );
     } else if (isInserting) {
       context.missing(_levelMeta);
+    }
+    if (data.containsKey('description')) {
+      context.handle(
+        _descriptionMeta,
+        description.isAcceptableOrUnknown(
+          data['description']!,
+          _descriptionMeta,
+        ),
+      );
     }
     if (data.containsKey('pieces_required')) {
       context.handle(
@@ -3924,6 +3999,10 @@ class $SkillLevelsTable extends SkillLevels
         DriftSqlType.int,
         data['${effectivePrefix}level'],
       )!,
+      description: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      ),
       piecesRequired: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}pieces_required'],
@@ -3973,6 +4052,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
   final int id;
   final int skillId;
   final int level;
+  final String? description;
   final int? piecesRequired;
   final double? bonus1Value;
   final String? bonus1Type;
@@ -3986,6 +4066,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     required this.id,
     required this.skillId,
     required this.level,
+    this.description,
     this.piecesRequired,
     this.bonus1Value,
     this.bonus1Type,
@@ -4002,6 +4083,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     map['id'] = Variable<int>(id);
     map['skill_id'] = Variable<int>(skillId);
     map['level'] = Variable<int>(level);
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
+    }
     if (!nullToAbsent || piecesRequired != null) {
       map['pieces_required'] = Variable<int>(piecesRequired);
     }
@@ -4037,6 +4121,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
       id: Value(id),
       skillId: Value(skillId),
       level: Value(level),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       piecesRequired: piecesRequired == null && nullToAbsent
           ? const Value.absent()
           : Value(piecesRequired),
@@ -4076,6 +4163,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
       id: serializer.fromJson<int>(json['id']),
       skillId: serializer.fromJson<int>(json['skillId']),
       level: serializer.fromJson<int>(json['level']),
+      description: serializer.fromJson<String?>(json['description']),
       piecesRequired: serializer.fromJson<int?>(json['piecesRequired']),
       bonus1Value: serializer.fromJson<double?>(json['bonus1Value']),
       bonus1Type: serializer.fromJson<String?>(json['bonus1Type']),
@@ -4094,6 +4182,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
       'id': serializer.toJson<int>(id),
       'skillId': serializer.toJson<int>(skillId),
       'level': serializer.toJson<int>(level),
+      'description': serializer.toJson<String?>(description),
       'piecesRequired': serializer.toJson<int?>(piecesRequired),
       'bonus1Value': serializer.toJson<double?>(bonus1Value),
       'bonus1Type': serializer.toJson<String?>(bonus1Type),
@@ -4110,6 +4199,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     int? id,
     int? skillId,
     int? level,
+    Value<String?> description = const Value.absent(),
     Value<int?> piecesRequired = const Value.absent(),
     Value<double?> bonus1Value = const Value.absent(),
     Value<String?> bonus1Type = const Value.absent(),
@@ -4123,6 +4213,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     id: id ?? this.id,
     skillId: skillId ?? this.skillId,
     level: level ?? this.level,
+    description: description.present ? description.value : this.description,
     piecesRequired: piecesRequired.present
         ? piecesRequired.value
         : this.piecesRequired,
@@ -4140,6 +4231,9 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
       id: data.id.present ? data.id.value : this.id,
       skillId: data.skillId.present ? data.skillId.value : this.skillId,
       level: data.level.present ? data.level.value : this.level,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       piecesRequired: data.piecesRequired.present
           ? data.piecesRequired.value
           : this.piecesRequired,
@@ -4172,6 +4266,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
           ..write('id: $id, ')
           ..write('skillId: $skillId, ')
           ..write('level: $level, ')
+          ..write('description: $description, ')
           ..write('piecesRequired: $piecesRequired, ')
           ..write('bonus1Value: $bonus1Value, ')
           ..write('bonus1Type: $bonus1Type, ')
@@ -4190,6 +4285,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
     id,
     skillId,
     level,
+    description,
     piecesRequired,
     bonus1Value,
     bonus1Type,
@@ -4207,6 +4303,7 @@ class SkillLevel extends DataClass implements Insertable<SkillLevel> {
           other.id == this.id &&
           other.skillId == this.skillId &&
           other.level == this.level &&
+          other.description == this.description &&
           other.piecesRequired == this.piecesRequired &&
           other.bonus1Value == this.bonus1Value &&
           other.bonus1Type == this.bonus1Type &&
@@ -4222,6 +4319,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
   final Value<int> id;
   final Value<int> skillId;
   final Value<int> level;
+  final Value<String?> description;
   final Value<int?> piecesRequired;
   final Value<double?> bonus1Value;
   final Value<String?> bonus1Type;
@@ -4235,6 +4333,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
     this.id = const Value.absent(),
     this.skillId = const Value.absent(),
     this.level = const Value.absent(),
+    this.description = const Value.absent(),
     this.piecesRequired = const Value.absent(),
     this.bonus1Value = const Value.absent(),
     this.bonus1Type = const Value.absent(),
@@ -4249,6 +4348,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
     this.id = const Value.absent(),
     required int skillId,
     required int level,
+    this.description = const Value.absent(),
     this.piecesRequired = const Value.absent(),
     this.bonus1Value = const Value.absent(),
     this.bonus1Type = const Value.absent(),
@@ -4264,6 +4364,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
     Expression<int>? id,
     Expression<int>? skillId,
     Expression<int>? level,
+    Expression<String>? description,
     Expression<int>? piecesRequired,
     Expression<double>? bonus1Value,
     Expression<String>? bonus1Type,
@@ -4278,6 +4379,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
       if (id != null) 'id': id,
       if (skillId != null) 'skill_id': skillId,
       if (level != null) 'level': level,
+      if (description != null) 'description': description,
       if (piecesRequired != null) 'pieces_required': piecesRequired,
       if (bonus1Value != null) 'bonus1_value': bonus1Value,
       if (bonus1Type != null) 'bonus1_type': bonus1Type,
@@ -4294,6 +4396,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
     Value<int>? id,
     Value<int>? skillId,
     Value<int>? level,
+    Value<String?>? description,
     Value<int?>? piecesRequired,
     Value<double?>? bonus1Value,
     Value<String?>? bonus1Type,
@@ -4308,6 +4411,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
       id: id ?? this.id,
       skillId: skillId ?? this.skillId,
       level: level ?? this.level,
+      description: description ?? this.description,
       piecesRequired: piecesRequired ?? this.piecesRequired,
       bonus1Value: bonus1Value ?? this.bonus1Value,
       bonus1Type: bonus1Type ?? this.bonus1Type,
@@ -4331,6 +4435,9 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
     }
     if (level.present) {
       map['level'] = Variable<int>(level.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
     }
     if (piecesRequired.present) {
       map['pieces_required'] = Variable<int>(piecesRequired.value);
@@ -4368,6 +4475,7 @@ class SkillLevelsCompanion extends UpdateCompanion<SkillLevel> {
           ..write('id: $id, ')
           ..write('skillId: $skillId, ')
           ..write('level: $level, ')
+          ..write('description: $description, ')
           ..write('piecesRequired: $piecesRequired, ')
           ..write('bonus1Value: $bonus1Value, ')
           ..write('bonus1Type: $bonus1Type, ')
@@ -8159,6 +8267,7 @@ typedef $$SkillsTableCreateCompanionBuilder =
       Value<int> id,
       required String slug,
       required String name,
+      Value<String?> description,
       required int maxLevel,
       Value<SkillCategory> type1,
       Value<SkillSubcategory> type2,
@@ -8168,6 +8277,7 @@ typedef $$SkillsTableUpdateCompanionBuilder =
       Value<int> id,
       Value<String> slug,
       Value<String> name,
+      Value<String?> description,
       Value<int> maxLevel,
       Value<SkillCategory> type1,
       Value<SkillSubcategory> type2,
@@ -8309,6 +8419,11 @@ class $$SkillsTableFilterComposer
 
   ColumnFilters<String> get name => $composableBuilder(
     column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get description => $composableBuilder(
+    column: $table.description,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -8504,6 +8619,11 @@ class $$SkillsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get description => $composableBuilder(
+    column: $table.description,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get maxLevel => $composableBuilder(
     column: $table.maxLevel,
     builder: (column) => ColumnOrderings(column),
@@ -8537,6 +8657,11 @@ class $$SkillsTableAnnotationComposer
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+    column: $table.description,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<int> get maxLevel =>
       $composableBuilder(column: $table.maxLevel, builder: (column) => column);
@@ -8736,6 +8861,7 @@ class $$SkillsTableTableManager
                 Value<int> id = const Value.absent(),
                 Value<String> slug = const Value.absent(),
                 Value<String> name = const Value.absent(),
+                Value<String?> description = const Value.absent(),
                 Value<int> maxLevel = const Value.absent(),
                 Value<SkillCategory> type1 = const Value.absent(),
                 Value<SkillSubcategory> type2 = const Value.absent(),
@@ -8743,6 +8869,7 @@ class $$SkillsTableTableManager
                 id: id,
                 slug: slug,
                 name: name,
+                description: description,
                 maxLevel: maxLevel,
                 type1: type1,
                 type2: type2,
@@ -8752,6 +8879,7 @@ class $$SkillsTableTableManager
                 Value<int> id = const Value.absent(),
                 required String slug,
                 required String name,
+                Value<String?> description = const Value.absent(),
                 required int maxLevel,
                 Value<SkillCategory> type1 = const Value.absent(),
                 Value<SkillSubcategory> type2 = const Value.absent(),
@@ -8759,6 +8887,7 @@ class $$SkillsTableTableManager
                 id: id,
                 slug: slug,
                 name: name,
+                description: description,
                 maxLevel: maxLevel,
                 type1: type1,
                 type2: type2,
@@ -10572,6 +10701,7 @@ typedef $$SkillLevelsTableCreateCompanionBuilder =
       Value<int> id,
       required int skillId,
       required int level,
+      Value<String?> description,
       Value<int?> piecesRequired,
       Value<double?> bonus1Value,
       Value<String?> bonus1Type,
@@ -10587,6 +10717,7 @@ typedef $$SkillLevelsTableUpdateCompanionBuilder =
       Value<int> id,
       Value<int> skillId,
       Value<int> level,
+      Value<String?> description,
       Value<int?> piecesRequired,
       Value<double?> bonus1Value,
       Value<String?> bonus1Type,
@@ -10637,6 +10768,11 @@ class $$SkillLevelsTableFilterComposer
 
   ColumnFilters<int> get level => $composableBuilder(
     column: $table.level,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get description => $composableBuilder(
+    column: $table.description,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -10728,6 +10864,11 @@ class $$SkillLevelsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get description => $composableBuilder(
+    column: $table.description,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get piecesRequired => $composableBuilder(
     column: $table.piecesRequired,
     builder: (column) => ColumnOrderings(column),
@@ -10811,6 +10952,11 @@ class $$SkillLevelsTableAnnotationComposer
 
   GeneratedColumn<int> get level =>
       $composableBuilder(column: $table.level, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+    column: $table.description,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<int> get piecesRequired => $composableBuilder(
     column: $table.piecesRequired,
@@ -10908,6 +11054,7 @@ class $$SkillLevelsTableTableManager
                 Value<int> id = const Value.absent(),
                 Value<int> skillId = const Value.absent(),
                 Value<int> level = const Value.absent(),
+                Value<String?> description = const Value.absent(),
                 Value<int?> piecesRequired = const Value.absent(),
                 Value<double?> bonus1Value = const Value.absent(),
                 Value<String?> bonus1Type = const Value.absent(),
@@ -10921,6 +11068,7 @@ class $$SkillLevelsTableTableManager
                 id: id,
                 skillId: skillId,
                 level: level,
+                description: description,
                 piecesRequired: piecesRequired,
                 bonus1Value: bonus1Value,
                 bonus1Type: bonus1Type,
@@ -10936,6 +11084,7 @@ class $$SkillLevelsTableTableManager
                 Value<int> id = const Value.absent(),
                 required int skillId,
                 required int level,
+                Value<String?> description = const Value.absent(),
                 Value<int?> piecesRequired = const Value.absent(),
                 Value<double?> bonus1Value = const Value.absent(),
                 Value<String?> bonus1Type = const Value.absent(),
@@ -10949,6 +11098,7 @@ class $$SkillLevelsTableTableManager
                 id: id,
                 skillId: skillId,
                 level: level,
+                description: description,
                 piecesRequired: piecesRequired,
                 bonus1Value: bonus1Value,
                 bonus1Type: bonus1Type,
