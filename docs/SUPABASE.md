@@ -34,18 +34,22 @@ CREATE TABLE data_versions (
 
 -- ─── Skills ───────────────────────────────────────────────────────────────
 CREATE TABLE skills (
-  id          INTEGER PRIMARY KEY,  -- ID numerico da Skill.json (source of truth)
-  slug        TEXT UNIQUE NOT NULL,
-  name        TEXT NOT NULL,
-  max_level   INTEGER NOT NULL,
-  type1       TEXT NOT NULL DEFAULT 'armor',   -- armor/weapon/set/group
-  type2       TEXT NOT NULL DEFAULT 'utility'  -- utility (subcategory)
+  id             INTEGER PRIMARY KEY,  -- ID numerico da Skill.json (source of truth)
+  slug           TEXT UNIQUE NOT NULL,
+  name           TEXT NOT NULL,
+  description    TEXT,                 -- descrizione generale (English)
+  description_it TEXT,                 -- descrizione generale (Italian)
+  max_level      INTEGER NOT NULL,
+  type1          TEXT NOT NULL DEFAULT 'armor',   -- armor/weapon/set/group
+  type2          TEXT NOT NULL DEFAULT 'utility'  -- utility (subcategory)
 );
 
 CREATE TABLE skill_levels (
   id              INTEGER PRIMARY KEY,
   skill_id        INTEGER NOT NULL REFERENCES skills(id),
   level           INTEGER NOT NULL,
+  description     TEXT,               -- descrizione del livello (English)
+  description_it  TEXT,               -- descrizione del livello (Italian)
   pieces_required INTEGER,            -- solo per skill set/group
   bonus1_value    REAL,
   bonus1_type     TEXT,
@@ -163,9 +167,17 @@ INSERT INTO data_versions (table_name, version) VALUES
   ('jewel_skills', 1);
 ```
 
-> **Nota FK**: i seed iniziano con `DELETE FROM ...` (es. `DELETE FROM skill_levels; DELETE FROM skills;`).
-> Su un DB vuoto non ci sono problemi. Se si ri-esegue su dati esistenti, l'ordine di DELETE nei file
-> rispetta già la dipendenza (prima i figli, poi i genitori).
+> **Nota FK — prima esecuzione su DB vuoto**: nessun problema, esegui i file nell'ordine indicato.
+>
+> **Nota FK — ri-esecuzione su dati esistenti**: il file `01_skills.sql` inizia con
+> `DELETE FROM skill_levels; DELETE FROM skills;` che su Postgres fallisce per le FK.
+> Usa invece `TRUNCATE skill_levels, skills, armor_set_skills, armor_piece_skills, jewel_skills CASCADE;`
+> prima di ri-importare, oppure esegui i file in ordine inverso (prima i figli).
+>
+> **Nota seed formato**: i file `.sql` sono generati per SQLite (usati dal SeedService in-app).
+> Su Postgres il dialetto è compatibile tranne per `AUTOINCREMENT` (usa `SERIAL` o `GENERATED ALWAYS`).
+> I seed in `assets/seeds/` sono già compatibili Postgres perché non usano `AUTOINCREMENT` esplicito
+> nei VALUES — gli id sono espliciti nei file 01/02, e gli altri file usano INSERT senza id.
 
 ---
 
@@ -179,7 +191,7 @@ ALTER TABLE skills             ENABLE ROW LEVEL SECURITY;
 ALTER TABLE skill_levels       ENABLE ROW LEVEL SECURITY;
 ALTER TABLE armor_sets         ENABLE ROW LEVEL SECURITY;
 ALTER TABLE armor_pieces       ENABLE ROW LEVEL SECURITY;
-ALTER TABLE armor_set_skills.  ENABLE ROW LEVEL SECURITY;
+ALTER TABLE armor_set_skills   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE armor_piece_skills ENABLE ROW LEVEL SECURITY;
 ALTER TABLE weapons            ENABLE ROW LEVEL SECURITY;
 ALTER TABLE jewels             ENABLE ROW LEVEL SECURITY;

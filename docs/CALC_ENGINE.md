@@ -1,6 +1,7 @@
 # CALC_ENGINE.md — Motore di Calcolo Statistiche
 
-Fonte: `/Users/loke/Downloads/Alpha Calulator.xlsx` — Sheet "Calculator" e "Builder"
+Fonte: `Alpha Calulator.xlsx` (Downloads) — Sheet "Calculator" e "Builder"  
+Dati già estratti in `scripts/excel_calc_levels.sql` via `scripts/parse_excel.py`.
 
 ## Flusso calcolo MVP (statistiche aggregate)
 
