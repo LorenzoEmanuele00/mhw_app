@@ -704,6 +704,12 @@ abstract class AppLocalizations {
   /// **'Equip some gear to see your stats'**
   String get statsNoEquipment;
 
+  /// No description provided for @skillDetailLevels.
+  ///
+  /// In en, this message translates to:
+  /// **'Levels'**
+  String get skillDetailLevels;
+
   /// No description provided for @comingSoon.
   ///
   /// In en, this message translates to:

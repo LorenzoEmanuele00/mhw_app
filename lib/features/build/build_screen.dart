@@ -14,6 +14,7 @@ import '../../shared/widgets/large_title.dart';
 import '../../shared/widgets/section_label.dart';
 import '../../shared/widgets/sharpness_gauge.dart';
 import '../../shared/widgets/skill_chip.dart';
+import '../../shared/widgets/skill_detail_sheet.dart';
 import '../equipment/equipment_screen.dart';
 import '../equipment/models/equip_item.dart';
 import '../equipment/widgets/equipment_detail_sheet.dart';
@@ -104,11 +105,20 @@ class _BuildContent extends ConsumerWidget {
                       entry.skill.type2,
                       Theme.of(context).brightness,
                     );
-                    return SkillChip(
-                      name: entry.skill.name,
-                      level: entry.level,
-                      max: entry.skill.maxLevel,
-                      color: color,
+                    return GestureDetector(
+                      onTap: () => showAppSheet(
+                        context: context,
+                        child: SkillDetailSheet(
+                          skill: entry.skill,
+                          currentLevel: entry.level,
+                        ),
+                      ),
+                      child: SkillChip(
+                        name: entry.skill.name,
+                        level: entry.level,
+                        max: entry.skill.maxLevel,
+                        color: color,
+                      ),
                     );
                   }).toList(),
                 ),

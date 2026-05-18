@@ -333,6 +333,9 @@ class AppLocalizationsIt extends AppLocalizations {
       'Equipaggia qualcosa per vedere le statistiche';
 
   @override
+  String get skillDetailLevels => 'Livelli';
+
+  @override
   String get comingSoon => 'Prossimamente';
 
   @override

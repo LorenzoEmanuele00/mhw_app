@@ -170,6 +170,8 @@
   },
   "statsNoEquipment": "Equip some gear to see your stats",
 
+  "skillDetailLevels": "Levels",
+
   "comingSoon": "Coming soon",
 
   "initError": "Init error: {error}",

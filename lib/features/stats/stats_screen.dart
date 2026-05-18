@@ -10,6 +10,8 @@ import '../../shared/theme/app_theme.dart';
 import '../../shared/utils/label_helpers.dart';
 import '../../shared/utils/slots_parser.dart';
 import '../../shared/widgets/app_card.dart';
+import '../../shared/widgets/app_sheet.dart';
+import '../../shared/widgets/skill_detail_sheet.dart';
 import '../../shared/widgets/deco_slots_row.dart';
 import '../../shared/widgets/large_title.dart';
 import '../../shared/widgets/section_label.dart';
@@ -154,7 +156,16 @@ class _StatsContent extends StatelessWidget {
                             endIndent: 0,
                             color: AppTokens.of(context).sep,
                           ),
-                        _SkillRow(entry: buildState.skills[i]),
+                        _SkillRow(
+                          entry: buildState.skills[i],
+                          onTap: () => showAppSheet(
+                            context: context,
+                            child: SkillDetailSheet(
+                              skill: buildState.skills[i].skill,
+                              currentLevel: buildState.skills[i].level,
+                            ),
+                          ),
+                        ),
                       ],
                     ],
                   ),
@@ -654,8 +665,9 @@ class _Pill extends StatelessWidget {
 // ---------------------------------------------------------------------------
 
 class _SkillRow extends StatelessWidget {
-  const _SkillRow({required this.entry});
+  const _SkillRow({required this.entry, this.onTap});
   final ({Skill skill, int level}) entry;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -665,7 +677,9 @@ class _SkillRow extends StatelessWidget {
     final skill = entry.skill;
     final color = AppColors.skillCategory(skill.type2, brightness);
 
-    return Padding(
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         spacing: 12,
@@ -725,7 +739,8 @@ class _SkillRow extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ),
+  );
   }
 }
 

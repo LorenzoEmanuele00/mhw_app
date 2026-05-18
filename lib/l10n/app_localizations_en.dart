@@ -331,6 +331,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statsNoEquipment => 'Equip some gear to see your stats';
 
   @override
+  String get skillDetailLevels => 'Levels';
+
+  @override
   String get comingSoon => 'Coming soon';
 
   @override

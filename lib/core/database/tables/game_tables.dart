@@ -95,6 +95,7 @@ class Skills extends Table {
   TextColumn get slug => text()();
   TextColumn get name => text()();
   TextColumn get description => text().nullable()();
+  TextColumn get descriptionIt => text().nullable()();
   IntColumn get maxLevel => integer()();
   TextColumn get type1 =>
       text().withDefault(const Constant('armor')).map(const SkillCategoryConverter())();
@@ -110,6 +111,7 @@ class SkillLevels extends Table {
   IntColumn get skillId => integer().references(Skills, #id)();
   IntColumn get level => integer()();
   TextColumn get description => text().nullable()();
+  TextColumn get descriptionIt => text().nullable()();
   // Null for armor/weapon skills; for set/group skills: armor pieces required to activate this level.
   IntColumn get piecesRequired => integer().nullable()();
   RealColumn get bonus1Value => real().nullable()();

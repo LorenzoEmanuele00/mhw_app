@@ -170,6 +170,8 @@
   },
   "statsNoEquipment": "Equipaggia qualcosa per vedere le statistiche",
 
+  "skillDetailLevels": "Livelli",
+
   "comingSoon": "Prossimamente",
 
   "initError": "Errore di inizializzazione: {error}",

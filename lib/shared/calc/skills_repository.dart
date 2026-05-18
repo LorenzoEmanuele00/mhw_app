@@ -28,3 +28,8 @@ final skillsRepositoryProvider = Provider<SkillsRepository>((ref) {
 final allSkillsProvider = StreamProvider<List<Skill>>((ref) {
   return ref.watch(skillsRepositoryProvider).watchAll();
 });
+
+final skillLevelsProvider =
+    FutureProvider.family<List<SkillLevel>, int>((ref, skillId) {
+  return ref.watch(skillsRepositoryProvider).getLevels(skillId);
+});

@@ -45,7 +45,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -93,6 +93,15 @@ class AppDatabase extends _$AppDatabase {
             );
             await customStatement(
               'ALTER TABLE skill_levels ADD COLUMN description TEXT',
+            );
+          }
+          if (from < 6) {
+            // v6: add Italian description columns to skills and skill_levels.
+            await customStatement(
+              'ALTER TABLE skills ADD COLUMN description_it TEXT',
+            );
+            await customStatement(
+              'ALTER TABLE skill_levels ADD COLUMN description_it TEXT',
             );
           }
         },
