@@ -142,12 +142,16 @@ class _JewelPickerSheetState extends ConsumerState<JewelPickerSheet> {
                 return false;
               }
 
+              final isWeaponSlot = widget.slotSource == JewelSlotSource.weapon;
+              bool matchesSource(Jewel j) =>
+                  isWeaponSlot ? j.allowedOn == 'weapon' : j.allowedOn == 'armor';
+
               final available = allJewels
-                  .where((j) => j.slotSize <= widget.slotLevel && matchesQuery(j))
+                  .where((j) => j.slotSize <= widget.slotLevel && matchesSource(j) && matchesQuery(j))
                   .toList();
               final tooLarge = _query.isNotEmpty
                   ? allJewels
-                      .where((j) => j.slotSize > widget.slotLevel && matchesQuery(j))
+                      .where((j) => j.slotSize > widget.slotLevel && matchesSource(j) && matchesQuery(j))
                       .toList()
                   : <Jewel>[];
 
