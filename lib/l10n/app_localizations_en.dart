@@ -340,4 +340,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String initError(Object error) {
     return 'Init error: $error';
   }
+
+  @override
+  String get syncUpdated => 'Game data updated';
+
+  @override
+  String get syncFailed => 'Sync failed — will retry when online';
 }

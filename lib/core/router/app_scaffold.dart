@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/sync/sync_notifier.dart';
+import '../../core/sync/sync_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/theme/app_theme.dart';
 
 /// Adaptive scaffold: shows a [NavigationBar] in portrait/narrow mode and a
 /// [NavigationRail] in landscape/wide mode (≥ 600 dp).
-///
-/// This gives the app proper landscape support without duplicating screen code.
-class AppScaffold extends StatelessWidget {
+class AppScaffold extends ConsumerWidget {
   const AppScaffold({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
@@ -15,13 +16,43 @@ class AppScaffold extends StatelessWidget {
   static const _breakpoint = 600.0;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final tokens = AppTokens.of(context);
     final width = MediaQuery.sizeOf(context).width;
     final isWide = width >= _breakpoint;
 
+    final syncState = ref.watch(syncNotifierProvider);
+
+    // Show snackbar on terminal sync states.
+    ref.listen(syncNotifierProvider, (_, next) {
+      if (!context.mounted) return;
+      next.whenData((result) {
+        if (result == null) return;
+        final messenger = ScaffoldMessenger.of(context);
+        messenger.clearSnackBars();
+        switch (result.status) {
+          case SyncStatus.updated:
+            messenger.showSnackBar(SnackBar(
+              content: Text(l10n.syncUpdated),
+              duration: const Duration(seconds: 2),
+              behavior: SnackBarBehavior.floating,
+            ));
+          case SyncStatus.error:
+            messenger.showSnackBar(SnackBar(
+              content: Text(l10n.syncFailed),
+              duration: const Duration(seconds: 4),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ));
+          default:
+            break;
+        }
+      });
+    });
+
     final destinations = _buildDestinations(l10n, tokens);
+    final isLoading = syncState.isLoading;
 
     if (isWide) {
       return Scaffold(
@@ -41,7 +72,14 @@ class AppScaffold extends StatelessWidget {
                   .toList(),
             ),
             VerticalDivider(width: 1, color: tokens.sep),
-            Expanded(child: navigationShell),
+            Expanded(
+              child: Column(
+                children: [
+                  if (isLoading) const LinearProgressIndicator(minHeight: 2),
+                  Expanded(child: navigationShell),
+                ],
+              ),
+            ),
           ],
         ),
       );
@@ -49,7 +87,12 @@ class AppScaffold extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: tokens.bg,
-      body: navigationShell,
+      body: Column(
+        children: [
+          if (isLoading) const LinearProgressIndicator(minHeight: 2),
+          Expanded(child: navigationShell),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: _onBranchSelected,

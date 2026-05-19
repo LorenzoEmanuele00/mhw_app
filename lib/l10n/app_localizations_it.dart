@@ -342,4 +342,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String initError(Object error) {
     return 'Errore di inizializzazione: $error';
   }
+
+  @override
+  String get syncUpdated => 'Dati di gioco aggiornati';
+
+  @override
+  String get syncFailed => 'Sincronizzazione fallita — riproverò quando online';
 }

@@ -24,6 +24,11 @@ I dati utente (build, talismani) rimangono **solo sul device** e non toccano mai
 
 Esegui in quest'ordine per rispettare le FK.
 
+> **Nota auto-increment**: Le tabelle `skills`, `armor_sets`, `armor_pieces`, `weapons`, `jewels`
+> usano `INTEGER PRIMARY KEY` con ID espliciti nei seed (sono stabili e source-of-truth).
+> Le tabelle `skill_levels`, `armor_set_skills`, `armor_piece_skills`, `jewel_skills`
+> usano `GENERATED ALWAYS AS IDENTITY` perché i seed non includono la colonna `id`.
+
 ```sql
 -- ─── Versioning (non sincronizzata nell'app) ───────────────────────────────
 CREATE TABLE data_versions (
@@ -45,7 +50,7 @@ CREATE TABLE skills (
 );
 
 CREATE TABLE skill_levels (
-  id              INTEGER PRIMARY KEY,
+  id              INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   skill_id        INTEGER NOT NULL REFERENCES skills(id),
   level           INTEGER NOT NULL,
   description     TEXT,               -- descrizione del livello (English)
@@ -85,7 +90,7 @@ CREATE TABLE armor_pieces (
 );
 
 CREATE TABLE armor_set_skills (
-  id              INTEGER PRIMARY KEY,
+  id              INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   set_id          INTEGER NOT NULL REFERENCES armor_sets(id),
   required_pieces INTEGER NOT NULL,
   skill_id        INTEGER NOT NULL REFERENCES skills(id),
@@ -94,7 +99,7 @@ CREATE TABLE armor_set_skills (
 );
 
 CREATE TABLE armor_piece_skills (
-  id             INTEGER PRIMARY KEY,
+  id             INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   armor_piece_id INTEGER NOT NULL REFERENCES armor_pieces(id),
   skill_id       INTEGER NOT NULL REFERENCES skills(id),
   skill_level    INTEGER NOT NULL
@@ -130,7 +135,7 @@ CREATE TABLE jewels (
 );
 
 CREATE TABLE jewel_skills (
-  id          INTEGER PRIMARY KEY,
+  id          INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   jewel_id    INTEGER NOT NULL REFERENCES jewels(id),
   skill_id    INTEGER NOT NULL REFERENCES skills(id),
   skill_level INTEGER NOT NULL

@@ -721,6 +721,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Init error: {error}'**
   String initError(Object error);
+
+  /// No description provided for @syncUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Game data updated'**
+  String get syncUpdated;
+
+  /// No description provided for @syncFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync failed — will retry when online'**
+  String get syncFailed;
 }
 
 class _AppLocalizationsDelegate
