@@ -17,21 +17,36 @@ class SeedService {
   ];
 
   Future<void> seedIfEmpty() async {
-    final count = await _db.customSelect(
+    final skillCount = await _db.customSelect(
       'SELECT COUNT(*) as c FROM skills',
     ).map((row) => row.read<int>('c')).getSingleOrNull() ?? 0;
 
-    if (count > 0) return;
-
-    await _db.transaction(() async {
-      for (final assetPath in _seeds) {
-        final sql = await rootBundle.loadString(assetPath);
-        final statements = _splitStatements(sql);
-        for (final stmt in statements) {
-          await _db.customStatement(stmt);
+    if (skillCount == 0) {
+      await _db.transaction(() async {
+        for (final assetPath in _seeds) {
+          await _runSeedAsset(assetPath);
         }
-      }
-    });
+      });
+      return;
+    }
+
+    // Skills already present — re-seed skill_levels if a migration cleared them.
+    final levelCount = await _db.customSelect(
+      'SELECT COUNT(*) as c FROM skill_levels',
+    ).map((row) => row.read<int>('c')).getSingleOrNull() ?? 0;
+
+    if (levelCount == 0) {
+      await _db.transaction(() async {
+        await _runSeedAsset('assets/seeds/02_skill_levels.sql');
+      });
+    }
+  }
+
+  Future<void> _runSeedAsset(String assetPath) async {
+    final sql = await rootBundle.loadString(assetPath);
+    for (final stmt in _splitStatements(sql)) {
+      await _db.customStatement(stmt);
+    }
   }
 
   /// Splits a SQL file into individual statements, skipping comments and blank lines.

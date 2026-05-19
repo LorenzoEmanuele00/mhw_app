@@ -318,10 +318,34 @@ class AppLocalizationsIt extends AppLocalizations {
   String get loadoutsDef => 'DIF';
 
   @override
+  String get statsResistances => 'Resistenze';
+
+  @override
+  String get statsCompare => 'Confronta';
+
+  @override
+  String statsSkillLevel(int level, int max) {
+    return 'Lv $level / $max';
+  }
+
+  @override
+  String get statsNoEquipment =>
+      'Equipaggia qualcosa per vedere le statistiche';
+
+  @override
+  String get skillDetailLevels => 'Livelli';
+
+  @override
   String get comingSoon => 'Prossimamente';
 
   @override
   String initError(Object error) {
     return 'Errore di inizializzazione: $error';
   }
+
+  @override
+  String get syncUpdated => 'Dati di gioco aggiornati';
+
+  @override
+  String get syncFailed => 'Sincronizzazione fallita — riproverò quando online';
 }

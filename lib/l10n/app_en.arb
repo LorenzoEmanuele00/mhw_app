@@ -159,6 +159,19 @@
   "loadoutsAtk": "ATK",
   "loadoutsDef": "DEF",
 
+  "statsResistances": "Resistances",
+  "statsCompare": "Compare",
+  "statsSkillLevel": "Lv {level} / {max}",
+  "@statsSkillLevel": {
+    "placeholders": {
+      "level": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+  "statsNoEquipment": "Equip some gear to see your stats",
+
+  "skillDetailLevels": "Levels",
+
   "comingSoon": "Coming soon",
 
   "initError": "Init error: {error}",
@@ -166,5 +179,8 @@
     "placeholders": {
       "error": { "type": "Object" }
     }
-  }
+  },
+
+  "syncUpdated": "Game data updated",
+  "syncFailed": "Sync failed — will retry when online"
 }

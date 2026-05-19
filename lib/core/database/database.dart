@@ -45,7 +45,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -85,6 +85,29 @@ class AppDatabase extends _$AppDatabase {
             await m.createTable(buildJewels);
             await m.createTable(armorPieceSkills);
             await m.createTable(jewelSkills);
+          }
+          if (from < 5) {
+            // v5: add description column to skills and skill_levels.
+            await customStatement(
+              'ALTER TABLE skills ADD COLUMN description TEXT',
+            );
+            await customStatement(
+              'ALTER TABLE skill_levels ADD COLUMN description TEXT',
+            );
+          }
+          if (from < 6) {
+            // v6: add Italian description columns to skills and skill_levels.
+            await customStatement(
+              'ALTER TABLE skills ADD COLUMN description_it TEXT',
+            );
+            await customStatement(
+              'ALTER TABLE skill_levels ADD COLUMN description_it TEXT',
+            );
+          }
+          if (from < 7) {
+            // v7: fix elem_res_additive → element-specific bonus types in skill_levels seed.
+            // Clearing the table lets SeedService re-seed with corrected bonus types.
+            await customStatement('DELETE FROM skill_levels');
           }
         },
       );

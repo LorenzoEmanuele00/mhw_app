@@ -201,13 +201,23 @@ def main():
         # because the JSON doesn't carry this information.
         subcategory = 'utility'
 
+        def clean_text(raw):
+            if raw is None:
+                return None
+            return raw.replace('\r\n', ' ').replace('\r', ' ').replace('\n', ' ').strip()
+
+        skill_desc    = clean_text(skill.get('descriptions', {}).get('en', None))
+        skill_desc_it = clean_text(skill.get('descriptions', {}).get('it', None))
+
         skills_rows.append({
-            'id':          sid,
-            'slug':        slug,
-            'name':        name,
-            'max_level':   max_level,
-            'kind':        kind,
-            'subcategory': subcategory,
+            'id':             sid,
+            'slug':           slug,
+            'name':           name,
+            'description':    skill_desc,
+            'description_it': skill_desc_it,
+            'max_level':      max_level,
+            'kind':           kind,
+            'subcategory':    subcategory,
         })
 
         if excel_lvls is not None:
@@ -219,6 +229,10 @@ def main():
         for rank in ranks:
             level = rank['level']
             pieces_req = rank.get('set_pieces_required', None)  # only set/group
+            raw_level_desc    = rank.get('descriptions', {}).get('en', None)
+            raw_level_desc_it = rank.get('descriptions', {}).get('it', None)
+            level_desc    = clean_text(raw_level_desc)
+            level_desc_it = clean_text(raw_level_desc_it)
 
             # For armor/weapon skills: find matching Excel level for calc bonuses
             # For set/group skills: all calc data is NULL (pieces-based activation)
@@ -231,17 +245,19 @@ def main():
                     calc = next((e for e in excel_lvls if e['level'] == pieces_req), None)
 
             skill_levels_rows.append({
-                'skill_id':      sid,
-                'level':         level,
+                'skill_id':       sid,
+                'level':          level,
+                'description':    level_desc,
+                'description_it': level_desc_it,
                 'pieces_required': pieces_req,
-                'bonus1_value':  calc['bonus1_value']  if calc else None,
-                'bonus1_type':   calc['bonus1_type']   if calc else None,
-                'bonus2_value':  calc['bonus2_value']  if calc else None,
-                'bonus2_type':   calc['bonus2_type']   if calc else None,
-                'bonus3_value':  calc['bonus3_value']  if calc else None,
-                'bonus3_type':   calc['bonus3_type']   if calc else None,
-                'duration_s':    calc['duration_s']    if calc else None,
-                'cooldown_s':    calc['cooldown_s']    if calc else None,
+                'bonus1_value':   calc['bonus1_value']  if calc else None,
+                'bonus1_type':    calc['bonus1_type']   if calc else None,
+                'bonus2_value':   calc['bonus2_value']  if calc else None,
+                'bonus2_type':    calc['bonus2_type']   if calc else None,
+                'bonus3_value':   calc['bonus3_value']  if calc else None,
+                'bonus3_type':    calc['bonus3_type']   if calc else None,
+                'duration_s':     calc['duration_s']    if calc else None,
+                'cooldown_s':     calc['cooldown_s']    if calc else None,
             })
 
     print(f'  matched to Excel:    {matched}')
@@ -255,11 +271,12 @@ def main():
         f.write('-- Source of truth: assets/output/merged/Skill.json\n\n')
         f.write('DELETE FROM skill_levels;\n')
         f.write('DELETE FROM skills;\n\n')
-        f.write('INSERT INTO skills (id, slug, name, max_level, type1, type2) VALUES\n')
+        f.write('INSERT INTO skills (id, slug, name, description, description_it, max_level, type1, type2) VALUES\n')
         rows = []
         for s in skills_rows:
             rows.append(
                 f"  ({s['id']}, {sql_str(s['slug'])}, {sql_str(s['name'])}, "
+                f"{sql_str(s['description'])}, {sql_str(s['description_it'])}, "
                 f"{s['max_level']}, {sql_str(s['kind'])}, {sql_str(s['subcategory'])})"
             )
         f.write(',\n'.join(rows))
@@ -272,14 +289,15 @@ def main():
         f.write('-- Source of truth: assets/output/merged/Skill.json\n')
         f.write('-- Calc bonuses from: Alpha Calulator.xlsx via parse_excel.py\n\n')
         f.write('INSERT INTO skill_levels\n')
-        f.write('  (skill_id, level, pieces_required,\n')
+        f.write('  (skill_id, level, description, description_it, pieces_required,\n')
         f.write('   bonus1_value, bonus1_type, bonus2_value, bonus2_type,\n')
         f.write('   bonus3_value, bonus3_type, duration_s, cooldown_s)\n')
         f.write('VALUES\n')
         rows = []
         for sl in skill_levels_rows:
             rows.append(
-                f"  ({sl['skill_id']}, {sl['level']}, {sql_int(sl['pieces_required'])},\n"
+                f"  ({sl['skill_id']}, {sl['level']}, {sql_str(sl['description'])}, "
+                f"{sql_str(sl['description_it'])}, {sql_int(sl['pieces_required'])},\n"
                 f"   {sql_float(sl['bonus1_value'])}, {sql_str(sl['bonus1_type'])}, "
                 f"{sql_float(sl['bonus2_value'])}, {sql_str(sl['bonus2_type'])},\n"
                 f"   {sql_float(sl['bonus3_value'])}, {sql_str(sl['bonus3_type'])}, "

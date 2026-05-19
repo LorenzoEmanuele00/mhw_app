@@ -680,6 +680,36 @@ abstract class AppLocalizations {
   /// **'DEF'**
   String get loadoutsDef;
 
+  /// No description provided for @statsResistances.
+  ///
+  /// In en, this message translates to:
+  /// **'Resistances'**
+  String get statsResistances;
+
+  /// No description provided for @statsCompare.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare'**
+  String get statsCompare;
+
+  /// No description provided for @statsSkillLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lv {level} / {max}'**
+  String statsSkillLevel(int level, int max);
+
+  /// No description provided for @statsNoEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Equip some gear to see your stats'**
+  String get statsNoEquipment;
+
+  /// No description provided for @skillDetailLevels.
+  ///
+  /// In en, this message translates to:
+  /// **'Levels'**
+  String get skillDetailLevels;
+
   /// No description provided for @comingSoon.
   ///
   /// In en, this message translates to:
@@ -691,6 +721,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Init error: {error}'**
   String initError(Object error);
+
+  /// No description provided for @syncUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Game data updated'**
+  String get syncUpdated;
+
+  /// No description provided for @syncFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync failed — will retry when online'**
+  String get syncFailed;
 }
 
 class _AppLocalizationsDelegate

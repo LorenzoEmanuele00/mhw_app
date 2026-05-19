@@ -159,6 +159,19 @@
   "loadoutsAtk": "ATT",
   "loadoutsDef": "DIF",
 
+  "statsResistances": "Resistenze",
+  "statsCompare": "Confronta",
+  "statsSkillLevel": "Lv {level} / {max}",
+  "@statsSkillLevel": {
+    "placeholders": {
+      "level": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+  "statsNoEquipment": "Equipaggia qualcosa per vedere le statistiche",
+
+  "skillDetailLevels": "Livelli",
+
   "comingSoon": "Prossimamente",
 
   "initError": "Errore di inizializzazione: {error}",
@@ -166,5 +179,8 @@
     "placeholders": {
       "error": { "type": "Object" }
     }
-  }
+  },
+
+  "syncUpdated": "Dati di gioco aggiornati",
+  "syncFailed": "Sincronizzazione fallita — riproverò quando online"
 }

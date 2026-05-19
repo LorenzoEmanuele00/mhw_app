@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/database/database.dart';
 import '../../core/database/tables/enums.dart';
+import '../../shared/calc/build_stats.dart';
+import '../../shared/calc/calc_engine.dart';
 import '../../shared/calc/skills_repository.dart';
 import 'repository/builds_repository.dart';
 import '../equipment/armor/armor_repository.dart';
@@ -27,6 +29,7 @@ class BuildState {
     this.talisman,
     this.jewels = const [],
     this.skills = const [],
+    this.stats = BuildStats.empty,
   });
 
   final Build build;
@@ -38,9 +41,8 @@ class BuildState {
   final ArmorPiece? legs;
   final Talisman? talisman;
   final List<BuildJewel> jewels;
-
-  // Phase 3: skills from armor pieces + talisman (no jewels / set bonuses — Phase 4)
   final List<({Skill skill, int level})> skills;
+  final BuildStats stats;
 
   ArmorPiece? pieceForSlot(ArmorSlotType slot) => switch (slot) {
         ArmorSlotType.head => head,
@@ -219,8 +221,42 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
       }
     }
 
+    // Set bonus activation: count pieces per set → activate bonuses with enough pieces
+    final setPieceCounts = <int, int>{};
+    for (final piece in [head, chest, arms, waist, legs].whereType<ArmorPiece>()) {
+      setPieceCounts[piece.setId] = (setPieceCounts[piece.setId] ?? 0) + 1;
+    }
+    if (setPieceCounts.isNotEmpty) {
+      final setSkills = await armorRepo.getSetSkillsForSets(setPieceCounts.keys.toList());
+      for (final ss in setSkills) {
+        final count = setPieceCounts[ss.setId] ?? 0;
+        if (count >= ss.requiredPieces) {
+          final existing = skillMap[ss.skillId];
+          if (existing == null || ss.skillLevel > existing.level) {
+            final skillObj = await skillsRepo.getById(ss.skillId);
+            if (skillObj != null) {
+              skillMap[ss.skillId] = (skill: skillObj, level: ss.skillLevel);
+            }
+          }
+        }
+      }
+    }
+
     final skills = skillMap.values.toList()
       ..sort((a, b) => b.level.compareTo(a.level));
+
+    // Compute stats via CalcEngine
+    final allSkillLevels = await skillsRepo.getAllSkillLevels();
+    final skillLevelsById = <int, List<SkillLevel>>{};
+    for (final sl in allSkillLevels) {
+      skillLevelsById.putIfAbsent(sl.skillId, () => []).add(sl);
+    }
+    final stats = CalcEngine.compute(
+      weapon: weapon,
+      armorPieces: [head, chest, arms, waist, legs],
+      activeSkills: skills,
+      skillLevelsById: skillLevelsById,
+    );
 
     return BuildState(
       build: build,
@@ -233,6 +269,7 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
       talisman: talisman,
       jewels: jewels,
       skills: skills,
+      stats: stats,
     );
   }
 

@@ -123,7 +123,7 @@ lib/
         skills_dao.dart     ← also handles Jewels + JewelSkills queries
         builds_dao.dart
         talismans_dao.dart
-      database.dart         ← AppDatabase drift (schemaVersion 4)
+      database.dart         ← AppDatabase drift (schemaVersion 6)
       database.g.dart       ← GENERATED — do not edit
       seed_service.dart     ← loads assets/seeds/*.sql on first launch
     providers/
@@ -156,7 +156,7 @@ lib/
       jewels/
         jewels_repository.dart
     stats/
-      stats_screen.dart         ← Stats tab (placeholder — Phase 4)
+      stats_screen.dart         ← Stats tab (radar/bars toggle, skill pips, sharpness, dec slots)
     loadouts/
       loadouts_screen.dart      ← Loadouts tab (swipeable build cards)
   shared/
@@ -176,13 +176,14 @@ lib/
       segmented_control.dart
       sharpness_gauge.dart
       skill_chip.dart
+      skill_detail_sheet.dart   ← sheet con descrizione skill + livelli (EN/IT)
       slot_glyph.dart
       stat_bar.dart
     calc/
-      skills_repository.dart    ← SkillsRepository + allSkillsProvider
-      calc_engine.dart          ← (Phase 4)
+      skills_repository.dart    ← SkillsRepository + allSkillsProvider + skillLevelsProvider
+      calc_engine.dart          ← CalcEngine (True Raw, Affinity, Element, Defense, Res, Sharpness)
     models/
-      build_stats.dart          ← (Phase 4 — aggregate result)
+      build_stats.dart          ← BuildStats: risultato aggregato del CalcEngine
   l10n/
     app_en.arb
     app_it.arb
@@ -224,7 +225,7 @@ final allWeaponsProvider = StreamProvider<List<Weapon>>((ref) {
 ```
 
 ### Build state
-The active build is held in a `StateNotifierProvider<BuildNotifier, Build>`. Sheets dispatch actions (equip, setJewel, clearJewel) that the notifier applies, then persists to drift via `BuildsRepository`.
+The active build is held in a `NotifierProvider<BuildNotifier, BuildState>` (Riverpod 3 `Notifier` — `StateNotifier` was removed in 3.x). Sheets dispatch actions (equip, setJewel, clearJewel) that the notifier applies, then persists to drift via `BuildsRepository`. `BuildNotifier._resolve` aggregates skill levels from all equipped items and runs `CalcEngine.compute` to produce a `BuildStats`.
 
 ### DB reactivity
 drift exposes `Stream<List<T>>` for queries — Riverpod wraps them in `StreamProvider`.
