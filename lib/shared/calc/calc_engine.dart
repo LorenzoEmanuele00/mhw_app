@@ -73,6 +73,12 @@ class CalcEngine {
             defMultiplier *= value;
           case 'def_additive':
             defAdditive += value;
+          case 'elem_res_additive':
+            fireResAdd += value;
+            waterResAdd += value;
+            thunderResAdd += value;
+            iceResAdd += value;
+            dragonResAdd += value;
           case 'fire_res_additive':
             fireResAdd += value;
           case 'water_res_additive':

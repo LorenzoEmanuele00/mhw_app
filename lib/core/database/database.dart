@@ -45,7 +45,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 6;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -103,6 +103,11 @@ class AppDatabase extends _$AppDatabase {
             await customStatement(
               'ALTER TABLE skill_levels ADD COLUMN description_it TEXT',
             );
+          }
+          if (from < 7) {
+            // v7: fix elem_res_additive → element-specific bonus types in skill_levels seed.
+            // Clearing the table lets SeedService re-seed with corrected bonus types.
+            await customStatement('DELETE FROM skill_levels');
           }
         },
       );
