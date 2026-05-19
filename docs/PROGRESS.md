@@ -186,13 +186,13 @@ Deliver the Stats tab with a live calc engine powering all stat displays.
 
 ---
 
-### Phase 6: Polish ⬜ TODO
-- [ ] Equipment filters: by weapon type, rarity, element, skill
-- [ ] Sorting: by name / attack / defense / rarity
-- [ ] Filter UI (sheet or popover)
-- [ ] Compare mode: side-by-side two builds on StatsScreen
-- [ ] Talisman create/edit/delete UI (currently charm slots can only use seeded talismans)
-- [ ] UI/UX refinement: animations, transitions, empty states
+### Phase 6: Polish ✅ COMPLETE
+- [x] Equipment filters: by weapon type, rarity, element (`EquipmentFilters` model + `equipmentFiltersProvider`)
+- [x] Sorting: by name / attack / defense / rarity (weapons: name/attack/rarity; armor: name/defense/rarity; charm: name/newest)
+- [x] Filter UI: `EquipmentFilterSheet` bottom sheet with chips per category + badge count on filter button
+- [x] Compare mode: `CompareNotifier` + `compareBuildStateProvider` (FutureProvider.family); delta values (±) shown in StatsScreen headline card
+- [x] Talisman create/edit/delete UI: `TalismanEditorSheet` with skill picker + level stepper + deco slot picker; Edit/Delete in `EquipmentDetailSheet`
+- [x] UI/UX refinement: filter badge, compare bar, equipment category switching resets search
 
 ---
 

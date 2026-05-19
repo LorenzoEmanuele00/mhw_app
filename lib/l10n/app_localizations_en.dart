@@ -346,4 +346,95 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get syncFailed => 'Sync failed — will retry when online';
+
+  @override
+  String get charmNew => 'New Charm';
+
+  @override
+  String get charmEdit => 'Edit Charm';
+
+  @override
+  String get charmSave => 'Save';
+
+  @override
+  String get charmDelete => 'Delete Charm';
+
+  @override
+  String get charmDeleteTitle => 'Delete Charm?';
+
+  @override
+  String charmDeleteMessage(String name) {
+    return 'This will permanently delete \"$name\".';
+  }
+
+  @override
+  String get charmDeleteConfirm => 'Delete';
+
+  @override
+  String get charmNameHint => 'Charm name';
+
+  @override
+  String get charmSkillNone => 'No skill';
+
+  @override
+  String get charmPickSkill => 'Select Skill';
+
+  @override
+  String get charmSectionSkills => 'Skills';
+
+  @override
+  String get charmSectionSlots => 'Slots';
+
+  @override
+  String get filterTitle => 'Filter & Sort';
+
+  @override
+  String get filterApply => 'Apply';
+
+  @override
+  String get filterReset => 'Reset';
+
+  @override
+  String get filterWeaponType => 'Weapon Type';
+
+  @override
+  String get filterElement => 'Element';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
+  String get filterNoElement => 'None';
+
+  @override
+  String get filterSortBy => 'Sort By';
+
+  @override
+  String get sortByName => 'Name';
+
+  @override
+  String get sortByAttack => 'Attack';
+
+  @override
+  String get sortByDefense => 'Defense';
+
+  @override
+  String get sortByRarity => 'Rarity';
+
+  @override
+  String get sortByNewest => 'Newest';
+
+  @override
+  String filterActiveCount(int count) {
+    return '$count active';
+  }
+
+  @override
+  String get compareSelectBuild => 'Compare with...';
+
+  @override
+  String get compareStop => 'Stop Comparing';
+
+  @override
+  String get compareVs => 'vs';
 }

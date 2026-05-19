@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/database/database.dart';
 import '../../core/database/tables/enums.dart';
 import '../../features/build/build_notifier.dart';
+import '../../features/build/repository/builds_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/calc/build_stats.dart';
 import '../../shared/theme/app_theme.dart';
@@ -17,6 +18,7 @@ import '../../shared/widgets/large_title.dart';
 import '../../shared/widgets/section_label.dart';
 import '../../shared/widgets/sharpness_gauge.dart';
 import '../../shared/widgets/stat_bar.dart';
+import 'compare_notifier.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({super.key});
@@ -33,6 +35,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
     final l10n = AppLocalizations.of(context);
     final tokens = AppTokens.of(context);
     final buildAsync = ref.watch(buildNotifierProvider);
+    final compareId = ref.watch(compareNotifierProvider);
 
     return SafeArea(
       child: buildAsync.when(
@@ -44,12 +47,32 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           if (buildState == null) {
             return const Center(child: CircularProgressIndicator());
           }
+          AsyncValue<BuildState?>? compareAsync;
+          if (compareId != null) {
+            compareAsync = ref.watch(compareBuildStateProvider(compareId));
+          }
+
           return _StatsContent(
             buildState: buildState,
+            compareId: compareId,
+            compareAsync: compareAsync,
             showRadar: _showRadar,
             onToggleResistView: () => setState(() => _showRadar = !_showRadar),
+            onSelectCompare: () => _selectCompareBuild(context, buildState.build.id),
+            onStopCompare: () => ref.read(compareNotifierProvider.notifier).stop(),
           );
         },
+      ),
+    );
+  }
+
+  void _selectCompareBuild(BuildContext context, int currentBuildId) {
+    showAppSheet(
+      context: context,
+      child: _BuildSelectorSheet(
+        currentBuildId: currentBuildId,
+        onSelected: (id) =>
+            ref.read(compareNotifierProvider.notifier).select(id),
       ),
     );
   }
@@ -64,19 +87,28 @@ class _StatsContent extends StatelessWidget {
     required this.buildState,
     required this.showRadar,
     required this.onToggleResistView,
+    required this.onSelectCompare,
+    required this.onStopCompare,
+    this.compareId,
+    this.compareAsync,
   });
 
   final BuildState buildState;
+  final int? compareId;
+  final AsyncValue<BuildState?>? compareAsync;
   final bool showRadar;
   final VoidCallback onToggleResistView;
+  final VoidCallback onSelectCompare;
+  final VoidCallback onStopCompare;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final tokens = AppTokens.of(context);
     final stats = buildState.stats;
     final hasWeapon = buildState.weapon != null;
+    final compareState = compareAsync?.asData?.value;
 
-    // Aggregate all deco slots across the full build
     final allSlots = <int>[];
     for (final src in [
       buildState.weapon?.slots,
@@ -95,24 +127,63 @@ class _StatsContent extends StatelessWidget {
           child: LargeTitleBar(
             title: l10n.navStats,
             subtitle: buildState.build.name,
+            trailing: compareId != null
+                ? HeaderAction(
+                    label: l10n.compareStop,
+                    onTap: onStopCompare,
+                  )
+                : null,
           ),
         ),
+
+        // Compare bar: show name of compared build
+        if (compareId != null && compareState != null)
+          SliverToBoxAdapter(
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: tokens.accent.withValues(alpha: 0.10),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: tokens.accent.withValues(alpha: 0.3)),
+              ),
+              child: Row(
+                spacing: 8,
+                children: [
+                  Icon(Icons.compare_arrows_rounded,
+                      size: 16, color: tokens.accent),
+                  Expanded(
+                    child: Text(
+                      '${l10n.compareVs} ${compareState.build.name}',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: tokens.accent,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
           sliver: SliverList(
             delegate: SliverChildListDelegate([
-              // Headline 2×2 card
-              _HeadlineCard(stats: stats, buildState: buildState),
+              _HeadlineCard(
+                stats: stats,
+                buildState: buildState,
+                compareStats: compareState?.stats,
+              ),
               const SizedBox(height: 28),
 
-              // Sharpness
               if (hasWeapon) ...[
                 SectionLabel(text: l10n.statSharpness),
                 _SharpnessCard(stats: stats),
                 const SizedBox(height: 28),
               ],
 
-              // Elemental Resistances
               SectionLabel(
                 text: l10n.statsResistances,
                 trailing: GestureDetector(
@@ -130,7 +201,6 @@ class _StatsContent extends StatelessWidget {
               ),
               const SizedBox(height: 28),
 
-              // Skills
               SectionLabel(text: l10n.sectionSkills),
               if (buildState.skills.isEmpty)
                 Padding(
@@ -172,7 +242,6 @@ class _StatsContent extends StatelessWidget {
                 ),
               const SizedBox(height: 28),
 
-              // Decoration Slots summary
               if (allSlots.isNotEmpty) ...[
                 SectionLabel(text: l10n.sectionDecoSlots),
                 AppCard(
@@ -181,21 +250,8 @@ class _StatsContent extends StatelessWidget {
                 const SizedBox(height: 28),
               ],
 
-              // Compare button (Phase 6 placeholder)
               OutlinedButton(
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    title: Text(l10n.statsCompare),
-                    content: Text(l10n.comingSoon),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text(l10n.loadoutsCancel),
-                      ),
-                    ],
-                  ),
-                ),
+                onPressed: onSelectCompare,
                 child: Text(l10n.statsCompare),
               ),
             ]),
@@ -211,9 +267,14 @@ class _StatsContent extends StatelessWidget {
 // ---------------------------------------------------------------------------
 
 class _HeadlineCard extends StatelessWidget {
-  const _HeadlineCard({required this.stats, required this.buildState});
+  const _HeadlineCard({
+    required this.stats,
+    required this.buildState,
+    this.compareStats,
+  });
   final BuildStats stats;
   final BuildState buildState;
+  final BuildStats? compareStats;
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +295,14 @@ class _HeadlineCard extends StatelessWidget {
       elemColor = AppColors.element(buildState.weapon!.elementType!, brightness);
     }
 
+    int? atkDelta, defDelta;
+    double? affDelta;
+    if (compareStats != null && hasWeapon) {
+      atkDelta = stats.trueRaw.round() - compareStats!.trueRaw.round();
+      defDelta = stats.totalDefense - compareStats!.totalDefense;
+      affDelta = stats.effectiveAffinity - compareStats!.effectiveAffinity;
+    }
+
     return AppCard(
       child: Row(
         children: [
@@ -241,18 +310,21 @@ class _HeadlineCard extends StatelessWidget {
             label: l10n.statAttack,
             value: hasWeapon ? stats.trueRaw.round().toString() : '—',
             color: AppColors.negativeRed,
+            delta: atkDelta,
           ),
           _HeadlineDivider(),
           _HeadlineCell(
             label: l10n.statDefense,
             value: stats.totalDefense > 0 ? stats.totalDefense.toString() : '—',
             color: tokens.accent,
+            delta: defDelta,
           ),
           _HeadlineDivider(),
           _HeadlineCell(
             label: l10n.statAffinity,
             value: affStr,
             color: const Color(0xFFFF9F0A),
+            delta: affDelta?.round(),
           ),
           _HeadlineDivider(),
           _HeadlineCell(
@@ -273,14 +345,18 @@ class _HeadlineCell extends StatelessWidget {
     required this.label,
     required this.value,
     required this.color,
+    this.delta,
   });
   final String label;
   final String value;
   final Color color;
+  final int? delta;
 
   @override
   Widget build(BuildContext context) {
     final tokens = AppTokens.of(context);
+    final hasDelta = delta != null && delta != 0;
+
     return Expanded(
       child: Column(
         children: [
@@ -293,6 +369,17 @@ class _HeadlineCell extends StatelessWidget {
               letterSpacing: -0.5,
             ),
           ),
+          if (hasDelta)
+            Text(
+              delta! > 0 ? '+$delta' : '$delta',
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: delta! > 0
+                    ? const Color(0xFF34C759)
+                    : const Color(0xFFFF3B30),
+              ),
+            ),
           const SizedBox(height: 2),
           Text(
             label.toUpperCase(),
@@ -680,69 +767,169 @@ class _SkillRow extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        spacing: 12,
-        children: [
-          // Colored dot
-          Container(
-            width: 10,
-            height: 10,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          spacing: 12,
+          children: [
+            Container(
+              width: 10,
+              height: 10,
+              decoration: BoxDecoration(
+                color: color,
+                shape: BoxShape.circle,
+              ),
             ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 6,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      skill.name,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: tokens.label,
-                        letterSpacing: -0.2,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        l10n.statsSkillLevel(entry.level, skill.maxLevel),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 6,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        skill.name,
                         style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          color: color,
-                          letterSpacing: 0.2,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: tokens.label,
+                          letterSpacing: -0.2,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                // Pip progress bar
-                _SkillPips(
-                  level: entry.level,
-                  maxLevel: skill.maxLevel,
-                  color: color,
-                ),
-              ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: color.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          l10n.statsSkillLevel(entry.level, skill.maxLevel),
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: color,
+                            letterSpacing: 0.2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  _SkillPips(
+                    level: entry.level,
+                    maxLevel: skill.maxLevel,
+                    color: color,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
+    );
   }
 }
+
+// ---------------------------------------------------------------------------
+// Build selector sheet (for compare mode)
+// ---------------------------------------------------------------------------
+
+class _BuildSelectorSheet extends ConsumerWidget {
+  const _BuildSelectorSheet({
+    required this.currentBuildId,
+    required this.onSelected,
+  });
+
+  final int currentBuildId;
+  final ValueChanged<int> onSelected;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final tokens = AppTokens.of(context);
+    final buildsAsync = ref.watch(allBuildsProvider);
+
+    final builds = buildsAsync.asData?.value ?? [];
+    final others = builds.where((b) => b.id != currentBuildId).toList();
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Text(
+              l10n.compareSelectBuild,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: tokens.label,
+                letterSpacing: -0.4,
+              ),
+            ),
+          ),
+          if (others.isEmpty)
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Center(
+                child: Text(
+                  l10n.loadoutsEmpty,
+                  style: TextStyle(color: tokens.label2),
+                ),
+              ),
+            )
+          else
+            AppCard(
+              padding: 0,
+              child: Column(
+                children: others.asMap().entries.map((e) {
+                  final idx = e.key;
+                  final build = e.value;
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      onSelected(build.id);
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
+                      decoration: idx < others.length - 1
+                          ? BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: tokens.sep, width: 0.5)))
+                          : null,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              build.name,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: tokens.label,
+                              ),
+                            ),
+                          ),
+                          Icon(Icons.chevron_right_rounded,
+                              size: 18, color: tokens.label3),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Skill pip progress bar
+// ---------------------------------------------------------------------------
 
 class _SkillPips extends StatelessWidget {
   const _SkillPips({

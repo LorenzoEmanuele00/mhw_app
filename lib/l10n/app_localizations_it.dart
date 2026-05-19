@@ -348,4 +348,95 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get syncFailed => 'Sincronizzazione fallita — riproverò quando online';
+
+  @override
+  String get charmNew => 'Nuovo talismano';
+
+  @override
+  String get charmEdit => 'Modifica talismano';
+
+  @override
+  String get charmSave => 'Salva';
+
+  @override
+  String get charmDelete => 'Elimina talismano';
+
+  @override
+  String get charmDeleteTitle => 'Eliminare il talismano?';
+
+  @override
+  String charmDeleteMessage(String name) {
+    return 'Questa azione eliminerà definitivamente \"$name\".';
+  }
+
+  @override
+  String get charmDeleteConfirm => 'Elimina';
+
+  @override
+  String get charmNameHint => 'Nome talismano';
+
+  @override
+  String get charmSkillNone => 'Nessuna abilità';
+
+  @override
+  String get charmPickSkill => 'Seleziona abilità';
+
+  @override
+  String get charmSectionSkills => 'Abilità';
+
+  @override
+  String get charmSectionSlots => 'Slot';
+
+  @override
+  String get filterTitle => 'Filtri & Ordine';
+
+  @override
+  String get filterApply => 'Applica';
+
+  @override
+  String get filterReset => 'Reset';
+
+  @override
+  String get filterWeaponType => 'Tipo arma';
+
+  @override
+  String get filterElement => 'Elemento';
+
+  @override
+  String get filterAny => 'Qualsiasi';
+
+  @override
+  String get filterNoElement => 'Nessuno';
+
+  @override
+  String get filterSortBy => 'Ordina per';
+
+  @override
+  String get sortByName => 'Nome';
+
+  @override
+  String get sortByAttack => 'Attacco';
+
+  @override
+  String get sortByDefense => 'Difesa';
+
+  @override
+  String get sortByRarity => 'Rarità';
+
+  @override
+  String get sortByNewest => 'Più recenti';
+
+  @override
+  String filterActiveCount(int count) {
+    return '$count attivi';
+  }
+
+  @override
+  String get compareSelectBuild => 'Confronta con...';
+
+  @override
+  String get compareStop => 'Smetti di confrontare';
+
+  @override
+  String get compareVs => 'vs';
 }

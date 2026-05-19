@@ -18,11 +18,12 @@ import '../../../shared/widgets/stat_bar.dart';
 import '../armor/armor_repository.dart';
 import '../equipment_screen.dart';
 import '../jewels/jewels_repository.dart';
+import '../talismans/talismans_repository.dart';
 import '../models/equip_item.dart';
 import '../../build/build_notifier.dart';
 import 'jewel_picker_sheet.dart';
+import 'talisman_editor_sheet.dart';
 
-/// Full-screen-height content for the equipment detail bottom sheet.
 class EquipmentDetailSheet extends ConsumerWidget {
   const EquipmentDetailSheet({super.key, required this.item});
 
@@ -146,7 +147,6 @@ class _WeaponDetail extends ConsumerWidget {
             ),
           ),
 
-          // Stats
           AppCard(
             child: Column(
               spacing: 14,
@@ -200,7 +200,6 @@ class _WeaponDetail extends ConsumerWidget {
               buildState: isEquipped ? buildState : null,
             ),
 
-          // Equip / Change CTA
           _EquipButton(
             label: isEquipped ? l10n.equipChange : l10n.equipTo,
             isEquipped: isEquipped,
@@ -321,7 +320,6 @@ class _ArmorDetail extends ConsumerWidget {
               buildState: isEquipped ? buildState : null,
             ),
 
-          // Equip / Change CTA
           _EquipButton(
             label: isEquipped ? l10n.equipChange : l10n.equipTo,
             isEquipped: isEquipped,
@@ -387,7 +385,6 @@ class _CharmDetail extends ConsumerWidget {
               slotSource: JewelSlotSource.talisman,
               buildState: isEquipped ? buildState : null,
             ),
-          // Equip / Change CTA
           _EquipButton(
             label: isEquipped ? l10n.equipChange : l10n.equipTo,
             isEquipped: isEquipped,
@@ -401,6 +398,70 @@ class _CharmDetail extends ConsumerWidget {
                     ref.read(buildNotifierProvider.notifier).equipCharm(talisman.id);
                     Navigator.of(context).pop();
                   },
+          ),
+
+          Row(
+            spacing: 12,
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    showAppSheet(
+                      context: context,
+                      child: TalismanEditorSheet(existing: talisman),
+                    );
+                  },
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                    side: BorderSide(color: tokens.sep),
+                  ),
+                  child: Text(l10n.charmEdit),
+                ),
+              ),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () async {
+                    final confirmed = await showDialog<bool>(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: Text(l10n.charmDeleteTitle),
+                        content: Text(l10n.charmDeleteMessage(talisman.name)),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(ctx).pop(false),
+                            child: Text(l10n.loadoutsCancel),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(ctx).pop(true),
+                            style: TextButton.styleFrom(
+                              foregroundColor: Theme.of(context).colorScheme.error,
+                            ),
+                            child: Text(l10n.charmDeleteConfirm),
+                          ),
+                        ],
+                      ),
+                    );
+                    if (confirmed != true || !context.mounted) return;
+                    if (isEquipped) {
+                      await ref.read(buildNotifierProvider.notifier).equipCharm(null);
+                    }
+                    await ref.read(talismansRepositoryProvider).delete(talisman.id);
+                    if (context.mounted) Navigator.of(context).pop();
+                  },
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.error,
+                    side: BorderSide(
+                      color: Theme.of(context).colorScheme.error.withValues(alpha: 0.5),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                  child: Text(l10n.charmDelete),
+                ),
+              ),
+            ],
           ),
         ],
       ),

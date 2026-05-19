@@ -1,74 +1,13 @@
 import 'package:drift/drift.dart' show Value;
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/database/database.dart';
 import '../../core/database/tables/enums.dart';
-import '../../shared/calc/build_stats.dart';
-import '../../shared/calc/calc_engine.dart';
-import '../../shared/calc/skills_repository.dart';
+import '../../shared/calc/build_resolver.dart';
+import 'build_state.dart';
 import 'repository/builds_repository.dart';
-import '../equipment/armor/armor_repository.dart';
-import '../equipment/jewels/jewels_repository.dart';
-import '../equipment/talismans/talismans_repository.dart';
-import '../equipment/weapons/weapons_repository.dart';
 
-// ---------------------------------------------------------------------------
-// State
-// ---------------------------------------------------------------------------
-
-@immutable
-class BuildState {
-  const BuildState({
-    required this.build,
-    this.weapon,
-    this.head,
-    this.chest,
-    this.arms,
-    this.waist,
-    this.legs,
-    this.talisman,
-    this.jewels = const [],
-    this.skills = const [],
-    this.stats = BuildStats.empty,
-  });
-
-  final Build build;
-  final Weapon? weapon;
-  final ArmorPiece? head;
-  final ArmorPiece? chest;
-  final ArmorPiece? arms;
-  final ArmorPiece? waist;
-  final ArmorPiece? legs;
-  final Talisman? talisman;
-  final List<BuildJewel> jewels;
-  final List<({Skill skill, int level})> skills;
-  final BuildStats stats;
-
-  ArmorPiece? pieceForSlot(ArmorSlotType slot) => switch (slot) {
-        ArmorSlotType.head => head,
-        ArmorSlotType.chest => chest,
-        ArmorSlotType.arms => arms,
-        ArmorSlotType.waist => waist,
-        ArmorSlotType.legs => legs,
-      };
-
-  int? jewelIdForSlot(JewelSlotSource source, int slotIndex) {
-    try {
-      return jewels
-          .firstWhere((j) => j.slotSource == source && j.slotIndex == slotIndex)
-          .jewelId;
-    } catch (_) {
-      return null;
-    }
-  }
-
-  int get totalDefense =>
-      (head?.baseDefense ?? 0) +
-      (chest?.baseDefense ?? 0) +
-      (arms?.baseDefense ?? 0) +
-      (waist?.baseDefense ?? 0) +
-      (legs?.baseDefense ?? 0);
-}
+// Re-export BuildState so existing callers don't need to update their imports.
+export 'build_state.dart';
 
 // ---------------------------------------------------------------------------
 // Providers
@@ -125,14 +64,14 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
         }
         // Resolve BEFORE updating activeBuildIdProvider so the listener
         // sees _currentBuildId already set and skips the redundant call.
-        final resolved = await _resolve(build!);
+        final resolved = await resolveBuild(build!, ref);
         _currentBuildId = build.id;
         state = AsyncValue.data(resolved);
         ref.read(activeBuildIdProvider.notifier).set(build.id);
         return;
       }
 
-      final resolved = await _resolve(build);
+      final resolved = await resolveBuild(build, ref);
       _currentBuildId = build.id;
       state = AsyncValue.data(resolved);
     } catch (e, st) {
@@ -140,145 +79,12 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
     }
   }
 
-  Future<BuildState> _resolve(Build build) async {
-    final weaponsRepo = ref.read(weaponsRepositoryProvider);
-    final armorRepo = ref.read(armorRepositoryProvider);
-    final talismansRepo = ref.read(talismansRepositoryProvider);
-    final buildsRepo = ref.read(buildsRepositoryProvider);
-
-    final (weapon, head, chest, arms, waist, legs, talisman, jewels) = await (
-      build.weaponId != null
-          ? weaponsRepo.getById(build.weaponId!)
-          : Future<Weapon?>.value(null),
-      build.headId != null
-          ? armorRepo.getById(build.headId!)
-          : Future<ArmorPiece?>.value(null),
-      build.chestId != null
-          ? armorRepo.getById(build.chestId!)
-          : Future<ArmorPiece?>.value(null),
-      build.armsId != null
-          ? armorRepo.getById(build.armsId!)
-          : Future<ArmorPiece?>.value(null),
-      build.waistId != null
-          ? armorRepo.getById(build.waistId!)
-          : Future<ArmorPiece?>.value(null),
-      build.legsId != null
-          ? armorRepo.getById(build.legsId!)
-          : Future<ArmorPiece?>.value(null),
-      build.talismanId != null
-          ? talismansRepo.getById(build.talismanId!)
-          : Future<Talisman?>.value(null),
-      buildsRepo.getJewels(build.id),
-    ).wait;
-
-    // Aggregate skills from armor pieces + talisman + jewels (no set bonuses — Phase 4)
-    final skillMap = <int, ({Skill skill, int level})>{};
-
-    void addSkill(Skill skill, int addedLevel) {
-      final existing = skillMap[skill.id];
-      if (existing == null) {
-        skillMap[skill.id] = (skill: skill, level: addedLevel);
-      } else {
-        final capped = (existing.level + addedLevel).clamp(0, skill.maxLevel);
-        skillMap[skill.id] = (skill: skill, level: capped);
-      }
-    }
-
-    await Future.wait([
-      for (final piece in [head, chest, arms, waist, legs].whereType<ArmorPiece>())
-        armorRepo.getPieceSkills(piece.id).then((list) {
-          for (final e in list) {
-            addSkill(e.skill, e.level);
-          }
-        }),
-    ]);
-
-    final skillsRepo = ref.read(skillsRepositoryProvider);
-
-    if (talisman != null) {
-      for (final (skillId, level) in [
-        (talisman.skill1Id, talisman.skill1Level),
-        (talisman.skill2Id, talisman.skill2Level),
-      ]) {
-        if (skillId != null && level != null) {
-          final skill = await skillsRepo.getById(skillId);
-          if (skill != null) addSkill(skill, level);
-        }
-      }
-    }
-
-    if (jewels.isNotEmpty) {
-      final allJewelSkills = await ref.read(jewelsRepositoryProvider).getAllJewelSkills();
-      final jewelSkillsByJewelId = <int, List<JewelSkill>>{};
-      for (final js in allJewelSkills) {
-        jewelSkillsByJewelId.putIfAbsent(js.jewelId, () => []).add(js);
-      }
-      for (final buildJewel in jewels) {
-        for (final js in jewelSkillsByJewelId[buildJewel.jewelId] ?? []) {
-          final skill = await skillsRepo.getById(js.skillId);
-          if (skill != null) addSkill(skill, js.skillLevel);
-        }
-      }
-    }
-
-    // Set bonus activation: count pieces per set → activate bonuses with enough pieces
-    final setPieceCounts = <int, int>{};
-    for (final piece in [head, chest, arms, waist, legs].whereType<ArmorPiece>()) {
-      setPieceCounts[piece.setId] = (setPieceCounts[piece.setId] ?? 0) + 1;
-    }
-    if (setPieceCounts.isNotEmpty) {
-      final setSkills = await armorRepo.getSetSkillsForSets(setPieceCounts.keys.toList());
-      for (final ss in setSkills) {
-        final count = setPieceCounts[ss.setId] ?? 0;
-        if (count >= ss.requiredPieces) {
-          final existing = skillMap[ss.skillId];
-          if (existing == null || ss.skillLevel > existing.level) {
-            final skillObj = await skillsRepo.getById(ss.skillId);
-            if (skillObj != null) {
-              skillMap[ss.skillId] = (skill: skillObj, level: ss.skillLevel);
-            }
-          }
-        }
-      }
-    }
-
-    final skills = skillMap.values.toList()
-      ..sort((a, b) => b.level.compareTo(a.level));
-
-    // Compute stats via CalcEngine
-    final allSkillLevels = await skillsRepo.getAllSkillLevels();
-    final skillLevelsById = <int, List<SkillLevel>>{};
-    for (final sl in allSkillLevels) {
-      skillLevelsById.putIfAbsent(sl.skillId, () => []).add(sl);
-    }
-    final stats = CalcEngine.compute(
-      weapon: weapon,
-      armorPieces: [head, chest, arms, waist, legs],
-      activeSkills: skills,
-      skillLevelsById: skillLevelsById,
-    );
-
-    return BuildState(
-      build: build,
-      weapon: weapon,
-      head: head,
-      chest: chest,
-      arms: arms,
-      waist: waist,
-      legs: legs,
-      talisman: talisman,
-      jewels: jewels,
-      skills: skills,
-      stats: stats,
-    );
-  }
-
   Future<void> _persistBuild(BuildsCompanion companion) async {
     final repo = ref.read(buildsRepositoryProvider);
     await repo.update(companion);
     final build = await repo.getById(companion.id.value);
     if (build != null) {
-      final resolved = await _resolve(build);
+      final resolved = await resolveBuild(build, ref);
       _currentBuildId = build.id;
       state = AsyncValue.data(resolved);
     }
@@ -289,7 +95,7 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
     if (id == null) return;
     final build = await ref.read(buildsRepositoryProvider).getById(id);
     if (build != null) {
-      state = AsyncValue.data(await _resolve(build));
+      state = AsyncValue.data(await resolveBuild(build, ref));
     }
   }
 
@@ -429,6 +235,10 @@ class BuildNotifier extends Notifier<AsyncValue<BuildState?>> {
         );
     if (state.asData?.value?.build.id == id) await _reloadCurrent();
   }
+
+  /// Reloads the currently active build from the database.
+  /// Call this after mutating data (e.g. editing a talisman) that affects the active build.
+  Future<void> refreshActiveBuild() => _reloadCurrent();
 
   Future<void> deleteBuild(int id) async {
     await ref.read(buildsRepositoryProvider).delete(id);

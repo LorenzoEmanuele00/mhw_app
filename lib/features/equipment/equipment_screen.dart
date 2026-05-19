@@ -11,11 +11,14 @@ import '../../shared/widgets/search_field.dart';
 import '../../shared/widgets/section_label.dart';
 import '../../shared/widgets/segmented_control.dart';
 import 'armor/armor_repository.dart';
+import 'models/equipment_filter.dart';
 import 'talismans/talismans_repository.dart';
 import 'weapons/weapons_repository.dart';
 import 'models/equip_item.dart';
 import 'widgets/equipment_detail_sheet.dart';
+import 'widgets/equipment_filter_sheet.dart';
 import 'widgets/equipment_row.dart';
+import 'widgets/talisman_editor_sheet.dart';
 
 enum EquipmentCategory { weapons, armor, charm }
 
@@ -59,9 +62,17 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
     ref.read(equipmentCategoryProvider.notifier).set(cat);
   }
 
+  void _openFilterSheet(BuildContext context, EquipmentCategory category) {
+    showAppSheet(
+      context: context,
+      child: EquipmentFilterSheet(category: category),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final category = ref.watch(equipmentCategoryProvider);
+    final filters = ref.watch(equipmentFiltersProvider);
 
     // Reset search when the category is changed from outside (e.g. from Build tab)
     ref.listen<EquipmentCategory>(equipmentCategoryProvider, (prev, next) {
@@ -73,6 +84,7 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
     final weapons = ref.watch(allWeaponsProvider);
     final armor = ref.watch(allArmorProvider);
     final charms = ref.watch(allTalismansProvider);
+    final filterCount = filters.activeFilterCount;
 
     return SafeArea(
       child: Column(
@@ -80,9 +92,53 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
         children: [
           LargeTitleBar(
             title: l10n.navEquipment,
-            trailing: HeaderAction(
-              label: l10n.filterButton,
-              onTap: () {}, // Phase 6
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 16,
+              children: [
+                if (category == EquipmentCategory.charm)
+                  HeaderAction(
+                    label: '+ ${l10n.charmNew}',
+                    isPrimary: true,
+                    onTap: () => showAppSheet(
+                      context: context,
+                      child: const TalismanEditorSheet(),
+                    ),
+                  ),
+                GestureDetector(
+                  onTap: () => _openFilterSheet(context, category),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 4,
+                    children: [
+                      Text(
+                        l10n.filterButton,
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: tokens.accent,
+                        ),
+                      ),
+                      if (filterCount > 0)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 1),
+                          decoration: BoxDecoration(
+                            color: tokens.accent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            '$filterCount',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
 
@@ -107,9 +163,9 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
 
           Expanded(
             child: switch (category) {
-              EquipmentCategory.weapons => _buildWeaponsList(context, weapons.asData?.value ?? [], l10n, tokens),
-              EquipmentCategory.armor   => _buildArmorList(context, armor.asData?.value ?? [], l10n, tokens),
-              EquipmentCategory.charm   => _buildCharmList(context, charms.asData?.value ?? [], l10n, tokens),
+              EquipmentCategory.weapons => _buildWeaponsList(context, weapons.asData?.value ?? [], filters, l10n, tokens),
+              EquipmentCategory.armor   => _buildArmorList(context, armor.asData?.value ?? [], filters, l10n, tokens),
+              EquipmentCategory.charm   => _buildCharmList(context, charms.asData?.value ?? [], filters, l10n, tokens),
             },
           ),
         ],
@@ -124,19 +180,21 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
   Widget _buildWeaponsList(
     BuildContext context,
     List<Weapon> weapons,
+    EquipmentFilters filters,
     AppLocalizations l10n,
     AppTokens tokens,
   ) {
-    const typeOrder = WeaponType.values;
+    // Which types to show
+    final typeOrder = filters.weaponTypes.isEmpty
+        ? WeaponType.values.toList()
+        : WeaponType.values
+            .where((t) => filters.weaponTypes.contains(t))
+            .toList();
 
-    final hasAny = typeOrder.any((type) => weapons.any(
-          (w) =>
-              w.weaponType == type &&
-              (_query.isEmpty ||
-                  w.name.toLowerCase().contains(_query.toLowerCase())),
-        ));
+    final hasAny = typeOrder.any((type) =>
+        _filterWeapons(weapons, type, _query, filters).isNotEmpty);
 
-    if (!hasAny && _query.isNotEmpty) {
+    if (!hasAny && (_query.isNotEmpty || !filters.isDefault)) {
       return _EmptySearch(query: _query, l10n: l10n, tokens: tokens);
     }
 
@@ -144,25 +202,62 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
       children: [
         for (final type in typeOrder)
-          ..._buildWeaponGroup(context, weapons, type, l10n, tokens),
+          ..._buildWeaponGroup(context, weapons, type, filters, l10n, tokens),
       ],
     );
+  }
+
+  List<Weapon> _filterWeapons(
+    List<Weapon> all,
+    WeaponType type,
+    String query,
+    EquipmentFilters filters,
+  ) {
+    var list = all.where((w) => w.weaponType == type).toList();
+    if (query.isNotEmpty) {
+      final q = query.toLowerCase();
+      list = list.where((w) => w.name.toLowerCase().contains(q)).toList();
+    }
+    if (filters.rarityMin > 1) {
+      list = list.where((w) => w.rarity >= filters.rarityMin).toList();
+    }
+    // Element filter
+    final anyElemFilter =
+        filters.elements.isNotEmpty || !filters.includeNoElement;
+    if (anyElemFilter) {
+      list = list.where((w) {
+        if (w.elementType == null) return filters.includeNoElement;
+        return filters.elements.isEmpty ||
+            filters.elements.contains(w.elementType);
+      }).toList();
+    }
+    // Sort
+    _sortWeapons(list, filters.sortBy);
+    return list;
+  }
+
+  void _sortWeapons(List<Weapon> list, EquipSortBy sortBy) {
+    switch (sortBy) {
+      case EquipSortBy.name:
+        list.sort((a, b) => a.name.compareTo(b.name));
+      case EquipSortBy.attack:
+        list.sort((a, b) => b.baseAttack.compareTo(a.baseAttack));
+      case EquipSortBy.rarity:
+        list.sort((a, b) => b.rarity.compareTo(a.rarity));
+      default:
+        list.sort((a, b) => a.name.compareTo(b.name));
+    }
   }
 
   List<Widget> _buildWeaponGroup(
     BuildContext context,
     List<Weapon> allWeapons,
     WeaponType type,
+    EquipmentFilters filters,
     AppLocalizations l10n,
     AppTokens tokens,
   ) {
-    final filtered = allWeapons
-        .where((w) =>
-            w.weaponType == type &&
-            (_query.isEmpty ||
-                w.name.toLowerCase().contains(_query.toLowerCase())))
-        .toList();
-
+    final filtered = _filterWeapons(allWeapons, type, _query, filters);
     if (filtered.isEmpty) return [];
 
     return [
@@ -192,6 +287,7 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
   Widget _buildArmorList(
     BuildContext context,
     List<ArmorPiece> allPieces,
+    EquipmentFilters filters,
     AppLocalizations l10n,
     AppTokens tokens,
   ) {
@@ -203,40 +299,62 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
       ArmorSlotType.legs,
     ];
 
-    final hasAny = slotOrder.any((slot) {
-      final pieces = allPieces
-          .where((p) =>
-              p.slotType == slot &&
-              (_query.isEmpty || p.name.toLowerCase().contains(_query.toLowerCase())))
-          .toList();
-      return pieces.isNotEmpty;
-    });
+    final hasAny = slotOrder.any((slot) =>
+        _filterArmor(allPieces, slot, _query, filters).isNotEmpty);
 
-    if (!hasAny && _query.isNotEmpty) {
+    if (!hasAny && (_query.isNotEmpty || !filters.isDefault)) {
       return _EmptySearch(query: _query, l10n: l10n, tokens: tokens);
     }
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
       children: [
-        for (final slot in slotOrder) ..._buildArmorGroup(context, allPieces, slot, l10n, tokens),
+        for (final slot in slotOrder)
+          ..._buildArmorGroup(context, allPieces, slot, filters, l10n, tokens),
       ],
     );
+  }
+
+  List<ArmorPiece> _filterArmor(
+    List<ArmorPiece> all,
+    ArmorSlotType slot,
+    String query,
+    EquipmentFilters filters,
+  ) {
+    var list = all.where((p) => p.slotType == slot).toList();
+    if (query.isNotEmpty) {
+      final q = query.toLowerCase();
+      list = list.where((p) => p.name.toLowerCase().contains(q)).toList();
+    }
+    if (filters.rarityMin > 1) {
+      list = list.where((p) => p.rarity >= filters.rarityMin).toList();
+    }
+    _sortArmor(list, filters.sortBy);
+    return list;
+  }
+
+  void _sortArmor(List<ArmorPiece> list, EquipSortBy sortBy) {
+    switch (sortBy) {
+      case EquipSortBy.name:
+        list.sort((a, b) => a.name.compareTo(b.name));
+      case EquipSortBy.defense:
+        list.sort((a, b) => b.baseDefense.compareTo(a.baseDefense));
+      case EquipSortBy.rarity:
+        list.sort((a, b) => b.rarity.compareTo(a.rarity));
+      default:
+        list.sort((a, b) => a.name.compareTo(b.name));
+    }
   }
 
   List<Widget> _buildArmorGroup(
     BuildContext context,
     List<ArmorPiece> allPieces,
     ArmorSlotType slot,
+    EquipmentFilters filters,
     AppLocalizations l10n,
     AppTokens tokens,
   ) {
-    final filtered = allPieces
-        .where((p) =>
-            p.slotType == slot &&
-            (_query.isEmpty || p.name.toLowerCase().contains(_query.toLowerCase())))
-        .toList();
-
+    final filtered = _filterArmor(allPieces, slot, _query, filters);
     if (filtered.isEmpty) return [];
 
     final groupLabel = switch (slot) {
@@ -274,29 +392,43 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
   Widget _buildCharmList(
     BuildContext context,
     List<Talisman> talismans,
+    EquipmentFilters filters,
     AppLocalizations l10n,
     AppTokens tokens,
   ) {
-    final filtered = _filterItems(talismans, (t) => t.name);
-    return _ItemList(
-      isEmpty: filtered.isEmpty,
-      query: _query,
-      l10n: l10n,
-      tokens: tokens,
-      builder: (context) => AppCard(
-        padding: 0,
-        child: Column(
-          children: filtered.asMap().entries.map((e) {
-            final idx = e.key;
-            final t = e.value;
-            return EquipmentRow(
-              item: CharmEquipItem(t),
-              isLast: idx == filtered.length - 1,
-              onTap: () => _openDetail(context, CharmEquipItem(t)),
-            );
-          }).toList(),
+    var list = talismans.toList();
+    if (_query.isNotEmpty) {
+      final q = _query.toLowerCase();
+      list = list.where((t) => t.name.toLowerCase().contains(q)).toList();
+    }
+    if (filters.sortBy == EquipSortBy.newest) {
+      // Keep DB order (already newest-first from DAO)
+    } else {
+      list.sort((a, b) => a.name.compareTo(b.name));
+    }
+
+    if (list.isEmpty) {
+      return _EmptySearch(query: _query, l10n: l10n, tokens: tokens);
+    }
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
+      children: [
+        AppCard(
+          padding: 0,
+          child: Column(
+            children: list.asMap().entries.map((e) {
+              final idx = e.key;
+              final t = e.value;
+              return EquipmentRow(
+                item: CharmEquipItem(t),
+                isLast: idx == list.length - 1,
+                onTap: () => _openDetail(context, CharmEquipItem(t)),
+              );
+            }).toList(),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -307,44 +439,11 @@ class _EquipmentScreenState extends ConsumerState<EquipmentScreen> {
   void _openDetail(BuildContext context, EquipItem item) {
     showAppSheet(context: context, child: EquipmentDetailSheet(item: item));
   }
-
-  List<T> _filterItems<T>(List<T> items, String Function(T) nameOf) {
-    if (_query.isEmpty) return items;
-    final q = _query.toLowerCase();
-    return items.where((i) => nameOf(i).toLowerCase().contains(q)).toList();
-  }
 }
 
 // ---------------------------------------------------------------------------
 // Shared list wrapper
 // ---------------------------------------------------------------------------
-
-class _ItemList extends StatelessWidget {
-  const _ItemList({
-    required this.isEmpty,
-    required this.query,
-    required this.l10n,
-    required this.tokens,
-    required this.builder,
-  });
-
-  final bool isEmpty;
-  final String query;
-  final AppLocalizations l10n;
-  final AppTokens tokens;
-  final Widget Function(BuildContext) builder;
-
-  @override
-  Widget build(BuildContext context) {
-    if (isEmpty && query.isNotEmpty) {
-      return _EmptySearch(query: query, l10n: l10n, tokens: tokens);
-    }
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
-      children: [builder(context)],
-    );
-  }
-}
 
 class _EmptySearch extends StatelessWidget {
   const _EmptySearch({
@@ -362,7 +461,9 @@ class _EmptySearch extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(32),
         child: Text(
-          l10n.searchNoResults(query),
+          query.isEmpty
+              ? l10n.buildNoSkills  // reuse "no items" message
+              : l10n.searchNoResults(query),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 14, color: tokens.label2),
         ),

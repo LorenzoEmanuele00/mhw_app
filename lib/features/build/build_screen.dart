@@ -67,11 +67,9 @@ class _BuildContent extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
           sliver: SliverList(
             delegate: SliverChildListDelegate([
-              // Weapon hero
               _WeaponHero(buildState: buildState),
               const SizedBox(height: 28),
 
-              // Armor slots + charm
               SectionLabel(text: l10n.sectionArmor),
               AppCard(
                 padding: 0,
@@ -86,7 +84,6 @@ class _BuildContent extends ConsumerWidget {
               ),
               const SizedBox(height: 28),
 
-              // Active skills
               SectionLabel(text: l10n.buildActiveSkills),
               if (buildState.skills.isEmpty)
                 Padding(
@@ -124,7 +121,6 @@ class _BuildContent extends ConsumerWidget {
                 ),
               const SizedBox(height: 28),
 
-              // Quick summary
               SectionLabel(text: l10n.buildSummary),
               _QuickSummary(buildState: buildState),
             ]),
@@ -201,7 +197,6 @@ class _WeaponHero extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: 14,
             children: [
-              // Header
               Row(
                 spacing: 12,
                 children: [
@@ -237,7 +232,6 @@ class _WeaponHero extends ConsumerWidget {
                 ],
               ),
 
-              // Stats grid
               Row(
                 children: [
                   _StatPill(
@@ -259,7 +253,6 @@ class _WeaponHero extends ConsumerWidget {
                 ],
               ),
 
-              // Sharpness
               SharpnessGauge(sharpnessMax: weapon.sharpnessMax),
             ],
           ),

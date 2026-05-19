@@ -182,5 +182,47 @@
   },
 
   "syncUpdated": "Game data updated",
-  "syncFailed": "Sync failed — will retry when online"
+  "syncFailed": "Sync failed — will retry when online",
+
+  "charmNew": "New Charm",
+  "charmEdit": "Edit Charm",
+  "charmSave": "Save",
+  "charmDelete": "Delete Charm",
+  "charmDeleteTitle": "Delete Charm?",
+  "charmDeleteMessage": "This will permanently delete \"{name}\".",
+  "@charmDeleteMessage": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "charmDeleteConfirm": "Delete",
+  "charmNameHint": "Charm name",
+  "charmSkillNone": "No skill",
+  "charmPickSkill": "Select Skill",
+  "charmSectionSkills": "Skills",
+  "charmSectionSlots": "Slots",
+
+  "filterTitle": "Filter & Sort",
+  "filterApply": "Apply",
+  "filterReset": "Reset",
+  "filterWeaponType": "Weapon Type",
+  "filterElement": "Element",
+  "filterAny": "Any",
+  "filterNoElement": "None",
+  "filterSortBy": "Sort By",
+  "sortByName": "Name",
+  "sortByAttack": "Attack",
+  "sortByDefense": "Defense",
+  "sortByRarity": "Rarity",
+  "sortByNewest": "Newest",
+  "filterActiveCount": "{count} active",
+  "@filterActiveCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "compareSelectBuild": "Compare with...",
+  "compareStop": "Stop Comparing",
+  "compareVs": "vs"
 }

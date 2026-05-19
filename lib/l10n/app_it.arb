@@ -182,5 +182,47 @@
   },
 
   "syncUpdated": "Dati di gioco aggiornati",
-  "syncFailed": "Sincronizzazione fallita — riproverò quando online"
+  "syncFailed": "Sincronizzazione fallita — riproverò quando online",
+
+  "charmNew": "Nuovo talismano",
+  "charmEdit": "Modifica talismano",
+  "charmSave": "Salva",
+  "charmDelete": "Elimina talismano",
+  "charmDeleteTitle": "Eliminare il talismano?",
+  "charmDeleteMessage": "Questa azione eliminerà definitivamente \"{name}\".",
+  "@charmDeleteMessage": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "charmDeleteConfirm": "Elimina",
+  "charmNameHint": "Nome talismano",
+  "charmSkillNone": "Nessuna abilità",
+  "charmPickSkill": "Seleziona abilità",
+  "charmSectionSkills": "Abilità",
+  "charmSectionSlots": "Slot",
+
+  "filterTitle": "Filtri & Ordine",
+  "filterApply": "Applica",
+  "filterReset": "Reset",
+  "filterWeaponType": "Tipo arma",
+  "filterElement": "Elemento",
+  "filterAny": "Qualsiasi",
+  "filterNoElement": "Nessuno",
+  "filterSortBy": "Ordina per",
+  "sortByName": "Nome",
+  "sortByAttack": "Attacco",
+  "sortByDefense": "Difesa",
+  "sortByRarity": "Rarità",
+  "sortByNewest": "Più recenti",
+  "filterActiveCount": "{count} attivi",
+  "@filterActiveCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "compareSelectBuild": "Confronta con...",
+  "compareStop": "Smetti di confrontare",
+  "compareVs": "vs"
 }

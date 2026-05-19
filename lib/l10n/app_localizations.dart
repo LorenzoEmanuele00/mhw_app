@@ -733,6 +733,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sync failed — will retry when online'**
   String get syncFailed;
+
+  /// No description provided for @charmNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New Charm'**
+  String get charmNew;
+
+  /// No description provided for @charmEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Charm'**
+  String get charmEdit;
+
+  /// No description provided for @charmSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get charmSave;
+
+  /// No description provided for @charmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Charm'**
+  String get charmDelete;
+
+  /// No description provided for @charmDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Charm?'**
+  String get charmDeleteTitle;
+
+  /// No description provided for @charmDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete \"{name}\".'**
+  String charmDeleteMessage(String name);
+
+  /// No description provided for @charmDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get charmDeleteConfirm;
+
+  /// No description provided for @charmNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Charm name'**
+  String get charmNameHint;
+
+  /// No description provided for @charmSkillNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No skill'**
+  String get charmSkillNone;
+
+  /// No description provided for @charmPickSkill.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Skill'**
+  String get charmPickSkill;
+
+  /// No description provided for @charmSectionSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'Skills'**
+  String get charmSectionSkills;
+
+  /// No description provided for @charmSectionSlots.
+  ///
+  /// In en, this message translates to:
+  /// **'Slots'**
+  String get charmSectionSlots;
+
+  /// No description provided for @filterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter & Sort'**
+  String get filterTitle;
+
+  /// No description provided for @filterApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get filterApply;
+
+  /// No description provided for @filterReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get filterReset;
+
+  /// No description provided for @filterWeaponType.
+  ///
+  /// In en, this message translates to:
+  /// **'Weapon Type'**
+  String get filterWeaponType;
+
+  /// No description provided for @filterElement.
+  ///
+  /// In en, this message translates to:
+  /// **'Element'**
+  String get filterElement;
+
+  /// No description provided for @filterAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get filterAny;
+
+  /// No description provided for @filterNoElement.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get filterNoElement;
+
+  /// No description provided for @filterSortBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort By'**
+  String get filterSortBy;
+
+  /// No description provided for @sortByName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get sortByName;
+
+  /// No description provided for @sortByAttack.
+  ///
+  /// In en, this message translates to:
+  /// **'Attack'**
+  String get sortByAttack;
+
+  /// No description provided for @sortByDefense.
+  ///
+  /// In en, this message translates to:
+  /// **'Defense'**
+  String get sortByDefense;
+
+  /// No description provided for @sortByRarity.
+  ///
+  /// In en, this message translates to:
+  /// **'Rarity'**
+  String get sortByRarity;
+
+  /// No description provided for @sortByNewest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get sortByNewest;
+
+  /// No description provided for @filterActiveCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} active'**
+  String filterActiveCount(int count);
+
+  /// No description provided for @compareSelectBuild.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare with...'**
+  String get compareSelectBuild;
+
+  /// No description provided for @compareStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Comparing'**
+  String get compareStop;
+
+  /// No description provided for @compareVs.
+  ///
+  /// In en, this message translates to:
+  /// **'vs'**
+  String get compareVs;
 }
 
 class _AppLocalizationsDelegate
