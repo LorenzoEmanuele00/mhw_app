@@ -112,6 +112,10 @@ class SyncService {
     List<Map<String, dynamic>> rows,
     int version,
   ) async {
+    // Don't wipe local data if remote returned nothing — Supabase table may be
+    // empty or RLS may be blocking reads. Treat as "no update available".
+    if (rows.isEmpty) return;
+
     await _db.transaction(() async {
       await _db.customStatement('DELETE FROM $table');
       for (final row in rows) {

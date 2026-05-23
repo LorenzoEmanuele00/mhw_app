@@ -107,6 +107,29 @@ void main() {
     expect(result.tablesUpdated, 2);
   });
 
+  test('remote version > local but empty rows → local data preserved',
+      () async {
+    // Pre-seed a skill row to simulate data from the local SQL seed.
+    await db.customStatement(
+      "INSERT INTO skills (id, slug, name, max_level, type1) "
+      "VALUES (1, 'test-skill', 'Test Skill', 1, 'armor')",
+    );
+
+    final service = SyncService(
+      db,
+      isOnline: () async => true,
+      fetchRemoteVersions: () async => {'skills': 1},
+      fetchRows: (_) async => [], // Supabase table is empty / RLS blocks reads
+    );
+
+    await service.checkAndSync();
+
+    // Local seed data must survive an empty remote response.
+    final skills = await db.select(db.skills).get();
+    expect(skills.length, 1);
+    expect(skills.first.slug, 'test-skill');
+  });
+
   test('network error during version fetch → SyncStatus.error', () async {
     final service = SyncService(
       db,
