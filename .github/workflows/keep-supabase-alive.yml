@@ -3,7 +3,7 @@ name: Supabase Keep Alive
 on:
   schedule:
     # Esegue l'azione ogni 3 giorni alle 08:00 UTC
-    - cron: '0 8 */3 * *'
+    - cron: "0 8 */3 * *"
   workflow_dispatch:
 
 jobs:
@@ -14,4 +14,4 @@ jobs:
         env:
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
         run: |
-          psql "$SUPABASE_DB_URL" -c "SELECT * FROM vehicle_types;"
+          psql "$SUPABASE_DB_URL" -c "SELECT * FROM data_versions;"
