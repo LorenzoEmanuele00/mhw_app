@@ -2,16 +2,29 @@ name: Supabase Keep Alive
 
 on:
   schedule:
-    # Esegue l'azione ogni 3 giorni alle 08:00 UTC
-    - cron: "0 8 */1 * *"
+    # Esegue l'azione due volte al giorno alle 08:00 e alle 20:00 UTC
+    - cron: "0 8,20 * * *"
   workflow_dispatch:
 
 jobs:
   ping-database:
     runs-on: ubuntu-latest
     steps:
-      - name: Esegui Ping su Supabase
+      - name: Esegui Ping su tutte le tabelle Supabase
         env:
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
         run: |
-          psql "$SUPABASE_DB_URL" -c "SELECT * FROM data_versions;"
+          tables=(
+            weapons
+            armor_pieces
+            armor_sets
+            armor_set_skills
+            jewels
+            skills
+            skill_levels
+            data_versions
+          )
+          for table in "${tables[@]}"; do
+            echo "SELECT su $table"
+            psql "$SUPABASE_DB_URL" -c "SELECT * FROM $table LIMIT 1;"
+          done
